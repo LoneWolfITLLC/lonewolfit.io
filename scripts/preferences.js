@@ -2,9 +2,13 @@ let usingPreferences = true; // THIS WILL ALWAYS BE TRUE -- USE TO CHECK TO SEE 
 
 window.addEventListener("authChecked", () => {
     if(window.location.pathname === "/preferences.html") {
-        
+        initPreferencesPage();
     }
 });
+
+function initPreferencesPage() {
+
+}
 
 //Returns the value for a given preference key, or creates it with a default value if it doesn't exist
 function createAndLoadPreference(key, default_value) {
