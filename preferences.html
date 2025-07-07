@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Preferences - LoneWolf IT</title>
+    <meta
+      name="description"
+      content="Manage your LoneWolf IT user preferences. Update notification settings, privacy options, and personalize your member experience."
+    />
+    <meta
+      name="keywords"
+      content="preferences, user settings, LoneWolf IT, notifications, privacy, account"
+    />
+    <meta name="author" content="LoneWolf IT" />
+    <link rel="icon" href="./images/wolf-logo.png" type="image/png" />
+    <link href="./styles/bootstrap.min.css" rel="stylesheet" />
+    <link href="./styles/buttons.css" rel="stylesheet" />
+    <link href="./styles/styles_white.css" rel="stylesheet" />
+    <link href="./styles/styles_black.css" rel="stylesheet" />
+    <link href="./styles/styles_modals_white.css" rel="stylesheet" />
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/slide-in.js"></script>
+    <script src="scripts/darkmode.js"></script>
+    <script src="scripts/accountFunctions.js"></script>
+    <style>
+      .main {
+        min-height: 100vh;
+      }
+      .main__section {
+        animation: fadeIn 0.8s ease-in;
+      }
+    </style>
+    <script>
+      requireLogin = true; // Set to true to require login for this page
+    </script>
+  </head>
+  <body>
+    <!-- Loading Modal -->
+    <div id="loadingModal" class="modal" tabindex="-1" style="display: none">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body text-center">
+            <img src="images/ui/spin.png" alt="Loading..." class="spinner" />
+            <p class="main__text" style="color: #fff">
+              Loading, please wait...
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <main class="main">
+      <section class="main__section" id="mainSection">
+        <img
+          src="./images/wolf-logo.png"
+          alt="Lone Wolf Logo"
+          class="main__logo main__item-centered"
+        />
+        <h1 class="main__heading main__item-centered">User Preferences</h1>
+        <p class="main__text main__item-centered">
+          Manage your account preferences, including notification settings and privacy options.
+        </p>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="footer__content">
+        <p class="footer__prepared-by">
+          Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
+        </p>
+        <p class="footer__contact">
+          Contact:
+          <a
+            href="mailto:arlo.lonewolfit@gmail.com"
+            class="footer__contact-link"
+            >arlo.lonewolfit@gmail.com</a
+          >
+        </p>
+        <p class="footer__copyright">
+          © 2025 Lone Wolf IT Services LLC | All Rights Reserved.
+        </p>
+        <ul class="footer__links">
+          <li class="footer__link-item">
+            <a href="pp.html" class="footer__link">Privacy Policy</a>
+          </li>
+          <li class="footer__link-item">
+            <a href="tos.html" class="footer__link">Terms of Service</a>
+          </li>
+          <li class="footer__link-item">
+            <a href="index.html#contact" class="footer__link">Contact Us</a>
+          </li>
+          <li class="footer__link-item footer__link-item--icon">
+            <a
+              href="https://www.facebook.com/lonewolfitservicesllc"
+              target="_blank"
+              class="footer__link"
+            >
+              <img
+                src="images/ui/facebook-icon.png"
+                alt="Facebook"
+                class="footer__icon"
+              />
+            </a>
+          </li>
+        </ul>
+      </div>
+    </footer>
