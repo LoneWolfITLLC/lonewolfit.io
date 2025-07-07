@@ -13,6 +13,8 @@ function executeOnLoad() {
     hasExecuted = true;
     const preAuthEvent = new CustomEvent("preAuthChecked");
     window.dispatchEvent(preAuthEvent);
+    const triggerDarkModeEvent = new CustomEvent("triggerDarkMode");
+    window.dispatchEvent(triggerDarkModeEvent);
     onLoad();
     console.log("onLoad executed successfully.");
   }

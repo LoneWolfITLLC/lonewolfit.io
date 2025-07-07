@@ -110,7 +110,7 @@ function toggleAutoDarkMode() {
 }
 
 // Optional: Apply dark mode on page load based on cookie
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("triggerDarkMode", () => {
     const autoToggle = document.getElementById("autoDarkModeToggle");
     const toggleButton = document.getElementById("darkModeToggle");
 
