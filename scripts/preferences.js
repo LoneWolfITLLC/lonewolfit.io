@@ -21,40 +21,94 @@ function syncCookie(name, value) {
 	}
 }
 
-//Stop the toggle from sending the save fetch request twice
+// Prevent duplicate event listeners
+let listenersAdded = false;
+
 function initPreferencesPage(darkMode, autoDarkMode) {
-    const darkModeToggle = document.getElementById("darkModePref");
-    const autoDarkModeToggle = document.getElementById("autoDarkModePref");
+	const darkModeToggle = document.getElementById("darkModePref");
+	const autoDarkModeToggle = document.getElementById("autoDarkModePref");
+
+	if (!darkModeToggle || !autoDarkModeToggle) return;
+
+	// Initialize toggle states
 	darkModeToggle.classList.toggle("active", darkMode === "on");
 	autoDarkModeToggle.classList.toggle("active", autoDarkMode === "on");
+
+	// Disable dark mode toggle if auto dark mode is on
 	if (autoDarkMode === "on") {
+		const systemDark = window.matchMedia(
+			"(prefers-color-scheme: dark)"
+		).matches;
+		darkModeToggle.disabled = true;
 		darkModeToggle.classList.add("disabled");
 		darkModeToggle.setAttribute("aria-disabled", "true");
+
+		// Update dark mode state to match system preference
+		darkModeToggle.classList.toggle("active", systemDark);
+		applyDarkMode(systemDark);
+	} else {
+		darkModeToggle.disabled = false;
+		darkModeToggle.classList.remove("disabled");
+		darkModeToggle.removeAttribute("aria-disabled");
 	}
-    else if (darkModeToggle.classList.contains("disabled") && autoDarkMode === "off") {
-        darkModeToggle.classList.remove("disabled");
-        darkModeToggle.setAttribute("aria-disabled", "false");
-    }
-    darkModeToggle.addEventListener("click", toggleDarkMode);
-    let dark = false;
-    darkModeToggle.addEventListener("click", () => {
-        const isDark = darkModeToggle.classList.contains("active");
-        if(!darkModeToggle.classList.contains("disabled") && (!dark && isDark)) savePreference("darkMode", isDark ? "on" : "off").then((success) => {
-            if (!success) {
-                toggleDarkMode.call(darkModeToggle);
-            }
-            dark = true;
-        });
-    });
-    autoDarkModeToggle.addEventListener("click", toggleAutoDarkMode);
-    autoDarkModeToggle.addEventListener("click", () => {
-        const isAuto = autoDarkModeToggle.classList.contains("active");
-        if(!autoDarkModeToggle.classList.contains("disabled")) savePreference("autoDarkMode", isAuto ? "on" : "off").then((success) => {
-            if (!success) {
-                toggleAutoDarkMode.call(autoDarkModeToggle);
-            }
-        });
-    });
+
+	// Add event listeners for toggles if not already added
+	if (!listenersAdded) {
+		darkModeToggle.addEventListener("click", (e) => {
+			e.preventDefault(); // Prevent default behavior
+			if (darkModeToggle.classList.contains("disabled")) return;
+
+			const isDark = darkModeToggle.classList.toggle("active");
+			savePreference("darkMode", isDark ? "on" : "off").then((success) => {
+				if (!success) {
+					// Revert the toggle state if saving fails
+					darkModeToggle.classList.toggle("active", !isDark);
+				} else {
+					applyDarkMode(isDark);
+				}
+			});
+		});
+
+		autoDarkModeToggle.addEventListener("click", (e) => {
+			e.preventDefault(); // Prevent default behavior
+			const isAuto = autoDarkModeToggle.classList.toggle("active");
+			savePreference("autoDarkMode", isAuto ? "on" : "off").then((success) => {
+				if (!success) {
+					// Revert the toggle state if saving fails
+					autoDarkModeToggle.classList.toggle("active", !isAuto);
+				} else {
+					applyAutoDarkMode(isAuto);
+
+					// Enable or disable dark mode toggle based on auto dark mode state
+					if (isAuto) {
+						const systemDark = window.matchMedia(
+							"(prefers-color-scheme: dark)"
+						).matches;
+						darkModeToggle.disabled = true;
+						darkModeToggle.classList.add("disabled");
+						darkModeToggle.setAttribute("aria-disabled", "true");
+
+						// Update dark mode state to match system preference
+						darkModeToggle.classList.toggle("active", systemDark);
+						applyDarkMode(systemDark);
+					} else {
+						darkModeToggle.disabled = false;
+						darkModeToggle.classList.remove("disabled");
+						darkModeToggle.removeAttribute("aria-disabled");
+
+						// Update dark mode toggle to reflect its current state
+						getPreference("darkMode").then((resolvedDarkMode) => {
+							const isDark = resolvedDarkMode === "on";
+							darkModeToggle.classList.toggle("active", isDark);
+							applyDarkMode(isDark);
+						});
+					}
+				}
+			});
+		});
+
+		listenersAdded = true; // Mark listeners as added
+	}
 }
 
 window.addEventListener("preAuthChecked", () => {
@@ -66,87 +120,86 @@ window.addEventListener("preAuthChecked", () => {
 		"autoDarkMode",
 		getCookie("autoDarkMode") || "off"
 	);
-    Promise.all([darkMode, autoDarkMode]).then(([resolvedDarkMode, resolvedAutoDarkMode]) => {
-        window.dispatchEvent(triggerDarkModeEvent);
-        if (window.location.pathname === "/preferences.html") {
-            initPreferencesPage(resolvedDarkMode, resolvedAutoDarkMode);
-        }
-    });
+	Promise.all([darkMode, autoDarkMode]).then(
+		([resolvedDarkMode, resolvedAutoDarkMode]) => {
+			window.dispatchEvent(triggerDarkModeEvent);
+			if (window.location.pathname === "/preferences.html") {
+				initPreferencesPage(resolvedDarkMode, resolvedAutoDarkMode);
+			}
+		}
+	);
 });
 
 //Returns the value for a given preference key, or creates it with a default value if it doesn't exist
 //Returns null if the user is not logged in.
 async function createAndLoadPreference(key, default_value) {
-    if (!loggedIn) return Promise.resolve(default_value);
-    const token = sessionStorage.getItem("jwt");
-    if (!token) {
-        return Promise.resolve(default_value);
-    }
-    showLoading();
-    try {
-        const value = await getPreference(key);
-        if (value !== null && value !== undefined) {
-            return value;
-        }
-        // Preference does not exist, create it
-        await fetch(`${URL_BASE}/api/user/create-preference`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-            credentials: "include",
-            body: JSON.stringify({
-                preference_key: key,
-                preference_value: default_value,
-            }),
-        });
-        return default_value;
-    } catch (err) {
-        console.error("Error loading or creating preference:", err);
-        return default_value;
-    } finally {
-        hideLoading();
-    }
+	const token = sessionStorage.getItem("jwt");
+	if (!token) {
+		return Promise.resolve(default_value);
+	}
+	showLoading();
+	try {
+		const value = await getPreference(key);
+		if (value !== null && value !== undefined) {
+			return value;
+		}
+		// Preference does not exist, create it
+		await fetch(`${URL_BASE}/api/user/create-preference`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+			credentials: "include",
+			body: JSON.stringify({
+				preference_key: key,
+				preference_value: default_value,
+			}),
+		});
+		return default_value;
+	} catch (err) {
+		console.error("Error loading or creating preference:", err);
+		return default_value;
+	} finally {
+		hideLoading();
+	}
 }
 
 function savePreference(key, value) {
-	if (!loggedIn) return Promise.resolve(false);
 	const token = sessionStorage.getItem("jwt");
 	if (!token) {
 		return Promise.resolve(false);
 	}
 	showLoading();
-    return fetch(`${URL_BASE}/api/user/edit-user-preference`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-        },
-        credentials: "include",
-        body: JSON.stringify({
-            preference_key: key,
-            preference_value: value,
-        }),
-    })
-        .then((response) => {
-            if (response.ok) {
-                return true;
-            } else {
-                return false;
-            }
-        })
-        .catch((err) => {
-            console.error("Error saving preference:", err);
-            return false;
-        })
-        .finally(() => {
-            hideLoading();
-        });
+	return fetch(`${URL_BASE}/api/user/edit-user-preference`, {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json",
+			Authorization: `Bearer ${token}`,
+		},
+		credentials: "include",
+		body: JSON.stringify({
+			preference_key: key,
+			preference_value: value,
+		}),
+	})
+		.then((response) => {
+			if (response.ok) {
+				return true;
+			} else {
+				return false;
+			}
+		})
+		.catch((err) => {
+			console.error("Error saving preference:", err);
+			return false;
+		})
+		.finally(() => {
+			hideLoading();
+		});
 }
 
 function deletePreference(key) {
-	if (!loggedIn) return Promise.resolve(false);
 	const token = sessionStorage.getItem("jwt");
 	if (!token) {
 		return Promise.resolve(false);
@@ -174,16 +227,17 @@ function deletePreference(key) {
 }
 
 function getPreference(key) {
-	if (!loggedIn) return Promise.resolve(null);
 	const token = sessionStorage.getItem("jwt");
 	if (!token) {
 		return Promise.resolve(null);
 	}
 	showLoading();
+	// Add a cache-busting query parameter to the URL
+	const cacheBuster = `&_=${Date.now()}`;
 	return fetch(
 		`${URL_BASE}/api/user/get-preference?preference_key=${encodeURIComponent(
 			key
-		)}`,
+		)}${cacheBuster}`,
 		{
 			method: "GET",
 			credentials: "include",
@@ -209,7 +263,6 @@ function getPreference(key) {
 }
 
 function getPreferences() {
-	if (!loggedIn) return Promise.resolve([]);
 	const token = sessionStorage.getItem("jwt");
 	if (!token) {
 		return Promise.resolve([]);
