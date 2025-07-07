@@ -15,12 +15,6 @@ function getCookie(name) {
 	return null;
 }
 
-function syncCookie(name, value) {
-	if (getCookie(name) !== value) {
-		setCookie(name, value, 365);
-	}
-}
-
 // Prevent duplicate event listeners
 let listenersAdded = false;
 
@@ -192,6 +186,7 @@ function savePreference(key, value) {
 		})
 		.catch((err) => {
 			console.error("Error saving preference:", err);
+			alert("An error occurred while saving your preference. Please try again later and check your connection.");
 			return false;
 		})
 		.finally(() => {

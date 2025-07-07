@@ -64,9 +64,6 @@ window.addEventListener("triggerDarkMode", () => {
 	Promise.all([getPreference("autoDarkMode"), getPreference("darkMode")]).then(
 		([prefAutoDarkMode, prefDarkMode]) => {
 			if (prefAutoDarkMode !== null || prefDarkMode !== null) {
-				syncCookie("autoDarkMode", prefAutoDarkMode);
-				syncCookie("darkMode", prefDarkMode);
-
 				const isAuto = prefAutoDarkMode === "on";
 				applyAutoDarkMode(isAuto);
 

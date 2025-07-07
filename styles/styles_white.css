@@ -560,3 +560,15 @@ body {
 #passwordStrengthContainer.progress {
     background: #FFFFFF;
 }
+
+.main__buttons--flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.main__text-slider {
+    margin-top: 1.5rem;
+}
