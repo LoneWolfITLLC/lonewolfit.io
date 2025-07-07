@@ -533,7 +533,7 @@ function updateStripeCustomerDetails(formType) {
 			document.getElementById("loadingModal").style.display = "none";
 			if (response.ok) {
 				alert("Stripe customer updated successfully!");
-        window.location.reload();
+				window.location.reload();
 			} else {
 				const errorText = await response.text();
 				alert(
