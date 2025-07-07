@@ -1,157 +1,123 @@
-function setCookie(name, value, days) {
-	const expires = days
-		? "; expires=" + new Date(Date.now() + days * 864e5).toUTCString()
-		: "";
-	document.cookie =
-		name + "=" + encodeURIComponent(value) + expires + "; path=/";
-}
-
-function getCookie(name) {
-	const cookies = document.cookie.split("; ");
-	for (let cookie of cookies) {
-		const [key, val] = cookie.split("=");
-		if (key === name) return decodeURIComponent(val);
-	}
-	return null;
-}
-
 function toggleDarkMode() {
 	const body = document.body;
 	const isDark = body.classList.toggle("dark-mode");
 	setCookie("darkMode", isDark ? "on" : "off", 365);
-	const toggleButton = document.getElementById("darkModeToggle");
+	const toggleButton = this;
 	if (!toggleButton) return;
 	toggleButton.classList.toggle("active", isDark);
 }
 
-let autoDarkModeInterval = null;
+function applyDarkMode(isDark, darkModeToggleStr = "darkModeToggle") {
+	const body = document.body;
+	const toggleButton = document.getElementById(darkModeToggleStr);
 
-function startAutoDarkModeWatcher() {
-	if (autoDarkModeInterval) return; // Don't start multiple intervals
-	autoDarkModeInterval = setInterval(() => {
-		// If auto mode is OFF, stop the watcher and return
-		if (
-			getCookie("autoDarkMode") !== "on" ||
-			getPreference("autoDarkMode") !== "on"
-		) {
-			stopAutoDarkModeWatcher();
-			return;
-		}
-		const autoToggle = document.getElementById("autoDarkModeToggle");
-		const toggleButton = document.getElementById("darkModeToggle");
-		if (
-			autoToggle &&
-			window.matchMedia &&
-			window.matchMedia("(prefers-color-scheme: dark)").matches
-		) {
-			document.body.classList.add("dark-mode");
-			if (toggleButton) {
-				toggleButton.classList.add("active");
-				toggleButton.classList.add("disabled");
-				toggleButton.disabled = true;
-				toggleButton.setAttribute("aria-disabled", "true");
-			}
-		} else if (
-			autoToggle &&
-			window.matchMedia &&
-			window.matchMedia("(prefers-color-scheme: light)").matches
-		) {
-			document.body.classList.remove("dark-mode");
-			if (toggleButton) {
-				toggleButton.classList.remove("active");
-				toggleButton.classList.add("disabled");
-				toggleButton.disabled = true;
-				toggleButton.setAttribute("aria-disabled", "true");
-			}
-		}
-	}, 100);
+	if (isDark) {
+		body.classList.add("dark-mode");
+		if (toggleButton) toggleButton.classList.add("active");
+	} else {
+		body.classList.remove("dark-mode");
+		if (toggleButton) toggleButton.classList.remove("active");
+	}
 }
 
-function stopAutoDarkModeWatcher() {
-	if (autoDarkModeInterval) {
-		clearInterval(autoDarkModeInterval);
-		autoDarkModeInterval = null;
+function applyAutoDarkMode(isAuto, darkModeToggleStr = "darkModeToggle", autoToggleStr = "autoDarkModeToggle") {
+	const autoToggle = document.getElementById(autoToggleStr);
+	const toggleButton = document.getElementById(darkModeToggleStr);
+
+	if (isAuto) {
+		const systemDark = window.matchMedia(
+			"(prefers-color-scheme: dark)"
+		).matches;
+		applyDarkMode(systemDark);
+
+		if (toggleButton) {
+			toggleButton.disabled = true;
+			toggleButton.setAttribute("aria-disabled", "true");
+			toggleButton.classList.add("disabled");
+		}
+		if (autoToggle) autoToggle.classList.add("active");
+	} else {
+		const darkMode = getCookie("darkMode") === "on";
+		applyDarkMode(darkMode);
+
+		if (toggleButton) {
+			toggleButton.disabled = false;
+			toggleButton.setAttribute("aria-disabled", "false");
+			toggleButton.classList.remove("disabled");
+		}
+		if (autoToggle) autoToggle.classList.remove("active");
 	}
 }
 
 function toggleAutoDarkMode() {
-	const autoToggle = document.getElementById("autoDarkModeToggle");
-	const toggleButton = document.getElementById("darkModeToggle");
-	if (!toggleButton || !autoToggle) return;
+	const autoToggle = this;
 	const isAuto = autoToggle.classList.toggle("active");
 	setCookie("autoDarkMode", isAuto ? "on" : "off", 365);
 
-	if (isAuto) {
-		// Set initial state based on system preference
-		if (
-			window.matchMedia &&
-			window.matchMedia("(prefers-color-scheme: dark)").matches
-		) {
-			document.body.classList.add("dark-mode");
-			setCookie("darkMode", "on", 365);
-			toggleButton.classList.toggle("active", true);
-		} else {
-			document.body.classList.remove("dark-mode");
-			setCookie("darkMode", "off", 365);
-			toggleButton.classList.toggle("active", false);
-		}
-		startAutoDarkModeWatcher();
-	} else {
-		document.body.classList.remove("dark-mode");
-		setCookie("darkMode", "off", 365);
-		toggleButton.classList.toggle("active", false);
-		stopAutoDarkModeWatcher();
-	}
-
-	toggleButton.disabled = isAuto;
-	toggleButton.setAttribute("aria-disabled", isAuto);
-	toggleButton.classList.toggle("disabled", isAuto);
-
-	if (autoToggle) {
-		autoToggle.classList.toggle("active", isAuto);
-	}
+	applyAutoDarkMode(isAuto);
 }
 
-// Optional: Apply dark mode on page load based on cookie
 window.addEventListener("triggerDarkMode", () => {
-	const autoToggle = document.getElementById("autoDarkModeToggle");
-	const toggleButton = document.getElementById("darkModeToggle");
+	Promise.all([getPreference("autoDarkMode"), getPreference("darkMode")]).then(
+		([prefAutoDarkMode, prefDarkMode]) => {
+			if (prefAutoDarkMode !== null || prefDarkMode !== null) {
+				syncCookie("autoDarkMode", prefAutoDarkMode);
+				syncCookie("darkMode", prefDarkMode);
 
-	// Set initial disabled state and .disabled class on load
-	const isAuto =
-		getCookie("autoDarkMode") === "on" ||
-		getPreference("autoDarkMode") === "on";
-	if (toggleButton) {
-		toggleButton.disabled = isAuto;
-		toggleButton.setAttribute("aria-disabled", isAuto);
-		toggleButton.classList.toggle("disabled", isAuto); // <-- Add or remove .disabled class
-	}
-	if (toggleButton) {
-		toggleButton.addEventListener("click", toggleDarkMode);
-	}
-	if (autoToggle) {
-		autoToggle.addEventListener("click", toggleAutoDarkMode);
-	}
-	if (isAuto) {
-		if (autoToggle) autoToggle.classList.add("active");
-		startAutoDarkModeWatcher();
-	} else {
-		stopAutoDarkModeWatcher();
-	}
-	// Set isDark based on system preference and cookie
-	let isDark =
-		document.body.classList.contains("dark-mode") ||
-		(isAuto &&
-			window.matchMedia &&
-			window.matchMedia("(prefers-color-scheme: dark)").matches);
-	if (
-		getCookie("darkMode") === "on" ||
-		getPreference("darkMode") === "on" ||
-		isDark
-	) {
-		document.body.classList.add("dark-mode");
-		if (toggleButton) {
-			toggleButton.classList.toggle("active", true);
+				const isAuto = prefAutoDarkMode === "on";
+				applyAutoDarkMode(isAuto);
+
+				if (!isAuto) {
+					const isDark = prefDarkMode === "on";
+					applyDarkMode(isDark);
+				}
+
+				// Disable the autoDarkMode toggle if the user is signed in
+				const autoToggle = document.getElementById("autoDarkModeToggle");
+				if (autoToggle && loggedIn) {
+					autoToggle.disabled = true;
+					autoToggle.setAttribute("aria-disabled", "true");
+					autoToggle.classList.add("disabled");
+				}
+
+				// Add event listeners for the toggles if they exist
+				const darkModeToggle = document.getElementById("darkModeToggle");
+				if (darkModeToggle) {
+					darkModeToggle.addEventListener("click", toggleDarkMode);
+				}
+				if (autoToggle) {
+					autoToggle.addEventListener("click", toggleAutoDarkMode);
+				}
+			} else if (prefAutoDarkMode === null && prefDarkMode === null) {
+				// Disable the autoDarkMode toggle if the user is signed in
+				const autoToggle = document.getElementById("autoDarkModeToggle");
+				if (autoToggle && loggedIn) {
+					autoToggle.disabled = true;
+					autoToggle.setAttribute("aria-disabled", "true");
+					autoToggle.classList.add("disabled");
+				}
+
+				// Add event listeners for the toggles if they exist
+				const darkModeToggle = document.getElementById("darkModeToggle");
+				if (darkModeToggle) {
+					darkModeToggle.addEventListener("click", toggleDarkMode);
+				}
+				if (autoToggle) {
+					autoToggle.addEventListener("click", toggleAutoDarkMode);
+				}
+				// If preferences are not set, initialize them
+				applyAutoDarkMode(getCookie("autoDarkMode") === "on");
+			}
 		}
-	}
+	);
 });
+
+// Listen for system dark mode changes
+window
+	.matchMedia("(prefers-color-scheme: dark)")
+	.addEventListener("change", (e) => {
+		const isAuto = getCookie("autoDarkMode") === "on";
+		if (isAuto) {
+			applyDarkMode(e.matches);
+		}
+	});

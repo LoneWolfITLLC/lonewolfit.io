@@ -47,14 +47,27 @@
       window.addEventListener("authChecked", function (event) {
 		const { loggedIn, authNeeded, user } = event.detail;
 		const memberAreaSection = document.getElementById("memberAreaSection");
+    const darkModeToggle = document.getElementById("darkModeToggle");
+    const autoDarkModeToggle = document.getElementById("autoDarkModeToggle");
+    const darkModeText = document.getElementById("darkModeText");
+    const autoDarkModeText = document.getElementById("autoDarkModeText");
+
 		if(loggedIn) {
 			// User is logged in
 			console.log("User is logged in...");
 			memberAreaSection.style.display = "block";
+      darkModeToggle.style.display = "none";
+      autoDarkModeToggle.style.display = "none";
+      darkModeText.style.display = "none";
+      autoDarkModeText.style.display = "none";
 		}
 		else{
 			console.log("User is not logged in");
 			memberAreaSection.style.display = "none";
+      darkModeToggle.style.display = "block";
+      autoDarkModeToggle.style.display = "block";
+      darkModeText.style.display = "block";
+      autoDarkModeText.style.display = "block";
 		}
 	  });
     </script>
@@ -132,14 +145,14 @@
           alt="Technology"
           class="main__image main__image--tech"
         />
-        <p class="main__text main__item-centered">
+        <p class="main__text main__item-centered" id="darkModeText">
           ***BETA*** Try out dark mode:
         </p>
         <button
           id="darkModeToggle"
           class="menu__item-slider main__item-centered"
         ></button>
-        <p class="main__text main__item-centered" style="margin-top: 10px">
+        <p class="main__text main__item-centered" style="margin-top: 10px" id="autoDarkModeText">
           Auto Dark Mode:
         </p>
         <button
