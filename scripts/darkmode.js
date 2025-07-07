@@ -1,8 +1,11 @@
 function toggleDarkMode() {
+	const toggleButton = this;
+	if(toggleButton.classList.contains("disabled")) {
+		return;
+	}	
 	const body = document.body;
 	const isDark = body.classList.toggle("dark-mode");
 	setCookie("darkMode", isDark ? "on" : "off", 365);
-	const toggleButton = this;
 	if (!toggleButton) return;
 	toggleButton.classList.toggle("active", isDark);
 }

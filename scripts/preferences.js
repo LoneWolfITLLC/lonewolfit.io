@@ -21,29 +21,35 @@ function syncCookie(name, value) {
 	}
 }
 
+//Stop the toggle from sending the save fetch request twice
 function initPreferencesPage(darkMode, autoDarkMode) {
     const darkModeToggle = document.getElementById("darkModePref");
     const autoDarkModeToggle = document.getElementById("autoDarkModePref");
 	darkModeToggle.classList.toggle("active", darkMode === "on");
 	autoDarkModeToggle.classList.toggle("active", autoDarkMode === "on");
-    if (autoDarkMode === "on") {
-        darkModeToggle.disabled = true;
-        darkModeToggle.classList.add("disabled");
-        darkModeToggle.setAttribute("aria-disabled", "true");
+	if (autoDarkMode === "on") {
+		darkModeToggle.classList.add("disabled");
+		darkModeToggle.setAttribute("aria-disabled", "true");
+	}
+    else if (darkModeToggle.classList.contains("disabled") && autoDarkMode === "off") {
+        darkModeToggle.classList.remove("disabled");
+        darkModeToggle.setAttribute("aria-disabled", "false");
     }
     darkModeToggle.addEventListener("click", toggleDarkMode);
+    let dark = false;
     darkModeToggle.addEventListener("click", () => {
         const isDark = darkModeToggle.classList.contains("active");
-        savePreference("darkMode", isDark ? "on" : "off").then((success) => {
+        if(!darkModeToggle.classList.contains("disabled") && (!dark && isDark)) savePreference("darkMode", isDark ? "on" : "off").then((success) => {
             if (!success) {
                 toggleDarkMode.call(darkModeToggle);
             }
+            dark = true;
         });
     });
     autoDarkModeToggle.addEventListener("click", toggleAutoDarkMode);
     autoDarkModeToggle.addEventListener("click", () => {
         const isAuto = autoDarkModeToggle.classList.contains("active");
-        savePreference("autoDarkMode", isAuto ? "on" : "off").then((success) => {
+        if(!autoDarkModeToggle.classList.contains("disabled")) savePreference("autoDarkMode", isAuto ? "on" : "off").then((success) => {
             if (!success) {
                 toggleAutoDarkMode.call(autoDarkModeToggle);
             }
@@ -70,63 +76,38 @@ window.addEventListener("preAuthChecked", () => {
 
 //Returns the value for a given preference key, or creates it with a default value if it doesn't exist
 //Returns null if the user is not logged in.
-function createAndLoadPreference(key, default_value) {
-	if (!loggedIn) return Promise.resolve(default_value);
-	const token = sessionStorage.getItem("jwt");
-	if (!token) {
-		return Promise.resolve(default_value);
-	}
-	showLoading();
-	return fetch(
-		`${URL_BASE}/api/user/get-preference?preference_key=${encodeURIComponent(
-			key
-		)}`,
-		{
-			method: "GET",
-			credentials: "include",
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		}
-	)
-		.then((response) => {
-			if (response.ok) {
-				return response
-					.json()
-					.then((data) => data.preference_value ?? default_value);
-			} else if (response.status === 404) {
-				// Preference does not exist, create it
-				return fetch(`${URL_BASE}/api/user/create-preference`, {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: `Bearer ${token}`,
-					},
-					credentials: "include",
-					body: JSON.stringify({
-						preference_key: key,
-						preference_value: default_value,
-					}),
-				}).then((createResponse) => {
-					if (createResponse.ok) {
-						return createResponse
-							.json()
-							.then((data) => data.preference_value ?? default_value);
-					} else {
-						return default_value;
-					}
-				});
-			} else {
-				return default_value;
-			}
-		})
-		.catch((err) => {
-			console.error("Error loading or creating preference:", err);
-			return default_value;
-		})
-		.finally(() => {
-			hideLoading();
-		});
+async function createAndLoadPreference(key, default_value) {
+    if (!loggedIn) return Promise.resolve(default_value);
+    const token = sessionStorage.getItem("jwt");
+    if (!token) {
+        return Promise.resolve(default_value);
+    }
+    showLoading();
+    try {
+        const value = await getPreference(key);
+        if (value !== null && value !== undefined) {
+            return value;
+        }
+        // Preference does not exist, create it
+        await fetch(`${URL_BASE}/api/user/create-preference`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            credentials: "include",
+            body: JSON.stringify({
+                preference_key: key,
+                preference_value: default_value,
+            }),
+        });
+        return default_value;
+    } catch (err) {
+        console.error("Error loading or creating preference:", err);
+        return default_value;
+    } finally {
+        hideLoading();
+    }
 }
 
 function savePreference(key, value) {
