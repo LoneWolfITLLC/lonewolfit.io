@@ -1,25 +1,33 @@
 let usingPreferences = true; // THIS WILL ALWAYS BE TRUE -- USE TO CHECK TO SEE IF SCRIPT IS LOADED
 
 window.addEventListener("authChecked", () => {
-    if(window.location.pathname === "/preferences.html") {
-        initPreferencesPage();
-    }
+	if (window.location.pathname === "/preferences.html") {
+		initPreferencesPage();
+	}
+	window.dispatchEvent(triggerDarkModeEvent);
 });
 
-function initPreferencesPage() {
-
-}
+function initPreferencesPage() {}
 
 //Returns the value for a given preference key, or creates it with a default value if it doesn't exist
+//Returns null if the user is not logged in.
 function createAndLoadPreference(key, default_value) {
+	if (!loggedIn) return null; // If not logged in, return null
+	const token = sessionStorage.getItem("jwt");
+	if (!token) {
+		return null;
+	}
 	showLoading();
 	return fetch(
-		`${API_BASE}/api/user/get-preference?preference_key=${encodeURIComponent(
+		`${URL_BASE}/api/user/get-preference?preference_key=${encodeURIComponent(
 			key
 		)}`,
 		{
 			method: "GET",
 			credentials: "include",
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
 		}
 	)
 		.then(async (response) => {
@@ -28,7 +36,7 @@ function createAndLoadPreference(key, default_value) {
 				return data.preference_value;
 			} else if (response.status === 404) {
 				// Preference does not exist or unauthorized, create it
-				return fetch(`${API_BASE}/api/user/create-preference`, {
+				return fetch(`${URL_BASE}/api/user/create-preference`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
@@ -50,11 +58,17 @@ function createAndLoadPreference(key, default_value) {
 }
 
 function savePreference(key, value) {
+	if (!loggedIn) return false;
+	const token = sessionStorage.getItem("jwt");
+	if (!token) {
+		return false;
+	}
 	showLoading();
-	return fetch(`${API_BASE}/api/user/edit-user-preference`, {
+	return fetch(`${URL_BASE}/api/user/edit-user-preference`, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
+			Authorization: `Bearer ${token}`,
 		},
 		credentials: "include",
 		body: JSON.stringify({
@@ -79,11 +93,17 @@ function savePreference(key, value) {
 }
 
 function deletePreference(key) {
+	if (!loggedIn) return false;
+	const token = sessionStorage.getItem("jwt");
+	if (!token) {
+		return false;
+	}
 	showLoading();
-	return fetch(`${API_BASE}/api/user/delete-preference`, {
+	return fetch(`${URL_BASE}/api/user/delete-preference`, {
 		method: "DELETE",
 		headers: {
 			"Content-Type": "application/json",
+			Authorization: `Bearer ${token}`,
 		},
 		credentials: "include",
 		body: JSON.stringify({
@@ -107,51 +127,67 @@ function deletePreference(key) {
 }
 
 function getPreference(key) {
-    showLoading();
-    return fetch(
-        `${API_BASE}/api/user/get-preference?preference_key=${encodeURIComponent(
-            key
-        )}`,
-        {
-            method: "GET",
-            credentials: "include",
-        }
-    )
-        .then(async (response) => {
-            if (response.status === 200) {
-                const data = await response.json();
-                return data.preference_value;
-            } else {
-                return null;
-            }
-        })
-        .catch((err) => {
-            console.error("Error getting preference:", err);
-            return null;
-        })
-        .finally(() => {
-            hideLoading();
-        });
+	if (!loggedIn) return null;
+	const token = sessionStorage.getItem("jwt");
+	if (!token) {
+		return false;
+	}
+	showLoading();
+	return fetch(
+		`${URL_BASE}/api/user/get-preference?preference_key=${encodeURIComponent(
+			key
+		)}`,
+		{
+			method: "GET",
+			credentials: "include",
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		}
+	)
+		.then(async (response) => {
+			if (response.status === 200) {
+				const data = await response.json();
+				return data.preference_value;
+			} else {
+				return null;
+			}
+		})
+		.catch((err) => {
+			console.error("Error getting preference:", err);
+			return null;
+		})
+		.finally(() => {
+			hideLoading();
+		});
 }
 function getPreferences() {
-    showLoading();
-    return fetch(`${API_BASE}/api/user/preferences`, {
-        method: "GET",
-        credentials: "include",
-    })
-        .then(async (response) => {
-            if (response.ok) {
-                const data = await response.json();
-                return data.preferences;
-            } else {
-                return [];
-            }
-        })
-        .catch((err) => {
-            console.error("Error getting preferences:", err);
-            return [];
-        })
-        .finally(() => {
-            hideLoading();
-        });
+	if (!loggedIn) return [];
+	const token = sessionStorage.getItem("jwt");
+	if (!token) {
+		return false;
+	}
+	showLoading();
+	return fetch(`${URL_BASE}/api/user/preferences`, {
+		method: "GET",
+		credentials: "include",
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	})
+		.then(async (response) => {
+			if (response.ok) {
+				const data = await response.json();
+				return data.preferences;
+			} else {
+				return [];
+			}
+		})
+		.catch((err) => {
+			console.error("Error getting preferences:", err);
+			return [];
+		})
+		.finally(() => {
+			hideLoading();
+		});
 }

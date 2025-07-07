@@ -7,13 +7,13 @@ let requireUserToBeAdmin = false; // Set this to true if you want to require the
 const URL_BASE = "http://localhost:3000";
 const ADMIN_PATH = "admin.html";
 const MEMBER_PATH = "members.html";
+const triggerDarkModeEvent = new CustomEvent("triggerDarkMode");
 
 function executeOnLoad() {
   if (!hasExecuted) {
     hasExecuted = true;
     const preAuthEvent = new CustomEvent("preAuthChecked");
     window.dispatchEvent(preAuthEvent);
-    const triggerDarkModeEvent = new CustomEvent("triggerDarkMode");
     window.dispatchEvent(triggerDarkModeEvent);
     onLoad();
     console.log("onLoad executed successfully.");
