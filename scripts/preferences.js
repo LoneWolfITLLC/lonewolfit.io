@@ -242,18 +242,13 @@ window.addEventListener("preAuthChecked", () => {
 			};
 
 			// Ensure applyPreferences runs only after loggedIn is defined
-			if (typeof loggedIn !== "undefined") {
-				applyPreferences(window.userPreferences || {});
-			} else {
-				// Wait for loggedIn to be defined before applying preferences
-				const checkLoggedIn = setInterval(() => {
-					if (typeof loggedIn !== "undefined") {
-						clearInterval(checkLoggedIn);
-						applyPreferences(window.userPreferences || {});
-					}
-				}, 50);
-			}
-
+			applyPreferences({
+				darkMode: resolvedDarkMode,
+				autoDarkMode: resolvedAutoDarkMode,
+				logoGlow: resolvedLogoGlow,
+				titleTextGlow: resolvedTitleTextGlow,
+			});
+			
 			// Only initialize preferences page logic if on preferences.html
 			if (window.location.pathname === "/preferences.html") {
 				initPreferencesPage(
