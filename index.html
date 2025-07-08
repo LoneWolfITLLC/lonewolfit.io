@@ -1,437 +1,419 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>LoneWolf IT</title>
-    <meta
-      name="description"
-      content="LoneWolf IT - Professional IT solutions, consulting, and support. Serving your technology needs with expertise and care."
-    />
-    <meta
-      name="keywords"
-      content="IT, consulting, tech support, LoneWolf IT, technology, services"
-    />
-    <meta name="author" content="LoneWolf IT" />
-    <meta property="og:title" content="LoneWolf IT" />
-    <meta
-      property="og:description"
-      content="Professional IT solutions, consulting, and support."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="images/wolf-logo.png" />
-    <meta property="og:url" content="https://lonewolfit.io/" />
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="styles/bootstrap.min.css" />
-    <link rel="stylesheet" href="styles/buttons.css" />
-    <link rel="stylesheet" href="styles/styles_white.css" />
-    <link rel="stylesheet" href="styles/styles_black.css" />
-    <link rel="stylesheet" href="styles/styles_modals_white.css" />
-    <script src="scripts/auth.js"></script>
-    <script src="scripts/header.js"></script>
-    <script src="scripts/slide-in.js"></script>
-    <script src="scripts/preferences.js"></script>
-    <script src="scripts/darkmode.js"></script>
-    <script src="scripts/accountFunctions.js"></script>
-    <style>
-      .main {
-        min-height: 100vh;
-      }
-      .main__section {
-        animation: fadeIn 0.8s ease-in;
-      }
-    </style>
-    <script>
-      requireLogin = false; // Set to true to require login for this page
-      window.addEventListener("authChecked", function (event) {
-        const { loggedIn, authNeeded, user } = event.detail;
-        const memberAreaSection = document.getElementById("memberAreaSection");
-        const darkModeToggle = document.getElementById("darkModeToggle");
-        const autoDarkModeToggle =
-          document.getElementById("autoDarkModeToggle");
-        const darkModeText = document.getElementById("darkModeText");
-        const autoDarkModeText = document.getElementById("autoDarkModeText");
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title>LoneWolf IT</title>
+		<meta
+			name="description"
+			content="LoneWolf IT - Professional IT solutions, consulting, and support. Serving your technology needs with expertise and care."
+		/>
+		<meta
+			name="keywords"
+			content="IT, consulting, tech support, LoneWolf IT, technology, services"
+		/>
+		<meta name="author" content="LoneWolf IT" />
+		<meta property="og:title" content="LoneWolf IT" />
+		<meta
+			property="og:description"
+			content="Professional IT solutions, consulting, and support."
+		/>
+		<meta property="og:type" content="website" />
+		<meta property="og:image" content="images/wolf-logo.png" />
+		<meta property="og:url" content="https://lonewolfit.io/" />
+		<link rel="icon" href="favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" href="styles/bootstrap.min.css" />
+		<link rel="stylesheet" href="styles/buttons.css" />
+		<link rel="stylesheet" href="styles/styles_white.css" />
+		<link rel="stylesheet" href="styles/styles_black.css" />
+		<link rel="stylesheet" href="styles/styles_modals_white.css" />
+		<script src="scripts/auth.js"></script>
+		<script src="scripts/header.js"></script>
+		<script src="scripts/slide-in.js"></script>
+		<script src="scripts/preferences.js"></script>
+		<script src="scripts/darkmode.js"></script>
+		<script src="scripts/accountFunctions.js"></script>
+		<style>
+			.main {
+				min-height: 100vh;
+			}
+			.main__section {
+				animation: fadeIn 0.8s ease-in;
+			}
+		</style>
+		<script>
+			requireLogin = false; // Set to true to require login for this page
+			window.addEventListener("authChecked", function (event) {
+				const { loggedIn, authNeeded, user } = event.detail;
+				const memberAreaSection = document.getElementById("memberAreaSection");
+				const darkModeToggle = document.getElementById("darkModeToggle");
+				const autoDarkModeToggle =
+					document.getElementById("autoDarkModeToggle");
+				const darkModeText = document.getElementById("darkModeText");
+				const autoDarkModeText = document.getElementById("autoDarkModeText");
 
-        if (loggedIn) {
-          // User is logged in
-          console.log("User is logged in...");
-          memberAreaSection.style.display = "block";
-          darkModeToggle.style.display = "none";
-          autoDarkModeToggle.style.display = "none";
-          darkModeText.style.display = "none";
-          autoDarkModeText.style.display = "none";
-        } else {
-          console.log("User is not logged in");
-          memberAreaSection.style.display = "none";
-          darkModeToggle.style.display = "block";
-          autoDarkModeToggle.style.display = "block";
-          darkModeText.style.display = "block";
-          autoDarkModeText.style.display = "block";
-        }
-      });
-    </script>
-  </head>
-  <body>
-    <!-- Loading Modal -->
-    <div id="loadingModal" class="modal" tabindex="-1" style="display: none">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-body text-center">
-            <img src="images/ui/spin.png" alt="Loading..." class="spinner" />
-            <p class="main__text" style="color: #fff">
-              Loading, please wait...
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <header class="header">
-      <img
-        src="images/wolf-logo.png"
-        alt="LoneWolf IT Logo"
-        class="header__logo"
-      />
-      <h1 class="header__title">LoneWolf IT</h1>
-      <nav class="header__nav" id="headerNav">
-        <ul class="header__nav-list">
-          <li class="header__nav-item">
-            <a href="index.html" class="header__nav-link">Home</a>
-          </li>
-          <li class="header__nav-item">
-            <a href="#services" class="header__nav-link">Portfolio/Services</a>
-          </li>
-          <li class="header__nav-item">
-            <a href="members.html" class="header__nav-link">Member Portal</a>
-          </li>
-          <li class="header__nav-item">
-            <a href="#about" class="header__nav-link">About</a>
-          </li>
-          <li class="header__nav-item">
-            <a href="#contact" class="header__nav-link">Contact</a>
-          </li>
-        </ul>
-      </nav>
-      <button
-        class="navbar-toggle"
-        id="navbarToggle"
-        aria-label="Open navigation menu"
-      >
-        &#9776;
-      </button>
-    </header>
-    <main class="main">
-      <section id="home" class="main__section main__section--home">
-        <h2 class="main__heading">Welcome to LoneWolf IT</h2>
-        <p class="main__text main__item-centered" style="font-weight: bold">
-          Empowering small businesses, startups, and individuals through
-          innovative, cost-effective, and AI-enhanced IT services.
-        </p>
-        <p class="main__text">
-          At LoneWolf IT, I am dedicated to providing top-notch IT solutions
-          tailored to your unique needs. Whether you're a small business looking
-          for reliable tech support or an individual seeking expert guidance,
-          I've got you covered.
-        </p>
-        <p class="main__text">
-          Our services include IT consulting, web development, and ongoing
-          support, all designed to help you leverage technology for success.
-          With a focus on personalized service and a commitment to understanding
-          each client's unique needs, I aim to deliver tailored solutions that
-          drive your success.
-        </p>
-        <img
-          src="images/index_bg.png"
-          alt="Technology"
-          class="main__image main__image--tech"
-        />
-        <p class="main__text main__item-centered" id="darkModeText">
-          ***BETA*** Try out dark mode:
-        </p>
-        <button
-          id="darkModeToggle"
-          class="menu__item-slider main__item-centered"
-        ></button>
-        <p
-          class="main__text main__item-centered"
-          style="margin-top: 10px"
-          id="autoDarkModeText"
-        >
-          Auto Dark Mode:
-        </p>
-        <button
-          id="autoDarkModeToggle"
-          class="menu__item-slider main__item-centered"
-        ></button>
-      </section>
-      <section id="services" class="main__section main__section--portfolio">
-        <h2 class="main__heading">Portfolio / Services</h2>
-        <div class="main__portfolio">
-          <div
-            class="main__portfolio-item"
-            onclick="window.open('https://www.comptia.org/certifications/a', '_blank');"
-          >
-            <img
-              src="images/compcert.png"
-              alt="CompTIA A+ Certification"
-              class="main__image main__image--cert"
-            />
-            <p class="main__portfolio-text">
-              <strong>CompTIA A+ Certified</strong> – Industry-recognized
-              certification for technical support and IT operational roles.
-            </p>
-          </div>
-          <div
-            class="main__portfolio-item"
-            onclick="window.open('https://tripleten.com/software-engineer/', '_blank');"
-          >
-            <img
-              src="images/tripleten-logo.svg"
-              alt="TripleTen Software Engineering Program"
-              class="main__image main__image--tripleten"
-            />
-            <p class="main__portfolio-text">
-              <strong>TripleTen Software Engineering Program</strong> –
-              Currently enrolled, gaining hands-on experience in full-stack
-              software engineering and modern web technologies.
-            </p>
-          </div>
-        </div>
-        <p class="main__text">
-          Explore my portfolio and discover the wide range of services I offer,
-          with a special focus on <strong>web development</strong> as my core
-          specialty. From building modern, responsive websites and custom web
-          applications to optimizing your online presence, I deliver tailored
-          solutions that help your business stand out. In addition to web
-          development, my expertise includes IT consulting, technical support,
-          cloud integration, and ongoing maintenance—ensuring your technology
-          works seamlessly for you. Let me help you leverage the latest tools
-          and best practices to achieve your goals efficiently and effectively.
-        </p>
-        <button
-          class="btn btn-primary main__portfolio-button"
-          onclick="window.location.href='portfolio.html';"
-        >
-          View My Portfolio
-        </button>
-        <!-- <button
+				if (loggedIn) {
+					// User is logged in
+					console.log("User is logged in...");
+					memberAreaSection.style.display = "block";
+					darkModeToggle.style.display = "none";
+					autoDarkModeToggle.style.display = "none";
+					darkModeText.style.display = "none";
+					autoDarkModeText.style.display = "none";
+				} else {
+					console.log("User is not logged in");
+					memberAreaSection.style.display = "none";
+					darkModeToggle.style.display = "block";
+					autoDarkModeToggle.style.display = "block";
+					darkModeText.style.display = "block";
+					autoDarkModeText.style.display = "block";
+				}
+			});
+		</script>
+	</head>
+	<body>
+		<!-- Loading Modal -->
+		<div id="loadingModal" class="modal" tabindex="-1" style="display: none">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-body text-center">
+						<img src="images/ui/spin.png" alt="Loading..." class="spinner" />
+						<p class="main__text" style="color: #fff">
+							Loading, please wait...
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<header class="header">
+			<img
+				src="images/wolf-logo.png"
+				alt="LoneWolf IT Logo"
+				class="header__logo"
+			/>
+			<h1 class="header__title">LoneWolf IT</h1>
+			<nav class="header__nav" id="headerNav">
+				<ul class="header__nav-list">
+					<li class="header__nav-item">
+						<a href="index.html" class="header__nav-link">Home</a>
+					</li>
+					<li class="header__nav-item">
+						<a href="#services" class="header__nav-link">Portfolio/Services</a>
+					</li>
+					<li class="header__nav-item">
+						<a href="members.html" class="header__nav-link">Member Portal</a>
+					</li>
+					<li class="header__nav-item">
+						<a href="#about" class="header__nav-link">About</a>
+					</li>
+					<li class="header__nav-item">
+						<a href="#contact" class="header__nav-link">Contact</a>
+					</li>
+				</ul>
+			</nav>
+			<button
+				class="navbar-toggle"
+				id="navbarToggle"
+				aria-label="Open navigation menu"
+			>
+				&#9776;
+			</button>
+		</header>
+		<main class="main">
+			<section id="home" class="main__section main__section--home">
+				<h2 class="main__heading">Welcome to LoneWolf IT</h2>
+				<p class="main__text main__item-centered" style="font-weight: bold">
+					Empowering small businesses, startups, and individuals through
+					innovative, cost-effective, and AI-enhanced IT services.
+				</p>
+				<p class="main__text">
+					At LoneWolf IT, I am dedicated to providing top-notch IT solutions
+					tailored to your unique needs. Whether you're a small business looking
+					for reliable tech support or an individual seeking expert guidance,
+					I've got you covered.
+				</p>
+				<p class="main__text">
+					Our services include IT consulting, web development, and ongoing
+					support, all designed to help you leverage technology for success.
+					With a focus on personalized service and a commitment to understanding
+					each client's unique needs, I aim to deliver tailored solutions that
+					drive your success.
+				</p>
+				<img
+					src="images/index_bg.png"
+					alt="Technology"
+					class="main__image main__image--tech"
+				/>
+			</section>
+			<section id="services" class="main__section main__section--portfolio">
+				<h2 class="main__heading">Portfolio / Services</h2>
+				<div class="main__portfolio">
+					<div
+						class="main__portfolio-item"
+						onclick="window.open('https://www.comptia.org/certifications/a', '_blank');"
+					>
+						<img
+							src="images/compcert.png"
+							alt="CompTIA A+ Certification"
+							class="main__image main__image--cert"
+						/>
+						<p class="main__portfolio-text">
+							<strong>CompTIA A+ Certified</strong> – Industry-recognized
+							certification for technical support and IT operational roles.
+						</p>
+					</div>
+					<div
+						class="main__portfolio-item"
+						onclick="window.open('https://tripleten.com/software-engineer/', '_blank');"
+					>
+						<img
+							src="images/tripleten-logo.svg"
+							alt="TripleTen Software Engineering Program"
+							class="main__image main__image--tripleten"
+						/>
+						<p class="main__portfolio-text">
+							<strong>TripleTen Software Engineering Program</strong> –
+							Currently enrolled, gaining hands-on experience in full-stack
+							software engineering and modern web technologies.
+						</p>
+					</div>
+				</div>
+				<p class="main__text">
+					Explore my portfolio and discover the wide range of services I offer,
+					with a special focus on <strong>web development</strong> as my core
+					specialty. From building modern, responsive websites and custom web
+					applications to optimizing your online presence, I deliver tailored
+					solutions that help your business stand out. In addition to web
+					development, my expertise includes IT consulting, technical support,
+					cloud integration, and ongoing maintenance—ensuring your technology
+					works seamlessly for you. Let me help you leverage the latest tools
+					and best practices to achieve your goals efficiently and effectively.
+				</p>
+				<button
+					class="btn btn-primary main__portfolio-button"
+					onclick="window.location.href='portfolio.html';"
+				>
+					View My Portfolio
+				</button>
+				<!-- <button
 					class="btn btn-primary main__portfolio-button"
 					onclick="window.location.href='services.html';"
 				>
 					View My Services
 				</button>-->
-        <button
-          class="btn btn-primary main__portfolio-button"
-          onclick="window.location.href='pricing.html';"
-        >
-          View My Pricing
-        </button>
-      </section>
-      <section
-        id="testimonials"
-        class="main__section main__section--testimonials"
-      >
-        <h2 class="main__heading">Testimonials</h2>
-        <p class="main__text main__item-centered">
-          Hear from our satisfied clients about their experiences with LoneWolf
-          IT.
-        </p>
-      </section>
-      <section id="memberAreaSection" class="main__section">
-        <h2 class="main__heading">Member Area</h2>
-        <p class="main__text main__item-centered">
-          Welcome to the member area! Thank you for being a valued member of the
-          Wolf Pack! Here you can manage your account, view invoices, and access
-          exclusive resources.
-        </p>
-        <button
-          class="btn btn-primary main__button main__item-centered"
-          onclick="window.location.href='members.html';"
-        >
-          Go to the Member Portal
-        </button>
-        <div class="main__section-hidden main__item-centered">
-          <button
-            class="btn btn-primary main__button main__item-centered"
-            onclick="signOut()"
-            style="margin-top: 10px"
-          >
-            Sign Out
-          </button>
-          <button
-            class="btn btn-secondary main__button main__item-centered"
-            onclick="signOut(true)"
-            style="margin-top: 10px"
-          >
-            Sign Out of All Devices
-          </button>
-        </div>
-      </section>
-      <section id="about" class="main__section main__section--about">
-        <h2 class="main__heading">About Me</h2>
-        <p class="main__text">
-          My name is <strong>Arlo W</strong>, and I was born and raised in a
-          middle-class family that instilled in me a strong work ethic and
-          resilience. Throughout my life, I have faced various adversities that
-          have shaped my character and fueled my passion for helping others find
-          their true calling.
-        </p>
-        <p class="main__text">
-          I believe that every challenge is an opportunity for growth. These
-          experiences have not only taught me valuable lessons but have also
-          inspired me to launch <strong>Lone Wolf IT</strong>. My mission is to
-          empower individuals and small businesses, guiding them towards success
-          through innovative IT solutions that enhance their productivity.
-        </p>
-        <p class="main__text">
-          With a heart dedicated to serving others and a commitment to
-          excellence, I strive to create a positive impact in everyone’s
-          journey. Together, let’s harness technology to elevate your dreams.
-        </p>
-        <p class="main__text">
-          LoneWolf IT is not just a business; it's a vision to empower
-          individuals and small businesses with the technology they need to
-          thrive.
-        </p>
-        <p class="main__text">
-          With a focus on personalized service and a commitment to understanding
-          each client's unique needs, I aim to deliver tailored solutions that
-          drive success.
-        </p>
-        <img
-          src="images/self.png"
-          alt="Arlo Wandell"
-          class="main__image main__image--arlo"
-        />
-      </section>
-      <section id="contact" class="main__section main__section--contact">
-        <h2 class="main__heading">Contact</h2>
-        <p class="main__text main__item-centered">
-          Get in touch with me for a consultation or support. I'm here to help
-          you succeed.
-        </p>
-        <button
-          class="btn btn-primary main__item-centered"
-          onclick="window.location.href='mailto:arlo.lonewolfit@gmail.com'"
-        >
-          Email Me
-        </button>
-        <button
-          class="btn btn-primary main__item-centered"
-          style="margin-top: 10px"
-          onclick="window.location.href='tel:+12245589459'"
-        >
-          Call Me
-        </button>
-      </section>
-    </main>
-    <footer class="footer">
-      <div class="footer__content">
-        <p class="footer__prepared-by">
-          Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
-        </p>
-        <p class="footer__contact">
-          Contact:
-          <a
-            href="mailto:arlo.lonewolfit@gmail.com"
-            class="footer__contact-link"
-            >arlo.lonewolfit@gmail.com</a
-          >
-        </p>
-        <p class="footer__copyright">
-          © 2025 Lone Wolf IT Services LLC | All Rights Reserved.
-        </p>
-        <ul class="footer__links">
-          <li class="footer__link-item">
-            <a href="pp.html" class="footer__link">Privacy Policy</a>
-          </li>
-          <li class="footer__link-item">
-            <a href="tos.html" class="footer__link">Terms of Service</a>
-          </li>
-          <li class="footer__link-item">
-            <a href="#contact" class="footer__link">Contact Us</a>
-          </li>
-          <li class="footer__link-item footer__link-item--icon">
-            <a
-              href="https://www.facebook.com/lonewolfitservicesllc"
-              target="_blank"
-              class="footer__link"
-            >
-              <img
-                src="images/ui/facebook-icon.png"
-                alt="Facebook"
-                class="footer__icon"
-              />
-            </a>
-          </li>
-        </ul>
-      </div>
-    </footer>
-    <div id="invoice-modal">
-      <div class="modal-content">
-        <span class="close-button" id="close-invoice-modal">X</span>
-        <h2>
-          Your Invoices
-          <button
-            class="refresh-button btn"
-            id="refresh-invoice-modal"
-            title="Refresh"
-          >
-            <img src="images/ui/refresh-logo.png" alt="Refresh" />
-          </button>
-        </h2>
-        <div id="loading-bar" class="loading-bar"></div>
-        <div id="invoice-content" class="invoice-scrollable">
-          <p>
-            No invoices found for you, please consult your technician if you
-            believe this is an error...
-          </p>
-        </div>
-      </div>
-    </div>
-    <div id="payment-modal">
-      <div class="modal-content">
-        <span class="close-button" id="close-payment-modal">X</span>
-        <h2>
-          Your Payments
-          <button
-            class="refresh-button btn"
-            id="refresh-payment-modal"
-            title="Refresh"
-          >
-            <img src="images/ui/refresh-logo.png" alt="Refresh" />
-          </button>
-        </h2>
-        <div id="loading-bar-payments" class="loading-bar"></div>
-        <div id="payment-content" class="invoice-scrollable">
-          <p>
-            No payments found for you, please consult your technician if you
-            believe this is an error...
-          </p>
-        </div>
-      </div>
-    </div>
-    <div id="consultation-modal">
-      <div class="modal-content">
-        <span class="close-button" id="close-consultation-modal">X</span>
-        <h2>
-          Your Requested Consultations
-          <button
-            class="refresh-button btn"
-            id="refresh-consultation-modal"
-            title="Refresh"
-          >
-            <img src="images/ui/refresh-logo.png" alt="Refresh" />
-          </button>
-        </h2>
-        <div id="loading-bar-consultations" class="loading-bar"></div>
-        <div id="consultation-content" class="invoice-scrollable">
-          <p>
-            No consultations found for you, please consult your technician if
-            you believe this is an error...
-          </p>
-        </div>
-      </div>
-    </div>
-  </body>
+				<button
+					class="btn btn-primary main__portfolio-button"
+					onclick="window.location.href='pricing.html';"
+				>
+					View My Pricing
+				</button>
+			</section>
+			<section
+				id="testimonials"
+				class="main__section main__section--testimonials"
+			>
+				<h2 class="main__heading">Testimonials</h2>
+				<p class="main__text main__item-centered">
+					Hear from our satisfied clients about their experiences with LoneWolf
+					IT.
+				</p>
+			</section>
+			<section id="memberAreaSection" class="main__section">
+				<h2 class="main__heading">Member Area</h2>
+				<p class="main__text main__item-centered">
+					Welcome to the member area! Thank you for being a valued member of the
+					Wolf Pack! Here you can manage your account, view invoices, and access
+					exclusive resources.
+				</p>
+				<button
+					class="btn btn-primary main__button main__item-centered"
+					onclick="window.location.href='members.html';"
+				>
+					Go to the Member Portal
+				</button>
+				<div class="main__section-hidden main__item-centered">
+					<button
+						class="btn btn-primary main__button main__item-centered"
+						onclick="signOut()"
+						style="margin-top: 10px"
+					>
+						Sign Out
+					</button>
+					<button
+						class="btn btn-secondary main__button main__item-centered"
+						onclick="signOut(true)"
+						style="margin-top: 10px"
+					>
+						Sign Out of All Devices
+					</button>
+				</div>
+			</section>
+			<section id="about" class="main__section main__section--about">
+				<h2 class="main__heading">About Me</h2>
+				<p class="main__text">
+					My name is <strong>Arlo W</strong>, and I was born and raised in a
+					middle-class family that instilled in me a strong work ethic and
+					resilience. Throughout my life, I have faced various adversities that
+					have shaped my character and fueled my passion for helping others find
+					their true calling.
+				</p>
+				<p class="main__text">
+					I believe that every challenge is an opportunity for growth. These
+					experiences have not only taught me valuable lessons but have also
+					inspired me to launch <strong>Lone Wolf IT</strong>. My mission is to
+					empower individuals and small businesses, guiding them towards success
+					through innovative IT solutions that enhance their productivity.
+				</p>
+				<p class="main__text">
+					With a heart dedicated to serving others and a commitment to
+					excellence, I strive to create a positive impact in everyone’s
+					journey. Together, let’s harness technology to elevate your dreams.
+				</p>
+				<p class="main__text">
+					LoneWolf IT is not just a business; it's a vision to empower
+					individuals and small businesses with the technology they need to
+					thrive.
+				</p>
+				<p class="main__text">
+					With a focus on personalized service and a commitment to understanding
+					each client's unique needs, I aim to deliver tailored solutions that
+					drive success.
+				</p>
+				<img
+					src="images/self.png"
+					alt="Arlo Wandell"
+					class="main__image main__image--arlo"
+				/>
+			</section>
+			<section id="contact" class="main__section main__section--contact">
+				<h2 class="main__heading">Contact</h2>
+				<p class="main__text main__item-centered">
+					Get in touch with me for a consultation or support. I'm here to help
+					you succeed.
+				</p>
+				<button
+					class="btn btn-primary main__item-centered"
+					onclick="window.location.href='mailto:arlo.lonewolfit@gmail.com'"
+				>
+					Email Me
+				</button>
+				<button
+					class="btn btn-primary main__item-centered"
+					style="margin-top: 10px"
+					onclick="window.location.href='tel:+12245589459'"
+				>
+					Call Me
+				</button>
+			</section>
+		</main>
+		<footer class="footer">
+			<div class="footer__content">
+				<p class="footer__prepared-by">
+					Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
+				</p>
+				<p class="footer__contact">
+					Contact:
+					<a
+						href="mailto:arlo.lonewolfit@gmail.com"
+						class="footer__contact-link"
+						>arlo.lonewolfit@gmail.com</a
+					>
+				</p>
+				<p class="footer__copyright">
+					© 2025 Lone Wolf IT Services LLC | All Rights Reserved.
+				</p>
+				<ul class="footer__links">
+					<li class="footer__link-item">
+						<a href="pp.html" class="footer__link">Privacy Policy</a>
+					</li>
+					<li class="footer__link-item">
+						<a href="tos.html" class="footer__link">Terms of Service</a>
+					</li>
+					<li class="footer__link-item">
+						<a href="#contact" class="footer__link">Contact Us</a>
+					</li>
+					<li class="footer__link-item footer__link-item--icon">
+						<a
+							href="https://www.facebook.com/lonewolfitservicesllc"
+							target="_blank"
+							class="footer__link"
+						>
+							<img
+								src="images/ui/facebook-icon.png"
+								alt="Facebook"
+								class="footer__icon"
+							/>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</footer>
+		<div id="invoice-modal">
+			<div class="modal-content">
+				<span class="close-button" id="close-invoice-modal">X</span>
+				<h2>
+					Your Invoices
+					<button
+						class="refresh-button btn"
+						id="refresh-invoice-modal"
+						title="Refresh"
+					>
+						<img src="images/ui/refresh-logo.png" alt="Refresh" />
+					</button>
+				</h2>
+				<div id="loading-bar" class="loading-bar"></div>
+				<div id="invoice-content" class="invoice-scrollable">
+					<p>
+						No invoices found for you, please consult your technician if you
+						believe this is an error...
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="payment-modal">
+			<div class="modal-content">
+				<span class="close-button" id="close-payment-modal">X</span>
+				<h2>
+					Your Payments
+					<button
+						class="refresh-button btn"
+						id="refresh-payment-modal"
+						title="Refresh"
+					>
+						<img src="images/ui/refresh-logo.png" alt="Refresh" />
+					</button>
+				</h2>
+				<div id="loading-bar-payments" class="loading-bar"></div>
+				<div id="payment-content" class="invoice-scrollable">
+					<p>
+						No payments found for you, please consult your technician if you
+						believe this is an error...
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="consultation-modal">
+			<div class="modal-content">
+				<span class="close-button" id="close-consultation-modal">X</span>
+				<h2>
+					Your Requested Consultations
+					<button
+						class="refresh-button btn"
+						id="refresh-consultation-modal"
+						title="Refresh"
+					>
+						<img src="images/ui/refresh-logo.png" alt="Refresh" />
+					</button>
+				</h2>
+				<div id="loading-bar-consultations" class="loading-bar"></div>
+				<div id="consultation-content" class="invoice-scrollable">
+					<p>
+						No consultations found for you, please consult your technician if
+						you believe this is an error...
+					</p>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>

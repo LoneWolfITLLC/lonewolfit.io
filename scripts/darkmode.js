@@ -21,6 +21,15 @@ function applyDarkMode(isDark, darkModeToggleStr = "darkModeToggle") {
 		body.classList.remove("dark-mode");
 		if (toggleButton) toggleButton.classList.remove("active");
 	}
+
+	// Only for guests (not logged in), toggle logo glow with dark mode
+	if (
+		typeof loggedIn !== "undefined" &&
+		loggedIn === false &&
+		typeof applyLogoGlow === "function"
+	) {
+		applyLogoGlow(isDark);
+	}
 }
 
 function applyAutoDarkMode(
@@ -28,31 +37,15 @@ function applyAutoDarkMode(
 	darkModeToggleStr = "darkModeToggle",
 	autoToggleStr = "autoDarkModeToggle"
 ) {
-	const autoToggle = document.getElementById(autoToggleStr);
-	const toggleButton = document.getElementById(darkModeToggleStr);
-
+	// Removed all references to autoToggle and toggleButton except for "this" usage
 	if (isAuto) {
 		const systemDark = window.matchMedia(
 			"(prefers-color-scheme: dark)"
 		).matches;
 		applyDarkMode(systemDark);
-
-		if (toggleButton) {
-			toggleButton.disabled = true;
-			toggleButton.setAttribute("aria-disabled", "true");
-			toggleButton.classList.add("disabled");
-		}
-		if (autoToggle) autoToggle.classList.add("active");
 	} else {
 		const darkMode = getCookie("darkMode") === "on";
 		applyDarkMode(darkMode);
-
-		if (toggleButton) {
-			toggleButton.disabled = false;
-			toggleButton.setAttribute("aria-disabled", "false");
-			toggleButton.classList.remove("disabled");
-		}
-		if (autoToggle) autoToggle.classList.remove("active");
 	}
 }
 
@@ -84,50 +77,21 @@ if (typeof darkMediaQuery.addEventListener === "function") {
 window.addEventListener("triggerDarkMode", () => {
 	Promise.all([getPreference("autoDarkMode"), getPreference("darkMode")]).then(
 		([prefAutoDarkMode, prefDarkMode]) => {
-			if (prefAutoDarkMode !== null || prefDarkMode !== null) {
-				const isAuto = prefAutoDarkMode === "on";
-				applyAutoDarkMode(isAuto);
+			let autoDarkModeValue = prefAutoDarkMode;
+			// If the preference is not set, default to "on" and set the cookie
+			if (
+				autoDarkModeValue === null ||
+				typeof autoDarkModeValue === "undefined"
+			) {
+				autoDarkModeValue = "on";
+				setCookie("autoDarkMode", "on", 365);
+			}
+			const isAuto = autoDarkModeValue === "on";
+			applyAutoDarkMode(isAuto);
 
-				if (!isAuto) {
-					const isDark = prefDarkMode === "on";
-					applyDarkMode(isDark);
-				}
-
-				// Disable the autoDarkMode toggle if the user is signed in
-				const autoToggle = document.getElementById("autoDarkModeToggle");
-				if (autoToggle && loggedIn) {
-					autoToggle.disabled = true;
-					autoToggle.setAttribute("aria-disabled", "true");
-					autoToggle.classList.add("disabled");
-				}
-
-				// Add event listeners for the toggles if they exist
-				const darkModeToggle = document.getElementById("darkModeToggle");
-				if (darkModeToggle) {
-					darkModeToggle.addEventListener("click", toggleDarkMode);
-				}
-				if (autoToggle) {
-					autoToggle.addEventListener("click", toggleAutoDarkMode);
-				}
-			} else if (prefAutoDarkMode === null && prefDarkMode === null) {
-				// Disable the autoDarkMode toggle if the user is signed in
-				const autoToggle = document.getElementById("autoDarkModeToggle");
-				if (autoToggle && loggedIn) {
-					autoToggle.disabled = true;
-					autoToggle.setAttribute("aria-disabled", "true");
-					autoToggle.classList.add("disabled");
-				}
-
-				// Add event listeners for the toggles if they exist
-				const darkModeToggle = document.getElementById("darkModeToggle");
-				if (darkModeToggle) {
-					darkModeToggle.addEventListener("click", toggleDarkMode);
-				}
-				if (autoToggle) {
-					autoToggle.addEventListener("click", toggleAutoDarkMode);
-				}
-				// If preferences are not set, initialize them
-				applyAutoDarkMode(getCookie("autoDarkMode") === "on");
+			if (!isAuto) {
+				const isDark = prefDarkMode === "on";
+				applyDarkMode(isDark);
 			}
 		}
 	);
