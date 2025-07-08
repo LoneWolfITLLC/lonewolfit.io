@@ -14,6 +14,10 @@ body.dark-mode .header__title {
     margin-right: 20px;
 }
 
+body.dark-mode .header__title--no-glow {
+    text-shadow: none;
+}
+
 body.dark-mode .header__nav-link {
     color: #e0e0e0;
  }
@@ -45,6 +49,10 @@ body.dark-mode .main__section-hidden {
 body.dark-mode .main__heading {
     color: #01e8f8;
     text-shadow: 3px 0px 15px #00ffff;
+}
+
+body.dark-mode .main__heading--no-glow {
+    text-shadow: none;
 }
 
 body.dark-mode .main__intro,
@@ -272,11 +280,26 @@ body.dark-mode .main__logo:hover {
     transition: animation 0.3s cubic-bezier(0.4,0,0.2,1);
 }
 
+body.dark-mode .main__logo--no-glow {
+    animation: none;
+    box-shadow: none;
+}
+
+body.dark-mode .main__logo--no-glow:hover {
+    animation: none;
+    box-shadow: none;
+}
+
 body.dark-mode .header__logo {
     border-radius: 50%;
     background: transparent;
     z-index: 1000;
     animation: logo-glow-small 5s ease-in-out infinite alternate;
+}
+
+body.dark-mode .header__logo--no-glow {
+    animation: none;
+    box-shadow: none;   
 }
 
 @keyframes logo-glow-idle {

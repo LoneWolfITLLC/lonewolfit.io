@@ -151,70 +151,59 @@ function initPreferencesPage(darkMode, autoDarkMode, logoGlow, titleTextGlow) {
 }
 
 function applyLogoGlow(isLogoGlow) {
-	if(!loggedIn) return;
-	const header__logo = document.querySelector(".header__logo"); // Adjust selector to your logo element
-	if (header__logo) {
-		if (isLogoGlow && document.body.classList.contains("dark-mode")) {
-			// Add glow effect using animation: logo-glow-small 5s ease-in-out infinite alternate
-			header__logo.style.animation =
-				"logo-glow-small 5s ease-in-out infinite alternate";
-		} else {
-			header__logo.style.animation = "none"; // Remove glow effect
-		}
-	}
+    const header__logo = document.querySelector(".header__logo");
+    const main__logo = document.querySelector(".main__logo");
 
-	const main__logo = document.querySelector(".main__logo"); // Adjust selector to your main logo element
-	if (main__logo) {
-		if (isLogoGlow && document.body.classList.contains("dark-mode")) {
-			// Add glow effect using animation: logo-glow-small 5s ease-in-out infinite alternate
-			main__logo.style.animation =
-				"logo-glow-idle 5s ease-in-out infinite alternate";
-			main__logo.style.transition = "animation 0.3s cubic-bezier(0.4,0,0.2,1)";
-			//enable the hover class
-			main__logo.classList.add("hoverable");
-		} else {
-			main__logo.style.animation = "none"; // Remove glow effect
-			main__logo.style.transition = "none"; // Remove transition
-			//disable the hover class
-			main__logo.classList.remove("hoverable");
+    if (header__logo) {
+        if (isLogoGlow) {
+            header__logo.classList.remove("header__logo--no-glow");
+        } else {
+            header__logo.classList.add("header__logo--no-glow");
 		}
-	}
+    }
+
+    if (main__logo) {
+        if (isLogoGlow) {
+			// Remove the BEM hoverable class to allow native :hover to work
+			main__logo.classList.remove("main__logo--no-glow");
+        } else {
+            main__logo.classList.add("main__logo--no-glow");
+        }
+    }
 }
 
 function applyTitleTextGlow(isTitleTextGlow) {
-	if(!loggedIn) return;
-	const titleText = document.querySelector(".header__title"); // Adjust selector to your title text element
-	if (titleText) {
-		if (isTitleTextGlow) {
-			// Add glow effect using text-shadow: 3px 0px 15px #00ffff;
-			const isDark = document.body.classList.contains("dark-mode");
-			const shadow = isDark
-				? "3px 0px 15px #00ffff"
-				: "0 0 8px #00ffff, 0 0 16px #00ffff, 0 0 24px #031E3C";
-			titleText.style.textShadow = shadow;
-		} else {
-			titleText.style.textShadow = "none"; // Remove glow effect
-		}
-	}
+    const titleText = document.querySelector(".header__title");
+    const mainSectionHeaders = document.querySelectorAll(".main__heading");
 
-	const mainSectionHeaders = document.querySelectorAll(".main__heading"); // Adjust selector to your main section headers
-	mainSectionHeaders.forEach((header) => {
-		if (header) {
-			if (isTitleTextGlow) {
-				// Add glow effect using text-shadow: 3px 0px 15px #00ffff;
-				// Set text shadow color based on current theme (dark or light)
-				const isDark = document.body.classList.contains("dark-mode");
-				const shadow = isDark
-					? "3px 0px 15px #00ffff"
-					: "0 0 8px #00ffff, 0 0 16px #00ffff, 0 0 24px #031E3C";
-				header.style.textShadow = shadow;
-			} else {
-				header.style.textShadow = "none"; // Remove glow effect
-			}
-		}
-	});
+    if (titleText) {
+        if (isTitleTextGlow) {
+            titleText.classList.remove("header__title--no-glow");
+        } else {
+            titleText.classList.add("header__title--no-glow");
+        }
+    }
+
+    mainSectionHeaders.forEach((header) => {
+        if (isTitleTextGlow) {
+            header.classList.remove("main__heading--no-glow");
+        } else {
+            header.classList.add("main__heading--no-glow");
+        }
+    });
 }
-let applyPreferencesEvent = null;
+
+function applyPreferences({ darkMode, logoGlow, titleTextGlow }) {
+	console.log("Applying preferences:", {
+		darkMode,
+		logoGlow,
+		titleTextGlow,
+	});
+	console.log(loggedIn);
+	// Only apply logo glow if logoGlow is "on"
+	applyLogoGlow(logoGlow === "on");
+	applyTitleTextGlow(titleTextGlow === "on");
+}
 window.addEventListener("preAuthChecked", () => {
 	const darkMode = createAndLoadPreference(
 		"darkMode",
@@ -245,37 +234,37 @@ window.addEventListener("preAuthChecked", () => {
 				);
 			}
 
-			//Create a window event to apply the preferences
-			//ADD each preference to the event detail TODO
-			applyPreferencesEvent = new CustomEvent("applyPreferences", {
-				detail: {
-					darkMode: resolvedDarkMode,
-					autoDarkMode: resolvedAutoDarkMode,
-					logoGlow: resolvedLogoGlow,
-					titleTextGlow: resolvedTitleTextGlow,
-				},
-			});
+			// Store preferences globally for later use
+			window.userPreferences = {
+				darkMode: resolvedDarkMode,
+				logoGlow: resolvedLogoGlow,
+				titleTextGlow: resolvedTitleTextGlow,
+			};
+
+			// Ensure applyPreferences runs only after loggedIn is defined
+			if (typeof loggedIn !== "undefined") {
+				applyPreferences(window.userPreferences || {});
+			} else {
+				// Wait for loggedIn to be defined before applying preferences
+				const checkLoggedIn = setInterval(() => {
+					if (typeof loggedIn !== "undefined") {
+						clearInterval(checkLoggedIn);
+						applyPreferences(window.userPreferences || {});
+					}
+				}, 50);
+			}
+
+			// Only initialize preferences page logic if on preferences.html
+			if (window.location.pathname === "/preferences.html") {
+				initPreferencesPage(
+					resolvedDarkMode,
+					resolvedAutoDarkMode,
+					resolvedLogoGlow,
+					resolvedTitleTextGlow
+				);
+			}
 		}
 	);
-});
-
-window.addEventListener("authChecked", () => {
-	// Wait until applyPreferencesEvent exists, then dispatch it
-	function tryDispatchApplyPreferencesEvent(retries = 10) {
-		if (applyPreferencesEvent) {
-			window.dispatchEvent(applyPreferencesEvent);
-		} else if (retries > 0) {
-			setTimeout(() => tryDispatchApplyPreferencesEvent(retries - 1), 100);
-		}
-	}
-	tryDispatchApplyPreferencesEvent();
-});
-
-window.addEventListener("applyPreferences", (event) => {
-	const { darkMode, logoGlow, titleTextGlow } = event.detail;
-	//TODO apply preferences to the page... RUNS EXACTLY ONCE
-	applyLogoGlow(logoGlow === "on" && darkMode === "on");
-	applyTitleTextGlow(titleTextGlow === "on");
 });
 
 //Returns the value for a given preference key, or creates it with a default value if it doesn't exist

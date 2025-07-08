@@ -28,6 +28,11 @@ body {
     margin-right: 10px;
 }
 
+.header__logo--no-glow {
+    animation: none;
+    box-shadow: none;
+}
+
 .header__title {
     font-size: 2rem;
     font-weight: 700;
@@ -37,6 +42,10 @@ body {
     white-space: nowrap;
     text-shadow: 0 0 8px #00ffff, 0 0 16px #00ffff, 0 0 24px #031E3C;
     margin: 0;
+}
+
+.header__title--no-glow {
+    text-shadow: none;
 }
 
 .header__nav {
@@ -137,6 +146,10 @@ body {
     text-shadow: 0 0 8px #00ffff, 0 0 16px #00ffff, 0 0 24px #031E3C;
 }
 
+.main__heading--no-glow {
+    text-shadow: none;
+}
+
 @media (max-width: 768px) {
     .main__heading {
         font-size: 1.25rem;
@@ -170,6 +183,16 @@ body {
     margin-bottom: 20px; /* Spacing below the logo */
     max-width: 80px;
     margin: 0 auto 10px auto; /* Center the logo */;
+}
+
+.main__logo--no-glow {
+    animation: none;
+    box-shadow: none;
+}
+
+.main__logo--no-glow:hover {
+    animation: none;
+    box-shadow: none;
 }
 
 @media (max-width: 768px) {
