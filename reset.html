@@ -19,6 +19,10 @@
     <link href="./styles/styles_white.css" rel="stylesheet" />
     <link href="./styles/styles_black.css" rel="stylesheet" />
     <link href="./styles/styles_modals_white.css" rel="stylesheet" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
     <script src="scripts/slide-in.js"></script>
     <script src="scripts/preferences.js"></script>
     <script src="scripts/darkmode.js"></script>
@@ -109,13 +113,35 @@
               placeholder="Verification Code"
             />
             <label for="password" class="form-label">New Password</label>
-            <input
-              type="password"
-              id="password"
-              class="form-control"
-              placeholder="New Password"
-              required
-            />
+            <div class="input-group">
+              <input
+                type="password"
+                id="password"
+                class="form-control"
+                placeholder="New Password"
+                style="height: inherit"
+                required
+              />
+              <button
+                type="button"
+                id="togglePassword"
+                class="btn btn-outline-secondary"
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  height: 50px;
+                  border-top-left-radius: 0;
+                  border-bottom-left-radius: 0;
+                  padding-top: 0;
+                  padding-bottom: 0;
+                "
+                tabindex="-1"
+                aria-label="Show/Hide Password"
+              >
+                <i class="fa fa-eye" aria-hidden="true"></i>
+              </button>
+            </div>
             <small class="main__text-small main__item-centered"
               >Password must be at least 10-16 characters long, contain a
               lowercase and uppercase letter, a number, and a special

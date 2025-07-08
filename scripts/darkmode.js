@@ -20,16 +20,7 @@ function applyDarkMode(isDark, darkModeToggleStr = "darkModeToggle") {
 	} else {
 		body.classList.remove("dark-mode");
 		if (toggleButton) toggleButton.classList.remove("active");
-	}
-
-	// Only for guests (not logged in), toggle logo glow with dark mode
-	if (
-		typeof loggedIn !== "undefined" &&
-		loggedIn === false &&
-		typeof applyLogoGlow === "function"
-	) {
-		applyLogoGlow(isDark);
-	}
+  }
 }
 
 function applyAutoDarkMode(
