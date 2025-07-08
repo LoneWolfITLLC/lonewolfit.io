@@ -45,31 +45,31 @@
     <script>
       requireLogin = false; // Set to true to require login for this page
       window.addEventListener("authChecked", function (event) {
-		const { loggedIn, authNeeded, user } = event.detail;
-		const memberAreaSection = document.getElementById("memberAreaSection");
-    const darkModeToggle = document.getElementById("darkModeToggle");
-    const autoDarkModeToggle = document.getElementById("autoDarkModeToggle");
-    const darkModeText = document.getElementById("darkModeText");
-    const autoDarkModeText = document.getElementById("autoDarkModeText");
+        const { loggedIn, authNeeded, user } = event.detail;
+        const memberAreaSection = document.getElementById("memberAreaSection");
+        const darkModeToggle = document.getElementById("darkModeToggle");
+        const autoDarkModeToggle =
+          document.getElementById("autoDarkModeToggle");
+        const darkModeText = document.getElementById("darkModeText");
+        const autoDarkModeText = document.getElementById("autoDarkModeText");
 
-		if(loggedIn) {
-			// User is logged in
-			console.log("User is logged in...");
-			memberAreaSection.style.display = "block";
-      darkModeToggle.style.display = "none";
-      autoDarkModeToggle.style.display = "none";
-      darkModeText.style.display = "none";
-      autoDarkModeText.style.display = "none";
-		}
-		else{
-			console.log("User is not logged in");
-			memberAreaSection.style.display = "none";
-      darkModeToggle.style.display = "block";
-      autoDarkModeToggle.style.display = "block";
-      darkModeText.style.display = "block";
-      autoDarkModeText.style.display = "block";
-		}
-	  });
+        if (loggedIn) {
+          // User is logged in
+          console.log("User is logged in...");
+          memberAreaSection.style.display = "block";
+          darkModeToggle.style.display = "none";
+          autoDarkModeToggle.style.display = "none";
+          darkModeText.style.display = "none";
+          autoDarkModeText.style.display = "none";
+        } else {
+          console.log("User is not logged in");
+          memberAreaSection.style.display = "none";
+          darkModeToggle.style.display = "block";
+          autoDarkModeToggle.style.display = "block";
+          darkModeText.style.display = "block";
+          autoDarkModeText.style.display = "block";
+        }
+      });
     </script>
   </head>
   <body>
@@ -152,7 +152,11 @@
           id="darkModeToggle"
           class="menu__item-slider main__item-centered"
         ></button>
-        <p class="main__text main__item-centered" style="margin-top: 10px" id="autoDarkModeText">
+        <p
+          class="main__text main__item-centered"
+          style="margin-top: 10px"
+          id="autoDarkModeText"
+        >
           Auto Dark Mode:
         </p>
         <button
@@ -253,6 +257,13 @@
             style="margin-top: 10px"
           >
             Sign Out
+          </button>
+          <button
+            class="btn btn-secondary main__button main__item-centered"
+            onclick="signOut(true)"
+            style="margin-top: 10px"
+          >
+            Sign Out of All Devices
           </button>
         </div>
       </section>

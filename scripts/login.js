@@ -97,16 +97,18 @@ window.addEventListener("authChecked", function () {
         if (response.ok) {
           const data = await response.json();
           const token = data.token;
+          sessionStorage.setItem("jwt", token);
+          console.log("Login successful, token stored in sessionStorage.");
           //wait one second before redirecting
           await new Promise((resolve) => setTimeout(resolve, 2000));
           if (data.adminUser) {
             if (redirectUri)
-              window.location.href = `admin.html?token=${token}&redirect_uri=${redirectUri}`;
-            else window.location.href = `admin.html?token=${token}`;
+              window.location.href = `admin.html?redirect_uri=${redirectUri}`;
+            else window.location.href = `admin.html`;
           } else {
             if (redirectUri)
-              window.location.href = `members.html?token=${token}&redirect_uri=${redirectUri}`;
-            else window.location.href = `members.html?token=${token}`;
+              window.location.href = `members.html?redirect_uri=${redirectUri}`;
+            else window.location.href = `members.html`;
           }
         } else {
           const errorData = await response.text();
