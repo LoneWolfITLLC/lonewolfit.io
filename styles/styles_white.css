@@ -573,7 +573,6 @@ body {
     margin-top: 1.5rem;
 }
 
-/* Ensure label and slider stay together on wrap */
 .main__label-slider-group {
     display: flex;
     justify-content: space-around;
