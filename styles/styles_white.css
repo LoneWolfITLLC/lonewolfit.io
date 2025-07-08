@@ -572,3 +572,12 @@ body {
 .main__text-slider {
     margin-top: 1.5rem;
 }
+
+/* Ensure label and slider stay together on wrap */
+.main__label-slider-group {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: nowrap;
+}
