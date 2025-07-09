@@ -6,6 +6,26 @@ body.dark-mode #editUserModal .modal-content {
     box-shadow: 0 0 32px 8px #00ffffcc, 0 0 64px 16px #00ffff55, 0 2px 24px rgba(0,255,255,0.18);
     transition: box-shadow 0.3s, background 0.3s;
 }
+body.dark-mode #loadingModal .modal-content {
+    box-shadow: none;
+    background: transparent !important;
+    color: transparent !important;
+    border: none;
+    pointer-events: none;
+}
+
+body.dark-mode #loadingModal .modal-content:hover {
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+body.dark-mode #loadingModal .modal-content > * {
+    color: inherit !important;
+    background: none !important;
+    border: none !important;
+    pointer-events: auto;
+    opacity: 1 !important;
+}
 
 /* Breathing hover effect */
 body.dark-mode .modal-content:hover,
@@ -62,13 +82,6 @@ body.dark-mode .loading-bar {
     background-color: #00ffff;
 }
 
-body.dark-mode .spinner {
-    border-top: 4px solid #00ffff;
-    border-right: 4px solid #00eaff;
-    border-bottom: 4px solid #232c3a;
-    border-left: 4px solid #232c3a;
-}
-
 body.dark-mode .modal-content input,
 body.dark-mode .modal-content textarea,
 body.dark-mode .modal-content select {
@@ -113,8 +126,5 @@ body.dark-mode .modal-close-button {
 }
 body.dark-mode .modal-close-button:hover,
 body.dark-mode .modal-close-button:focus {
-    opacity: 1;
-    background-image: url('../images/ui/closebtn-black.png');
-    background-repeat: no-repeat;
-    background-position: center;
+    opacity: 0.5;
 }
