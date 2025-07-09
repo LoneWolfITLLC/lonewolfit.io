@@ -119,6 +119,36 @@ async function onLoad() {
     const urlParams = new URLSearchParams(window.location.search);
     const redirectUri = urlParams.get("redirect_uri");
     const adminUser = logged.user.adminUser;
+    // Clean up redirect_uri if already on the correct portal
+    if (
+      adminUser &&
+      window.location.pathname.endsWith(ADMIN_PATH) &&
+      redirectUri
+    ) {
+      // Only keep redirect_uri if it's not members.html or admin.html
+      if (redirectUri === ADMIN_PATH || redirectUri === MEMBER_PATH) {
+        urlParams.delete("redirect_uri");
+        const newUrl =
+          window.location.pathname +
+          (urlParams.toString() ? "?" + urlParams.toString() : "") +
+          window.location.hash;
+        window.history.replaceState({}, document.title, newUrl);
+      }
+    } else if (
+      !adminUser &&
+      window.location.pathname.endsWith(MEMBER_PATH) &&
+      redirectUri
+    ) {
+      if (redirectUri === ADMIN_PATH || redirectUri === MEMBER_PATH) {
+        urlParams.delete("redirect_uri");
+        const newUrl =
+          window.location.pathname +
+          (urlParams.toString() ? "?" + urlParams.toString() : "") +
+          window.location.hash;
+        window.history.replaceState({}, document.title, newUrl);
+      }
+    }
+
     if (adminUser) {
       if (redirectUri && !redirectToPortal) {
         window.location.href = redirectUri;

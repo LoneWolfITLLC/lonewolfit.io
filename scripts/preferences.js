@@ -192,14 +192,8 @@ function applyTitleTextGlow(isTitleTextGlow) {
         }
     });
 }
-
+//TODO Apply each preference to the page
 function applyPreferences({ darkMode, logoGlow, titleTextGlow }) {
-	console.log("Applying preferences:", {
-		darkMode,
-		logoGlow,
-		titleTextGlow,
-	});
-	console.log(loggedIn);
 	// Only apply logo glow if logoGlow is "on"
 	applyLogoGlow(logoGlow === "on");
 	applyTitleTextGlow(titleTextGlow === "on");

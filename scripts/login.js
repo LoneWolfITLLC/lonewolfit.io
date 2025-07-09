@@ -102,11 +102,20 @@ window.addEventListener("authChecked", function () {
           //wait one second before redirecting
           await new Promise((resolve) => setTimeout(resolve, 2000));
           if (data.adminUser) {
-            if (redirectUri)
+            // Only append redirect_uri if it is not the admin or member portal itself
+            if (
+              redirectUri &&
+              redirectUri !== "admin.html" &&
+              redirectUri !== "members.html"
+            )
               window.location.href = `admin.html?redirect_uri=${redirectUri}`;
             else window.location.href = `admin.html`;
           } else {
-            if (redirectUri)
+            if (
+              redirectUri &&
+              redirectUri !== "members.html" &&
+              redirectUri !== "admin.html"
+            )
               window.location.href = `members.html?redirect_uri=${redirectUri}`;
             else window.location.href = `members.html`;
           }
