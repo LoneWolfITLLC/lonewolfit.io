@@ -1,34 +1,34 @@
-body.dark-mode .modal,
-body.dark-mode #invoice-modal,
-body.dark-mode #payment-modal,
-body.dark-mode #appointment-modal,
-body.dark-mode #consultation-modal {
-    background-color: rgba(10, 20, 40, 0.92) !important;
-    /* Slightly deeper blue-black overlay */
-    box-shadow: 0 0 32px 8px #00ffff88, 0 0 64px 16px #00ffff44;
-}
-
 body.dark-mode .modal-content,
 body.dark-mode #editUserModal .modal-content {
     background: #1a222d !important;
     color: #e0f7ff;
     border-radius: 12px;
     box-shadow: 0 0 32px 8px #00ffffcc, 0 0 64px 16px #00ffff55, 0 2px 24px rgba(0,255,255,0.18);
-    border: 1.5px solid #00ffff;
     transition: box-shadow 0.3s, background 0.3s;
 }
 
-body.dark-mode .modal-content:focus-within,
-body.dark-mode .modal-content:hover {
-    box-shadow: 0 0 48px 16px #00ffff, 0 0 96px 32px #00ffff88, 0 2px 32px rgba(0,255,255,0.25);
-    border-color: #00ffff;
+/* Breathing hover effect */
+body.dark-mode .modal-content:hover,
+body.dark-mode #editUserModal .modal-content:hover {
+    animation: breathing-shadow 2s ease-in-out infinite;
+}
+
+@keyframes breathing-shadow {
+    0% {
+        box-shadow: 0 0 32px 8px #00ffffcc, 0 0 64px 16px #00ffff55, 0 2px 24px rgba(0,255,255,0.18);
+    }
+    50% {
+        box-shadow: 0 0 48px 16px #00ffffee, 0 0 80px 24px #00ffff77, 0 4px 32px rgba(0,255,255,0.28);
+    }
+    100% {
+        box-shadow: 0 0 32px 8px #00ffffcc, 0 0 64px 16px #00ffff55, 0 2px 24px rgba(0,255,255,0.18);
+    }
 }
 
 body.dark-mode .modal-header,
 body.dark-mode .modal-footer {
-    background: #18202b;
+    background: #1a222d !important;
     color: #00ffff;
-    border-bottom: 1px solid #00ffff33;
 }
 
 body.dark-mode .modal-body {
