@@ -1,0 +1,120 @@
+body.dark-mode .modal,
+body.dark-mode #invoice-modal,
+body.dark-mode #payment-modal,
+body.dark-mode #appointment-modal,
+body.dark-mode #consultation-modal {
+    background-color: rgba(10, 20, 40, 0.92) !important;
+    /* Slightly deeper blue-black overlay */
+    box-shadow: 0 0 32px 8px #00ffff88, 0 0 64px 16px #00ffff44;
+}
+
+body.dark-mode .modal-content,
+body.dark-mode #editUserModal .modal-content {
+    background: #1a222d !important;
+    color: #e0f7ff;
+    border-radius: 12px;
+    box-shadow: 0 0 32px 8px #00ffffcc, 0 0 64px 16px #00ffff55, 0 2px 24px rgba(0,255,255,0.18);
+    border: 1.5px solid #00ffff;
+    transition: box-shadow 0.3s, background 0.3s;
+}
+
+body.dark-mode .modal-content:focus-within,
+body.dark-mode .modal-content:hover {
+    box-shadow: 0 0 48px 16px #00ffff, 0 0 96px 32px #00ffff88, 0 2px 32px rgba(0,255,255,0.25);
+    border-color: #00ffff;
+}
+
+body.dark-mode .modal-header,
+body.dark-mode .modal-footer {
+    background: #18202b;
+    color: #00ffff;
+    border-bottom: 1px solid #00ffff33;
+}
+
+body.dark-mode .modal-body {
+    background: none;
+    color: #e0f7ff;
+}
+
+body.dark-mode .refresh-button {
+    background: none;
+    color: #00ffff;
+}
+body.dark-mode .refresh-button:hover {
+    background: none;
+    color: #fff;
+}
+
+body.dark-mode .invoice-item,
+body.dark-mode .consultation-item {
+    background: #232c3a;
+    color: #e0f7ff;
+    border: 1px solid #00ffff55;
+    box-shadow: 0 0 12px #00ffff33;
+}
+body.dark-mode .invoice-item:hover,
+body.dark-mode .consultation-item:hover {
+    background: #1a222d;
+    box-shadow: 0 0 24px #00ffff88;
+}
+
+body.dark-mode .loading-bar {
+    background-color: #00ffff;
+}
+
+body.dark-mode .spinner {
+    border-top: 4px solid #00ffff;
+    border-right: 4px solid #00eaff;
+    border-bottom: 4px solid #232c3a;
+    border-left: 4px solid #232c3a;
+}
+
+body.dark-mode .modal-content input,
+body.dark-mode .modal-content textarea,
+body.dark-mode .modal-content select {
+    background: #232c3a;
+    color: #e0f7ff;
+    border: 1.5px solid #00ffff;
+}
+body.dark-mode .modal-content input:focus,
+body.dark-mode .modal-content textarea:focus,
+body.dark-mode .modal-content select:focus {
+    border-color: #00ffff;
+    box-shadow: 0 0 8px #00ffff88;
+    background: #1a222d;
+    color: #fff;
+}
+
+body.dark-mode .modal-title,
+body.dark-mode .invoice-title {
+    color: #00ffff;
+    text-shadow: 0 0 8px #00ffff88;
+}
+
+/* Modal close button styled like .btn-close but with custom texture for dark mode */
+body.dark-mode .modal-close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    outline: none;
+    /* Use white close icon by default in dark mode */
+    background-image: url('../images/ui/closebtn-white.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 24px 24px;
+    transition: opacity 0.2s, box-shadow 0.2s;
+    content: '';
+}
+body.dark-mode .modal-close-button:hover,
+body.dark-mode .modal-close-button:focus {
+    opacity: 1;
+    background-image: url('../images/ui/closebtn-black.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}

@@ -2,7 +2,9 @@
 function showAlert(message, isError, formElem) {
   let alertDiv;
   if (formElem) {
-    alertDiv = formElem.closest("section").querySelector(".alertDiv");
+    alertDiv = formElem.closest("section")?.querySelector(".alertDiv");
+    if(!alertDiv) alertDiv = formElem.querySelector(".alertDiv");
+    if(!alertDiv) alertDiv = formElem;
   }
   if (!alertDiv) {
     // fallback to global alert if not found
