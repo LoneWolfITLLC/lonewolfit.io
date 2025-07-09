@@ -3,9 +3,10 @@ body.dark-mode #editUserModal .modal-content {
     background: #1a222d !important;
     color: #e0f7ff;
     border-radius: 12px;
-    box-shadow: 0 0 32px 8px #00ffffcc, 0 0 64px 16px #00ffff55, 0 2px 24px rgba(0,255,255,0.18);
+    box-shadow: 0 0 32px 8px #00ffffcc, 0 0 64px 16px #00ffff55, 0 2px 24px rgba(0, 255, 255, 0.18);
     transition: box-shadow 0.3s, background 0.3s;
 }
+
 body.dark-mode #loadingModal .modal-content {
     box-shadow: none;
     background: transparent !important;
@@ -19,7 +20,7 @@ body.dark-mode #loadingModal .modal-content:hover {
     background: transparent !important;
 }
 
-body.dark-mode #loadingModal .modal-content > * {
+body.dark-mode #loadingModal .modal-content>* {
     color: inherit !important;
     background: none !important;
     border: none !important;
@@ -35,13 +36,15 @@ body.dark-mode #editUserModal .modal-content:hover {
 
 @keyframes breathing-shadow {
     0% {
-        box-shadow: 0 0 32px 8px #00ffffcc, 0 0 64px 16px #00ffff55, 0 2px 24px rgba(0,255,255,0.18);
+        box-shadow: 0 0 32px 8px #00ffffcc, 0 0 64px 16px #00ffff55, 0 2px 24px rgba(0, 255, 255, 0.18);
     }
+
     50% {
-        box-shadow: 0 0 48px 16px #00ffffee, 0 0 80px 24px #00ffff77, 0 4px 32px rgba(0,255,255,0.28);
+        box-shadow: 0 0 48px 16px #00ffffee, 0 0 80px 24px #00ffff77, 0 4px 32px rgba(0, 255, 255, 0.28);
     }
+
     100% {
-        box-shadow: 0 0 32px 8px #00ffffcc, 0 0 64px 16px #00ffff55, 0 2px 24px rgba(0,255,255,0.18);
+        box-shadow: 0 0 32px 8px #00ffffcc, 0 0 64px 16px #00ffff55, 0 2px 24px rgba(0, 255, 255, 0.18);
     }
 }
 
@@ -60,6 +63,7 @@ body.dark-mode .refresh-button {
     background: none;
     color: #00ffff;
 }
+
 body.dark-mode .refresh-button:hover {
     background: none;
     color: #fff;
@@ -72,6 +76,7 @@ body.dark-mode .consultation-item {
     border: 1px solid #00ffff55;
     box-shadow: 0 0 12px #00ffff33;
 }
+
 body.dark-mode .invoice-item:hover,
 body.dark-mode .consultation-item:hover {
     background: #1a222d;
@@ -89,6 +94,7 @@ body.dark-mode .modal-content select {
     color: #e0f7ff;
     border: 1.5px solid #00ffff;
 }
+
 body.dark-mode .modal-content input:focus,
 body.dark-mode .modal-content textarea:focus,
 body.dark-mode .modal-content select:focus {
@@ -124,6 +130,7 @@ body.dark-mode .modal-close-button {
     transition: opacity 0.2s, box-shadow 0.2s;
     content: '';
 }
+
 body.dark-mode .modal-close-button:hover,
 body.dark-mode .modal-close-button:focus {
     opacity: 0.5;
