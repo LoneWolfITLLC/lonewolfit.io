@@ -1,9 +1,11 @@
 // --- Testimonials Admin Portal Logic ---
 let currentCenterSlide = 0; // Current index for the center slide
 let currentEditSlide = -1;
-let testimonials = [];
+let unapprovedTestimonials = [];
+let approvedTestimonials = [];
 let changingSlide = false;
 let busy = false;
+let currentEditContext = "unapproved"; // Track which section is being edited
 
 // Show alert in the correct alertDiv (unapproved or approved section)
 function showMessage(message, isSuccess, context = "unapproved") {
@@ -40,7 +42,8 @@ function showMessage(message, isSuccess, context = "unapproved") {
 function updateTestimonialTextField() {
   const testimonialText = document.getElementById("testimonialText");
   if (testimonialText)
-    testimonialText.value = testimonials[currentCenterSlide]?.testimonial || "";
+    testimonialText.value =
+      unapprovedTestimonials[currentCenterSlide]?.testimonial || "";
 }
 
 async function fetchUnapprovedTestimonials() {
@@ -59,21 +62,26 @@ async function fetchUnapprovedTestimonials() {
       if (!response.ok) {
         showMessage("Authentication failed.", false, true);
         if (loadingBar) loadingBar.style.display = "none";
+        updateNavButtons();
         return;
       }
-      testimonials = await response.json();
+      unapprovedTestimonials = await response.json();
+      currentCenterSlide = 0;
       displaySlides();
-      displayTestimonialList();
+      updateNavButtons();
     } catch (error) {
       console.error("Error fetching testimonials:", error);
       showMessage("Error fetching testimonials.", false, true);
+      updateNavButtons();
     }
   } else {
     showMessage("Authentication failed.", false, true);
+    updateNavButtons();
   }
   if (loadingBar) loadingBar.style.display = "none";
 }
 
+// Fetch approved testimonials for the list only, do not merge with slideshow testimonials
 async function fetchApprovedTestimonials() {
   const token = getTokenFromSession && getTokenFromSession();
   const loadingModal = document.getElementById("loadingModal");
@@ -93,8 +101,7 @@ async function fetchApprovedTestimonials() {
         if (loadingModal) loadingModal.style.display = "none";
         return;
       }
-      const newTestimonials = await response.json();
-      testimonials = testimonials.concat(newTestimonials);
+      approvedTestimonials = await response.json();
     } catch (error) {
       console.error("Error fetching testimonials:", error);
       showMessage("Error fetching testimonials.", false, false);
@@ -166,7 +173,7 @@ async function displaySlides() {
   slides.innerHTML =
     '<div class="slideshow__slide slideshow__slide--blank"><p style="color: #0e0e0e">No testimonials available, please try again later...</p></div>';
   const slideIndices = [];
-  if (!testimonials || testimonials.length === 0) {
+  if (!unapprovedTestimonials || unapprovedTestimonials.length === 0) {
     changingSlide = false;
     const prevButton = document.getElementById("prev");
     const nextButton = document.getElementById("next");
@@ -176,21 +183,22 @@ async function displaySlides() {
     nextButton.style.pointerEvents = "none";
     return;
   }
-  if (testimonials.length === 1) {
+  if (unapprovedTestimonials.length === 1) {
     slideIndices.push(currentCenterSlide);
-  } else if (testimonials.length === 2) {
+  } else if (unapprovedTestimonials.length === 2) {
     slideIndices.push(
       currentCenterSlide,
-      (currentCenterSlide + 1) % testimonials.length
+      (currentCenterSlide + 1) % unapprovedTestimonials.length
     );
-  } else if (testimonials.length >= 3) {
+  } else if (unapprovedTestimonials.length >= 3) {
     slideIndices.push(
-      (currentCenterSlide - 1 + testimonials.length) % testimonials.length,
+      (currentCenterSlide - 1 + unapprovedTestimonials.length) %
+        unapprovedTestimonials.length,
       currentCenterSlide,
-      (currentCenterSlide + 1) % testimonials.length
+      (currentCenterSlide + 1) % unapprovedTestimonials.length
     );
   }
-  const twoSlides = testimonials.length === 2;
+  const twoSlides = unapprovedTestimonials.length === 2;
   const createSlideContent = async (testimonial, index) => {
     if (!testimonial) return;
     const slide = document.createElement("div");
@@ -205,7 +213,7 @@ async function displaySlides() {
   if (slideIndices.length) {
     for (let i = 0; i < slideIndices.length; i++) {
       const index = slideIndices[i];
-      await createSlideContent(testimonials[index], i);
+      await createSlideContent(unapprovedTestimonials[index], i);
       await new Promise((resolve) => setTimeout(resolve, 125));
     }
   }
@@ -215,16 +223,39 @@ async function displaySlides() {
 function updateNavButtons() {
   const prevButton = document.getElementById("prev");
   const nextButton = document.getElementById("next");
-  prevButton.style.opacity = testimonials.length > 1 ? 1 : 0.5;
-  nextButton.style.opacity = testimonials.length > 1 ? 1 : 0.5;
-  prevButton.style.pointerEvents = testimonials.length > 1 ? "auto" : "none";
-  nextButton.style.pointerEvents = testimonials.length > 1 ? "auto" : "none";
+  prevButton.style.opacity = unapprovedTestimonials.length > 1 ? 1 : 0.5;
+  nextButton.style.opacity = unapprovedTestimonials.length > 1 ? 1 : 0.5;
+  prevButton.style.pointerEvents =
+    unapprovedTestimonials.length > 1 ? "auto" : "none";
+  nextButton.style.pointerEvents =
+    unapprovedTestimonials.length > 1 ? "auto" : "none";
   changingSlide = false;
   updateTestimonialTextField();
+
+  // Disable/enable action buttons based on unapproved testimonials
+  const approveBtn = document.getElementById("approveButton");
+  const denyBtn = document.getElementById("denyButton");
+  const editBtn = document.getElementById("editButton");
+  const hasUnapproved = unapprovedTestimonials.length > 0;
+  if (approveBtn) {
+    approveBtn.disabled = !hasUnapproved;
+    approveBtn.style.opacity = hasUnapproved ? 1 : 0.5;
+    approveBtn.style.pointerEvents = hasUnapproved ? "auto" : "none";
+  }
+  if (denyBtn) {
+    denyBtn.disabled = !hasUnapproved;
+    denyBtn.style.opacity = hasUnapproved ? 1 : 0.5;
+    denyBtn.style.pointerEvents = hasUnapproved ? "auto" : "none";
+  }
+  if (editBtn) {
+    editBtn.disabled = !hasUnapproved;
+    editBtn.style.opacity = hasUnapproved ? 1 : 0.5;
+    editBtn.style.pointerEvents = hasUnapproved ? "auto" : "none";
+  }
 }
 
 function changeSlide(direction) {
-  if (testimonials.length > 1 && !changingSlide) {
+  if (unapprovedTestimonials.length > 1 && !changingSlide) {
     changingSlide = true;
     const slides = document.querySelectorAll(".slideshow__slide");
     slides.forEach((slide) => {
@@ -233,8 +264,8 @@ function changeSlide(direction) {
     });
     setTimeout(() => {
       currentCenterSlide =
-        (currentCenterSlide + direction + testimonials.length) %
-        testimonials.length;
+        (currentCenterSlide + direction + unapprovedTestimonials.length) %
+        unapprovedTestimonials.length;
       displaySlides();
     }, 250);
   }
@@ -272,15 +303,15 @@ async function deleteTestimonial(id, context = "unapproved") {
         ? "unapprovedTestimonials"
         : "approvedTestimonials";
     if (loadingBar) loadingBar.style.display = "none";
-    testimonials = [];
-    currentCenterSlide = 0;
-    const editSection = document.getElementById("editTestimonialSection");
-    if (editSection) editSection.style.display = "none";
     if (context === "approved") {
-      await displayTestimonialList();
+      await displayTestimonialList(); // Refresh approved list
     } else {
+      unapprovedTestimonials = [];
+      currentCenterSlide = 0;
       await fetchUnapprovedTestimonials();
     }
+    const editSection = document.getElementById("editTestimonialSection");
+    if (editSection) editSection.style.display = "none";
   } catch (error) {
     showMessage("Error: Could not delete the testimonial", false, context);
   }
@@ -292,10 +323,10 @@ async function displayTestimonialList() {
   await fetchApprovedTestimonials();
   const testimonialList = document.getElementById("testimonialList");
   testimonialList.innerHTML = "";
-  if (testimonials.length === 0) {
+  if (approvedTestimonials.length === 0) {
     return;
   }
-  for (const [index, testimonial] of testimonials.entries()) {
+  for (const [index, testimonial] of approvedTestimonials.entries()) {
     const userDetails = await fetchUserDetailsWithoutToken(testimonial.user_id);
     const testimonialItem = document.createElement("div");
     testimonialItem.classList.add("testimonials__item");
@@ -360,12 +391,15 @@ async function displayTestimonialList() {
         if (editSection.style.display === "block") {
           editSection.style.display = "none";
           currentEditSlide = -1;
+          currentEditContext = "unapproved";
           window.location.hash = "unapprovedTestimonials";
           if (testimonialText) testimonialText.value = "";
         } else {
           editSection.style.display = "block";
-          testimonialText.value = testimonials[idToEdit]?.testimonial || "";
+          testimonialText.value =
+            approvedTestimonials[idToEdit]?.testimonial || "";
           currentEditSlide = idToEdit;
+          currentEditContext = "approved";
           window.location.hash = "editTestimonialSection";
         }
       });
@@ -377,7 +411,7 @@ async function displayTestimonialList() {
           "Are you sure you want to delete this testimonial?"
         );
         if (confirmation) {
-          await deleteTestimonial(idToDelete);
+          await deleteTestimonial(idToDelete, "approved"); // Pass correct context
         }
       });
     testimonialList.appendChild(testimonialItem);
@@ -387,6 +421,7 @@ async function displayTestimonialList() {
 window.addEventListener("authChecked", async function () {
   updateNavButtons();
   await fetchUnapprovedTestimonials();
+  await displayTestimonialList(); // Ensure approved list loads on page load
   document
     .getElementById("approveButton")
     ?.addEventListener("click", async function () {
@@ -399,7 +434,7 @@ window.addEventListener("authChecked", async function () {
         return;
       }
       // Only operate on unapproved testimonials (slideshow)
-      const testimonialId = testimonials[currentCenterSlide]?.id;
+      const testimonialId = unapprovedTestimonials[currentCenterSlide]?.id;
       const loadingBar = document.getElementById("loadingBar");
       if (loadingBar) loadingBar.style.display = "block";
       try {
@@ -423,11 +458,9 @@ window.addEventListener("authChecked", async function () {
         }
         showMessage("Testimonial Approved", true, "unapproved");
         if (loadingBar) loadingBar.style.display = "none";
-        testimonials = [];
         currentCenterSlide = 0;
-        const editSection = document.getElementById("editTestimonialSection");
-        if (editSection) editSection.style.display = "none";
         await fetchUnapprovedTestimonials();
+        await displayTestimonialList(); // Refresh approved list after approving
       } catch (error) {
         showMessage(
           "Error: Could not approve the testimonial",
@@ -444,9 +477,10 @@ window.addEventListener("authChecked", async function () {
     ?.addEventListener("click", async function () {
       // Only operate on unapproved testimonials (slideshow)
       await deleteTestimonial(
-        testimonials[currentCenterSlide]?.id,
+        unapprovedTestimonials[currentCenterSlide]?.id,
         "unapproved"
       );
+      await displayTestimonialList(); // Refresh approved list after deny/delete
     });
 
   document.getElementById("editButton")?.addEventListener("click", function () {
@@ -457,12 +491,14 @@ window.addEventListener("authChecked", async function () {
     if (editSection.style.display === "none") {
       editSection.style.display = "block";
       testimonialText.value =
-        testimonials[currentCenterSlide]?.testimonial || "";
+        unapprovedTestimonials[currentCenterSlide]?.testimonial || "";
       currentEditSlide = currentCenterSlide;
+      currentEditContext = "unapproved";
       window.location.hash = "editTestimonialSection";
     } else {
       editSection.style.display = "none";
       currentEditSlide = -1;
+      currentEditContext = "unapproved";
       window.location.hash = "unapprovedTestimonials";
       if (testimonialText) testimonialText.value = "";
     }
@@ -479,7 +515,12 @@ window.addEventListener("authChecked", async function () {
         busy = false;
         return;
       }
-      const testimonialId = testimonials[currentEditSlide]?.id;
+      let testimonialId;
+      if (currentEditContext === "approved") {
+        testimonialId = approvedTestimonials[currentEditSlide]?.id;
+      } else {
+        testimonialId = unapprovedTestimonials[currentEditSlide]?.id;
+      }
       const updatedTestimonial =
         document.getElementById("testimonialText")?.value;
       const loadingBar = document.getElementById("loadingBar");
@@ -497,24 +538,27 @@ window.addEventListener("authChecked", async function () {
           showMessage(
             "Error: Could not save the testimonial",
             false,
-            "unapproved"
+            currentEditContext
           );
           if (loadingBar) loadingBar.style.display = "none";
           busy = false;
           return;
         }
-        showMessage("Testimonial Updated", true, "unapproved");
+        showMessage("Testimonial Updated", true, currentEditContext);
         if (loadingBar) loadingBar.style.display = "none";
-        testimonials = [];
         currentCenterSlide = 0;
-        await fetchUnapprovedTestimonials();
+        if (currentEditContext === "approved") {
+          await displayTestimonialList();
+        } else {
+          await fetchUnapprovedTestimonials();
+        }
         const editSection = document.getElementById("editTestimonialSection");
         if (editSection) editSection.style.display = "none";
       } catch (error) {
         showMessage(
           "Error: Could not save the testimonial",
           false,
-          "unapproved"
+          currentEditContext
         );
       }
       if (loadingBar) loadingBar.style.display = "none";
@@ -528,6 +572,7 @@ window.addEventListener("authChecked", async function () {
       if (editSection) {
         editSection.style.display = "none";
         currentEditSlide = -1;
+        currentEditContext = "unapproved";
         window.location.hash = "unapprovedTestimonials";
         const testimonialText = document.getElementById("testimonialText");
         if (testimonialText) testimonialText.value = "";
