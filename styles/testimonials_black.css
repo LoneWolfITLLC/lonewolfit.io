@@ -75,24 +75,6 @@ body.dark-mode .testimonials__text {
     text-shadow: 0 0 6px #00ffff99;
 }
 
-body.dark-mode .testimonials__edit-btn,
-body.dark-mode .testimonials__delete-btn {
-    margin-right: 10px;
-    min-width: 120px;
-    background: #032e4c;
-    color: #00ffff;
-    border: 1.5px solid #00ffff;
-    box-shadow: 0 0 8px #00ffff55;
-    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-}
-
-body.dark-mode .testimonials__edit-btn:hover,
-body.dark-mode .testimonials__delete-btn:hover {
-    background: #00ffff;
-    color: #181a1b;
-    box-shadow: 0 0 16px #00ffffcc;
-}
-
 body.dark-mode .testimonials__edit-section {
     display: none;
     flex-direction: column;
