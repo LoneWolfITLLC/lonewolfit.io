@@ -271,6 +271,7 @@
         background-color: red;
         box-shadow: 0px 5px 8px red, 0 10px 16px red;
     }
+
     to {
         background-color: #ff6666;
         box-shadow: 0px 5px 8px #ff6666, 0 10px 16px #ff6666;
@@ -282,6 +283,7 @@
         background-color: orange;
         box-shadow: 0px 5px 8px orange, 0 10px 16px yellow;
     }
+
     to {
         background-color: yellow;
         box-shadow: 0px 5px 8px yellow, 0 10px 16px #ffff66;
@@ -293,6 +295,7 @@
         background-color: green;
         box-shadow: 0px 5px 8px green, 0 10px 16px green;
     }
+
     to {
         background-color: #66ff66;
         box-shadow: 0px 5px 8px #66ff66, 0 10px 16px #66ff66;

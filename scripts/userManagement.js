@@ -41,6 +41,7 @@ async function loadUsers() {
     hideLoading();
     showMessage("Unable to load users", false);
   }
+  //OPTIONAL: Hide modal
 }
 function renderTable() {
   const tbody = document.getElementById("userTableBody");
@@ -180,10 +181,10 @@ async function buttonFunctions() {
             new FormData(document.getElementById("editUserForm"))
           );
           hideLoading();
+          loadUsers();
           //wait 2 seconds before hiding the loading modal with a promise
           await new Promise((resolve) => setTimeout(resolve, 2000));
           hideModal("editUserModal");
-          loadUsers();
           return;
         }
       } catch (err) {
@@ -201,9 +202,6 @@ async function buttonFunctions() {
         }
         showMessage(errorMsg, false);
       }
-      // Wait 2 seconds before hiding the modal
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      hideModal("editUserModal");
     });
   // DELETE USER HANDLER
   const deleteBtn = document.getElementById("deleteUserBtn");
@@ -240,9 +238,7 @@ async function buttonFunctions() {
         errorMsg = errJson?.error || errJson?.message || errorMsg;
       } catch {}
       showMessage(errorMsg, false);
-      // Wait 2 seconds before hiding the modal
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      hideModal("editUserModal");
+      //OPTIONAL: Hide modal
     }
   });
 }
