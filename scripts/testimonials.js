@@ -267,7 +267,10 @@ async function deleteTestimonial(id, context = "unapproved") {
       return;
     }
     showMessage("Testimonial Deleted", true, context);
-    window.location.hash = context === "unapproved" ? "unapprovedTestimonials" : "approvedTestimonials";
+    window.location.hash =
+      context === "unapproved"
+        ? "unapprovedTestimonials"
+        : "approvedTestimonials";
     if (loadingBar) loadingBar.style.display = "none";
     testimonials = [];
     currentCenterSlide = 0;
@@ -384,53 +387,67 @@ async function displayTestimonialList() {
 window.addEventListener("authChecked", async function () {
   updateNavButtons();
   await fetchUnapprovedTestimonials();
-  document.getElementById("approveButton")?.addEventListener("click", async function () {
-    if (busy) return;
-    busy = true;
-    const token = getTokenFromSession && getTokenFromSession();
-    if (!token) {
-      window.location.href = "/";
-      busy = false;
-      return;
-    }
-    // Only operate on unapproved testimonials (slideshow)
-    const testimonialId = testimonials[currentCenterSlide]?.id;
-    const loadingBar = document.getElementById("loadingBar");
-    if (loadingBar) loadingBar.style.display = "block";
-    try {
-      const response = await fetch(`${URL_BASE}/api/approve-testimonial`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ testimonialId }),
-      });
-      if (!response.ok) {
-        showMessage("Error: Could not approve the testimonial", false, "unapproved");
-        if (loadingBar) loadingBar.style.display = "none";
+  document
+    .getElementById("approveButton")
+    ?.addEventListener("click", async function () {
+      if (busy) return;
+      busy = true;
+      const token = getTokenFromSession && getTokenFromSession();
+      if (!token) {
+        window.location.href = "/";
         busy = false;
         return;
       }
-      showMessage("Testimonial Approved", true, "unapproved");
-      window.location.hash = "unapprovedTestimonials";
+      // Only operate on unapproved testimonials (slideshow)
+      const testimonialId = testimonials[currentCenterSlide]?.id;
+      const loadingBar = document.getElementById("loadingBar");
+      if (loadingBar) loadingBar.style.display = "block";
+      try {
+        const response = await fetch(`${URL_BASE}/api/approve-testimonial`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ testimonialId }),
+        });
+        if (!response.ok) {
+          showMessage(
+            "Error: Could not approve the testimonial",
+            false,
+            "unapproved"
+          );
+          if (loadingBar) loadingBar.style.display = "none";
+          busy = false;
+          return;
+        }
+        showMessage("Testimonial Approved", true, "unapproved");
+        if (loadingBar) loadingBar.style.display = "none";
+        testimonials = [];
+        currentCenterSlide = 0;
+        const editSection = document.getElementById("editTestimonialSection");
+        if (editSection) editSection.style.display = "none";
+        await fetchUnapprovedTestimonials();
+      } catch (error) {
+        showMessage(
+          "Error: Could not approve the testimonial",
+          false,
+          "unapproved"
+        );
+      }
       if (loadingBar) loadingBar.style.display = "none";
-      testimonials = [];
-      currentCenterSlide = 0;
-      const editSection = document.getElementById("editTestimonialSection");
-      if (editSection) editSection.style.display = "none";
-      await fetchUnapprovedTestimonials();
-    } catch (error) {
-      showMessage("Error: Could not approve the testimonial", false, "unapproved");
-    }
-    if (loadingBar) loadingBar.style.display = "none";
-    busy = false;
-  });
+      busy = false;
+    });
 
-  document.getElementById("denyButton")?.addEventListener("click", async function () {
-    // Only operate on unapproved testimonials (slideshow)
-    await deleteTestimonial(testimonials[currentCenterSlide]?.id, "unapproved");
-  });
+  document
+    .getElementById("denyButton")
+    ?.addEventListener("click", async function () {
+      // Only operate on unapproved testimonials (slideshow)
+      await deleteTestimonial(
+        testimonials[currentCenterSlide]?.id,
+        "unapproved"
+      );
+    });
 
   document.getElementById("editButton")?.addEventListener("click", function () {
     // Only operate on unapproved testimonials (slideshow)
@@ -439,7 +456,8 @@ window.addEventListener("authChecked", async function () {
     if (!editSection || !testimonialText) return;
     if (editSection.style.display === "none") {
       editSection.style.display = "block";
-      testimonialText.value = testimonials[currentCenterSlide]?.testimonial || "";
+      testimonialText.value =
+        testimonials[currentCenterSlide]?.testimonial || "";
       currentEditSlide = currentCenterSlide;
       window.location.hash = "editTestimonialSection";
     } else {
@@ -450,56 +468,69 @@ window.addEventListener("authChecked", async function () {
     }
   });
 
-  document.getElementById("saveTestimonialButton")?.addEventListener("click", async function () {
-    if (busy) return;
-    busy = true;
-    const token = getTokenFromSession && getTokenFromSession();
-    if (!token) {
-      window.location.href = "/";
-      busy = false;
-      return;
-    }
-    const testimonialId = testimonials[currentEditSlide]?.id;
-    const updatedTestimonial = document.getElementById("testimonialText")?.value;
-    const loadingBar = document.getElementById("loadingBar");
-    if (loadingBar) loadingBar.style.display = "block";
-    try {
-      const response = await fetch(`${URL_BASE}/api/edit-testimonial`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ testimonialId, updatedTestimonial }),
-      });
-      if (!response.ok) {
-        showMessage("Error: Could not save the testimonial", false, "unapproved");
-        if (loadingBar) loadingBar.style.display = "none";
+  document
+    .getElementById("saveTestimonialButton")
+    ?.addEventListener("click", async function () {
+      if (busy) return;
+      busy = true;
+      const token = getTokenFromSession && getTokenFromSession();
+      if (!token) {
+        window.location.href = "/";
         busy = false;
         return;
       }
-      showMessage("Testimonial Updated", true, "unapproved");
+      const testimonialId = testimonials[currentEditSlide]?.id;
+      const updatedTestimonial =
+        document.getElementById("testimonialText")?.value;
+      const loadingBar = document.getElementById("loadingBar");
+      if (loadingBar) loadingBar.style.display = "block";
+      try {
+        const response = await fetch(`${URL_BASE}/api/edit-testimonial`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ testimonialId, updatedTestimonial }),
+        });
+        if (!response.ok) {
+          showMessage(
+            "Error: Could not save the testimonial",
+            false,
+            "unapproved"
+          );
+          if (loadingBar) loadingBar.style.display = "none";
+          busy = false;
+          return;
+        }
+        showMessage("Testimonial Updated", true, "unapproved");
+        if (loadingBar) loadingBar.style.display = "none";
+        testimonials = [];
+        currentCenterSlide = 0;
+        await fetchUnapprovedTestimonials();
+        const editSection = document.getElementById("editTestimonialSection");
+        if (editSection) editSection.style.display = "none";
+      } catch (error) {
+        showMessage(
+          "Error: Could not save the testimonial",
+          false,
+          "unapproved"
+        );
+      }
       if (loadingBar) loadingBar.style.display = "none";
-      testimonials = [];
-      currentCenterSlide = 0;
-      await fetchUnapprovedTestimonials();
-      const editSection = document.getElementById("editTestimonialSection");
-      if (editSection) editSection.style.display = "none";
-    } catch (error) {
-      showMessage("Error: Could not save the testimonial", false, "unapproved");
-    }
-    if (loadingBar) loadingBar.style.display = "none";
-    busy = false;
-  });
+      busy = false;
+    });
 
-  document.getElementById("closeEditTestimonialButton")?.addEventListener("click", function () {
-    const editSection = document.getElementById("editTestimonialSection");
-    if (editSection){
-      editSection.style.display = "none";
-      currentEditSlide = -1;
-      window.location.hash = "unapprovedTestimonials";
-      const testimonialText = document.getElementById("testimonialText");
-      if (testimonialText) testimonialText.value = "";
-    }
-  });
+  document
+    .getElementById("closeEditTestimonialButton")
+    ?.addEventListener("click", function () {
+      const editSection = document.getElementById("editTestimonialSection");
+      if (editSection) {
+        editSection.style.display = "none";
+        currentEditSlide = -1;
+        window.location.hash = "unapprovedTestimonials";
+        const testimonialText = document.getElementById("testimonialText");
+        if (testimonialText) testimonialText.value = "";
+      }
+    });
 });
