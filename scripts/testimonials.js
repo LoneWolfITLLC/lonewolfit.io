@@ -97,7 +97,6 @@ async function fetchApprovedTestimonials() {
       );
       if (!response.ok) {
         showMessage("Authentication failed.", false, false);
-        window.location.href = "index.html";
         if (loadingModal) loadingModal.style.display = "none";
         return;
       }
@@ -105,11 +104,9 @@ async function fetchApprovedTestimonials() {
     } catch (error) {
       console.error("Error fetching testimonials:", error);
       showMessage("Error fetching testimonials.", false, false);
-      window.location.href = "index.html";
     }
   } else {
     showMessage("Authentication failed.", false, false);
-    window.location.href = "index.html";
   }
   if (loadingModal) loadingModal.style.display = "none";
 }
@@ -340,9 +337,6 @@ async function displayTestimonialList() {
         <span class="testimonials__user-label">Submitted by:</span> <span class="testimonials__user-name">${
           userDetails.first_name
         } ${userDetails.last_name}</span>
-        <span class="testimonials__approved">(Approved: ${
-          testimonial.approved ? "Yes" : "No"
-        })</span>
         <span class="testimonials__chevron"></span>
       `;
       actionsDiv.innerHTML = `
@@ -353,9 +347,6 @@ async function displayTestimonialList() {
     } else {
       userParagraph.innerHTML = `
         <span class="testimonials__user-label">Submitted by:</span> <span class="testimonials__user-name">Deleted User</span>
-        <span class="testimonials__approved">(Approved: ${
-          testimonial.approved ? "Yes" : "No"
-        })</span>
         <span class="testimonials__chevron"></span>
       `;
       actionsDiv.innerHTML = `
