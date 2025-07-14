@@ -206,6 +206,7 @@ body.dark-mode .main__section--testimonials-edit {
     display: none;
 }
 
+
 @keyframes glowFade {
     0% {
         box-shadow: 0 0 8px #00ffff55, 0 0 2px #00ffff22;
