@@ -50,6 +50,28 @@
     animation: glowing-orange 1.5s infinite alternate;
 }
 
+.btn-success {
+    background-color: #28a745;
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: inset 0px 0px 40px rgba(40, 167, 69, 1);
+    text-shadow: 0 0 15px #28a745;
+    transition: background 0.2s, color 0.2s, box-shadow 0.3s;
+}
+
+.btn-success:disabled {
+    background-color: #155724;
+    border-color: #155724;
+    color: #eee;
+}
+
+.btn-success:hover {
+    background-color: #34d058;
+    color: #fff;
+    animation: glowing-green 1.5s infinite alternate;
+}
+
 @keyframes glowing-red {
     from {
         box-shadow: inset 0px 0px 40px rgba(100, 0, 0, 1);
@@ -88,6 +110,17 @@
     to {
         box-shadow: inset 0px 0px 20px #e66000;
         text-shadow: 0 0 35px #e66000;
+    }
+}
+
+@keyframes glowing-green {
+    from {
+        box-shadow: inset 0px 0px 40px #28a745;
+        text-shadow: 0 0 15px #34d058;
+    }
+    to {
+        box-shadow: inset 0px 0px 20px #34d058;
+        text-shadow: 0 0 35px #28a745;
     }
 }
 
