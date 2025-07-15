@@ -1,0 +1,204 @@
+/* Invoices Section - Light Mode */
+.invoices__list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin: 0 auto;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    max-height: 800px;
+    overflow-y: visible; /* Allow box-shadows to show outside */
+    padding-right: 8px; /* Optional: add space for scrollbar if needed */
+}
+
+.invoices__item {
+    background: linear-gradient(120deg, #fafdff 80%, #e6f7ff 100%);
+    border-radius: 16px;
+    box-shadow: 0 6px 32px 0 rgba(0, 191, 255, 0.12), 0 2px 12px 0 rgba(0, 80, 180, 0.10);
+    margin: 0;
+    padding: 28px 36px 22px 36px;
+    transition: box-shadow 0.35s cubic-bezier(0.4, 0.2, 0.2, 1), background 0.3s;
+    position: relative;
+    border: 1.5px solid #e3e8f0;
+    width: 100%;
+    max-width: 700px;
+    cursor: pointer;
+}
+
+.invoices__item:hover {
+    box-shadow: 0 12px 40px 0 rgba(0, 191, 255, 0.18), 0 4px 24px 0 rgba(0, 80, 180, 0.14);
+    border: 2px solid #00bfff;
+    background: linear-gradient(120deg, #e6f7ff 80%, #fafdff 100%);
+    transition: box-shadow 0.4s cubic-bezier(0.4, 0.2, 0.2, 1), border 0.3s, background 0.3s;
+}
+
+.invoices__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    color: #0e2a47;
+    margin-bottom: 8px;
+}
+
+.invoices__number {
+    font-size: 1.1em;
+    color: #00bfff;
+    font-weight: 700;
+}
+
+.invoices__status {
+    font-size: 1em;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 8px;
+    background: #e3e8f0;
+    color: #0e2a47;
+    transition: background 0.3s, color 0.3s;
+}
+
+.invoices__status--paid {
+    background: #28a745;
+    color: #fff;
+}
+.invoices__status--open {
+    background: #ffc107;
+    color: #222;
+}
+.invoices__status--draft {
+    background: #e3e8f0;
+    color: #0e2a47;
+}
+.invoices__status--uncollectible {
+    background: #dc3545;
+    color: #fff;
+}
+.invoices__status--void {
+    background: #6c757d;
+    color: #fff;
+}
+
+.invoices__details {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin-bottom: 10px;
+    font-size: 1.08em;
+    color: #0e2a47;
+}
+
+.invoices__amount {
+    font-weight: 700;
+    color: #031E3C;
+}
+
+.invoices__date {
+    color: #6c757d;
+    font-size: 0.98em;
+}
+
+.invoices__actions {
+    display: flex;
+    gap: 16px;
+    margin-top: 10px;
+}
+
+.invoices__view-btn {
+    min-width: 120px;
+    font-weight: 600;
+    box-shadow: 0 2px 12px rgba(0,191,255,0.08);
+    transition: box-shadow 0.3s cubic-bezier(0.4,0,0.2,1), background 0.3s;
+}
+
+.invoices__pay-btn {
+    min-width: 120px;
+    font-weight: 600;
+    box-shadow: 0 2px 12px rgba(40,167,69,0.08);
+    transition: box-shadow 0.3s cubic-bezier(0.4,0,0.2,1), background 0.3s;
+}
+
+.invoices__chevron {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    margin-left: 16px;
+    background: url('../images/ui/collapse.png') center center no-repeat;
+    background-size: 22px 22px;
+    transition: transform 0.3s cubic-bezier(0.4, 0.2, 0.2, 1), box-shadow 0.3s, filter 0.3s;
+    vertical-align: middle;
+}
+
+.invoices__item--expanded .invoices__chevron {
+    transform: rotate(90deg);
+    filter: drop-shadow(0 0 10px rgba(0, 191, 255, 0.22)) brightness(1.12);
+}
+
+.invoices__chevron:hover {
+    filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.18)) brightness(1.08);
+}
+
+.invoices__empty {
+    text-align: center;
+    color: #6c757d;
+    font-size: 1.1em;
+    margin: 32px 0;
+    padding: 24px;
+    background: #fafdff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,191,255,0.08);
+}
+
+.invoices__loading-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, #00bfff 0%, #00ffff 50%, #00bfff 100%);
+    box-shadow: 0 0 16px #00bfff, 0 0 32px #00ffff;
+    border-radius: 0 0 3px 3px;
+    overflow: hidden;
+    z-index: 10;
+    pointer-events: none;
+    display: none;
+    opacity: 1;
+    transition: opacity 0.3s cubic-bezier(0.4, 0.2, 0.2, 1);
+    animation: invoices-loading-bar-glow 1.5s infinite alternate;
+}
+
+.invoices__loading-bar::before {
+    content: "";
+    position: absolute;
+    left: -40%;
+    top: 0;
+    height: 100%;
+    width: 40%;
+    background: linear-gradient(90deg, transparent, #00ffff88, transparent);
+    filter: blur(4px);
+    animation: invoices-loading-sweep 1.2s cubic-bezier(0.4, 0.2, 0.2, 1) infinite;
+}
+
+@keyframes invoices-loading-sweep {
+    0% {
+        left: -40%;
+        opacity: 0.7;
+    }
+    50% {
+        left: 60%;
+        opacity: 1;
+    }
+    100% {
+        left: 100%;
+        opacity: 0.7;
+    }
+}
+
+@keyframes invoices-loading-bar-glow {
+    from {
+        box-shadow: 0 0 16px #00bfff, 0 0 32px #00ffff;
+    }
+    to {
+        box-shadow: 0 0 32px #00bfff, 0 0 64px #00ffff;
+    }
+}

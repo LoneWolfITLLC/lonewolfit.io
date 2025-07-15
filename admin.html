@@ -1,475 +1,355 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Portal - LoneWolf IT</title>
-    <meta
-      name="description"
-      content="Access the LoneWolf IT admin dashboard. Manage users, view analytics, and perform administrative tasks."
-    />
-    <meta
-      name="keywords"
-      content="admin, dashboard, LoneWolf IT, admin portal, management"
-    />
-    <meta name="author" content="LoneWolf IT" />
-    <link rel="icon" href="./images/wolf-logo.png" type="image/png" />
-    <link href="./vendor/bootstrap.min.css" rel="stylesheet" />
-    <link href="./styles/buttons.css" rel="stylesheet" />
-    <link href="./styles/styles_white.css" rel="stylesheet" />
-    <link href="./styles/styles_black.css" rel="stylesheet" />
-    <link href="./styles/styles_modals_white.css" rel="stylesheet" />
-    <link href="./styles/styles_modals_black.css" rel="stylesheet" />
-    <script src="scripts/auth.js"></script>
-    <script src="scripts/header.js"></script>
-    <script src="scripts/slide-in.js"></script>
-    <script src="scripts/preferences.js"></script>
-    <script src="scripts/darkmode.js"></script>
-    <script src="scripts/accountFunctions.js"></script>
-    <style>
-      .main {
-        min-height: 100vh;
-      }
-      .main__section {
-        animation: fadeIn 0.8s ease-in;
-      }
-    </style>
-    <script>
-      requireLogin = true; // Set to true to require login for this page
-      requireUserToBeAdmin = true; // Require admin for this page
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Admin Portal - LoneWolf IT</title>
+		<meta
+			name="description"
+			content="Access the LoneWolf IT admin dashboard. Manage users, view analytics, and perform administrative tasks."
+		/>
+		<meta
+			name="keywords"
+			content="admin, dashboard, LoneWolf IT, admin portal, management"
+		/>
+		<meta name="author" content="LoneWolf IT" />
+		<link rel="icon" href="./images/wolf-logo.png" type="image/png" />
+		<link href="./vendor/bootstrap.min.css" rel="stylesheet" />
+		<link href="./styles/buttons.css" rel="stylesheet" />
+		<link href="./styles/styles_white.css" rel="stylesheet" />
+		<link href="./styles/styles_black.css" rel="stylesheet" />
+		<link href="./styles/styles_modals_white.css" rel="stylesheet" />
+		<link href="./styles/styles_modals_black.css" rel="stylesheet" />
+		<script src="scripts/auth.js"></script>
+		<script src="scripts/header.js"></script>
+		<script src="scripts/slide-in.js"></script>
+		<script src="scripts/preferences.js"></script>
+		<script src="scripts/darkmode.js"></script>
+		<script src="scripts/accountFunctions.js"></script>
+		<style>
+			.main {
+				min-height: 100vh;
+			}
+			.main__section {
+				animation: fadeIn 0.8s ease-in;
+			}
+		</style>
+		<script>
+			requireLogin = true; // Set to true to require login for this page
+			requireUserToBeAdmin = true; // Require admin for this page
 
-      async function syncStripeDB() {
-        showLoading();
-        try {
-          // Fetch state mapping from assets/iso-3166-2.json
-          const resp = await fetch("assets/iso-3166-2.json");
-          if (!resp.ok) throw new Error("Failed to fetch state mapping");
-          const stateMapping = await resp.json();
-          // Call backend endpoint
-          const token = sessionStorage.getItem("jwt");
-          const res = await fetch(URL_BASE + "/api/sync-customers", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({ stateMapping }),
-          });
-          hideLoading();
-          let data;
-          let isJson = res.headers
-            .get("content-type")
-            ?.includes("application/json");
-          if (isJson) {
-            data = await res.json();
-          } else {
-            data = { message: await res.text() };
-          }
-          if (!res.ok) {
-            alert(data.message || "Sync failed.");
-          } else {
-            alert(data.message || "Sync completed successfully.");
-          }
-        } catch (err) {
-          hideLoading();
-          alert("An error occurred during sync: " + err);
-        }
-      }
+			async function syncStripeDB() {
+				showLoading();
+				try {
+					// Fetch state mapping from assets/iso-3166-2.json
+					const resp = await fetch("assets/iso-3166-2.json");
+					if (!resp.ok) throw new Error("Failed to fetch state mapping");
+					const stateMapping = await resp.json();
+					// Call backend endpoint
+					const token = sessionStorage.getItem("jwt");
+					const res = await fetch(URL_BASE + "/api/sync-customers", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${token}`,
+						},
+						body: JSON.stringify({ stateMapping }),
+					});
+					hideLoading();
+					let data;
+					let isJson = res.headers
+						.get("content-type")
+						?.includes("application/json");
+					if (isJson) {
+						data = await res.json();
+					} else {
+						data = { message: await res.text() };
+					}
+					if (!res.ok) {
+						alert(data.message || "Sync failed.");
+					} else {
+						alert(data.message || "Sync completed successfully.");
+					}
+				} catch (err) {
+					hideLoading();
+					alert("An error occurred during sync: " + err);
+				}
+			}
 
-      async function cleanupPastBookings() {
-        showLoading();
-        try {
-          const token = sessionStorage.getItem("jwt");
-          const res = await fetch(URL_BASE + "/api/cleanup-past-bookings", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          hideLoading();
-          let data;
-          let isJson = res.headers
-            .get("content-type")
-            ?.includes("application/json");
-          if (isJson) {
-            data = await res.json();
-          } else {
-            data = { message: await res.text() };
-          }
-          if (!res.ok) {
-            alert(data.message || "Cleanup failed.");
-          } else {
-            alert(data.message || "Cleanup completed successfully.");
-          }
-        } catch (err) {
-          hideLoading();
-          alert("An error occurred during cleanup: " + err);
-        }
-      }
+			async function cleanupDeletedUserContent() {
+				showLoading();
+				try {
+					const token = sessionStorage.getItem("jwt");
+					const res = await fetch(
+						URL_BASE + "/api/cleanup-deleted-user-content",
+						{
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+								Authorization: `Bearer ${token}`,
+							},
+						}
+					);
+					hideLoading();
+					let data;
+					let isJson = res.headers
+						.get("content-type")
+						?.includes("application/json");
+					if (isJson) {
+						data = await res.json();
+					} else {
+						data = { message: await res.text() };
+					}
+					if (!res.ok) {
+						alert(data.message || "Cleanup failed.");
+					} else {
+						alert(data.message || "Cleanup completed successfully.");
+					}
+				} catch (err) {
+					hideLoading();
+					alert("An error occurred during cleanup: " + err);
+				}
+			}
 
-      async function cleanupPastConsultations() {
-        showLoading();
-        try {
-          const token = sessionStorage.getItem("jwt");
-          const res = await fetch(
-            URL_BASE + "/api/cleanup-past-consultations",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-          hideLoading();
-          let data;
-          let isJson = res.headers
-            .get("content-type")
-            ?.includes("application/json");
-          if (isJson) {
-            data = await res.json();
-          } else {
-            data = { message: await res.text() };
-          }
-          if (!res.ok) {
-            alert(data.message || "Cleanup failed.");
-          } else {
-            alert(data.message || "Cleanup completed successfully.");
-          }
-        } catch (err) {
-          hideLoading();
-          alert("An error occurred during cleanup: " + err);
-        }
-      }
-
-      async function cleanupDeletedUserContent() {
-        showLoading();
-        try {
-          const token = sessionStorage.getItem("jwt");
-          const res = await fetch(
-            URL_BASE + "/api/cleanup-deleted-user-content",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-          hideLoading();
-          let data;
-          let isJson = res.headers
-            .get("content-type")
-            ?.includes("application/json");
-          if (isJson) {
-            data = await res.json();
-          } else {
-            data = { message: await res.text() };
-          }
-          if (!res.ok) {
-            alert(data.message || "Cleanup failed.");
-          } else {
-            alert(data.message || "Cleanup completed successfully.");
-          }
-        } catch (err) {
-          hideLoading();
-          alert("An error occurred during cleanup: " + err);
-        }
-      }
-
-      window.addEventListener("authChecked", function (event) {
-        let adminUser = false;
-        if (event.detail.user) adminUser = event.detail.user.adminUser;
-        const syncBtn = document.getElementById("stripeSyncBtn");
-        if (syncBtn) {
-          syncBtn.addEventListener("click", async function () {
-            await syncStripeDB();
-          });
-        }
-        const cleanupAllBtn = document.getElementById("cleanupAllBtn");
-        if (cleanupAllBtn) {
-          cleanupAllBtn.addEventListener("click", async function () {
-            cleanupDeletedUserContent();
-          });
-        }
-        const cleanupBookingsBtn =
-          document.getElementById("cleanupBookingsBtn");
-        if (cleanupBookingsBtn) {
-          cleanupBookingsBtn.addEventListener("click", async function () {
-            await cleanupPastBookings();
-          });
-        }
-        const cleanupConsultationsBtn = document.getElementById(
-          "cleanupConsultationsBtn"
-        );
-        if (cleanupConsultationsBtn) {
-          cleanupConsultationsBtn.addEventListener("click", async function () {
-            await cleanupPastConsultations();
-          });
-        }
-      });
-    </script>
-  </head>
-  <body>
-    <!-- Loading Modal -->
-    <div id="loadingModal" class="modal" tabindex="-1" style="display: none">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-body text-center">
-            <img src="images/ui/spin.png" alt="Loading..." class="spinner" />
-            <p class="main__text" style="color: #fff">
-              Loading, please wait...
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <header class="header">
-      <img
-        src="images/wolf-logo.png"
-        alt="LoneWolf IT Logo"
-        class="header__logo"
-      />
-      <h1 class="header__title">LoneWolf IT</h1>
-      <nav class="header__nav" id="headerNav">
-        <ul class="header__nav-list">
-          <li class="header__nav-item">
-            <a href="index.html" class="header__nav-link">Home</a>
-          </li>
-          <li class="header__nav-item">
-            <a href="index.html#services" class="header__nav-link"
-              >Portfolio/Services</a
-            >
-          </li>
-          <li class="header__nav-item">
-            <a href="members.html" class="header__nav-link">Member Portal</a>
-          </li>
-          <li class="header__nav-item">
-            <a href="index.html#about" class="header__nav-link">About</a>
-          </li>
-          <li class="header__nav-item">
-            <a href="index.html#contact" class="header__nav-link">Contact</a>
-          </li>
-        </ul>
-      </nav>
-      <button
-        class="navbar-toggle"
-        id="navbarToggle"
-        aria-label="Open navigation menu"
-      >
-        &#9776;
-      </button>
-    </header>
-    <main class="main">
-      <section class="main__section" id="mainSection">
-        <img
-          src="./images/wolf-logo.png"
-          alt="Lone Wolf Logo"
-          class="main__logo main__item-centered"
-        />
-        <h1 class="main__heading main__item-centered">
-          Welcome to the Admin Portal
-        </h1>
-        <p class="main__text main__item-centered">
-          This is the admin portal for LoneWolf IT Services LLC. Here you can
-          manage users, view analytics, and perform administrative tasks.
-        </p>
-        <p class="main__text main__item-centered">
-          If you have any questions or need assistance, please
-          <a href="index.html#contact" class="main__link">contact support</a>.
-        </p>
-        <p class="main__text main__item-centered">
-          <a href="members.html" class="main__link">Go to Member Portal</a>
-        </p>
-        <button
-          class="btn btn-primary main__item-centered"
-          onclick="window.location.href='members.html'"
-        >
-          Member Portal
-        </button>
-      </section>
-      <section class="main__section" id="customerFeedbackSection">
-        <h2 class="main__heading">Customer Feedback & Testimonials</h2>
-        <p class="main__text main__item-centered">
-          Manage and review customer testimonials for LoneWolf IT.
-        </p>
-        <div
-          class="main__section-hidden main__item-centered"
-          style="margin-bottom: 5px"
-        >
-          <button
-            class="btn btn-primary"
-            style="margin-bottom: 5px"
-            onclick="window.location.href='testimonials.html'"
-          >
-            Manage Testimonials
-          </button>
-          <button
-            class="btn btn-primary"
-            onclick="window.location.href='delete_testimonials.html'"
-            style="margin-bottom: 5px"
-          >
-            Delete Approved Testimonials
-          </button>
-        </div>
-      </section>
-      <section class="main__section" id="schedulingSection">
-        <h2 class="main__heading">Scheduling & Consultations</h2>
-        <p class="main__text main__item-centered">
-          View and manage client consultations and bookings.
-        </p>
-        <div class="main__item-centered" style="margin-bottom: 5px">
-          <button
-            class="btn btn-primary"
-            style="margin-bottom: 5px"
-            onclick="window.location.href='consultations.html'"
-            disabled
-          >
-            View/Manage Consultations
-          </button>
-          <button
-            class="btn btn-primary"
-            onclick="window.location.href='bookings.html'"
-            style="margin-bottom: 5px"
-            disabled
-          >
-            View/Manage Bookings
-          </button>
-        </div>
-      </section>
-      <section class="main__section" id="databaseManagementSection">
-        <h2 class="main__heading">Database & User Management</h2>
-        <p class="main__text main__item-centered">
-          Manage users, synchronize databases, and perform cleanup operations.
-        </p>
-        <div class="main__item-centered" style="margin-bottom: 5px">
-          <button
-            class="btn btn-primary"
-            onclick="window.location.href='users.html'"
-            style="margin-bottom: 5px"
-          >
-            View/Manage Users
-          </button>
-          <button
-            class="btn btn-primary"
-            id="stripeSyncBtn"
-            style="margin-bottom: 5px"
-          >
-            Sync Stripe DB to SQLLite
-          </button>
-          <button
-            class="btn btn-primary"
-            onclick="window.open('https://dashboard.stripe.com', '_blank')"
-            style="margin-bottom: 5px"
-          >
-            Stripe Dashboard
-          </button>
-        </div>
-        <div class="main__item-centered" style="margin-bottom: 5px">
-          <button
-            class="btn btn-primary"
-            id="cleanupAllBtn"
-            style="margin-bottom: 5px"
-          >
-            Cleanup Deleted User Content
-          </button>
-          <button
-            class="btn btn-primary"
-            id="cleanupBookingsBtn"
-            style="margin-bottom: 5px"
-          >
-            Cleanup Past Bookings
-          </button>
-          <button
-            class="btn btn-primary"
-            id="cleanupConsultationsBtn"
-            style="margin-bottom: 5px"
-          >
-            Cleanup Past Consultations
-          </button>
-        </div>
-      </section>
-      <section class="main__section" id="accountManagementSection">
-        <h2 class="main__heading">Personal Account Management</h2>
-        <p class="main__text main__item-centered">
-          Manage your account details, and update your preferences.
-        </p>
-        <div
-          class="main__section-hidden main__item-centered"
-          style="margin-bottom: 5px"
-        >
-          <button
-            class="btn btn-primary"
-            onclick="window.location.href='preferences.html'"
-            style="margin-bottom: 5px"
-          >
-            Manage Preferences
-          </button>
-          <button
-            class="btn btn-primary"
-            onclick="window.location.href='edit_user.html'"
-            style="margin-bottom: 5px"
-          >
-            Edit User Account Details
-          </button>
-        </div>
-        <div class="main__section-hidden main__item-centered">
-          <button class="btn btn-primary" onclick="signOut()">Sign Out</button>
-          <button class="btn btn-secondary" onclick="signOut(true)">
-            Sign Out of All Devices
-          </button>
-        </div>
-        <button
-          class="btn btn-delete main__item-centered"
-          style="margin-top: 5px"
-          onclick="deleteAccount()"
-        >
-          Delete Account
-        </button>
-      </section>
-    </main>
-    <footer class="footer">
-      <div class="footer__content">
-        <p class="footer__prepared-by">
-          Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
-        </p>
-        <p class="footer__contact">
-          Contact:
-          <a
-            href="mailto:arlo.lonewolfit@gmail.com"
-            class="footer__contact-link"
-            >arlo.lonewolfit@gmail.com</a
-          >
-        </p>
-        <p class="footer__copyright">
-          © 2025 Lone Wolf IT Services LLC | All Rights Reserved.
-        </p>
-        <ul class="footer__links">
-          <li class="footer__link-item">
-            <a href="pp.html" class="footer__link">Privacy Policy</a>
-          </li>
-          <li class="footer__link-item">
-            <a href="tos.html" class="footer__link">Terms of Service</a>
-          </li>
-          <li class="footer__link-item">
-            <a href="index.html#contact" class="footer__link">Contact Us</a>
-          </li>
-          <li class="footer__link-item footer__link-item--icon">
-            <a
-              href="https://www.facebook.com/lonewolfitservicesllc"
-              target="_blank"
-              class="footer__link"
-            >
-              <img
-                src="images/ui/facebook-icon.png"
-                alt="Facebook"
-                class="footer__icon"
-              />
-            </a>
-          </li>
-        </ul>
-      </div>
-    </footer>
-  </body>
+			window.addEventListener("authChecked", function (event) {
+				let adminUser = false;
+				if (event.detail.user) adminUser = event.detail.user.adminUser;
+				const syncBtn = document.getElementById("stripeSyncBtn");
+				if (syncBtn) {
+					syncBtn.addEventListener("click", async function () {
+						await syncStripeDB();
+					});
+				}
+				const cleanupAllBtn = document.getElementById("cleanupAllBtn");
+				if (cleanupAllBtn) {
+					cleanupAllBtn.addEventListener("click", async function () {
+						cleanupDeletedUserContent();
+					});
+				}
+			});
+		</script>
+	</head>
+	<body>
+		<!-- Loading Modal -->
+		<div id="loadingModal" class="modal" tabindex="-1" style="display: none">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-body text-center">
+						<img src="images/ui/spin.png" alt="Loading..." class="spinner" />
+						<p class="main__text" style="color: #fff">
+							Loading, please wait...
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<header class="header">
+			<img
+				src="images/wolf-logo.png"
+				alt="LoneWolf IT Logo"
+				class="header__logo"
+			/>
+			<h1 class="header__title">LoneWolf IT</h1>
+			<nav class="header__nav" id="headerNav">
+				<ul class="header__nav-list">
+					<li class="header__nav-item">
+						<a href="index.html" class="header__nav-link">Home</a>
+					</li>
+					<li class="header__nav-item">
+						<a href="index.html#services" class="header__nav-link"
+							>Portfolio/Services</a
+						>
+					</li>
+					<li class="header__nav-item">
+						<a href="members.html" class="header__nav-link">Member Portal</a>
+					</li>
+					<li class="header__nav-item">
+						<a href="index.html#about" class="header__nav-link">About</a>
+					</li>
+					<li class="header__nav-item">
+						<a href="index.html#contact" class="header__nav-link">Contact</a>
+					</li>
+				</ul>
+			</nav>
+			<button
+				class="navbar-toggle"
+				id="navbarToggle"
+				aria-label="Open navigation menu"
+			>
+				&#9776;
+			</button>
+		</header>
+		<main class="main">
+			<section class="main__section" id="mainSection">
+				<img
+					src="./images/wolf-logo.png"
+					alt="Lone Wolf Logo"
+					class="main__logo main__item-centered"
+				/>
+				<h1 class="main__heading main__item-centered">
+					Welcome to the Admin Portal
+				</h1>
+				<p class="main__text main__item-centered">
+					This is the admin portal for LoneWolf IT Services LLC. Here you can
+					manage users, view analytics, and perform administrative tasks.
+				</p>
+				<p class="main__text main__item-centered">
+					If you have any questions or need assistance, please
+					<a href="index.html#contact" class="main__link">contact support</a>.
+				</p>
+				<p class="main__text main__item-centered">
+					<a href="members.html" class="main__link">Go to Member Portal</a>
+				</p>
+				<button
+					class="btn btn-primary main__item-centered"
+					onclick="window.location.href='members.html'"
+				>
+					Member Portal
+				</button>
+			</section>
+			<section class="main__section" id="customerFeedbackSection">
+				<h2 class="main__heading">Customer Feedback & Testimonials</h2>
+				<p class="main__text main__item-centered">
+					Manage and review customer testimonials for LoneWolf IT.
+				</p>
+				<div
+					class="main__section-hidden main__item-centered"
+					style="margin-bottom: 5px"
+				>
+					<button
+						class="btn btn-primary"
+						style="margin-bottom: 5px"
+						onclick="window.location.href='testimonials.html'"
+					>
+						Manage Testimonials
+					</button>
+					<button
+						class="btn btn-primary"
+						onclick="window.location.href='delete_testimonials.html'"
+						style="margin-bottom: 5px"
+					>
+						Delete Approved Testimonials
+					</button>
+				</div>
+			</section>
+			<section class="main__section" id="databaseManagementSection">
+				<h2 class="main__heading">Database & User Management</h2>
+				<p class="main__text main__item-centered">
+					Manage users, synchronize databases, and perform cleanup operations.
+				</p>
+				<div class="main__item-centered" style="margin-bottom: 5px">
+					<button
+						class="btn btn-primary"
+						onclick="window.location.href='users.html'"
+						style="margin-bottom: 5px"
+					>
+						View/Manage Users
+					</button>
+					<button
+						class="btn btn-primary"
+						id="stripeSyncBtn"
+						style="margin-bottom: 5px"
+					>
+						Sync Stripe DB to SQLLite
+					</button>
+					<button
+						class="btn btn-primary"
+						onclick="window.open('https://dashboard.stripe.com', '_blank')"
+						style="margin-bottom: 5px"
+					>
+						Stripe Dashboard
+					</button>
+				</div>
+				<div class="main__item-centered" style="margin-bottom: 5px">
+					<button
+						class="btn btn-primary"
+						id="cleanupAllBtn"
+						style="margin-bottom: 5px"
+					>
+						Cleanup Deleted User Content
+					</button>
+				</div>
+			</section>
+			<section class="main__section" id="accountManagementSection">
+				<h2 class="main__heading">Personal Account Management</h2>
+				<p class="main__text main__item-centered">
+					Manage your account details, and update your preferences.
+				</p>
+				<div
+					class="main__section-hidden main__item-centered"
+					style="margin-bottom: 5px"
+				>
+					<button
+						class="btn btn-primary"
+						onclick="window.location.href='preferences.html'"
+						style="margin-bottom: 5px"
+					>
+						Manage Preferences
+					</button>
+					<button
+						class="btn btn-primary"
+						onclick="window.location.href='edit_user.html'"
+						style="margin-bottom: 5px"
+					>
+						Edit User Account Details
+					</button>
+				</div>
+				<div class="main__section-hidden main__item-centered">
+					<button class="btn btn-primary" onclick="signOut()">Sign Out</button>
+					<button class="btn btn-secondary" onclick="signOut(true)">
+						Sign Out of All Devices
+					</button>
+				</div>
+				<button
+					class="btn btn-delete main__item-centered"
+					style="margin-top: 5px"
+					onclick="deleteAccount()"
+				>
+					Delete Account
+				</button>
+			</section>
+		</main>
+		<footer class="footer">
+			<div class="footer__content">
+				<p class="footer__prepared-by">
+					Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
+				</p>
+				<p class="footer__contact">
+					Contact:
+					<a
+						href="mailto:arlo.lonewolfit@gmail.com"
+						class="footer__contact-link"
+						>arlo.lonewolfit@gmail.com</a
+					>
+				</p>
+				<p class="footer__copyright">
+					© 2025 Lone Wolf IT Services LLC | All Rights Reserved.
+				</p>
+				<ul class="footer__links">
+					<li class="footer__link-item">
+						<a href="pp.html" class="footer__link">Privacy Policy</a>
+					</li>
+					<li class="footer__link-item">
+						<a href="tos.html" class="footer__link">Terms of Service</a>
+					</li>
+					<li class="footer__link-item">
+						<a href="index.html#contact" class="footer__link">Contact Us</a>
+					</li>
+					<li class="footer__link-item footer__link-item--icon">
+						<a
+							href="https://www.facebook.com/lonewolfitservicesllc"
+							target="_blank"
+							class="footer__link"
+						>
+							<img
+								src="images/ui/facebook-icon.png"
+								alt="Facebook"
+								class="footer__icon"
+							/>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</footer>
+	</body>
 </html>
