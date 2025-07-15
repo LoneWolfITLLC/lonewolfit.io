@@ -80,22 +80,48 @@
 }
 
 .invoices__details {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-    margin-bottom: 10px;
-    font-size: 1.08em;
+    display: block;
+    margin-top: 14px;
+    padding: 18px 0 0 0;
+    border-top: 1.5px solid #e3e8f0;
+    background: #fafdff;
+    border-radius: 0 0 14px 14px;
+    box-shadow: 0 4px 24px 0 rgba(0,191,255,0.10);
+    font-size: 1em;
     color: #0e2a47;
+    animation: fadeIn 0.4s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
 
-.invoices__amount {
-    font-weight: 700;
-    color: #031E3C;
-}
-
-.invoices__date {
-    color: #6c757d;
+.invoices__desc,
+.invoices__id,
+.invoices__customer,
+.invoices__period,
+.invoices__due {
+    margin-bottom: 8px;
+    color: #0e2a47;
     font-size: 0.98em;
+    letter-spacing: 0.01em;
+}
+
+.invoices__receipt {
+    margin-bottom: 8px;
+}
+
+.invoices__receipt-link {
+    color: #00bfff;
+    text-decoration: underline;
+    font-weight: 600;
+    transition: color 0.2s cubic-bezier(0.4,0,0.2,1), text-shadow 0.3s cubic-bezier(0.4,0,0.2,1);
+    text-shadow: 0 0 6px #00bfff33;
+}
+.invoices__receipt-link:hover {
+    color: #28a745;
+    text-shadow: 0 0 12px #00bfff88;
+}
+
+.invoices__receipt-na {
+    color: #6c757d;
+    font-style: italic;
 }
 
 .invoices__actions {
@@ -149,56 +175,7 @@
     box-shadow: 0 2px 12px rgba(0,191,255,0.08);
 }
 
-.invoices__loading-bar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background: linear-gradient(90deg, #00bfff 0%, #00ffff 50%, #00bfff 100%);
-    box-shadow: 0 0 16px #00bfff, 0 0 32px #00ffff;
-    border-radius: 0 0 3px 3px;
-    overflow: hidden;
-    z-index: 10;
-    pointer-events: none;
-    display: none;
-    opacity: 1;
-    transition: opacity 0.3s cubic-bezier(0.4, 0.2, 0.2, 1);
-    animation: invoices-loading-bar-glow 1.5s infinite alternate;
-}
-
-.invoices__loading-bar::before {
-    content: "";
-    position: absolute;
-    left: -40%;
-    top: 0;
-    height: 100%;
-    width: 40%;
-    background: linear-gradient(90deg, transparent, #00ffff88, transparent);
-    filter: blur(4px);
-    animation: invoices-loading-sweep 1.2s cubic-bezier(0.4, 0.2, 0.2, 1) infinite;
-}
-
-@keyframes invoices-loading-sweep {
-    0% {
-        left: -40%;
-        opacity: 0.7;
-    }
-    50% {
-        left: 60%;
-        opacity: 1;
-    }
-    100% {
-        left: 100%;
-        opacity: 0.7;
-    }
-}
-
-@keyframes invoices-loading-bar-glow {
-    from {
-        box-shadow: 0 0 16px #00bfff, 0 0 32px #00ffff;
-    }
-    to {
-        box-shadow: 0 0 32px #00bfff, 0 0 64px #00ffff;
-    }
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }

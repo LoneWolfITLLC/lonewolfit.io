@@ -1,4 +1,4 @@
-body.dark-mode .invoices__list {
+body.dark-mode .payments__list {
 	display: flex;
 	flex-direction: column;
 	gap: 24px;
@@ -9,13 +9,12 @@ body.dark-mode .invoices__list {
 	max-height: 800px;
 	overflow-y: visible;
 	padding-right: 8px;
-	/* Remove background to fix black box issue */
 	background: none;
 	box-shadow: none;
 	border-radius: 16px;
 }
 
-body.dark-mode .invoices__item {
+body.dark-mode .payments__item {
 	background: linear-gradient(120deg, #181a1b 80%, #23272a 100%);
 	border-radius: 16px;
 	box-shadow: 0 6px 32px 0 rgba(0, 255, 255, 0.12),
@@ -31,16 +30,16 @@ body.dark-mode .invoices__item {
 	filter: brightness(1.08);
 }
 
-body.dark-mode .invoices__item:hover {
+body.dark-mode .payments__item:hover {
 	box-shadow: 0 0 32px #00ffff88, 0 0 12px #00ffff44;
 	border: 2px solid #00ffff;
 	background: linear-gradient(120deg, #23272a 80%, #00ffff22 100%);
-	animation: invoicesItemGlow 2s cubic-bezier(0.4, 0.2, 0.2, 1) alternate
+	animation: paymentsItemGlow 2s cubic-bezier(0.4, 0.2, 0.2, 1) alternate
 		infinite;
 	transition: box-shadow 0.3s, border 0.3s, background 0.3s;
 }
 
-body.dark-mode .invoices__header {
+body.dark-mode .payments__header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -50,14 +49,14 @@ body.dark-mode .invoices__header {
 	text-shadow: 0 0 8px #00ffffcc;
 }
 
-body.dark-mode .invoices__number {
+body.dark-mode .payments__amount {
 	font-size: 1.1em;
 	color: #00bfff;
 	font-weight: 700;
 	text-shadow: 0 0 8px #00ffffcc;
 }
 
-body.dark-mode .invoices__status {
+body.dark-mode .payments__status {
 	font-size: 1em;
 	font-weight: 600;
 	padding: 4px 12px;
@@ -67,76 +66,34 @@ body.dark-mode .invoices__status {
 	transition: background 0.3s, color 0.3s;
 	box-shadow: 0 0 8px #00ffff44;
 }
-body.dark-mode .invoices__status--paid {
+body.dark-mode .payments__status--succeeded {
 	background: #28a745;
 	color: #fff;
 	box-shadow: 0 0 12px #28a74588;
 }
-body.dark-mode .invoices__status--open {
+body.dark-mode .payments__status--processing {
 	background: #ffc107;
 	color: #222;
 	box-shadow: 0 0 12px #ffc10755;
 }
-body.dark-mode .invoices__status--draft {
-	background: #23272a;
-	color: #00ffff;
-}
-body.dark-mode .invoices__status--uncollectible {
+body.dark-mode .payments__status--requires_payment_method {
 	background: #dc3545;
 	color: #fff;
 	box-shadow: 0 0 12px #dc354588;
 }
-body.dark-mode .invoices__status--void {
+body.dark-mode .payments__status--canceled {
 	background: #6c757d;
 	color: #fff;
-	box-shadow: 0 0 12px #6c757d88;
 }
 
-body.dark-mode .invoices__details {
-	display: flex;
-	align-items: center;
-	gap: 32px;
-	margin-bottom: 10px;
-	font-size: 1.08em;
-	color: #00ffff;
-	text-shadow: 0 0 6px #00ffff99;
-}
-
-body.dark-mode .invoices__amount {
-	font-weight: 700;
-	color: #00ffff;
-	text-shadow: 0 0 8px #00ffffcc;
-}
-
-body.dark-mode .invoices__date {
+body.dark-mode .payments__date {
 	color: #00bfff;
 	font-size: 0.98em;
+	margin-left: 16px;
 	text-shadow: 0 0 6px #00ffff99;
 }
 
-body.dark-mode .invoices__actions {
-	display: flex;
-	gap: 16px;
-	margin-top: 10px;
-}
-
-body.dark-mode .invoices__pay-btn {
-	min-width: 120px;
-	font-weight: 600;
-	background: #00bfff;
-	color: #032e4c;
-	border: 1.5px solid #00ffff;
-	box-shadow: 0 2px 12px #00ffff44;
-	transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s,
-		color 0.3s;
-}
-body.dark-mode .invoices__pay-btn:hover {
-	background: #00ffff;
-	color: #032e4c;
-	box-shadow: 0 0 24px #00ffffcc;
-}
-
-body.dark-mode .invoices__chevron {
+body.dark-mode .payments__chevron {
 	display: inline-block;
 	width: 28px;
 	height: 28px;
@@ -148,16 +105,37 @@ body.dark-mode .invoices__chevron {
 	vertical-align: middle;
 	filter: drop-shadow(0 0 8px #00ffffcc);
 }
-body.dark-mode .invoices__item--expanded .invoices__chevron {
+body.dark-mode .payments__item--expanded .payments__chevron {
 	transform: rotate(90deg);
 	filter: drop-shadow(0 0 16px #00ffffcc) brightness(1.12);
 }
-body.dark-mode .invoices__chevron:hover {
+body.dark-mode .payments__chevron:hover {
 	filter: drop-shadow(0 0 18px #00ffffcc) brightness(1.2);
 	animation: chevronGlow 0.7s cubic-bezier(0.4, 0.2, 0.2, 1) alternate infinite;
 }
 
-body.dark-mode .invoices__empty {
+body.dark-mode .payments__details {
+	display: block;
+	margin-top: 12px;
+	padding: 18px 0 0 0;
+	border-top: 1px solid #00ffff44;
+	background: #23272a;
+	border-radius: 0 0 12px 12px;
+	box-shadow: 0 2px 12px #00ffff22;
+	font-size: 1em;
+	color: #00ffff;
+	animation: fadeIn 0.4s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+body.dark-mode .payments__desc,
+body.dark-mode .payments__id,
+body.dark-mode .payments__method {
+	margin-bottom: 8px;
+	color: #00ffff;
+	font-size: 0.98em;
+}
+
+body.dark-mode .payments__empty {
 	text-align: center;
 	color: #00bfff;
 	font-size: 1.1em;
@@ -169,7 +147,7 @@ body.dark-mode .invoices__empty {
 	text-shadow: 0 0 8px #00ffffcc;
 }
 
-body.dark-mode .invoices__loading-bar {
+body.dark-mode .payments__loading-bar {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -184,9 +162,9 @@ body.dark-mode .invoices__loading-bar {
 	display: none;
 	opacity: 1;
 	transition: opacity 0.3s cubic-bezier(0.4, 0.2, 0.2, 1);
-	animation: invoices-loading-bar-glow-dark 1.5s infinite alternate;
+	animation: payments-loading-bar-glow-dark 1.5s infinite alternate;
 }
-body.dark-mode .invoices__loading-bar::before {
+body.dark-mode .payments__loading-bar::before {
 	content: "";
 	position: absolute;
 	left: -40%;
@@ -195,50 +173,11 @@ body.dark-mode .invoices__loading-bar::before {
 	width: 40%;
 	background: linear-gradient(90deg, transparent, #00ffff88, transparent);
 	filter: blur(4px);
-	animation: invoices-loading-sweep-dark 1.2s cubic-bezier(0.4, 0.2, 0.2, 1)
+	animation: payments-loading-sweep-dark 1.2s cubic-bezier(0.4, 0.2, 0.2, 1)
 		infinite;
 }
 
-body.dark-mode .invoices__details {
-    background-color: #23272a;
-    border-color: #032e4c;
-}
-
-body.dark-mode .invoices__desc,
-body.dark-mode .invoices__id,
-body.dark-mode .invoices__customer,
-body.dark-mode .invoices__period,
-body.dark-mode .invoices__due {
-    margin-bottom: 8px;
-    color: #00ffff;
-    font-size: 0.98em;
-    letter-spacing: 0.01em;
-    text-shadow: 0 0 8px #00ffff99;
-}
-
-body.dark-mode .invoices__receipt {
-    margin-bottom: 8px;
-}
-
-body.dark-mode .invoices__receipt-link {
-    color: #00ffff;
-    text-decoration: underline;
-    font-weight: 600;
-    text-shadow: 0 0 10px #00ffff88;
-    transition: color 0.2s cubic-bezier(0.4,0,0.2,1), text-shadow 0.3s cubic-bezier(0.4,0,0.2,1);
-}
-body.dark-mode .invoices__receipt-link:hover {
-    color: #28a745;
-    text-shadow: 0 0 18px #00ffffcc;
-}
-
-body.dark-mode .invoices__receipt-na {
-    color: #6c757d;
-    font-style: italic;
-    text-shadow: 0 0 6px #00ffff33;
-}
-
-@keyframes invoicesItemGlow {
+@keyframes paymentsItemGlow {
 	0% {
 		box-shadow: 0 0 16px #00ffff44, 0 0 6px #00ffff22;
 	}
@@ -254,7 +193,7 @@ body.dark-mode .invoices__receipt-na {
 		filter: drop-shadow(0 0 10px #00ffff) brightness(10);
 	}
 }
-@keyframes invoices-loading-sweep-dark {
+@keyframes payments-loading-sweep-dark {
 	0% {
 		left: -40%;
 		opacity: 0.7;
@@ -268,11 +207,19 @@ body.dark-mode .invoices__receipt-na {
 		opacity: 0.7;
 	}
 }
-@keyframes invoices-loading-bar-glow-dark {
+@keyframes payments-loading-bar-glow-dark {
 	from {
 		box-shadow: 0 0 16px #00ffff, 0 0 32px #00ffff;
 	}
 	to {
 		box-shadow: 0 0 32px #00ffff, 0 0 64px #00ffff;
+	}
+}
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
 	}
 }
