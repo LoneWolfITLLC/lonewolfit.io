@@ -29,7 +29,6 @@ body.dark-mode #loadingModal .modal-content>* {
 }
 
 /* Breathing hover effect */
-body.dark-mode .modal-content:hover,
 body.dark-mode #editUserModal .modal-content:hover {
     animation: breathing-shadow 2s ease-in-out infinite;
 }
