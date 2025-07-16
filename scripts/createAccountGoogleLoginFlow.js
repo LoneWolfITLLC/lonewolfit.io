@@ -296,12 +296,13 @@ window.addEventListener("authChecked", async function () {
         if (response.ok) {
           const respData = await response.json();
           const token = respData.token;
-          const redirectUri = getQueryParam("redirect_uri") || "";
           sessionStorage.setItem("jwt", token);
           showAlertDiv("Account created successfully!", false, residentialForm);
           console.log("Login successful, token stored in sessionStorage.");
           //wait one second before redirecting
+          window.location.hash = "#registerSectionResidential";
           await new Promise((resolve) => setTimeout(resolve, 2000));
+          const redirectUri = getQueryParam("redirect_uri") || "";
           if (data.adminUser) {
             // Only append redirect_uri if it is not the admin or member portal itself
             if (
@@ -352,7 +353,9 @@ window.addEventListener("authChecked", async function () {
           console.log("Login successful, token stored in sessionStorage.");
           showAlertDiv("Account created successfully!", false, businessForm);
           //wait one second before redirecting
+          window.location.hash = "#registerSectionResidential";
           await new Promise((resolve) => setTimeout(resolve, 2000));
+          const redirectUri = getQueryParam("redirect_uri") || "";
           if (data.adminUser) {
             // Only append redirect_uri if it is not the admin or member portal itself
             if (
