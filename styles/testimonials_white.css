@@ -200,16 +200,12 @@
     pointer-events: none;
 }
 
-.main__section--testimonials {
+.main__section--testimonials-edit {
     max-height: 600px;
+    border-radius: 12px;
     overflow-y: auto;
     padding: 20px;
     background: #f5faff;
-    border-radius: 12px;
-    box-shadow: 0 4px 24px rgba(0, 80, 180, 0.1);
-}
-
-.main__section--testimonials-edit {
     margin-top: 20px;
     box-shadow: 0 4px 24px rgba(0, 80, 180, 0.1);
     display: none;
