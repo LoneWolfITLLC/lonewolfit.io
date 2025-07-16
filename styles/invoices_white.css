@@ -104,7 +104,6 @@
 	margin-bottom: 8px;
 	color: #0e2a47;
 	font-size: 0.98em;
-	letter-spacing: 0.01em;
 }
 
 .invoices__receipt {
@@ -152,13 +151,16 @@
 .invoices__chevron {
 	display: inline-block;
 	width: 28px;
+	min-width: 28px;
 	height: 28px;
+	min-height: 28px;
 	margin-left: 16px;
 	background: url("../images/ui/collapse.png") center center no-repeat;
 	background-size: 22px 22px;
 	transition: transform 0.3s cubic-bezier(0.4, 0.2, 0.2, 1), box-shadow 0.3s,
 		filter 0.3s;
 	vertical-align: middle;
+	overflow: hidden;
 }
 
 .invoices__item--expanded .invoices__chevron {
@@ -188,4 +190,28 @@
 	to {
 		opacity: 1;
 	}
+}
+
+@media (max-width: 710px) {
+    .invoices__chevron {
+        min-width: 28px;
+        min-height: 28px;
+        width: 28px;
+        height: 28px;
+        opacity: 1 !important;
+        visibility: visible !important;
+        filter: none !important;
+        transition: none;
+        display: inline-block !important;
+        background-size: 22px 22px;
+        margin-left: 10px;
+        overflow: hidden;
+    }
+}
+
+@media (max-width: 590px) {
+    .invoices__chevron {
+        display: none !important;
+        visibility: hidden !important;
+    }
 }

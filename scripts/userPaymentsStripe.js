@@ -40,14 +40,18 @@ async function fetchAndDisplayUserPayments() {
 			paymentItem.className = "payments__item";
 			paymentItem.innerHTML = `
 				<div class="payments__header">
-					<span class="payments__amount">$${(payment.amount / 100).toFixed(2)}</span>
-					<span class="payments__status payments__status--${payment.status}">${
+					<div class="payments__header-main">
+						<span class="payments__amount">$${(payment.amount / 100).toFixed(2)}</span>
+						<span class="payments__status payments__status--${payment.status}">${
 				payment.status.charAt(0).toUpperCase() + payment.status.slice(1)
 			}</span>
-					<span class="payments__date">${new Date(
-						payment.created * 1000
-					).toLocaleDateString()}</span>
-					<span class="payments__chevron" tabindex="0" aria-label="Expand payment details"></span>
+					</div>
+					<div class="payments__header-side">
+						<span class="payments__date">${new Date(
+							payment.created * 1000
+						).toLocaleDateString()}</span>
+						<span class="payments__chevron" tabindex="0" aria-label="Expand payment details"></span>
+					</div>
 				</div>
 				<div class="payments__details" style="display:none;">
 					<p class="payments__desc"><strong>Description:</strong> ${
@@ -64,11 +68,17 @@ async function fetchAndDisplayUserPayments() {
 			// Collapse/expand logic
 			const chevron = paymentItem.querySelector(".payments__chevron");
 			const details = paymentItem.querySelector(".payments__details");
-			chevron.addEventListener("click", () => {
+			function toggleDetails() {
 				const expanded = paymentItem.classList.toggle(
 					"payments__item--expanded"
 				);
 				details.style.display = expanded ? "block" : "none";
+			}
+			chevron.addEventListener("click", toggleDetails);
+			paymentItem.addEventListener("click", function (e) {
+				// Prevent double toggle if chevron is clicked
+				if (e.target === chevron) return;
+				toggleDetails();
 			});
 			paymentItem.addEventListener("keydown", (e) => {
 				if (e.key === "Enter" || e.key === " ") {

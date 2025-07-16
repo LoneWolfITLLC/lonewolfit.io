@@ -184,7 +184,7 @@ body.dark-mode .invoices__loading-bar::before {
 }
 
 body.dark-mode .invoices__details {
-    background-color: #23272a;
+    background-color: transparent;
     border-color: #032e4c;
 }
 

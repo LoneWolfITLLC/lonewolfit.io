@@ -60,6 +60,7 @@
 	background: #e3e8f0;
 	color: #0e2a47;
 	transition: background 0.3s, color 0.3s;
+    margin-left: 10px;
 }
 .payments__status--succeeded {
 	background: #28a745;
@@ -198,4 +199,28 @@
 	to {
 		opacity: 1;
 	}
+}
+
+@media (max-width: 710px) {
+    .payments__chevron {
+        min-width: 28px;
+        min-height: 28px;
+        width: 28px;
+        height: 28px;
+        opacity: 1 !important;
+        visibility: visible !important;
+        filter: none !important;
+        transition: none;
+        display: inline-block !important;
+        background-size: 22px 22px;
+        margin-left: 10px;
+        overflow: hidden;
+    }
+}
+
+@media (max-width: 590px) {
+    .payments__chevron {
+        display: none !important;
+        visibility: hidden !important;
+    }
 }

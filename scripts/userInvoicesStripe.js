@@ -34,15 +34,19 @@ async function fetchAndDisplayInvoices() {
 			invoiceItem.className = "invoices__item";
 			invoiceItem.innerHTML = `
 				<div class="invoices__header">
-					<span class="invoices__number">Invoice #${invoice.number || invoice.id}</span>
-					<span class="invoices__status invoices__status--${invoice.status}">${
+					<div class="invoices__header-main">
+						<span class="invoices__number">Invoice #${invoice.number || invoice.id}</span>
+						<span class="invoices__status invoices__status--${invoice.status}">${
 				invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)
 			}</span>
-					<span class="invoices__amount">$${(invoice.amount_due / 100).toFixed(2)}</span>
-					<span class="invoices__date">${new Date(
-						invoice.created * 1000
-					).toLocaleDateString()}</span>
-					<span class="invoices__chevron" tabindex="0" aria-label="Expand invoice details"></span>
+					</div>
+					<div class="invoices__header-side">
+						<span class="invoices__amount">$${(invoice.amount_due / 100).toFixed(2)}</span>
+						<span class="invoices__date">${new Date(
+							invoice.created * 1000
+						).toLocaleDateString()}</span>
+						<span class="invoices__chevron" tabindex="0" aria-label="Expand invoice details"></span>
+					</div>
 				</div>
 				<div class="invoices__details" style="display:none;">
 					<p class="invoices__desc"><strong>Description:</strong> ${
@@ -84,11 +88,17 @@ async function fetchAndDisplayInvoices() {
 			// Collapse/expand logic
 			const chevron = invoiceItem.querySelector(".invoices__chevron");
 			const details = invoiceItem.querySelector(".invoices__details");
-			chevron.addEventListener("click", () => {
+			function toggleDetails() {
 				const expanded = invoiceItem.classList.toggle(
 					"invoices__item--expanded"
 				);
 				details.style.display = expanded ? "block" : "none";
+			}
+			chevron.addEventListener("click", toggleDetails);
+			invoiceItem.addEventListener("click", function (e) {
+				// Prevent double toggle if chevron is clicked
+				if (e.target === chevron) return;
+				toggleDetails();
 			});
 			invoiceItem.addEventListener("keydown", (e) => {
 				if (e.key === "Enter" || e.key === " ") {

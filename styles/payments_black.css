@@ -103,7 +103,7 @@ body.dark-mode .payments__details {
 	margin-top: 12px;
 	padding: 18px 0 0 0;
 	border-top: 1px solid #00ffff44;
-	background: #23272a;
+	background: transparent;
 	border-radius: 0 0 12px 12px;
 	box-shadow: 0 2px 12px #00ffff22;
 	font-size: 1em;
