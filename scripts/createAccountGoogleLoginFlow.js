@@ -353,7 +353,7 @@ window.addEventListener("authChecked", async function () {
           console.log("Login successful, token stored in sessionStorage.");
           showAlertDiv("Account created successfully!", false, businessForm);
           //wait one second before redirecting
-          window.location.hash = "#registerSectionResidential";
+          window.location.hash = "#registerSectionBusiness";
           await new Promise((resolve) => setTimeout(resolve, 2000));
           const redirectUri = getQueryParam("redirect_uri") || "";
           if (data.adminUser) {
