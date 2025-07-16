@@ -134,16 +134,35 @@ window.addEventListener("authChecked", function (event) {
           const businessCountryElem =
             document.getElementById("businessCountry");
           const businessStateElem = document.getElementById("businessState");
-          businessCountryElem.value = country.trim();
+          // Try to match by value or label (full name or code)
+          function setSelectByValueOrText(selectElem, val) {
+            val = val.trim();
+            // Try value match
+            let found = false;
+            for (let opt of selectElem.options) {
+              if (opt.value === val) {
+                selectElem.value = opt.value;
+                found = true;
+                break;
+              }
+            }
+            if (!found) {
+              // Try label/text match (case-insensitive)
+              for (let opt of selectElem.options) {
+                if (opt.text.toLowerCase() === val.toLowerCase()) {
+                  selectElem.value = opt.value;
+                  found = true;
+                  break;
+                }
+              }
+            }
+            return found;
+          }
+          setSelectByValueOrText(businessCountryElem, country);
           businessCountryElem.dispatchEvent(new Event("change"));
           // Wait for state options to be loaded before setting value
           const setStateValue = () => {
-            if (
-              [...businessStateElem.options].some(
-                (opt) => opt.value === state.trim()
-              )
-            ) {
-              businessStateElem.value = state.trim();
+            if (setSelectByValueOrText(businessStateElem, state)) {
               businessStateElem.dispatchEvent(new Event("input"));
             } else {
               setTimeout(setStateValue, 50);
@@ -172,28 +191,39 @@ window.addEventListener("authChecked", function (event) {
           document.getElementById("address2Business").value = addr2.trim();
           document.getElementById("cityBusiness").value = city.trim();
           document.getElementById("zipCodeBusiness").value = zip.trim();
-          document.getElementById("countryBusiness").value = country.trim();
-          document
-            .getElementById("countryBusiness")
-            .dispatchEvent(new Event("change"));
+          // Set country and state by value or label
+          const countryElem = document.getElementById("countryBusiness");
+          const stateElem = document.getElementById("stateBusiness");
+          function setSelectByValueOrText(selectElem, val) {
+            val = val.trim();
+            let found = false;
+            for (let opt of selectElem.options) {
+              if (opt.value === val) {
+                selectElem.value = opt.value;
+                found = true;
+                break;
+              }
+            }
+            if (!found) {
+              for (let opt of selectElem.options) {
+                if (opt.text.toLowerCase() === val.toLowerCase()) {
+                  selectElem.value = opt.value;
+                  found = true;
+                  break;
+                }
+              }
+            }
+            return found;
+          }
+          setSelectByValueOrText(countryElem, country);
+          countryElem.dispatchEvent(new Event("change"));
           // Wait for the state options to be populated before setting the value
           const setStateValue = () => {
-            const stateSelect = document.getElementById("stateBusiness");
-            // Check if the desired state option exists
-            if (
-              [...stateSelect.options].some((opt) => opt.value === state.trim())
-            ) {
-              stateSelect.value = state.trim();
-              stateSelect.removeEventListener(
-                "optionsPopulated",
-                setStateValue
-              );
+            if (setSelectByValueOrText(stateElem, state)) {
+              stateElem.dispatchEvent(new Event("input"));
             } else {
-              // Try again after a short delay
               setTimeout(setStateValue, 50);
             }
-            //fire off a input event for the state select element...
-            stateSelect.dispatchEvent(new Event("input"));
           };
           setStateValue();
         } else {
@@ -238,27 +268,39 @@ window.addEventListener("authChecked", function (event) {
           document.getElementById("address2Residential").value = addr2.trim();
           document.getElementById("cityResidential").value = city.trim();
           document.getElementById("zipCodeResidential").value = zip.trim();
-          // Trigger the change event to populate state options
-          document.getElementById("country").value = country.trim();
-          document.getElementById("country").dispatchEvent(new Event("change"));
+          // Set country and state by value or label
+          const countryElem = document.getElementById("country");
+          const stateElem = document.getElementById("state");
+          function setSelectByValueOrText(selectElem, val) {
+            val = val.trim();
+            let found = false;
+            for (let opt of selectElem.options) {
+              if (opt.value === val) {
+                selectElem.value = opt.value;
+                found = true;
+                break;
+              }
+            }
+            if (!found) {
+              for (let opt of selectElem.options) {
+                if (opt.text.toLowerCase() === val.toLowerCase()) {
+                  selectElem.value = opt.value;
+                  found = true;
+                  break;
+                }
+              }
+            }
+            return found;
+          }
+          setSelectByValueOrText(countryElem, country);
+          countryElem.dispatchEvent(new Event("change"));
           // Wait for the state options to be populated before setting the value
           const setStateValue = () => {
-            const stateSelect = document.getElementById("state");
-            // Check if the desired state option exists
-            if (
-              [...stateSelect.options].some((opt) => opt.value === state.trim())
-            ) {
-              stateSelect.value = state.trim();
-              stateSelect.removeEventListener(
-                "optionsPopulated",
-                setStateValue
-              );
+            if (setSelectByValueOrText(stateElem, state)) {
+              stateElem.dispatchEvent(new Event("input"));
             } else {
-              // Try again after a short delay
               setTimeout(setStateValue, 50);
             }
-            //fire off a input event for the state select element...
-            stateSelect.dispatchEvent(new Event("input"));
           };
           setStateValue();
         } else {
