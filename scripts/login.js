@@ -1,3 +1,33 @@
+function getQueryParam(name) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(name);
+}
+function googleCallback() {
+  const token = getQueryParam("token");
+  const admin = getQueryParam("admin");
+  const redirectUri = getQueryParam("redirect_uri");
+  if (token) {
+    sessionStorage.setItem("jwt", token);
+    if (admin) {
+      // Only append redirect_uri if it is not the admin or member portal itself
+      if (
+        redirectUri &&
+        redirectUri !== "admin.html" &&
+        redirectUri !== "members.html"
+      )
+        window.location.href = `admin.html?redirect_uri=${redirectUri}`;
+      else window.location.href = `admin.html`;
+    } else {
+      if (
+        redirectUri &&
+        redirectUri !== "members.html" &&
+        redirectUri !== "admin.html"
+      )
+        window.location.href = `members.html?redirect_uri=${redirectUri}`;
+      else window.location.href = `members.html`;
+    }
+  }
+}
 window.addEventListener("authChecked", function () {
   const email = document.getElementById("email");
   const password = document.getElementById("password");
@@ -202,4 +232,5 @@ window.addEventListener("authChecked", function () {
         window.location.href = URL_BASE + "/auth/google";
       }
     });
+  googleCallback(); // Call this to handle any existing token in the URL
 });
