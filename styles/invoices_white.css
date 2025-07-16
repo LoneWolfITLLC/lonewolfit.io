@@ -60,6 +60,7 @@
 	background: #e3e8f0;
 	color: #0e2a47;
 	transition: background 0.3s, color 0.3s;
+	margin-left: 10px;
 }
 
 .invoices__status--paid {
@@ -86,7 +87,8 @@
 .invoices__details {
 	display: block;
 	margin-top: 14px;
-	padding: 18px 0 0 0;
+	padding-top: 18px;
+	padding-bottom: 18px;
 	border-top: 1.5px solid #e3e8f0;
 	background: transparent;
 	border-radius: 0 0 14px 14px;
@@ -193,25 +195,25 @@
 }
 
 @media (max-width: 710px) {
-    .invoices__chevron {
-        min-width: 28px;
-        min-height: 28px;
-        width: 28px;
-        height: 28px;
-        opacity: 1 !important;
-        visibility: visible !important;
-        filter: none !important;
-        transition: none;
-        display: inline-block !important;
-        background-size: 22px 22px;
-        margin-left: 10px;
-        overflow: hidden;
-    }
+	.invoices__chevron {
+		min-width: 28px;
+		min-height: 28px;
+		width: 28px;
+		height: 28px;
+		opacity: 1 !important;
+		visibility: visible !important;
+		filter: none !important;
+		transition: none;
+		display: inline-block !important;
+		background-size: 22px 22px;
+		margin-left: 10px;
+		overflow: hidden;
+	}
 }
 
 @media (max-width: 590px) {
-    .invoices__chevron {
-        display: none !important;
-        visibility: hidden !important;
-    }
+	.invoices__chevron {
+		display: none !important;
+		visibility: hidden !important;
+	}
 }
