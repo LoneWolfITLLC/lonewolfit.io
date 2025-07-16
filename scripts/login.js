@@ -13,7 +13,8 @@ function googleCallback() {
       if (
         redirectUri &&
         redirectUri !== "admin.html" &&
-        redirectUri !== "members.html"
+        redirectUri !== "members.html" &&
+        redirectUri !== "null"
       )
         window.location.href = `admin.html?redirect_uri=${redirectUri}`;
       else window.location.href = `admin.html`;
@@ -21,7 +22,8 @@ function googleCallback() {
       if (
         redirectUri &&
         redirectUri !== "members.html" &&
-        redirectUri !== "admin.html"
+        redirectUri !== "admin.html" &&
+        redirectUri !== "null"
       )
         window.location.href = `members.html?redirect_uri=${redirectUri}`;
       else window.location.href = `members.html`;
