@@ -296,6 +296,7 @@ window.addEventListener("authChecked", async function () {
         if (response.ok) {
           const respData = await response.json();
           const token = respData.token;
+          const redirectUri = getQueryParam("redirect_uri") || "";
           sessionStorage.setItem("jwt", token);
           showAlertDiv("Account created successfully!", false, residentialForm);
           console.log("Login successful, token stored in sessionStorage.");
