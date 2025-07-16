@@ -127,23 +127,48 @@ window.addEventListener("authChecked", async function () {
   // Populate both forms with temp user data
   function fillFormFields(form, prefix = "") {
     if (!form) return;
-    if (form.querySelector(`#${prefix}username`))
-      form.querySelector(`#${prefix}username`).value = email
-        .split("@")[0]
-        .trim();
-    if (form.querySelector(`#${prefix}firstName`))
-      form.querySelector(`#${prefix}firstName`).value =
-        tempUserData.first_name || "";
-    if (form.querySelector(`#${prefix}lastName`))
-      form.querySelector(`#${prefix}lastName`).value =
-        tempUserData.last_name || "";
-    if (form.querySelector(`#${prefix}middleName`))
-      form.querySelector(`#${prefix}middleName`).value =
-        tempUserData.middle_name || "";
-    if (form.querySelector(`#${prefix}phone`))
-      form.querySelector(`#${prefix}phone`).value = tempUserData.phone || "";
-    if (form.querySelector(`#${prefix}email`))
-      form.querySelector(`#${prefix}email`).value = email;
+    // Determine if this is the business form by checking for a business-specific field
+    const isBusiness = form.id === "registerFormBusiness";
+    if (isBusiness) {
+      // Business form field IDs
+      if (form.querySelector("#usernameBusiness"))
+        form.querySelector("#usernameBusiness").value = email
+          .split("@")[0]
+          .trim();
+      if (form.querySelector("#firstNameBusiness"))
+        form.querySelector("#firstNameBusiness").value =
+          tempUserData.first_name || "";
+      if (form.querySelector("#lastNameBusiness"))
+        form.querySelector("#lastNameBusiness").value =
+          tempUserData.last_name || "";
+      if (form.querySelector("#middleNameBusiness"))
+        form.querySelector("#middleNameBusiness").value =
+          tempUserData.middle_name || "";
+      if (form.querySelector("#phoneBusiness"))
+        form.querySelector("#phoneBusiness").value = tempUserData.phone || "";
+      if (form.querySelector("#emailBusiness"))
+        form.querySelector("#emailBusiness").value = email;
+    } else {
+      // Residential form field IDs
+      if (form.querySelector("#usernameResidential"))
+        form.querySelector("#usernameResidential").value = email
+          .split("@")[0]
+          .trim();
+      if (form.querySelector("#firstNameResidential"))
+        form.querySelector("#firstNameResidential").value =
+          tempUserData.first_name || "";
+      if (form.querySelector("#lastNameResidential"))
+        form.querySelector("#lastNameResidential").value =
+          tempUserData.last_name || "";
+      if (form.querySelector("#middleNameResidential"))
+        form.querySelector("#middleNameResidential").value =
+          tempUserData.middle_name || "";
+      if (form.querySelector("#phoneResidential"))
+        form.querySelector("#phoneResidential").value =
+          tempUserData.phone || "";
+      if (form.querySelector("#emailResidential"))
+        form.querySelector("#emailResidential").value = email;
+    }
   }
   // Residential
   fillFormFields(residentialForm, "");
