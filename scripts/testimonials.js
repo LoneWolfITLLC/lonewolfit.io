@@ -377,6 +377,7 @@ async function displayTestimonialList() {
 		testimonialItem.addEventListener("click", function (e) {
 			// Prevent double toggle if chevron is clicked
 			if (e.target === chevron) return;
+			if (e.target.classList.contains("btn")) return;
 			toggleActions();
 		});
 		actionsDiv
