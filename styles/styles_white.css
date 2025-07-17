@@ -616,6 +616,13 @@ body {
 	margin-top: 1.5rem; /* Space above slider text. */
 }
 
+.main__text-character-count {
+	margin-top: 0rem; /* Space above character count text. */
+	font-size: 0.9rem; /* Smaller text for character count. */
+	color: #666; /* Lighter gray for character count text. */
+	text-align: right; /* Aligns character count text to the left. */
+}
+
 .main__label-slider-group {
 	display: flex; /* Flexbox for slider label group. */
 	justify-content: space-around; /* Evenly spaces labels. */

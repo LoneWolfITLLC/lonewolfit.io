@@ -69,6 +69,10 @@ body.dark-mode .main__text-hyperlink {
 	color: #00bfff; /* Bright blue for hyperlinks for visibility. */
 }
 
+body.dark-mode .main__text-character-count {
+	color: #00bfff; /* Bright blue for character count text for visibility. */
+}
+
 body.dark-mode .main__image {
 	background: #181a1b; /* Matches image background to page background. */
 	border: 1px solid #222; /* Thin, dark border for definition. */
