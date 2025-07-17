@@ -1,14 +1,23 @@
+// Prevent overlapping fetches
+let isLoadingInvoices = false;
 // Fetch and display Stripe invoices for the logged-in user
 async function fetchAndDisplayInvoices() {
+	console.log("[Invoices] fetchAndDisplayInvoices called");
+	if (isLoadingInvoices) {
+		console.warn("[Invoices] Fetch already in progress, skipping.");
+		return;
+	}
+	isLoadingInvoices = true;
+	const loadingBar = document.getElementById("listInvoicesLoadingBar");
 	const invoicesContainer = document.getElementById("invoicesContainer");
 	const alertDiv = document.getElementById("alertInvoices");
-	invoicesContainer.innerHTML = "";
-	alertDiv.style.display = "none";
+	// Always show loading bar at the start
+	if (loadingBar) {
+		loadingBar.style.display = "block";
+	}
+	if (invoicesContainer) invoicesContainer.innerHTML = "";
+	if (alertDiv) alertDiv.style.display = "none";
 
-	// Add loading bar
-	const loadingBar = document.getElementById("listLoadingBar");
-	// Show loading spinner
-	loadingBar.style.display = "block";
 	try {
 		const token = sessionStorage.getItem("jwt");
 		const response = await fetch(URL_BASE + "/api/user/invoices", {
@@ -23,7 +32,9 @@ async function fetchAndDisplayInvoices() {
 		}
 		const data = await response.json();
 		if (!data.data || data.data.length === 0) {
-			invoicesContainer.innerHTML = `<div class="invoices__empty">No invoices found.</div>`;
+			if (invoicesContainer)
+				invoicesContainer.innerHTML = `<div class="invoices__empty">No invoices found.</div>`;
+			if (loadingBar) loadingBar.style.display = "none";
 			return;
 		}
 		// Render invoices
@@ -108,18 +119,20 @@ async function fetchAndDisplayInvoices() {
 			});
 			invoicesList.appendChild(invoiceItem);
 		});
-		invoicesContainer.appendChild(invoicesList);
+		if (invoicesContainer) invoicesContainer.appendChild(invoicesList);
 		// Remove loading bar after fetch
-		loadingBar.style.display = "none";
+		if (loadingBar) loadingBar.style.display = "none";
 	} catch (error) {
-		loadingBar.style.display = "none";
+		if (loadingBar) loadingBar.style.display = "none";
 		if (typeof showAlert === "function") {
 			showAlert(`Error loading invoices: ${error.message}`, true, alertDiv);
-		} else {
+		} else if (alertDiv) {
 			alertDiv.style.display = "block";
 			alertDiv.innerHTML = `Error loading invoices: ${error.message}`;
 		}
-		invoicesContainer.innerHTML = "";
+		if (invoicesContainer) invoicesContainer.innerHTML = "";
+	} finally {
+		isLoadingInvoices = false;
 	}
 }
 

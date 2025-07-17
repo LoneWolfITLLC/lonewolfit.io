@@ -1,390 +1,389 @@
 .btn-primary {
-    background-color: #031E3C;
-    border: none;
-    box-shadow: none;
+	background-color: #031e3c;
+	border: none;
+	box-shadow: none;
 }
 
 .btn-primary:disabled {
-    background-color: #01101e;
-    border-color: #01101e;
+	background-color: #01101e;
+	border-color: #01101e;
 }
 
 .btn-primary:hover {
-    background-color: rgba(0, 255, 255, 1);
-    border: none;
-    animation: glowing 1.5s infinite alternate;
+	background-color: rgba(0, 255, 255, 1);
+	border: none;
+	animation: glowing 1.5s infinite alternate;
 }
 
 .btn-delete {
-    background-color: rgb(100, 0, 0);
-    border: none;
-    box-shadow: none;
-    color: white;
+	background-color: rgb(100, 0, 0);
+	border: none;
+	box-shadow: none;
+	color: white;
 }
 
 .btn-delete:hover {
-    background-color: rgba(255, 0, 0, 1);
-    border: none;
-    animation: glowing-red 1.5s infinite alternate;
-    color: white;
+	background-color: rgba(255, 0, 0, 1);
+	border: none;
+	animation: glowing-red 1.5s infinite alternate;
+	color: white;
 }
 
 .btn-secondary {
-    background-color: #e66000;
-    border: none;
-    color: #fff;
-    box-shadow: none;
-    transition: background 0.2s, color 0.2s;
+	background-color: #e66000;
+	border: none;
+	color: #fff;
+	box-shadow: none;
+	transition: background 0.2s, color 0.2s;
 }
 
 .btn-secondary:disabled {
-    background-color: #a63d00;
-    border-color: #a63d00;
-    color: #eee;
+	background-color: #a63d00;
+	border-color: #a63d00;
+	color: #eee;
 }
 
 .btn-secondary:hover {
-    background-color: #e66000;
-    border: none;
-    color: #fff;
-    animation: glowing-orange 1.5s infinite alternate;
+	background-color: #e66000;
+	border: none;
+	color: #fff;
+	animation: glowing-orange 1.5s infinite alternate;
 }
 
 .btn-success {
-    background-color: #28a745;
-    border: none;
-    color: #fff;
-    font-weight: 600;
-    box-shadow: inset 0px 0px 40px rgba(40, 167, 69, 1);
-    text-shadow: 0 0 15px #28a745;
-    transition: background 0.2s, color 0.2s, box-shadow 0.3s;
+	background-color: #28a745;
+	border: none;
+	color: #fff;
+	font-weight: 600;
+	box-shadow: inset 0px 0px 40px rgba(40, 167, 69, 1);
+	text-shadow: 0 0 15px #28a745;
+	transition: background 0.2s, color 0.2s, box-shadow 0.3s;
 }
 
 .btn-success:disabled {
-    background-color: #155724;
-    border-color: #155724;
-    color: #eee;
+	background-color: #155724;
+	border-color: #155724;
+	color: #eee;
 }
 
 .btn-success:hover {
-    background-color: #34d058;
-    color: #fff;
-    animation: glowing-green 1.5s infinite alternate;
+	background-color: #34d058;
+	color: #fff;
+	animation: glowing-green 1.5s infinite alternate;
 }
 
 @keyframes glowing-red {
-    from {
-        box-shadow: inset 0px 0px 40px rgba(100, 0, 0, 1);
-        text-shadow: 0 0 15px rgb(0, 255, 255);
-    }
+	from {
+		box-shadow: inset 0px 0px 40px rgba(100, 0, 0, 1);
+		text-shadow: 0 0 15px rgb(0, 255, 255);
+	}
 
-    to {
-        box-shadow: inset 0px 0px 20px rgba(100, 0, 0, 0.65);
-        text-shadow: 0 0 35px rgb(0, 255, 255);
-    }
+	to {
+		box-shadow: inset 0px 0px 20px rgba(100, 0, 0, 0.65);
+		text-shadow: 0 0 35px rgb(0, 255, 255);
+	}
 }
 
 @keyframes glowing {
-    from {
-        box-shadow: inset 0px 0px 40px rgba(3, 30, 60, 1);
-        text-shadow: 0 0 15px rgb(0, 255, 255);
-    }
+	from {
+		box-shadow: inset 0px 0px 40px rgba(3, 30, 60, 1);
+		text-shadow: 0 0 15px rgb(0, 255, 255);
+	}
 
-    to {
-        box-shadow: inset 0px 0px 20px rgba(3, 30, 60, 0.65);
-        text-shadow: 0 0 35px rgb(0, 255, 255);
-    }
+	to {
+		box-shadow: inset 0px 0px 20px rgba(3, 30, 60, 0.65);
+		text-shadow: 0 0 35px rgb(0, 255, 255);
+	}
 }
 
 @keyframes glowing-orange {
-    from {
-        box-shadow: inset 0px 0px 40px #ff9500;
-        text-shadow: 0 0 15px #ff9500;
-    }
+	from {
+		box-shadow: inset 0px 0px 40px #ff9500;
+		text-shadow: 0 0 15px #ff9500;
+	}
 
-    50% {
-        box-shadow: inset 0px 0px 30px #ff9500;
-        text-shadow: 0 0 30px #ff9500;
-    }
+	50% {
+		box-shadow: inset 0px 0px 30px #ff9500;
+		text-shadow: 0 0 30px #ff9500;
+	}
 
-    to {
-        box-shadow: inset 0px 0px 20px #e66000;
-        text-shadow: 0 0 35px #e66000;
-    }
+	to {
+		box-shadow: inset 0px 0px 20px #e66000;
+		text-shadow: 0 0 35px #e66000;
+	}
 }
 
 @keyframes glowing-green {
-    from {
-        box-shadow: inset 0px 0px 40px #28a745;
-        text-shadow: 0 0 15px #34d058;
-    }
-    to {
-        box-shadow: inset 0px 0px 20px #34d058;
-        text-shadow: 0 0 35px #28a745;
-    }
+	from {
+		box-shadow: inset 0px 0px 40px #28a745;
+		text-shadow: 0 0 15px #34d058;
+	}
+	to {
+		box-shadow: inset 0px 0px 20px #34d058;
+		text-shadow: 0 0 35px #28a745;
+	}
 }
 
 .header__nav-link {
-    color: #222;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1.1rem;
-    transition: color 0.2s, text-shadow 0.2s;
+	color: #222;
+	text-decoration: none;
+	font-weight: 700;
+	font-size: 1.1rem;
+	transition: color 0.2s, text-shadow 0.2s;
 }
 
 @keyframes glow {
-    0% {
-        color: #222;
-        text-shadow: 0 0 8px #00ffff, 0 0 16px #00ffff, 0 0 24px #00ffff;
-    }
+	0% {
+		color: #222;
+		text-shadow: 0 0 8px #00ffff, 0 0 16px #00ffff, 0 0 24px #00ffff;
+	}
 
-    50% {
-        color: #00bfff;
-        text-shadow: 0 0 24px #00ffff, 0 0 36px #00ffff, 0 0 48px #00ffff;
-    }
+	50% {
+		color: #00bfff;
+		text-shadow: 0 0 24px #00ffff, 0 0 36px #00ffff, 0 0 48px #00ffff;
+	}
 
-    100% {
-        color: #222;
-        text-shadow: 0 0 8px #00ffff, 0 0 16px #00ffff, 0 0 24px #00ffff;
-    }
+	100% {
+		color: #222;
+		text-shadow: 0 0 8px #00ffff, 0 0 16px #00ffff, 0 0 24px #00ffff;
+	}
 }
 
 .header__nav-link:hover {
-    color: #222;
-    animation: glow 1s ease-in-out infinite;
+	color: #222;
+	animation: glow 1s ease-in-out infinite;
 }
 
 .header__nav-link:active {
-    color: #00bfff;
-    /* Deep Sky Blue for a vibrant pop */
-    animation: none;
-    text-shadow: 0 0 12px #00ffff, 0 0 24px #00ffff, 0 0 32px #00ffff;
+	color: #00bfff;
+	/* Deep Sky Blue for a vibrant pop */
+	animation: none;
+	text-shadow: 0 0 12px #00ffff, 0 0 24px #00ffff, 0 0 32px #00ffff;
 }
 
 .navbar-toggle {
-    display: none;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 2.2rem;
-    color: #031E3C;
-    cursor: pointer;
-    z-index: 1201;
-    padding: 0.25rem 0.75rem;
-    border-radius: 8px;
-    transition: box-shadow 0.3s, color 0.2s;
-    box-shadow: none;
+	display: none;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background: none;
+	border: none;
+	font-size: 2.2rem;
+	color: #031e3c;
+	cursor: pointer;
+	z-index: 1201;
+	padding: 0.25rem 0.75rem;
+	border-radius: 8px;
+	transition: box-shadow 0.3s, color 0.2s;
+	box-shadow: none;
 }
 
 .navbar-toggle:hover {
-    animation: glow 1s ease-in-out infinite;
+	animation: glow 1s ease-in-out infinite;
 }
 
 .navbar-toggle:active {
-    animation: none;
-    background: #cceeff;
-    text-shadow: 0 0 4px #00bfff;
+	animation: none;
+	background: #cceeff;
+	text-shadow: 0 0 4px #00bfff;
 }
 
 .menu__item-slider {
-    display: inline-block;
-    width: 48px;
-    min-width: 48px;
-    height: 26px;
-    background: #ccc;
-    border-radius: 13px;
-    position: relative;
-    cursor: pointer;
-    vertical-align: middle;
-    transition: background 0.3s;
-    border: none;
-    outline: none;
-    padding: 0;
+	display: inline-block;
+	width: 48px;
+	min-width: 48px;
+	height: 26px;
+	background: #ccc;
+	border-radius: 13px;
+	position: relative;
+	cursor: pointer;
+	vertical-align: middle;
+	transition: background 0.3s;
+	border: none;
+	outline: none;
+	padding: 0;
 }
 
 /* The slider knob */
 .menu__item-slider::before {
-    content: "";
-    position: absolute;
-    left: 3px;
-    top: 3px;
-    width: 20px;
-    min-width: 20px;
-    height: 20px;
-    background: #fff;
-    border-radius: 50%;
-    transition: transform 0.3s, background 0.3s;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+	content: "";
+	position: absolute;
+	left: 3px;
+	top: 3px;
+	width: 20px;
+	min-width: 20px;
+	height: 20px;
+	background: #fff;
+	border-radius: 50%;
+	transition: transform 0.3s, background 0.3s;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 }
 
 .menu__item-slider.disabled {
-    background: #EEE;
-    cursor: not-allowed;
+	background: #eee;
+	cursor: not-allowed;
 }
 
 .menu__item-slider.disabled:hover {
-    background: #EEE;
-    cursor: not-allowed;
-    box-shadow: none;
-    animation: none;
+	background: #eee;
+	cursor: not-allowed;
+	box-shadow: none;
+	animation: none;
 }
 
 .menu__item-slider.disabled::before {
-    animation: none;
-    box-shadow: none;
+	animation: none;
+	box-shadow: none;
 }
 
 .menu__item-slider.disabled:hover::before {
-    animation: none;
-    box-shadow: none;
+	animation: none;
+	box-shadow: none;
 }
 
 .menu__item-slider.active {
-    background: #00bfff;
-    animation: none;
-    box-shadow: 0 0 8px rgba(0, 191, 255, 0.5);
+	background: #00bfff;
+	animation: none;
+	box-shadow: 0 0 8px rgba(0, 191, 255, 0.5);
 }
 
 .menu__item-slider.active::before {
-    transform: translateX(22px);
-    animation: none;
-    box-shadow: 0 0 8px rgba(0, 191, 255, 0.5);
+	transform: translateX(22px);
+	animation: none;
+	box-shadow: 0 0 8px rgba(0, 191, 255, 0.5);
 }
 
 .menu__item-slider:hover {
-    animation: glow-box-shadow 1s ease-in-out infinite;
+	animation: glow-box-shadow 1s ease-in-out infinite;
 }
 
 .menu__item-slider:hover::before {
-    animation: glow-box-shadow 1s ease-in-out infinite;
+	animation: glow-box-shadow 1s ease-in-out infinite;
 }
 
 @keyframes glow-box-shadow {
-    0% {
-        box-shadow: 0 0 8px rgba(0, 191, 255, 0.5);
-    }
+	0% {
+		box-shadow: 0 0 8px rgba(0, 191, 255, 0.5);
+	}
 
-    50% {
-        box-shadow: 0 0 16px rgba(0, 191, 255, 1);
-    }
+	50% {
+		box-shadow: 0 0 16px rgba(0, 191, 255, 1);
+	}
 
-    100% {
-        box-shadow: 0 0 8px rgba(0, 191, 255, 0.5);
-    }
+	100% {
+		box-shadow: 0 0 8px rgba(0, 191, 255, 0.5);
+	}
 }
 
 #passwordStrength {
-    height: 100%;
-    border-radius: 5px;
-    transition: width 0.5s;
+	height: 100%;
+	border-radius: 5px;
+	transition: width 0.5s;
 }
 
 .strength-weak {
-    background-color: red;
-    width: 10%;
-    animation: glow-weak 1s infinite alternate;
+	background-color: red;
+	width: 10%;
+	animation: glow-weak 1s infinite alternate;
 }
 
 .strength-medium {
-    background-color: yellow;
-    width: 50%;
-    animation: glow-medium 1s infinite alternate;
+	background-color: yellow;
+	width: 50%;
+	animation: glow-medium 1s infinite alternate;
 }
 
 .strength-strong {
-    background-color: green;
-    width: 100%;
-    animation: glow-strong 1s infinite alternate;
+	background-color: green;
+	width: 100%;
+	animation: glow-strong 1s infinite alternate;
 }
 
 @keyframes glow-weak {
-    from {
-        background-color: red;
-        box-shadow: 0px 5px 8px red, 0 10px 16px red;
-    }
+	from {
+		background-color: red;
+		box-shadow: 0px 5px 8px red, 0 10px 16px red;
+	}
 
-    to {
-        background-color: #ff6666;
-        box-shadow: 0px 5px 8px #ff6666, 0 10px 16px #ff6666;
-    }
+	to {
+		background-color: #ff6666;
+		box-shadow: 0px 5px 8px #ff6666, 0 10px 16px #ff6666;
+	}
 }
 
 @keyframes glow-medium {
-    from {
-        background-color: orange;
-        box-shadow: 0px 5px 8px orange, 0 10px 16px yellow;
-    }
+	from {
+		background-color: orange;
+		box-shadow: 0px 5px 8px orange, 0 10px 16px yellow;
+	}
 
-    to {
-        background-color: yellow;
-        box-shadow: 0px 5px 8px yellow, 0 10px 16px #ffff66;
-    }
+	to {
+		background-color: yellow;
+		box-shadow: 0px 5px 8px yellow, 0 10px 16px #ffff66;
+	}
 }
 
 @keyframes glow-strong {
-    from {
-        background-color: green;
-        box-shadow: 0px 5px 8px green, 0 10px 16px green;
-    }
+	from {
+		background-color: green;
+		box-shadow: 0px 5px 8px green, 0 10px 16px green;
+	}
 
-    to {
-        background-color: #66ff66;
-        box-shadow: 0px 5px 8px #66ff66, 0 10px 16px #66ff66;
-    }
+	to {
+		background-color: #66ff66;
+		box-shadow: 0px 5px 8px #66ff66, 0 10px 16px #66ff66;
+	}
 }
 
 .invoices__loading-bar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background: linear-gradient(90deg, #00bfff 0%, #00ffff 50%, #00bfff 100%);
-    box-shadow: 0 0 16px #00bfff, 0 0 32px #00ffff;
-    border-radius: 0 0 3px 3px;
-    overflow: hidden;
-    z-index: 10;
-    pointer-events: none;
-    display: none;
-    opacity: 1;
-    transition: opacity 0.3s cubic-bezier(0.4, 0.2, 0.2, 1);
-    animation: invoices-loading-bar-glow 1.5s infinite alternate;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 5px;
+	background: linear-gradient(90deg, #00bfff 0%, #00ffff 50%, #00bfff 100%);
+	box-shadow: 0 0 16px #00bfff, 0 0 32px #00ffff;
+	border-radius: 0 0 3px 3px;
+	overflow: hidden;
+	z-index: 2000;
+	pointer-events: none;
+	opacity: 1;
+	transition: opacity 0.3s cubic-bezier(0.4, 0.2, 0.2, 1);
+	animation: invoices-loading-bar-glow 5s infinite alternate;
 }
 
 .invoices__loading-bar::before {
-    content: "";
-    position: absolute;
-    left: -40%;
-    top: 0;
-    height: 100%;
-    width: 40%;
-    background: linear-gradient(90deg, transparent, #00ffff88, transparent);
-    filter: blur(4px);
-    animation: invoices-loading-sweep 1.2s cubic-bezier(0.4, 0.2, 0.2, 1) infinite;
+	content: "";
+	position: absolute;
+	left: -40%;
+	top: 0;
+	height: 100%;
+	width: 40%;
+	background: linear-gradient(90deg, transparent, #00ffff88, transparent);
+	filter: blur(4px);
+	animation: invoices-loading-sweep 2s cubic-bezier(0.4, 0.2, 0.2, 1) infinite;
 }
 
 @keyframes invoices-loading-sweep {
-    0% {
-        left: -40%;
-        opacity: 0.7;
-    }
-    50% {
-        left: 60%;
-        opacity: 1;
-    }
-    100% {
-        left: 100%;
-        opacity: 0.7;
-    }
+	0% {
+		left: -40%;
+		opacity: 0.7;
+	}
+	50% {
+		left: 60%;
+		opacity: 1;
+	}
+	100% {
+		left: 100%;
+		opacity: 0.7;
+	}
 }
 
 @keyframes invoices-loading-bar-glow {
-    from {
-        box-shadow: 0 0 16px #00bfff, 0 0 32px #00ffff;
-    }
-    to {
-        box-shadow: 0 0 32px #00bfff, 0 0 64px #00ffff;
-    }
+	from {
+		box-shadow: 0 0 16px #00bfff, 0 0 32px #00ffff;
+	}
+	to {
+		box-shadow: 0 0 32px #00bfff, 0 0 64px #00ffff;
+	}
 }

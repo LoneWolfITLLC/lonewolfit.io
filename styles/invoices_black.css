@@ -153,36 +153,6 @@ body.dark-mode .invoices__empty {
 	text-shadow: 0 0 8px #00ffffcc;
 }
 
-body.dark-mode .invoices__loading-bar {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 5px;
-	background: linear-gradient(90deg, #00bfff 0%, #00ffff 50%, #00bfff 100%);
-	box-shadow: 0 0 16px #00ffff, 0 0 32px #00ffff;
-	border-radius: 0 0 3px 3px;
-	overflow: hidden;
-	z-index: 10;
-	pointer-events: none;
-	display: none;
-	opacity: 1;
-	transition: opacity 0.3s cubic-bezier(0.4, 0.2, 0.2, 1);
-	animation: invoices-loading-bar-glow-dark 1.5s infinite alternate;
-}
-body.dark-mode .invoices__loading-bar::before {
-	content: "";
-	position: absolute;
-	left: -40%;
-	top: 0;
-	height: 100%;
-	width: 40%;
-	background: linear-gradient(90deg, transparent, #00ffff88, transparent);
-	filter: blur(4px);
-	animation: invoices-loading-sweep-dark 1.2s cubic-bezier(0.4, 0.2, 0.2, 1)
-		infinite;
-}
-
 body.dark-mode .invoices__details {
     background-color: transparent;
     border-color: #032e4c;

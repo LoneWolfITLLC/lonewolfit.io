@@ -1,14 +1,20 @@
+// Prevent overlapping fetches
+let isLoadingPayments = false;
 // Fetch and display Stripe payments for the logged-in user
 async function fetchAndDisplayUserPayments() {
+	if (isLoadingPayments) {
+		console.warn("[Payments] Fetch already in progress, skipping.");
+		return;
+	}
+	isLoadingPayments = true;
 	const paymentsContainer = document.getElementById("paymentsContainer");
 	const alertDiv = document.getElementById("alertPayments");
+	const loadingBar = document.getElementById("listPaymentsLoadingBar");
+	// Always show loading bar at the start
+	if (loadingBar) loadingBar.style.display = "block";
 	if (!paymentsContainer) return;
 	paymentsContainer.innerHTML = "";
 	if (alertDiv) alertDiv.style.display = "none";
-
-	// Add loading bar
-	let loadingBar = document.getElementById("listPaymentsLoadingBar");
-	loadingBar.style.display = "block";
 
 	try {
 		const token = sessionStorage.getItem("jwt");
@@ -24,7 +30,7 @@ async function fetchAndDisplayUserPayments() {
 		}
 		const data = await response.json();
 		if (!data.data || data.data.length === 0) {
-			loadingBar.style.display = "none";
+			if (loadingBar) loadingBar.style.display = "none";
 			paymentsContainer.innerHTML += `<div class="payments__empty">No payments found.</div>`;
 			return;
 		}
@@ -89,9 +95,9 @@ async function fetchAndDisplayUserPayments() {
 			paymentsList.appendChild(paymentItem);
 		}
 		paymentsContainer.appendChild(paymentsList);
-		loadingBar.style.display = "none";
+		if (loadingBar) loadingBar.style.display = "none";
 	} catch (error) {
-		loadingBar.style.display = "none";
+		if (loadingBar) loadingBar.style.display = "none";
 		if (typeof showAlert === "function") {
 			showAlert(`Error loading payments: ${error.message}`, true, alertDiv);
 		} else if (alertDiv) {
@@ -99,6 +105,8 @@ async function fetchAndDisplayUserPayments() {
 			alertDiv.innerHTML = `Error loading payments: ${error.message}`;
 		}
 		paymentsContainer.innerHTML = "";
+	} finally {
+		isLoadingPayments = false;
 	}
 }
 
