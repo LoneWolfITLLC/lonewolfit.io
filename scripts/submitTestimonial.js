@@ -44,6 +44,7 @@ window.addEventListener("authChecked", function () {
 			});
 			const data = await response.json();
 			if (response.ok) {
+                window.location.hash = "#userSubmissionSection";
 				showAlert(data.message || "Submitted your testimonial!", false, form);
 				textarea.value = "";
 				checkbox.checked = false;
@@ -54,6 +55,7 @@ window.addEventListener("authChecked", function () {
 					charCountElem.textContent = `0/${maxChars} characters`;
 				}
 			} else {
+                window.location.hash = "#userSubmissionSection";
 				showAlert(
 					data.message || "An error occurred. Please try again.",
 					true,
@@ -66,6 +68,7 @@ window.addEventListener("authChecked", function () {
 				}
 			}
 		} catch (error) {
+            window.location.hash = "#userSubmissionSection";
 			showAlert(
 				`Unable to submit testimonial. Error: ${
 					error && error.toString ? error.toString() : String(error)
