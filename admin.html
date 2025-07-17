@@ -6,11 +6,11 @@
 		<title>Admin Portal - LoneWolf IT</title>
 		<meta
 			name="description"
-			content="Access the LoneWolf IT admin dashboard. Manage users, view analytics, and perform administrative tasks."
+			content="Access the Lone Wolf IT admin dashboard. Manage users, view analytics, and perform administrative tasks."
 		/>
 		<meta
 			name="keywords"
-			content="admin, dashboard, LoneWolf IT, admin portal, management"
+			content="admin, dashboard, Lone Wolf IT, admin portal, management"
 		/>
 		<meta name="author" content="LoneWolf IT" />
 		<link rel="icon" href="./images/wolf-logo.png" type="image/png" />
@@ -44,7 +44,7 @@
 					// Fetch state mapping from assets/iso-3166-2.json
 					const resp = await fetch("assets/iso-3166-2.json");
 					if (!resp.ok) throw new Error("Failed to fetch state mapping");
-					const stateMapping = await resp.json();
+					alt = "Lone Wolf IT Logo";
 					// Call backend endpoint
 					const token = sessionStorage.getItem("jwt");
 					const res = await fetch(URL_BASE + "/api/sync-customers", {
@@ -183,7 +183,7 @@
 			<section class="main__section" id="mainSection">
 				<img
 					src="./images/wolf-logo.png"
-					alt="Lone Wolf Logo"
+					alt="LoneWolf IT Logo"
 					class="main__logo main__item-centered"
 				/>
 				<h1 class="main__heading main__item-centered">
@@ -210,7 +210,7 @@
 			<section class="main__section" id="customerFeedbackSection">
 				<h2 class="main__heading">Customer Feedback & Testimonials</h2>
 				<p class="main__text main__item-centered">
-					Manage and review customer testimonials for LoneWolf IT.
+					Manage and review customer testimonials for Lone Wolf IT.
 				</p>
 				<div
 					class="main__section-hidden main__item-centered"

@@ -1,350 +1,347 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>User Management - LoneWolf IT</title>
-    <meta
-      name="description"
-      content="View and manage all registered users for LoneWolf IT. Admin-only access."
-    />
-    <meta
-      name="keywords"
-      content="users, admin, management, LoneWolf IT, user portal"
-    />
-    <meta name="author" content="LoneWolf IT" />
-    <link rel="icon" href="./images/wolf-logo.png" type="image/png" />
-    <link href="./vendor/bootstrap.min.css" rel="stylesheet" />
-    <link href="./styles/buttons.css" rel="stylesheet" />
-    <link href="./styles/styles_white.css" rel="stylesheet" />
-    <link href="./styles/styles_black.css" rel="stylesheet" />
-    <link href="./styles/styles_modals_white.css" rel="stylesheet" />
-    <link href="./styles/styles_modals_black.css" rel="stylesheet" />
-    <style>
-      .main {
-        min-height: 100vh;
-      }
-      .main__section {
-        animation: fadeIn 0.8s ease-in;
-      }
-    </style>
-    <script src="scripts/auth.js"></script>
-    <script src="scripts/header.js"></script>
-    <script src="scripts/slide-in.js"></script>
-    <script src="scripts/alert.js"></script>
-    <script src="scripts/preferences.js"></script>
-    <script src="scripts/darkmode.js"></script>
-    <script src="scripts/userManagement.js"></script>
-    <script>
-      requireLogin = true;
-      requireUserToBeAdmin = true;
-    </script>
-  </head>
-  <body>
-    <!-- Loading Modal -->
-    <div id="loadingModal" class="modal" tabindex="-1" style="display: none">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-body text-center">
-            <img src="images/ui/spin.png" alt="Loading..." class="spinner" />
-            <p class="main__text" style="color: #fff">
-              Loading, please wait...
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- EDIT USER MODAL -->
-    <div id="editUserModal" class="modal" tabindex="-1" style="display: none">
-      <div class="modal-dialog" id="editModalBody">
-        <form
-          id="editUserForm"
-          class="modal-content"
-          enctype="multipart/form-data"
-        >
-          <div class="modal-header">
-            <h5 class="modal-title">Edit User</h5>
-            <button
-              type="button"
-              class="modal-close-button"
-              onclick="hideModal('editUserModal')"
-            ></button>
-          </div>
-          <div
-            id="editModalAlert"
-            class="alertDiv main__alert"
-            style="display: none"
-          ></div>
-          <div class="modal-body">
-            <input type="hidden" name="editorId" id="editorId" />
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>User Management - LoneWolf IT</title>
+		<meta
+			name="description"
+			content="View and manage all registered users for LoneWolf IT. Admin-only access."
+		/>
+		<meta
+			name="keywords"
+			content="users, admin, management, LoneWolf IT, user portal"
+		/>
+		<meta name="author" content="LoneWolf IT" />
+		<link rel="icon" href="./images/wolf-logo.png" type="image/png" />
+		<link href="./vendor/bootstrap.min.css" rel="stylesheet" />
+		<link href="./styles/buttons.css" rel="stylesheet" />
+		<link href="./styles/styles_white.css" rel="stylesheet" />
+		<link href="./styles/styles_black.css" rel="stylesheet" />
+		<link href="./styles/styles_modals_white.css" rel="stylesheet" />
+		<link href="./styles/styles_modals_black.css" rel="stylesheet" />
+		<style>
+			.main {
+				min-height: 100vh;
+			}
+			.main__section {
+				animation: fadeIn 0.8s ease-in;
+			}
+		</style>
+		<script src="scripts/auth.js"></script>
+		<script src="scripts/header.js"></script>
+		<script src="scripts/slide-in.js"></script>
+		<script src="scripts/alert.js"></script>
+		<script src="scripts/preferences.js"></script>
+		<script src="scripts/darkmode.js"></script>
+		<script src="scripts/userManagement.js"></script>
+		<script>
+			requireLogin = true;
+			requireUserToBeAdmin = true;
+		</script>
+	</head>
+	<body>
+		<!-- Loading Modal -->
+		<div id="loadingModal" class="modal" tabindex="-1" style="display: none">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-body text-center">
+						<img src="images/ui/spin.png" alt="Loading..." class="spinner" />
+						<p class="main__text" style="color: #fff">
+							Loading, please wait...
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- EDIT USER MODAL -->
+		<div id="editUserModal" class="modal" tabindex="-1" style="display: none">
+			<div class="modal-dialog" id="editModalBody">
+				<form
+					id="editUserForm"
+					class="modal-content"
+					enctype="multipart/form-data"
+				>
+					<div class="modal-header">
+						<h5 class="modal-title">Edit User</h5>
+						<button
+							type="button"
+							class="modal-close-button"
+							onclick="hideModal('editUserModal')"
+						></button>
+					</div>
+					<div
+						id="editModalAlert"
+						class="alertDiv main__alert"
+						style="display: none"
+					></div>
+					<div class="modal-body">
+						<input type="hidden" name="editorId" id="editorId" />
 
-            <div class="mb-2">
-              <label for="firstName" class="form-label">First Name</label>
-              <input
-                type="text"
-                class="form-control"
-                id="firstName"
-                name="firstName"
-                required
-                autocomplete="given-name"
-              />
-            </div>
-            <div class="mb-2">
-              <label>Middle Name</label>
-              <input
-                type="text"
-                class="form-control"
-                id="middleName"
-                name="middleName"
-              />
-            </div>
-            <div class="mb-2">
-              <label>Last Name</label>
-              <input
-                type="text"
-                class="form-control"
-                id="lastName"
-                name="lastName"
-                required
-              />
-            </div>
-            <div class="mb-2">
-              <label>Username</label>
-              <input
-                type="text"
-                class="form-control"
-                id="username"
-                name="username"
-                required
-              />
-            </div>
-            <div class="mb-2">
-              <label>Email</label>
-              <input
-                type="email"
-                class="form-control"
-                id="email"
-                name="email"
-                required
-              />
-            </div>
-            <div class="mb-2">
-              <label>Phone</label>
-              <input
-                type="text"
-                class="form-control"
-                id="phone"
-                name="phone"
-                required
-              />
-            </div>
-            <div class="mb-2">
-              <label
-                >Address<br /><small
-                  >(add1,add2,city,state,zip,country)</small
-                ></label
-              >
-              <input
-                type="text"
-                class="form-control"
-                id="address"
-                name="address"
-                required
-              />
-            </div>
-            <div class="mb-2">
-              <label>Stripe Cust. ID</label>
-              <input
-                type="text"
-                class="form-control"
-                id="stripeCustomerId"
-                name="stripeCustomerId"
-                required
-              />
-            </div>
-            <div class="mb-2">
-              <label>DBA Name</label>
-              <input
-                type="text"
-                class="form-control"
-                id="dbaName"
-                name="dbaName"
-              />
-            </div>
-            <div class="mb-2">
-              <label>Business Address</label>
-              <input
-                type="text"
-                class="form-control"
-                id="businessAddress"
-                name="businessAddress"
-              />
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="endUserCanEdit"
-                name="endUserCanEdit"
-              />
-              <label class="form-check-label">End-user can edit</label>
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="adminUser"
-                name="adminUser"
-              />
-              <label class="form-check-label">Admin user</label>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-delete" id="deleteUserBtn">
-              Delete User
-            </button>
-            <button
-              type="button"
-              class="btn btn-primary"
-              onclick="hideModal('editUserModal')"
-            >
-              Cancel
-            </button>
-            <button type="submit" class="btn btn-primary">Save changes</button>
-          </div>
-        </form>
-      </div>
-    </div>
-    <header class="header">
-      <img
-        src="images/wolf-logo.png"
-        alt="LoneWolf IT Logo"
-        class="header__logo"
-      />
-      <h1 class="header__title">LoneWolf IT</h1>
-      <nav class="header__nav" id="headerNav">
-        <ul class="header__nav-list">
-          <li class="header__nav-item">
-            <a href="index.html" class="header__nav-link">Home</a>
-          </li>
-          <li class="header__nav-item">
-            <a href="index.html#services" class="header__nav-link"
-              >Portfolio/Services</a
-            >
-          </li>
-          <li class="header__nav-item">
-            <a href="members.html" class="header__nav-link">Member Portal</a>
-          </li>
-          <li class="header__nav-item">
-            <a href="index.html#about" class="header__nav-link">About</a>
-          </li>
-          <li class="header__nav-item">
-            <a href="index.html#contact" class="header__nav-link">Contact</a>
-          </li>
-        </ul>
-      </nav>
-      <button
-        class="navbar-toggle"
-        id="navbarToggle"
-        aria-label="Open navigation menu"
-      >
-        &#9776;
-      </button>
-    </header>
-    <main class="main">
-      <section class="main__section" id="userManagementSection">
-        <img
-          src="./images/wolf-logo.png"
-          alt="Lone Wolf Logo"
-          class="main__logo main__item-centered"
-        />
-        <h1 class="main__heading main__item-centered">
-          User Management Portal
-        </h1>
-        <p class="main__text main__item-centered">
-          View, manage, and administer all registered users for LoneWolf IT
-          Services LLC. This section is restricted to admin users only.
-        </p>
-        <p class="main__text main__item-centered">
-          Press Ctrl+F to search for a user in the table.
-        </p>
-        <p class="main__text main__item-centered">
-          If you have any questions or need assistance, please
-          <a href="index.html#contact" class="main__link">contact support</a>.
-        </p>
-      </section>
-      <section class="main__section main__section--users" id="userTableSection">
-        <h1 class="main__heading main__item-centered">All Users</h1>
-        <div
-          id="editUserAlert"
-          class="alertDiv main__alert"
-          style="display: none"
-        ></div>
-        <small class="main__item-centered"
-          >Tap/Click on the user in the table to edit them! Want to edit your
-          own information? Click&nbsp;<a href="edit_user.html">here</a>&nbsp;to
-          edit your profile.</small
-        >
-        <table
-          id="userTable"
-          class="pricing-table pricing-table--fade-in"
-        >
-          <thead>
-            <tr>
-              <th class="pricing-table__th">Username</th>
-              <th class="pricing-table__th">Name</th>
-              <th class="pricing-table__th">Email</th>
-              <th class="pricing-table__th">Phone</th>
-              <th class="pricing-table__th">Admin?</th>
-            </tr>
-          </thead>
-          <tbody id="userTableBody">
-            <!-- populated by JS -->
-          </tbody>
-        </table>
-      </section>
-    </main>
-    <footer class="footer">
-      <div class="footer__content">
-        <p class="footer__prepared-by">
-          Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
-        </p>
-        <p class="footer__contact">
-          Contact:
-          <a
-            href="mailto:arlo.lonewolfit@gmail.com"
-            class="footer__contact-link"
-            >arlo.lonewolfit@gmail.com</a
-          >
-        </p>
-        <p class="footer__copyright">
-          © 2025 Lone Wolf IT Services LLC | All Rights Reserved.
-        </p>
-        <ul class="footer__links">
-          <li class="footer__link-item">
-            <a href="pp.html" class="footer__link">Privacy Policy</a>
-          </li>
-          <li class="footer__link-item">
-            <a href="tos.html" class="footer__link">Terms of Service</a>
-          </li>
-          <li class="footer__link-item">
-            <a href="index.html#contact" class="footer__link">Contact Us</a>
-          </li>
-          <li class="footer__link-item footer__link-item--icon">
-            <a
-              href="https://www.facebook.com/lonewolfitservicesllc"
-              target="_blank"
-              class="footer__link"
-            >
-              <img
-                src="images/ui/facebook-icon.png"
-                alt="Facebook"
-                class="footer__icon"
-              />
-            </a>
-          </li>
-        </ul>
-      </div>
-    </footer>
-  </body>
+						<div class="mb-2">
+							<label for="firstName" class="form-label">First Name</label>
+							<input
+								type="text"
+								class="form-control"
+								id="firstName"
+								name="firstName"
+								required
+								autocomplete="given-name"
+							/>
+						</div>
+						<div class="mb-2">
+							<label>Middle Name</label>
+							<input
+								type="text"
+								class="form-control"
+								id="middleName"
+								name="middleName"
+							/>
+						</div>
+						<div class="mb-2">
+							<label>Last Name</label>
+							<input
+								type="text"
+								class="form-control"
+								id="lastName"
+								name="lastName"
+								required
+							/>
+						</div>
+						<div class="mb-2">
+							<label>Username</label>
+							<input
+								type="text"
+								class="form-control"
+								id="username"
+								name="username"
+								required
+							/>
+						</div>
+						<div class="mb-2">
+							<label>Email</label>
+							<input
+								type="email"
+								class="form-control"
+								id="email"
+								name="email"
+								required
+							/>
+						</div>
+						<div class="mb-2">
+							<label>Phone</label>
+							<input
+								type="text"
+								class="form-control"
+								id="phone"
+								name="phone"
+								required
+							/>
+						</div>
+						<div class="mb-2">
+							<label
+								>Address<br /><small
+									>(add1,add2,city,state,zip,country)</small
+								></label
+							>
+							<input
+								type="text"
+								class="form-control"
+								id="address"
+								name="address"
+								required
+							/>
+						</div>
+						<div class="mb-2">
+							<label>Stripe Cust. ID</label>
+							<input
+								type="text"
+								class="form-control"
+								id="stripeCustomerId"
+								name="stripeCustomerId"
+								required
+							/>
+						</div>
+						<div class="mb-2">
+							<label>DBA Name</label>
+							<input
+								type="text"
+								class="form-control"
+								id="dbaName"
+								name="dbaName"
+							/>
+						</div>
+						<div class="mb-2">
+							<label>Business Address</label>
+							<input
+								type="text"
+								class="form-control"
+								id="businessAddress"
+								name="businessAddress"
+							/>
+						</div>
+						<div class="form-check">
+							<input
+								class="form-check-input"
+								type="checkbox"
+								id="endUserCanEdit"
+								name="endUserCanEdit"
+							/>
+							<label class="form-check-label">End-user can edit</label>
+						</div>
+						<div class="form-check">
+							<input
+								class="form-check-input"
+								type="checkbox"
+								id="adminUser"
+								name="adminUser"
+							/>
+							<label class="form-check-label">Admin user</label>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-delete" id="deleteUserBtn">
+							Delete User
+						</button>
+						<button
+							type="button"
+							class="btn btn-primary"
+							onclick="hideModal('editUserModal')"
+						>
+							Cancel
+						</button>
+						<button type="submit" class="btn btn-primary">Save changes</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<header class="header">
+			<img
+				src="images/wolf-logo.png"
+				alt="Lone Wolf IT Logo"
+				class="header__logo"
+			/>
+			<h1 class="header__title">Lone Wolf IT</h1>
+			<nav class="header__nav" id="headerNav">
+				<ul class="header__nav-list">
+					<li class="header__nav-item">
+						<a href="index.html" class="header__nav-link">Home</a>
+					</li>
+					<li class="header__nav-item">
+						<a href="index.html#services" class="header__nav-link"
+							>Portfolio/Services</a
+						>
+					</li>
+					<li class="header__nav-item">
+						<a href="members.html" class="header__nav-link">Member Portal</a>
+					</li>
+					<li class="header__nav-item">
+						<a href="index.html#about" class="header__nav-link">About</a>
+					</li>
+					<li class="header__nav-item">
+						<a href="index.html#contact" class="header__nav-link">Contact</a>
+					</li>
+				</ul>
+			</nav>
+			<button
+				class="navbar-toggle"
+				id="navbarToggle"
+				aria-label="Open navigation menu"
+			>
+				&#9776;
+			</button>
+		</header>
+		<main class="main">
+			<section class="main__section" id="userManagementSection">
+				<img
+					src="./images/wolf-logo.png"
+					alt="Lone Wolf Logo"
+					class="main__logo main__item-centered"
+				/>
+				<h1 class="main__heading main__item-centered">
+					User Management Portal
+				</h1>
+				<p class="main__text main__item-centered">
+					View, manage, and administer all registered users for LoneWolf IT
+					Services LLC. This section is restricted to admin users only.
+				</p>
+				<p class="main__text main__item-centered">
+					Press Ctrl+F to search for a user in the table.
+				</p>
+				<p class="main__text main__item-centered">
+					If you have any questions or need assistance, please
+					<a href="index.html#contact" class="main__link">contact support</a>.
+				</p>
+			</section>
+			<section class="main__section main__section--users" id="userTableSection">
+				<h1 class="main__heading main__item-centered">All Users</h1>
+				<div
+					id="editUserAlert"
+					class="alertDiv main__alert"
+					style="display: none"
+				></div>
+				<small class="main__item-centered"
+					>Tap/Click on the user in the table to edit them! Want to edit your
+					own information? Click&nbsp;<a href="edit_user.html">here</a>&nbsp;to
+					edit your profile.</small
+				>
+				<table id="userTable" class="pricing-table pricing-table--fade-in">
+					<thead>
+						<tr>
+							<th class="pricing-table__th">Username</th>
+							<th class="pricing-table__th">Name</th>
+							<th class="pricing-table__th">Email</th>
+							<th class="pricing-table__th">Phone</th>
+							<th class="pricing-table__th">Admin?</th>
+						</tr>
+					</thead>
+					<tbody id="userTableBody">
+						<!-- populated by JS -->
+					</tbody>
+				</table>
+			</section>
+		</main>
+		<footer class="footer">
+			<div class="footer__content">
+				<p class="footer__prepared-by">
+					Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
+				</p>
+				<p class="footer__contact">
+					Contact:
+					<a
+						href="mailto:arlo.lonewolfit@gmail.com"
+						class="footer__contact-link"
+						>arlo.lonewolfit@gmail.com</a
+					>
+				</p>
+				<p class="footer__copyright">
+					© 2025 Lone Wolf IT Services LLC | All Rights Reserved.
+				</p>
+				<ul class="footer__links">
+					<li class="footer__link-item">
+						<a href="pp.html" class="footer__link">Privacy Policy</a>
+					</li>
+					<li class="footer__link-item">
+						<a href="tos.html" class="footer__link">Terms of Service</a>
+					</li>
+					<li class="footer__link-item">
+						<a href="index.html#contact" class="footer__link">Contact Us</a>
+					</li>
+					<li class="footer__link-item footer__link-item--icon">
+						<a
+							href="https://www.facebook.com/lonewolfitservicesllc"
+							target="_blank"
+							class="footer__link"
+						>
+							<img
+								src="images/ui/facebook-icon.png"
+								alt="Facebook"
+								class="footer__icon"
+							/>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</footer>
+	</body>
 </html>

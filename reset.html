@@ -1,227 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Reset Password - LoneWolf IT</title>
-    <meta
-      name="description"
-      content="Reset your LoneWolf IT account password. Secure password recovery for clients and members."
-    />
-    <meta
-      name="keywords"
-      content="reset password, password recovery, LoneWolf IT, client access, secure reset"
-    />
-    <meta name="author" content="LoneWolf IT" />
-    <link rel="icon" href="./images/wolf-logo.png" type="image/png" />
-    <link href="./vendor/bootstrap.min.css" rel="stylesheet" />
-    <link href="./styles/buttons.css" rel="stylesheet" />
-    <link href="./styles/styles_white.css" rel="stylesheet" />
-    <link href="./styles/styles_black.css" rel="stylesheet" />
-    <link href="./styles/styles_modals_white.css" rel="stylesheet" />
-    <link href="./styles/styles_modals_black.css" rel="stylesheet" />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-      rel="stylesheet"
-    />
-    <script src="scripts/slide-in.js"></script>
-    <script src="scripts/preferences.js"></script>
-    <script src="scripts/darkmode.js"></script>
-    <script src="scripts/auth.js"></script>
-    <script src="scripts/newPasswordField.js"></script>
-    <script src="scripts/alert.js"></script>
-    <script src="scripts/resetPassword.js"></script>
-    <style>
-      .main {
-        min-height: 100vh;
-        margin-top: -40px;
-      }
-      .main__section {
-        animation: fadeIn 0.8s ease-in;
-      }
-    </style>
-    <script>
-      redirectToPortal = true;
-    </script>
-  </head>
-  <body>
-    <!-- Loading Modal -->
-    <div id="loadingModal" class="modal" tabindex="-1" style="display: none">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-body text-center">
-            <img src="images/ui/spin.png" alt="Loading..." class="spinner" />
-            <p class="main__text" style="color: #fff">
-              Loading, please wait...
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <main class="main">
-      <section class="main__section" id="mainSection">
-        <img
-          src="images/wolf-logo.png"
-          alt="Lone Wolf Logo"
-          class="main__logo main__item-centered"
-        />
-        <h1 class="main__heading">Reset Your Password</h1>
-        <div
-          id="alertEmail"
-          class="alertDiv main__alert"
-          style="display: none"
-        ></div>
-        <p class="main__intro main__item-centered" style="margin-top: 20px">
-          Please enter your email address below and we will send you
-          instructions on how to reset your password.
-        </p>
-        <form id="resetForm" class="main__form main__item-centered">
-          <div class="form-group">
-            <input
-              type="text"
-              id="email"
-              class="form-control"
-              placeholder="Email"
-              required
-            /><br /><br />
-            <button
-              type="submit"
-              class="btn btn-primary main__item-centered"
-              style="margin-top: -30px"
-              disabled
-            >
-              Send Verification Code
-            </button>
-          </div>
-        </form>
-      </section>
-      <section class="main__section main__section-hidden" id="resetSection">
-        <h2 class="main__heading">Enter New Password</h2>
-        <div
-          id="alertNewPassword"
-          class="alertDiv main__alert"
-          style="display: none"
-        ></div>
-        <form id="newPasswordForm" class="main__form main__item-centered">
-          <div class="form-group">
-            <label for="verificationCode" class="form-label"
-              >Verification Code</label
-            >
-            <input
-              type="text"
-              id="verificationCode"
-              class="form-control"
-              placeholder="Verification Code"
-            />
-            <label for="password" class="form-label">New Password</label>
-            <div class="input-group">
-              <input
-                type="password"
-                id="password"
-                class="form-control"
-                placeholder="New Password"
-                style="height: inherit"
-                required
-              />
-              <button
-                type="button"
-                id="togglePassword"
-                class="btn btn-outline-secondary"
-                style="
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  height: 50px;
-                  border-top-left-radius: 0;
-                  border-bottom-left-radius: 0;
-                  padding-top: 0;
-                  padding-bottom: 0;
-                "
-                tabindex="-1"
-                aria-label="Show/Hide Password"
-              >
-                <i class="fa fa-eye" aria-hidden="true"></i>
-              </button>
-            </div>
-            <small class="main__text-small main__item-centered"
-              >Password must be at least 10-16 characters long, contain a
-              lowercase and uppercase letter, a number, and a special
-              character.</small
-            >
-            <div
-              class="progress"
-              id="passwordStrengthContainer"
-              style="display: none"
-            >
-              <div
-                id="passwordStrength"
-                class="progress-bar"
-                role="progressbar"
-              ></div>
-            </div>
-            <label for="passwordConfirm" class="form-label"
-              >Confirm New Password</label
-            >
-            <input
-              type="password"
-              id="passwordConfirm"
-              class="form-control"
-              placeholder="Confirm New Password"
-              required
-            />
-            <button
-              type="submit"
-              class="btn btn-primary main__item-centered"
-              style="margin-top: 10px"
-              disabled
-            >
-              Reset Password
-            </button>
-          </div>
-        </form>
-      </section>
-    </main>
-    <footer class="footer">
-      <div class="footer__content">
-        <p class="footer__prepared-by">
-          Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
-        </p>
-        <p class="footer__contact">
-          Contact:
-          <a
-            href="mailto:arlo.lonewolfit@gmail.com"
-            class="footer__contact-link"
-            >arlo.lonewolfit@gmail.com</a
-          >
-        </p>
-        <p class="footer__copyright">
-          © 2025 Lone Wolf IT Services LLC | All Rights Reserved.
-        </p>
-        <ul class="footer__links">
-          <li class="footer__link-item">
-            <a href="pp.html" class="footer__link">Privacy Policy</a>
-          </li>
-          <li class="footer__link-item">
-            <a href="tos.html" class="footer__link">Terms of Service</a>
-          </li>
-          <li class="footer__link-item">
-            <a href="index.html#contact" class="footer__link">Contact Us</a>
-          </li>
-          <li class="footer__link-item footer__link-item--icon">
-            <a
-              href="https://www.facebook.com/lonewolfitservicesllc"
-              target="_blank"
-              class="footer__link"
-            >
-              <img
-                src="images/ui/facebook-icon.png"
-                alt="Facebook"
-                class="footer__icon"
-              />
-            </a>
-          </li>
-        </ul>
-      </div>
-    </footer>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Reset Password - Lone Wolf IT</title>
+		<meta
+			name="description"
+			content="Reset your Lone Wolf IT account password. Secure password recovery for clients and members."
+		/>
+		<meta
+			name="keywords"
+			content="reset password, password recovery, Lone Wolf IT, client access, secure reset"
+		/>
+		<meta name="author" content="Lone Wolf IT" />
+		<link rel="icon" href="./images/wolf-logo.png" type="image/png" />
+		<link href="./vendor/bootstrap.min.css" rel="stylesheet" />
+		<link href="./styles/buttons.css" rel="stylesheet" />
+		<link href="./styles/styles_white.css" rel="stylesheet" />
+		<link href="./styles/styles_black.css" rel="stylesheet" />
+		<link href="./styles/styles_modals_white.css" rel="stylesheet" />
+		<link href="./styles/styles_modals_black.css" rel="stylesheet" />
+		<link
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+			rel="stylesheet"
+		/>
+		<script src="scripts/slide-in.js"></script>
+		<script src="scripts/preferences.js"></script>
+		<script src="scripts/darkmode.js"></script>
+		<script src="scripts/auth.js"></script>
+		<script src="scripts/newPasswordField.js"></script>
+		<script src="scripts/alert.js"></script>
+		<script src="scripts/resetPassword.js"></script>
+		<style>
+			.main {
+				min-height: 100vh;
+				margin-top: -40px;
+			}
+			.main__section {
+				animation: fadeIn 0.8s ease-in;
+			}
+		</style>
+		<script>
+			redirectToPortal = true;
+		</script>
+	</head>
+	<body>
+		<!-- Loading Modal -->
+		<div id="loadingModal" class="modal" tabindex="-1" style="display: none">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-body text-center">
+						<img src="images/ui/spin.png" alt="Loading..." class="spinner" />
+						<p class="main__text" style="color: #fff">
+							Loading, please wait...
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<main class="main">
+			<section class="main__section" id="mainSection">
+				<img
+					src="images/wolf-logo.png"
+					alt="Lone Wolf Logo"
+					class="main__logo main__item-centered"
+				/>
+				<h1 class="main__heading">Reset Your Password</h1>
+				<div
+					id="alertEmail"
+					class="alertDiv main__alert"
+					style="display: none"
+				></div>
+				<p class="main__intro main__item-centered" style="margin-top: 20px">
+					Please enter your email address below and we will send you
+					instructions on how to reset your password.
+				</p>
+				<form id="resetForm" class="main__form main__item-centered">
+					<div class="form-group">
+						<input
+							type="text"
+							id="email"
+							class="form-control"
+							placeholder="Email"
+							required
+						/><br /><br />
+						<button
+							type="submit"
+							class="btn btn-primary main__item-centered"
+							style="margin-top: -30px"
+							disabled
+						>
+							Send Verification Code
+						</button>
+					</div>
+				</form>
+			</section>
+			<section class="main__section main__section-hidden" id="resetSection">
+				<h2 class="main__heading">Enter New Password</h2>
+				<div
+					id="alertNewPassword"
+					class="alertDiv main__alert"
+					style="display: none"
+				></div>
+				<form id="newPasswordForm" class="main__form main__item-centered">
+					<div class="form-group">
+						<label for="verificationCode" class="form-label"
+							>Verification Code</label
+						>
+						<input
+							type="text"
+							id="verificationCode"
+							class="form-control"
+							placeholder="Verification Code"
+						/>
+						<label for="password" class="form-label">New Password</label>
+						<div class="input-group">
+							<input
+								type="password"
+								id="password"
+								class="form-control"
+								placeholder="New Password"
+								style="height: inherit"
+								required
+							/>
+							<button
+								type="button"
+								id="togglePassword"
+								class="btn btn-outline-secondary"
+								style="
+									display: flex;
+									align-items: center;
+									justify-content: center;
+									height: 50px;
+									border-top-left-radius: 0;
+									border-bottom-left-radius: 0;
+									padding-top: 0;
+									padding-bottom: 0;
+								"
+								tabindex="-1"
+								aria-label="Show/Hide Password"
+							>
+								<i class="fa fa-eye" aria-hidden="true"></i>
+							</button>
+						</div>
+						<small class="main__text-small main__item-centered"
+							>Password must be at least 10-16 characters long, contain a
+							lowercase and uppercase letter, a number, and a special
+							character.</small
+						>
+						<div
+							class="progress"
+							id="passwordStrengthContainer"
+							style="display: none"
+						>
+							<div
+								id="passwordStrength"
+								class="progress-bar"
+								role="progressbar"
+							></div>
+						</div>
+						<label for="passwordConfirm" class="form-label"
+							>Confirm New Password</label
+						>
+						<input
+							type="password"
+							id="passwordConfirm"
+							class="form-control"
+							placeholder="Confirm New Password"
+							required
+						/>
+						<button
+							type="submit"
+							class="btn btn-primary main__item-centered"
+							style="margin-top: 10px"
+							disabled
+						>
+							Reset Password
+						</button>
+					</div>
+				</form>
+			</section>
+		</main>
+		<footer class="footer">
+			<div class="footer__content">
+				<p class="footer__prepared-by">
+					Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
+				</p>
+				<p class="footer__contact">
+					Contact:
+					<a
+						href="mailto:arlo.lonewolfit@gmail.com"
+						class="footer__contact-link"
+						>arlo.lonewolfit@gmail.com</a
+					>
+				</p>
+				<p class="footer__copyright">
+					© 2025 Lone Wolf IT Services LLC | All Rights Reserved.
+				</p>
+				<ul class="footer__links">
+					<li class="footer__link-item">
+						<a href="pp.html" class="footer__link">Privacy Policy</a>
+					</li>
+					<li class="footer__link-item">
+						<a href="tos.html" class="footer__link">Terms of Service</a>
+					</li>
+					<li class="footer__link-item">
+						<a href="index.html#contact" class="footer__link">Contact Us</a>
+					</li>
+					<li class="footer__link-item footer__link-item--icon">
+						<a
+							href="https://www.facebook.com/lonewolfitservicesllc"
+							target="_blank"
+							class="footer__link"
+						>
+							<img
+								src="images/ui/facebook-icon.png"
+								alt="Facebook"
+								class="footer__icon"
+							/>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</footer>
+	</body>
 </html>

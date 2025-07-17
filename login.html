@@ -1,251 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login - LoneWolf IT</title>
-    <meta
-      name="description"
-      content="Secure login portal for LoneWolf IT clients and members. Access your account, manage services, and view exclusive resources."
-    />
-    <meta
-      name="keywords"
-      content="login, member portal, LoneWolf IT, client access, secure login"
-    />
-    <meta name="author" content="LoneWolf IT" />
-    <link rel="icon" href="./images/wolf-logo.png" type="image/png" />
-    <link href="./vendor/bootstrap.min.css" rel="stylesheet" />
-    <link href="./styles/buttons.css" rel="stylesheet" />
-    <link href="./styles/styles_white.css" rel="stylesheet" />
-    <link href="./styles/styles_black.css" rel="stylesheet" />
-    <link href="./styles/styles_modals_white.css" rel="stylesheet" />
-    <link href="./styles/styles_modals_black.css" rel="stylesheet" />
-    <script src="scripts/slide-in.js"></script>
-    <script src="scripts/preferences.js"></script>
-    <script src="scripts/darkmode.js"></script>
-    <script src="scripts/auth.js"></script>
-    <script src="scripts/alert.js"></script>
-    <script src="scripts/login.js"></script>
-    <style>
-      .main {
-        min-height: 100vh;
-        margin-top: -40px;
-      }
-      .main__section {
-        animation: fadeIn 0.8s ease-in;
-      }
-    </style>
-    <script>
-      redirectToPortal = true; // Set to true to redirect to the portal after login
-    </script>
-  </head>
-  <body>
-    <!-- Loading Modal -->
-    <div id="loadingModal" class="modal" tabindex="-1" style="display: none">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-body text-center">
-            <img src="images/ui/spin.png" alt="Loading..." class="spinner" />
-            <p class="main__text" style="color: #fff">
-              Loading, please wait...
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <main class="main">
-      <section class="main__section" id="mainSection">
-        <img
-          src="images/wolf-logo.png"
-          alt="Lone Wolf Logo"
-          class="main__logo main__item-centered"
-        />
-        <h1 class="main__heading">Login to Your Account</h1>
-        <p class="main__intro main__item-centered" style="margin-top: 20px">
-          Please
-          <a href="#emailloginSection" style="text-decoration: underline"
-            >enter your credentials</a
-          >
-          to access the member portal
-        </p>
-        <p class="main__intro main__item-centered" style="margin-top: 20px">
-          -OR-
-        </p>
-        <a
-          id="loginGoogle"
-          class="btn btn-primary main__item-centered"
-          style="max-width: 200px"
-        >
-          <img
-            src="images/ui/google-logo.png"
-            alt="Google Logo"
-            style="width: 25px; margin-right: 10px"
-          />
-          Login with Google
-        </a>
-        <p class="main__intro main__item-centered" style="margin-top: 20px">
-          If you don't have an account, please
-          <a href="register.html" style="text-decoration: underline"
-            >register here</a
-          >.
-        </p>
-        <button
-          class="btn btn-primary main__item-centered"
-          style="max-width: 200px"
-          onclick="window.location.href='register.html'"
-        >
-          Register New Account
-        </button>
-        <small
-          class="main__text main__item-centered"
-          style="margin-top: 20px; margin-bottom: 0px"
-        >
-          If you want to use Google to sign in, please click "Login with
-          Google".</small
-        >
-      </section>
-      <section
-        class="main__section main__section-hidden"
-        id="emailloginSection"
-      >
-        <h1 class="main__heading">Login with Email/Password</h1>
-        <!-- Add this just above your <form id="emaillogin" class="main__form"> -->
-        <div
-          id="alertLogin"
-          class="alertDiv main__alert"
-          style="display: none"
-        ></div>
-        <form id="emaillogin" class="main__form">
-          <div class="form-group">
-            <label for="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              class="form-control"
-              placeholder="Enter your email"
-              required
-            />
-            <label for="password">Password:</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              class="form-control"
-              placeholder="Enter your password"
-              required
-            />
-            <label onclick="window.location.href='reset.html';" class="main__text-hyperlink main__item-centered">
-              Forgot your password? Click HERE</label
-            >
-            <button
-              type="submit"
-              class="btn btn-primary main__item-centered"
-              style="margin-top: 10px;"
-              disabled
-            >
-              Log In
-            </button>
-          </div>
-        </form>
-      </section>
-      <section class="main__section" id="verifyLoginSection" style="display: none">
-        <h1 class="main__heading">Verify Your Login Email</h1>
-        <div
-          id="alertVerify"
-          class="alertDiv main__alert"
-          style="display: none"
-        ></div>
-        <p class="main__text main__item-centered">
-          Thank you for being a valued member of LoneWolf IT. To ensure the
-          security of your account, we require email verification for all
-          logins. A verification code has been sent to your registered email
-          address. Please check your inbox and enter the code below to verify
-          your login.
-        </p>
-        <p class="main__text main__item-centered">
-          If you do not receive the email within a few minutes, please check
-          your spam folder or
-          <a href="index.html#contact" class="main__link">contact us</a> for
-          assistance.
-        </p>
-        <p class="main__text main__item-centered">
-          Once verified, you can log in to your account and start using our
-          services.
-        </p>
-        <form class="main__form">
-          <label
-            for="verificationCode"
-            class="form-label"
-            style="margin-top: -10px"
-            >Enter the verification code sent to your email:</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="verificationCode"
-            required
-          />
-          <button
-            type="submit"
-            class="btn btn-primary main__item-centered"
-            id="verifyAccountButton"
-            style="margin-top: 10px"
-          >
-            Verify Account
-          </button>
-          <button
-            type="button"
-            class="btn btn-secondary main__item-centered"
-            style="margin-top: 10px"
-            id="resendCodeButton"
-          >
-            Resend Verification Email
-          </button>
-        </form>
-      </section>
-    </main>
-    <footer class="footer">
-      <div class="footer__content">
-        <p class="footer__prepared-by">
-          Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
-        </p>
-        <p class="footer__contact">
-          Contact:
-          <a
-            href="mailto:arlo.lonewolfit@gmail.com"
-            class="footer__contact-link"
-            >arlo.lonewolfit@gmail.com</a
-          >
-        </p>
-        <p class="footer__copyright">
-          © 2025 Lone Wolf IT Services LLC | All Rights Reserved.
-        </p>
-        <ul class="footer__links">
-          <li class="footer__link-item">
-            <a href="pp.html" class="footer__link">Privacy Policy</a>
-          </li>
-          <li class="footer__link-item">
-            <a href="tos.html" class="footer__link">Terms of Service</a>
-          </li>
-          <li class="footer__link-item">
-            <a href="index.html#contact" class="footer__link">Contact Us</a>
-          </li>
-          <li class="footer__link-item footer__link-item--icon">
-            <a
-              href="https://www.facebook.com/lonewolfitservicesllc"
-              target="_blank"
-              class="footer__link"
-            >
-              <img
-                src="images/ui/facebook-icon.png"
-                alt="Facebook"
-                class="footer__icon"
-              />
-            </a>
-          </li>
-        </ul>
-      </div>
-    </footer>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Login - LoneWolf IT</title>
+		<meta
+			name="description"
+			content="Secure login portal for LoneWolf IT clients and members. Access your account, manage services, and view exclusive resources."
+		/>
+		<meta
+			name="keywords"
+			content="login, member portal, LoneWolf IT, client access, secure login"
+		/>
+		<meta name="author" content="LoneWolf IT" />
+		<link rel="icon" href="./images/wolf-logo.png" type="image/png" />
+		<link href="./vendor/bootstrap.min.css" rel="stylesheet" />
+		<link href="./styles/buttons.css" rel="stylesheet" />
+		<link href="./styles/styles_white.css" rel="stylesheet" />
+		<link href="./styles/styles_black.css" rel="stylesheet" />
+		<link href="./styles/styles_modals_white.css" rel="stylesheet" />
+		<link href="./styles/styles_modals_black.css" rel="stylesheet" />
+		<script src="scripts/slide-in.js"></script>
+		<script src="scripts/preferences.js"></script>
+		<script src="scripts/darkmode.js"></script>
+		<script src="scripts/auth.js"></script>
+		<script src="scripts/alert.js"></script>
+		<script src="scripts/login.js"></script>
+		<style>
+			.main {
+				min-height: 100vh;
+				margin-top: -40px;
+			}
+			.main__section {
+				animation: fadeIn 0.8s ease-in;
+			}
+		</style>
+		<script>
+			redirectToPortal = true; // Set to true to redirect to the portal after login
+		</script>
+	</head>
+	<body>
+		<!-- Loading Modal -->
+		<div id="loadingModal" class="modal" tabindex="-1" style="display: none">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-body text-center">
+						<img src="images/ui/spin.png" alt="Loading..." class="spinner" />
+						<p class="main__text" style="color: #fff">
+							Loading, please wait...
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<main class="main">
+			<section class="main__section" id="mainSection">
+				<img
+					src="images/wolf-logo.png"
+					alt="Lone Wolf Logo"
+					class="main__logo main__item-centered"
+				/>
+				<h1 class="main__heading">Login to Your Account</h1>
+				<p class="main__intro main__item-centered" style="margin-top: 20px">
+					Please
+					<a href="#emailloginSection" style="text-decoration: underline"
+						>enter your credentials</a
+					>
+					to access the member portal
+				</p>
+				<p class="main__intro main__item-centered" style="margin-top: 20px">
+					-OR-
+				</p>
+				<a
+					id="loginGoogle"
+					class="btn btn-primary main__item-centered"
+					style="max-width: 200px"
+				>
+					<img
+						src="images/ui/google-logo.png"
+						alt="Google Logo"
+						style="width: 25px; margin-right: 10px"
+					/>
+					Login with Google
+				</a>
+				<p class="main__intro main__item-centered" style="margin-top: 20px">
+					If you don't have an account, please
+					<a href="register.html" style="text-decoration: underline"
+						>register here</a
+					>.
+				</p>
+				<button
+					class="btn btn-primary main__item-centered"
+					style="max-width: 200px"
+					onclick="window.location.href='register.html'"
+				>
+					Register New Account
+				</button>
+				<small
+					class="main__text main__item-centered"
+					style="margin-top: 20px; margin-bottom: 0px"
+				>
+					If you want to use Google to sign in, please click "Login with
+					Google".</small
+				>
+			</section>
+			<section
+				class="main__section main__section-hidden"
+				id="emailloginSection"
+			>
+				<h1 class="main__heading">Login with Email/Password</h1>
+				<!-- Add this just above your <form id="emaillogin" class="main__form"> -->
+				<div
+					id="alertLogin"
+					class="alertDiv main__alert"
+					style="display: none"
+				></div>
+				<form id="emaillogin" class="main__form">
+					<div class="form-group">
+						<label for="email">Email:</label>
+						<input
+							type="email"
+							id="email"
+							name="email"
+							class="form-control"
+							placeholder="Enter your email"
+							required
+						/>
+						<label for="password">Password:</label>
+						<input
+							type="password"
+							id="password"
+							name="password"
+							class="form-control"
+							placeholder="Enter your password"
+							required
+						/>
+						<label
+							onclick="window.location.href='reset.html';"
+							class="main__text-hyperlink main__item-centered"
+						>
+							Forgot your password? Click HERE</label
+						>
+						<button
+							type="submit"
+							class="btn btn-primary main__item-centered"
+							style="margin-top: 10px"
+							disabled
+						>
+							Log In
+						</button>
+					</div>
+				</form>
+			</section>
+			<section
+				class="main__section"
+				id="verifyLoginSection"
+				style="display: none"
+			>
+				<h1 class="main__heading">Verify Your Login Email</h1>
+				<div
+					id="alertVerify"
+					class="alertDiv main__alert"
+					style="display: none"
+				></div>
+				<p class="main__text main__item-centered">
+					Thank you for being a valued member of LoneWolf IT. To ensure the
+					security of your account, we require email verification for all
+					logins. A verification code has been sent to your registered email
+					address. Please check your inbox and enter the code below to verify
+					your login.
+				</p>
+				<p class="main__text main__item-centered">
+					If you do not receive the email within a few minutes, please check
+					your spam folder or
+					<a href="index.html#contact" class="main__link">contact us</a> for
+					assistance.
+				</p>
+				<p class="main__text main__item-centered">
+					Once verified, you can log in to your account and start using our
+					services.
+				</p>
+				<form class="main__form">
+					<label
+						for="verificationCode"
+						class="form-label"
+						style="margin-top: -10px"
+						>Enter the verification code sent to your email:</label
+					>
+					<input
+						type="text"
+						class="form-control"
+						id="verificationCode"
+						required
+					/>
+					<button
+						type="submit"
+						class="btn btn-primary main__item-centered"
+						id="verifyAccountButton"
+						style="margin-top: 10px"
+					>
+						Verify Account
+					</button>
+					<button
+						type="button"
+						class="btn btn-secondary main__item-centered"
+						style="margin-top: 10px"
+						id="resendCodeButton"
+					>
+						Resend Verification Email
+					</button>
+				</form>
+			</section>
+		</main>
+		<footer class="footer">
+			<div class="footer__content">
+				<p class="footer__prepared-by">
+					Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
+				</p>
+				<p class="footer__contact">
+					Contact:
+					<a
+						href="mailto:arlo.lonewolfit@gmail.com"
+						class="footer__contact-link"
+						>arlo.lonewolfit@gmail.com</a
+					>
+				</p>
+				<p class="footer__copyright">
+					© 2025 Lone Wolf IT Services LLC | All Rights Reserved.
+				</p>
+				<ul class="footer__links">
+					<li class="footer__link-item">
+						<a href="pp.html" class="footer__link">Privacy Policy</a>
+					</li>
+					<li class="footer__link-item">
+						<a href="tos.html" class="footer__link">Terms of Service</a>
+					</li>
+					<li class="footer__link-item">
+						<a href="index.html#contact" class="footer__link">Contact Us</a>
+					</li>
+					<li class="footer__link-item footer__link-item--icon">
+						<a
+							href="https://www.facebook.com/lonewolfitservicesllc"
+							target="_blank"
+							class="footer__link"
+						>
+							<img
+								src="images/ui/facebook-icon.png"
+								alt="Facebook"
+								class="footer__icon"
+							/>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</footer>
+	</body>
 </html>
