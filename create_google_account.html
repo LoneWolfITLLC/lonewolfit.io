@@ -1,573 +1,573 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Finish Google Account - Lone Wolf IT</title>
-    <meta
-      name="description"
-      content="Finish creating your LoneWolf IT member profile after signing in with Google."
-    />
-    <meta
-      name="keywords"
-      content="create account, google, profile, LoneWolf IT, member registration"
-    />
-    <meta name="author" content="LoneWolf IT" />
-    <link rel="icon" href="./images/wolf-logo.png" type="image/png" />
-    <link href="./vendor/bootstrap.min.css" rel="stylesheet" />
-    <link href="./styles/buttons.css" rel="stylesheet" />
-    <link href="./styles/styles_white.css" rel="stylesheet" />
-    <link href="./styles/styles_black.css" rel="stylesheet" />
-    <link href="./styles/styles_modals_white.css" rel="stylesheet" />
-    <link href="./styles/styles_modals_black.css" rel="stylesheet" />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-      rel="stylesheet"
-    />
-    <script src="scripts/slide-in.js"></script>
-    <script src="scripts/stateFields.js"></script>
-    <script src="scripts/clientTypeToggle.js"></script>
-    <script src="scripts/accountFunctions.js"></script>
-    <script src="scripts/auth.js"></script>
-    <script src="scripts/alert.js"></script>
-    <script src="scripts/preferences.js"></script>
-    <script src="scripts/darkmode.js"></script>
-    <script src="scripts/createAccountGoogleLoginFlow.js"></script>
-    <style>
-      .main {
-        min-height: 100vh;
-        margin-top: -40px;
-      }
-      .main__section {
-        animation: fadeIn 0.8s ease-in;
-      }
-    </style>
-    <script>
-      requireLogin = false;
-    </script>
-  </head>
-  <body>
-    <!-- Loading Modal -->
-    <div id="loadingModal" class="modal" tabindex="-1" style="display: none">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-body text-center">
-            <img src="images/ui/spin.png" alt="Loading..." class="spinner" />
-            <p class="main__text" style="color: #fff">
-              Loading, please wait...
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <main class="main">
-      <section class="main__section" id="mainSection">
-        <img
-          src="images/wolf-logo.png"
-          alt="Lone Wolf IT Logo"
-          class="main__logo main__item-centered"
-        />
-        <h1 class="main__heading main__item-centered">
-          Finish Creating Your Account
-        </h1>
-        <p class="main__text main__item-centered">
-          Welcome! Please complete your profile to finish setting up your
-          Lone Wolf IT account.
-        </p>
-        <p class="main__text main__item-centered">
-          Toggle between client and member views to access different features:
-        </p>
-        <button
-          id="clientTypeToggle"
-          class="menu__item-slider main__item-centered"
-          style="margin-top: 20px"
-        ></button>
-      </section>
-      <!-- RESIDENTIAL SECTION -->
-      <section
-        class="main__section main__section-hidden"
-        id="registerSectionResidential"
-      >
-        <h1 class="main__heading">Residential Client Details</h1>
-        <div
-          id="alertResidential"
-          class="alertDiv main__alert"
-          style="display: none"
-        ></div>
-        <form id="registerForm" class="main__form">
-          <div class="form-group">
-            <label for="usernameResidential" class="form-label">Username</label>
-            <input
-              type="text"
-              id="usernameResidential"
-              name="usernameResidential"
-              class="form-control"
-              required
-            />
-            <label for="firstNameResidential" class="form-label"
-              >First Name</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="firstNameResidential"
-              required
-            />
-            <label for="middleNameResidential" class="form-label"
-              >Middle Name</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="middleNameResidential"
-            />
-            <label for="lastNameResidential" class="form-label"
-              >Last Name</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="lastNameResidential"
-              required
-            />
-            <label for="phoneResidential" class="form-label"
-              >Phone Number</label
-            >
-            <input
-              type="tel"
-              class="form-control"
-              id="phoneResidential"
-              required
-              pattern="[0-9]*"
-              onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-            />
-            <label for="country" class="form-label">Country</label>
-            <select class="form-control" id="country" required>
-              <option value="">Select a country</option>
-              <option value="US">United States</option>
-              <option value="CA">Canada</option>
-              <option value="MX">Mexico</option>
-              <option value="AG">Antigua and Barbuda</option>
-              <option value="AR">Argentina</option>
-              <option value="BO">Bolivia</option>
-              <option value="BR">Brazil</option>
-              <option value="CL">Chile</option>
-              <option value="CO">Colombia</option>
-              <option value="CR">Costa Rica</option>
-              <option value="CU">Cuba</option>
-              <option value="DM">Dominica</option>
-              <option value="DO">Dominican Republic</option>
-              <option value="EC">Ecuador</option>
-              <option value="SV">El Salvador</option>
-              <option value="GQ">Equatorial Guinea</option>
-              <option value="GT">Guatemala</option>
-              <option value="GY">Guyana</option>
-              <option value="HN">Honduras</option>
-              <option value="JM">Jamaica</option>
-              <option value="MX">Mexico</option>
-              <option value="NI">Nicaragua</option>
-              <option value="PA">Panama</option>
-              <option value="PY">Paraguay</option>
-              <option value="PE">Peru</option>
-              <option value="SR">Suriname</option>
-              <option value="TT">Trinidad and Tobago</option>
-              <option value="UY">Uruguay</option>
-              <option value="VE">Venezuela</option>
-              <option value="AL">Albania</option>
-              <option value="AT">Austria</option>
-              <option value="BY">Belarus</option>
-              <option value="BE">Belgium</option>
-              <option value="BG">Bulgaria</option>
-              <option value="CH">Switzerland</option>
-              <option value="CY">Cyprus</option>
-              <option value="CZ">Czech Republic</option>
-              <option value="DE">Germany</option>
-              <option value="DK">Denmark</option>
-              <option value="EE">Estonia</option>
-              <option value="ES">Spain</option>
-              <option value="FI">Finland</option>
-              <option value="FR">France</option>
-              <option value="GB">United Kingdom</option>
-              <option value="GR">Greece</option>
-              <option value="HR">Croatia</option>
-              <option value="HU">Hungary</option>
-              <option value="IE">Ireland</option>
-              <option value="IT">Italy</option>
-              <option value="LT">Lithuania</option>
-              <option value="LU">Luxembourg</option>
-              <option value="MT">Malta</option>
-              <option value="NL">Netherlands</option>
-              <option value="NO">Norway</option>
-              <option value="PL">Poland</option>
-              <option value="PT">Portugal</option>
-              <option value="RO">Romania</option>
-              <option value="SE">Sweden</option>
-              <option value="SI">Slovenia</option>
-              <option value="SK">Slovakia</option>
-              <option value="UA">Ukraine</option>
-              <option value="IS">Iceland</option>
-            </select>
-            <label for="address1Residential" class="form-label"
-              >Address Line 1</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="address1Residential"
-              required
-            />
-            <label for="address2Residential" class="form-label"
-              >Address Line 2 (APT#/Unit)</label
-            >
-            <input type="text" class="form-control" id="address2Residential" />
-            <label for="cityResidential" class="form-label">City</label>
-            <input
-              type="text"
-              class="form-control"
-              id="cityResidential"
-              required
-            />
-            <label for="state" class="form-label">State</label>
-            <select class="form-control" id="state" name="state" required>
-              <option value="">Select a state</option>
-              <!-- State options will be populated dynamically based on selected country -->
-            </select>
-            <label for="zipCodeResidential" class="form-label">Zip Code</label>
-            <input
-              type="text"
-              class="form-control"
-              id="zipCodeResidential"
-              required
-            />
-            <label for="emailResidential" class="form-label">Email</label>
-            <input
-              type="email"
-              class="form-control"
-              id="emailResidential"
-              required
-              readonly
-            />
-            <!-- Checkboxes from register.html -->
-            <label>
-              <input type="checkbox" id="privacyPolicyResidential" required />
-              I have read and accept the
-              <a href="pp.html" target="_blank">Privacy Policy</a>
-              and <a href="tos.html" target="_blank">Terms of Service</a>.
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                id="informationSharingResidential"
-                required
-              />
-              I agree to share my information with Stripe and confirm I am at
-              least 18 years old.
-            </label>
-            <button
-              type="submit"
-              style="margin-top: 10px"
-              class="btn btn-primary main__item-centered"
-            >
-              Finish Account Setup
-            </button>
-          </div>
-        </form>
-      </section>
-      <!-- BUSINESS SECTION -->
-      <section
-        class="main__section main__section-hidden"
-        id="registerSectionBusiness"
-      >
-        <h1 class="main__heading">Business Client Details</h1>
-        <div
-          id="alertBusiness"
-          class="alertDiv main__alert"
-          style="display: none"
-        ></div>
-        <form id="registerFormBusiness" class="main__form">
-          <div class="form-group">
-            <label for="dbaNameBusiness" class="form-label">DBA Name</label>
-            <input type="text" class="form-control" id="dbaNameBusiness" />
-            <label for="businessCountry" class="form-label"
-              >Business Country</label
-            >
-            <select class="form-control" id="businessCountry" required>
-              <option value="">Select a country</option>
-              <option value="US">United States</option>
-              <option value="CA">Canada</option>
-              <option value="MX">Mexico</option>
-              <option value="AG">Antigua and Barbuda</option>
-              <option value="AR">Argentina</option>
-              <option value="BO">Bolivia</option>
-              <option value="BR">Brazil</option>
-              <option value="CL">Chile</option>
-              <option value="CO">Colombia</option>
-              <option value="CR">Costa Rica</option>
-              <option value="CU">Cuba</option>
-              <option value="DM">Dominica</option>
-              <option value="DO">Dominican Republic</option>
-              <option value="EC">Ecuador</option>
-              <option value="SV">El Salvador</option>
-              <option value="GQ">Equatorial Guinea</option>
-              <option value="GT">Guatemala</option>
-              <option value="GY">Guyana</option>
-              <option value="HN">Honduras</option>
-              <option value="JM">Jamaica</option>
-              <option value="MX">Mexico</option>
-              <option value="NI">Nicaragua</option>
-              <option value="PA">Panama</option>
-              <option value="PY">Paraguay</option>
-              <option value="PE">Peru</option>
-              <option value="SR">Suriname</option>
-              <option value="TT">Trinidad and Tobago</option>
-              <option value="UY">Uruguay</option>
-              <option value="VE">Venezuela</option>
-              <option value="AL">Albania</option>
-              <option value="AT">Austria</option>
-              <option value="BY">Belarus</option>
-              <option value="BE">Belgium</option>
-              <option value="BG">Bulgaria</option>
-              <option value="CH">Switzerland</option>
-              <option value="CY">Cyprus</option>
-              <option value="CZ">Czech Republic</option>
-              <option value="DE">Germany</option>
-              <option value="DK">Denmark</option>
-              <option value="EE">Estonia</option>
-              <option value="ES">Spain</option>
-            </select>
-            <label for="businessAddress1Business" class="form-label"
-              >Business Address Line 1</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="businessAddress1Business"
-            />
-            <label for="businessAddress2Business" class="form-label"
-              >Business Address Line 2 (Unit#)</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="businessAddress2Business"
-            />
-            <label for="businessCityBusiness" class="form-label"
-              >Business City</label
-            >
-            <input type="text" class="form-control" id="businessCityBusiness" />
-            <label for="businessState" class="form-label">Business State</label>
-            <select class="form-control" id="businessState">
-              <option value="">Select a state</option>
-              <!-- State options dynamically populated based on Business Country -->
-            </select>
-            <label for="businessZipCodeBusiness" class="form-label"
-              >Business Zip Code</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="businessZipCodeBusiness"
-            />
-            <label for="usernameBusiness" class="form-label">Username</label>
-            <input
-              type="text"
-              id="usernameBusiness"
-              name="usernameBusiness"
-              class="form-control"
-              required
-            />
-            <label for="firstNameBusiness" class="form-label">First Name</label>
-            <input
-              type="text"
-              class="form-control"
-              id="firstNameBusiness"
-              required
-            />
-            <label for="middleNameBusiness" class="form-label"
-              >Middle Name</label
-            >
-            <input type="text" class="form-control" id="middleNameBusiness" />
-            <label for="lastNameBusiness" class="form-label">Last Name</label>
-            <input
-              type="text"
-              class="form-control"
-              id="lastNameBusiness"
-              required
-            />
-            <label for="phoneBusiness" class="form-label">Phone Number</label>
-            <input
-              type="tel"
-              class="form-control"
-              id="phoneBusiness"
-              required
-              pattern="[0-9]*"
-              onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-            />
-            <label for="countryBusiness" class="form-label">Country</label>
-            <select class="form-control" id="countryBusiness" required>
-              <option value="">Select a country</option>
-              <option value="US">United States</option>
-              <option value="CA">Canada</option>
-              <option value="MX">Mexico</option>
-              <option value="AG">Antigua and Barbuda</option>
-              <option value="AR">Argentina</option>
-              <option value="BO">Bolivia</option>
-              <option value="BR">Brazil</option>
-              <option value="CL">Chile</option>
-              <option value="CO">Colombia</option>
-              <option value="CR">Costa Rica</option>
-              <option value="CU">Cuba</option>
-              <option value="DM">Dominica</option>
-              <option value="DO">Dominican Republic</option>
-              <option value="EC">Ecuador</option>
-              <option value="SV">El Salvador</option>
-              <option value="GQ">Equatorial Guinea</option>
-              <option value="GT">Guatemala</option>
-              <option value="GY">Guyana</option>
-              <option value="HN">Honduras</option>
-              <option value="JM">Jamaica</option>
-              <option value="MX">Mexico</option>
-              <option value="NI">Nicaragua</option>
-              <option value="PA">Panama</option>
-              <option value="PY">Paraguay</option>
-              <option value="PE">Peru</option>
-              <option value="SR">Suriname</option>
-              <option value="TT">Trinidad and Tobago</option>
-              <option value="UY">Uruguay</option>
-              <option value="VE">Venezuela</option>
-              <option value="AL">Albania</option>
-              <option value="AT">Austria</option>
-              <option value="BY">Belarus</option>
-              <option value="BE">Belgium</option>
-              <option value="BG">Bulgaria</option>
-              <option value="CH">Switzerland</option>
-              <option value="CY">Cyprus</option>
-              <option value="CZ">Czech Republic</option>
-              <option value="DE">Germany</option>
-              <option value="DK">Denmark</option>
-              <option value="EE">Estonia</option>
-              <option value="ES">Spain</option>
-              <option value="FI">Finland</option>
-              <option value="FR">France</option>
-              <option value="GB">United Kingdom</option>
-              <option value="GR">Greece</option>
-              <option value="HR">Croatia</option>
-              <option value="HU">Hungary</option>
-              <option value="IE">Ireland</option>
-              <option value="IT">Italy</option>
-              <option value="LT">Lithuania</option>
-              <option value="LU">Luxembourg</option>
-              <option value="MT">Malta</option>
-              <option value="NL">Netherlands</option>
-              <option value="NO">Norway</option>
-              <option value="PL">Poland</option>
-              <option value="PT">Portugal</option>
-              <option value="RO">Romania</option>
-              <option value="SE">Sweden</option>
-              <option value="SI">Slovenia</option>
-              <option value="SK">Slovakia</option>
-              <option value="UA">Ukraine</option>
-              <option value="IS">Iceland</option>
-            </select>
-            <label for="address1Business" class="form-label"
-              >Address Line 1</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="address1Business"
-              required
-            />
-            <label for="address2Business" class="form-label"
-              >Address Line 2 (APT#/Unit)</label
-            >
-            <input type="text" class="form-control" id="address2Business" />
-            <label for="cityBusiness" class="form-label">City</label>
-            <input
-              type="text"
-              class="form-control"
-              id="cityBusiness"
-              required
-            />
-            <label for="stateBusiness" class="form-label">State</label>
-            <select
-              class="form-control"
-              id="stateBusiness"
-              name="stateBusiness"
-              required
-            >
-              <option value="">Select a state</option>
-              <!-- State options will be populated dynamically based on selected country -->
-            </select>
-            <label for="zipCodeBusiness" class="form-label">Zip Code</label>
-            <input
-              type="text"
-              class="form-control"
-              id="zipCodeBusiness"
-              required
-            />
-            <label for="email" class="form-label">Email </label>
-            <input
-              type="email"
-              class="form-control"
-              id="emailBusiness"
-              required
-              readonly
-            />
-            <!-- Checkboxes from register.html -->
-            <label>
-              <input type="checkbox" id="privacyPolicyBusiness" required />
-              I have read and accept the
-              <a href="pp.html" target="_blank">Privacy Policy</a>
-              and <a href="tos.html" target="_blank">Terms of Service</a>.
-            </label>
-            <label>
-              <input type="checkbox" id="informationSharingBusiness" required />
-              I agree to share my information with Stripe and confirm I am at
-              least 18 years old.
-            </label>
-            <button
-              type="submit"
-              style="margin-top: 10px"
-              class="btn btn-primary main__item-centered"
-            >
-              Finish Account Setup
-            </button>
-          </div>
-        </form>
-      </section>
-    </main>
-    <footer class="footer">
-      <div class="footer__content">
-        <p class="footer__prepared-by">
-          Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
-        </p>
-        <p class="footer__contact">
-          Contact:
-          <a
-            href="mailto:arlo.lonewolfit@gmail.com"
-            class="footer__contact-link"
-            >arlo.lonewolfit@gmail.com</a
-          >
-        </p>
-        <p class="footer__copyright">
-          © 2025 Lone Wolf IT Services LLC | All Rights Reserved.
-        </p>
-        <ul class="footer__links">
-          <li class="footer__link-item">
-            <a href="pp.html" class="footer__link">Privacy Policy</a>
-          </li>
-          <li class="footer__link-item">
-            <a href="tos.html" class="footer__link">Terms of Service</a>
-          </li>
-          <li class="footer__link-item">
-            <a href="index.html#contact" class="footer__link">Contact Us</a>
-          </li>
-          <li class="footer__link-item footer__link-item--icon">
-            <a class="footer__link"></a>
-          </li>
-        </ul>
-      </div>
-    </footer>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Finish Google Account - Lone Wolf IT</title>
+		<meta
+			name="description"
+			content="Finish creating your Lone Wolf IT member profile after signing in with Google."
+		/>
+		<meta
+			name="keywords"
+			content="create account, google, profile, Lone Wolf IT, member registration"
+		/>
+		<meta name="author" content="Lone Wolf IT" />
+		<link rel="icon" href="./images/wolf-logo.png" type="image/png" />
+		<link href="./vendor/bootstrap.min.css" rel="stylesheet" />
+		<link href="./styles/buttons.css" rel="stylesheet" />
+		<link href="./styles/styles_white.css" rel="stylesheet" />
+		<link href="./styles/styles_black.css" rel="stylesheet" />
+		<link href="./styles/styles_modals_white.css" rel="stylesheet" />
+		<link href="./styles/styles_modals_black.css" rel="stylesheet" />
+		<link
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+			rel="stylesheet"
+		/>
+		<script src="scripts/slide-in.js"></script>
+		<script src="scripts/stateFields.js"></script>
+		<script src="scripts/clientTypeToggle.js"></script>
+		<script src="scripts/accountFunctions.js"></script>
+		<script src="scripts/auth.js"></script>
+		<script src="scripts/alert.js"></script>
+		<script src="scripts/preferences.js"></script>
+		<script src="scripts/darkmode.js"></script>
+		<script src="scripts/createAccountGoogleLoginFlow.js"></script>
+		<style>
+			.main {
+				min-height: 100vh;
+				margin-top: -40px;
+			}
+			.main__section {
+				animation: fadeIn 0.8s ease-in;
+			}
+		</style>
+		<script>
+			requireLogin = false;
+		</script>
+	</head>
+	<body>
+		<!-- Loading Modal -->
+		<div id="loadingModal" class="modal" tabindex="-1" style="display: none">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-body text-center">
+						<img src="images/ui/spin.png" alt="Loading..." class="spinner" />
+						<p class="main__text" style="color: #fff">
+							Loading, please wait...
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<main class="main">
+			<section class="main__section" id="mainSection">
+				<img
+					src="images/wolf-logo.png"
+					alt="Lone Wolf IT Logo"
+					class="main__logo main__item-centered"
+				/>
+				<h1 class="main__heading main__item-centered">
+					Finish Creating Your Account
+				</h1>
+				<p class="main__text main__item-centered">
+					Welcome! Please complete your profile to finish setting up your Lone
+					Wolf IT account.
+				</p>
+				<p class="main__text main__item-centered">
+					Toggle between client and member views to access different features:
+				</p>
+				<button
+					id="clientTypeToggle"
+					class="menu__item-slider main__item-centered"
+					style="margin-top: 20px"
+				></button>
+			</section>
+			<!-- RESIDENTIAL SECTION -->
+			<section
+				class="main__section main__section-hidden"
+				id="registerSectionResidential"
+			>
+				<h1 class="main__heading">Residential Client Details</h1>
+				<div
+					id="alertResidential"
+					class="alertDiv main__alert"
+					style="display: none"
+				></div>
+				<form id="registerForm" class="main__form">
+					<div class="form-group">
+						<label for="usernameResidential" class="form-label">Username</label>
+						<input
+							type="text"
+							id="usernameResidential"
+							name="usernameResidential"
+							class="form-control"
+							required
+						/>
+						<label for="firstNameResidential" class="form-label"
+							>First Name</label
+						>
+						<input
+							type="text"
+							class="form-control"
+							id="firstNameResidential"
+							required
+						/>
+						<label for="middleNameResidential" class="form-label"
+							>Middle Name</label
+						>
+						<input
+							type="text"
+							class="form-control"
+							id="middleNameResidential"
+						/>
+						<label for="lastNameResidential" class="form-label"
+							>Last Name</label
+						>
+						<input
+							type="text"
+							class="form-control"
+							id="lastNameResidential"
+							required
+						/>
+						<label for="phoneResidential" class="form-label"
+							>Phone Number</label
+						>
+						<input
+							type="tel"
+							class="form-control"
+							id="phoneResidential"
+							required
+							pattern="[0-9]*"
+							onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+						/>
+						<label for="country" class="form-label">Country</label>
+						<select class="form-control" id="country" required>
+							<option value="">Select a country</option>
+							<option value="US">United States</option>
+							<option value="CA">Canada</option>
+							<option value="MX">Mexico</option>
+							<option value="AG">Antigua and Barbuda</option>
+							<option value="AR">Argentina</option>
+							<option value="BO">Bolivia</option>
+							<option value="BR">Brazil</option>
+							<option value="CL">Chile</option>
+							<option value="CO">Colombia</option>
+							<option value="CR">Costa Rica</option>
+							<option value="CU">Cuba</option>
+							<option value="DM">Dominica</option>
+							<option value="DO">Dominican Republic</option>
+							<option value="EC">Ecuador</option>
+							<option value="SV">El Salvador</option>
+							<option value="GQ">Equatorial Guinea</option>
+							<option value="GT">Guatemala</option>
+							<option value="GY">Guyana</option>
+							<option value="HN">Honduras</option>
+							<option value="JM">Jamaica</option>
+							<option value="MX">Mexico</option>
+							<option value="NI">Nicaragua</option>
+							<option value="PA">Panama</option>
+							<option value="PY">Paraguay</option>
+							<option value="PE">Peru</option>
+							<option value="SR">Suriname</option>
+							<option value="TT">Trinidad and Tobago</option>
+							<option value="UY">Uruguay</option>
+							<option value="VE">Venezuela</option>
+							<option value="AL">Albania</option>
+							<option value="AT">Austria</option>
+							<option value="BY">Belarus</option>
+							<option value="BE">Belgium</option>
+							<option value="BG">Bulgaria</option>
+							<option value="CH">Switzerland</option>
+							<option value="CY">Cyprus</option>
+							<option value="CZ">Czech Republic</option>
+							<option value="DE">Germany</option>
+							<option value="DK">Denmark</option>
+							<option value="EE">Estonia</option>
+							<option value="ES">Spain</option>
+							<option value="FI">Finland</option>
+							<option value="FR">France</option>
+							<option value="GB">United Kingdom</option>
+							<option value="GR">Greece</option>
+							<option value="HR">Croatia</option>
+							<option value="HU">Hungary</option>
+							<option value="IE">Ireland</option>
+							<option value="IT">Italy</option>
+							<option value="LT">Lithuania</option>
+							<option value="LU">Luxembourg</option>
+							<option value="MT">Malta</option>
+							<option value="NL">Netherlands</option>
+							<option value="NO">Norway</option>
+							<option value="PL">Poland</option>
+							<option value="PT">Portugal</option>
+							<option value="RO">Romania</option>
+							<option value="SE">Sweden</option>
+							<option value="SI">Slovenia</option>
+							<option value="SK">Slovakia</option>
+							<option value="UA">Ukraine</option>
+							<option value="IS">Iceland</option>
+						</select>
+						<label for="address1Residential" class="form-label"
+							>Address Line 1</label
+						>
+						<input
+							type="text"
+							class="form-control"
+							id="address1Residential"
+							required
+						/>
+						<label for="address2Residential" class="form-label"
+							>Address Line 2 (APT#/Unit)</label
+						>
+						<input type="text" class="form-control" id="address2Residential" />
+						<label for="cityResidential" class="form-label">City</label>
+						<input
+							type="text"
+							class="form-control"
+							id="cityResidential"
+							required
+						/>
+						<label for="state" class="form-label">State</label>
+						<select class="form-control" id="state" name="state" required>
+							<option value="">Select a state</option>
+							<!-- State options will be populated dynamically based on selected country -->
+						</select>
+						<label for="zipCodeResidential" class="form-label">Zip Code</label>
+						<input
+							type="text"
+							class="form-control"
+							id="zipCodeResidential"
+							required
+						/>
+						<label for="emailResidential" class="form-label">Email</label>
+						<input
+							type="email"
+							class="form-control"
+							id="emailResidential"
+							required
+							readonly
+						/>
+						<!-- Checkboxes from register.html -->
+						<label>
+							<input type="checkbox" id="privacyPolicyResidential" required />
+							I have read and accept the
+							<a href="pp.html" target="_blank">Privacy Policy</a>
+							and <a href="tos.html" target="_blank">Terms of Service</a>.
+						</label>
+						<label>
+							<input
+								type="checkbox"
+								id="informationSharingResidential"
+								required
+							/>
+							I agree to share my information with Stripe and confirm I am at
+							least 18 years old.
+						</label>
+						<button
+							type="submit"
+							style="margin-top: 10px"
+							class="btn btn-primary main__item-centered"
+						>
+							Finish Account Setup
+						</button>
+					</div>
+				</form>
+			</section>
+			<!-- BUSINESS SECTION -->
+			<section
+				class="main__section main__section-hidden"
+				id="registerSectionBusiness"
+			>
+				<h1 class="main__heading">Business Client Details</h1>
+				<div
+					id="alertBusiness"
+					class="alertDiv main__alert"
+					style="display: none"
+				></div>
+				<form id="registerFormBusiness" class="main__form">
+					<div class="form-group">
+						<label for="dbaNameBusiness" class="form-label">DBA Name</label>
+						<input type="text" class="form-control" id="dbaNameBusiness" />
+						<label for="businessCountry" class="form-label"
+							>Business Country</label
+						>
+						<select class="form-control" id="businessCountry" required>
+							<option value="">Select a country</option>
+							<option value="US">United States</option>
+							<option value="CA">Canada</option>
+							<option value="MX">Mexico</option>
+							<option value="AG">Antigua and Barbuda</option>
+							<option value="AR">Argentina</option>
+							<option value="BO">Bolivia</option>
+							<option value="BR">Brazil</option>
+							<option value="CL">Chile</option>
+							<option value="CO">Colombia</option>
+							<option value="CR">Costa Rica</option>
+							<option value="CU">Cuba</option>
+							<option value="DM">Dominica</option>
+							<option value="DO">Dominican Republic</option>
+							<option value="EC">Ecuador</option>
+							<option value="SV">El Salvador</option>
+							<option value="GQ">Equatorial Guinea</option>
+							<option value="GT">Guatemala</option>
+							<option value="GY">Guyana</option>
+							<option value="HN">Honduras</option>
+							<option value="JM">Jamaica</option>
+							<option value="MX">Mexico</option>
+							<option value="NI">Nicaragua</option>
+							<option value="PA">Panama</option>
+							<option value="PY">Paraguay</option>
+							<option value="PE">Peru</option>
+							<option value="SR">Suriname</option>
+							<option value="TT">Trinidad and Tobago</option>
+							<option value="UY">Uruguay</option>
+							<option value="VE">Venezuela</option>
+							<option value="AL">Albania</option>
+							<option value="AT">Austria</option>
+							<option value="BY">Belarus</option>
+							<option value="BE">Belgium</option>
+							<option value="BG">Bulgaria</option>
+							<option value="CH">Switzerland</option>
+							<option value="CY">Cyprus</option>
+							<option value="CZ">Czech Republic</option>
+							<option value="DE">Germany</option>
+							<option value="DK">Denmark</option>
+							<option value="EE">Estonia</option>
+							<option value="ES">Spain</option>
+						</select>
+						<label for="businessAddress1Business" class="form-label"
+							>Business Address Line 1</label
+						>
+						<input
+							type="text"
+							class="form-control"
+							id="businessAddress1Business"
+						/>
+						<label for="businessAddress2Business" class="form-label"
+							>Business Address Line 2 (Unit#)</label
+						>
+						<input
+							type="text"
+							class="form-control"
+							id="businessAddress2Business"
+						/>
+						<label for="businessCityBusiness" class="form-label"
+							>Business City</label
+						>
+						<input type="text" class="form-control" id="businessCityBusiness" />
+						<label for="businessState" class="form-label">Business State</label>
+						<select class="form-control" id="businessState">
+							<option value="">Select a state</option>
+							<!-- State options dynamically populated based on Business Country -->
+						</select>
+						<label for="businessZipCodeBusiness" class="form-label"
+							>Business Zip Code</label
+						>
+						<input
+							type="text"
+							class="form-control"
+							id="businessZipCodeBusiness"
+						/>
+						<label for="usernameBusiness" class="form-label">Username</label>
+						<input
+							type="text"
+							id="usernameBusiness"
+							name="usernameBusiness"
+							class="form-control"
+							required
+						/>
+						<label for="firstNameBusiness" class="form-label">First Name</label>
+						<input
+							type="text"
+							class="form-control"
+							id="firstNameBusiness"
+							required
+						/>
+						<label for="middleNameBusiness" class="form-label"
+							>Middle Name</label
+						>
+						<input type="text" class="form-control" id="middleNameBusiness" />
+						<label for="lastNameBusiness" class="form-label">Last Name</label>
+						<input
+							type="text"
+							class="form-control"
+							id="lastNameBusiness"
+							required
+						/>
+						<label for="phoneBusiness" class="form-label">Phone Number</label>
+						<input
+							type="tel"
+							class="form-control"
+							id="phoneBusiness"
+							required
+							pattern="[0-9]*"
+							onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+						/>
+						<label for="countryBusiness" class="form-label">Country</label>
+						<select class="form-control" id="countryBusiness" required>
+							<option value="">Select a country</option>
+							<option value="US">United States</option>
+							<option value="CA">Canada</option>
+							<option value="MX">Mexico</option>
+							<option value="AG">Antigua and Barbuda</option>
+							<option value="AR">Argentina</option>
+							<option value="BO">Bolivia</option>
+							<option value="BR">Brazil</option>
+							<option value="CL">Chile</option>
+							<option value="CO">Colombia</option>
+							<option value="CR">Costa Rica</option>
+							<option value="CU">Cuba</option>
+							<option value="DM">Dominica</option>
+							<option value="DO">Dominican Republic</option>
+							<option value="EC">Ecuador</option>
+							<option value="SV">El Salvador</option>
+							<option value="GQ">Equatorial Guinea</option>
+							<option value="GT">Guatemala</option>
+							<option value="GY">Guyana</option>
+							<option value="HN">Honduras</option>
+							<option value="JM">Jamaica</option>
+							<option value="MX">Mexico</option>
+							<option value="NI">Nicaragua</option>
+							<option value="PA">Panama</option>
+							<option value="PY">Paraguay</option>
+							<option value="PE">Peru</option>
+							<option value="SR">Suriname</option>
+							<option value="TT">Trinidad and Tobago</option>
+							<option value="UY">Uruguay</option>
+							<option value="VE">Venezuela</option>
+							<option value="AL">Albania</option>
+							<option value="AT">Austria</option>
+							<option value="BY">Belarus</option>
+							<option value="BE">Belgium</option>
+							<option value="BG">Bulgaria</option>
+							<option value="CH">Switzerland</option>
+							<option value="CY">Cyprus</option>
+							<option value="CZ">Czech Republic</option>
+							<option value="DE">Germany</option>
+							<option value="DK">Denmark</option>
+							<option value="EE">Estonia</option>
+							<option value="ES">Spain</option>
+							<option value="FI">Finland</option>
+							<option value="FR">France</option>
+							<option value="GB">United Kingdom</option>
+							<option value="GR">Greece</option>
+							<option value="HR">Croatia</option>
+							<option value="HU">Hungary</option>
+							<option value="IE">Ireland</option>
+							<option value="IT">Italy</option>
+							<option value="LT">Lithuania</option>
+							<option value="LU">Luxembourg</option>
+							<option value="MT">Malta</option>
+							<option value="NL">Netherlands</option>
+							<option value="NO">Norway</option>
+							<option value="PL">Poland</option>
+							<option value="PT">Portugal</option>
+							<option value="RO">Romania</option>
+							<option value="SE">Sweden</option>
+							<option value="SI">Slovenia</option>
+							<option value="SK">Slovakia</option>
+							<option value="UA">Ukraine</option>
+							<option value="IS">Iceland</option>
+						</select>
+						<label for="address1Business" class="form-label"
+							>Address Line 1</label
+						>
+						<input
+							type="text"
+							class="form-control"
+							id="address1Business"
+							required
+						/>
+						<label for="address2Business" class="form-label"
+							>Address Line 2 (APT#/Unit)</label
+						>
+						<input type="text" class="form-control" id="address2Business" />
+						<label for="cityBusiness" class="form-label">City</label>
+						<input
+							type="text"
+							class="form-control"
+							id="cityBusiness"
+							required
+						/>
+						<label for="stateBusiness" class="form-label">State</label>
+						<select
+							class="form-control"
+							id="stateBusiness"
+							name="stateBusiness"
+							required
+						>
+							<option value="">Select a state</option>
+							<!-- State options will be populated dynamically based on selected country -->
+						</select>
+						<label for="zipCodeBusiness" class="form-label">Zip Code</label>
+						<input
+							type="text"
+							class="form-control"
+							id="zipCodeBusiness"
+							required
+						/>
+						<label for="email" class="form-label">Email </label>
+						<input
+							type="email"
+							class="form-control"
+							id="emailBusiness"
+							required
+							readonly
+						/>
+						<!-- Checkboxes from register.html -->
+						<label>
+							<input type="checkbox" id="privacyPolicyBusiness" required />
+							I have read and accept the
+							<a href="pp.html" target="_blank">Privacy Policy</a>
+							and <a href="tos.html" target="_blank">Terms of Service</a>.
+						</label>
+						<label>
+							<input type="checkbox" id="informationSharingBusiness" required />
+							I agree to share my information with Stripe and confirm I am at
+							least 18 years old.
+						</label>
+						<button
+							type="submit"
+							style="margin-top: 10px"
+							class="btn btn-primary main__item-centered"
+						>
+							Finish Account Setup
+						</button>
+					</div>
+				</form>
+			</section>
+		</main>
+		<footer class="footer">
+			<div class="footer__content">
+				<p class="footer__prepared-by">
+					Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
+				</p>
+				<p class="footer__contact">
+					Contact:
+					<a
+						href="mailto:arlo.lonewolfit@gmail.com"
+						class="footer__contact-link"
+						>arlo.lonewolfit@gmail.com</a
+					>
+				</p>
+				<p class="footer__copyright">
+					© 2025 Lone Wolf IT Services LLC | All Rights Reserved.
+				</p>
+				<ul class="footer__links">
+					<li class="footer__link-item">
+						<a href="pp.html" class="footer__link">Privacy Policy</a>
+					</li>
+					<li class="footer__link-item">
+						<a href="tos.html" class="footer__link">Terms of Service</a>
+					</li>
+					<li class="footer__link-item">
+						<a href="index.html#contact" class="footer__link">Contact Us</a>
+					</li>
+					<li class="footer__link-item footer__link-item--icon">
+						<a class="footer__link"></a>
+					</li>
+				</ul>
+			</div>
+		</footer>
+	</body>
 </html>
