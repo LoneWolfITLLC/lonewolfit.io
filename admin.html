@@ -42,7 +42,7 @@
 				showLoading();
 				try {
 					// Fetch state mapping from assets/iso-3166-2.json
-					const resp = await fetch("assets/iso-3166-2.json");
+					const resp = await fetch("./assets/iso-3166-2.json");
 					if (!resp.ok) throw new Error("Failed to fetch state mapping");
 					alt = "Lone Wolf IT Logo";
 					// Call backend endpoint
