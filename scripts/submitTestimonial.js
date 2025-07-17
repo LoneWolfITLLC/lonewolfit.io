@@ -34,17 +34,14 @@ window.addEventListener("authChecked", function () {
 			return;
 		}
 		try {
-			const response = await fetch(
-				(window.URL_BASE || "") + "/api/submit-testimonial",
-				{
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: `Bearer ${token}`,
-					},
-					body: JSON.stringify({ testimonial: textarea.value.trim() }),
-				}
-			);
+			const response = await fetch(URL_BASE + "/api/submit-testimonial", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${token}`,
+				},
+				body: JSON.stringify({ testimonial: textarea.value.trim() }),
+			});
 			const data = await response.json();
 			if (response.ok) {
 				showAlert(data.message || "Submitted your testimonial!", false, form);
@@ -70,7 +67,9 @@ window.addEventListener("authChecked", function () {
 			}
 		} catch (error) {
 			showAlert(
-				"Unable to submit testimonial. Please check your connection and try again.",
+				`Unable to submit testimonial. Error: ${
+					error && error.toString ? error.toString() : String(error)
+				}`,
 				true,
 				form
 			);
