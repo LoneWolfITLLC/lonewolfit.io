@@ -12,16 +12,6 @@ const triggerDarkModeEvent = new CustomEvent("triggerDarkMode");
 function executeOnLoad() {
   if (!hasExecuted) {
     hasExecuted = true;
-    // Redirect if loaded on port 2096 or URI contains :2096
-    if (
-      window.location.port === "2096" ||
-      window.location.href.includes(":2096")
-    ) {
-      const url = new URL(window.location.href);
-      url.port = "";
-      window.location.replace(url.toString());
-      return;
-    }
     const preAuthEvent = new CustomEvent("preAuthChecked");
     window.dispatchEvent(preAuthEvent);
     onLoad();
