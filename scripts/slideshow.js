@@ -111,6 +111,8 @@ function changeSlide(direction) {
 
 // Fetch testimonials from backend and update the global testimonials array
 async function fetchTestimonials() {
+  testimonials = []; // Reset approved testimonials array
+  currentCenterSlide = 0; // Reset current center slide index
   const slideshowWrapper = document.querySelector(".slideshow__wrapper");
   let loadingBar = slideshowWrapper.querySelector(".slideshow__loading-bar");
 

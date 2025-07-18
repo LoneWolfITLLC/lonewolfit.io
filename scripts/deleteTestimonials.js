@@ -3,6 +3,8 @@ let approvedTestimonials = []; // Approved testimonials array
 let changingSlide = false;
 
 async function fetchApprovedTestimonials() {
+  approvedTestimonials = []; // Reset approved testimonials array
+  currentCenterSlide = 0; // Reset current center slide index
   const slideshowWrapper = document.querySelector(".slideshow__wrapper");
   let loadingBar = slideshowWrapper.querySelector(".slideshow__loading-bar");
 

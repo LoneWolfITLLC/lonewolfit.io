@@ -47,6 +47,8 @@ function updateTestimonialTextField() {
 }
 
 async function fetchUnapprovedTestimonials() {
+  unapprovedTestimonials = []; // Reset unapproved testimonials array
+  currentCenterSlide = 0; // Reset current center slide index
   const token = getTokenFromSession && getTokenFromSession();
   const loadingBar = document.getElementById("loadingBar");
   if (loadingBar) loadingBar.style.display = "block";
@@ -83,6 +85,8 @@ async function fetchUnapprovedTestimonials() {
 
 // Fetch approved testimonials for the list only, do not merge with slideshow testimonials
 async function fetchApprovedTestimonials() {
+  approvedTestimonials = []; // Reset approved testimonials array
+  currentEditSlide = -1; // Reset current edit slide index
   const token = getTokenFromSession && getTokenFromSession();
   const loadingModal = document.getElementById("loadingModal");
   if (loadingModal) loadingModal.style.display = "block";
