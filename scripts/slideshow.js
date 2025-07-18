@@ -191,7 +191,6 @@ window.addEventListener("authChecked", async function () {
 	  isRefreshing = true;
 	  try {
 		await fetchTestimonials();
-		displaySlides();
 	  } finally {
 		isRefreshing = false;
 	  }
