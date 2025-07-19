@@ -51,15 +51,15 @@
 			requireLogin = false; // Set to true to require login for this page
 			window.addEventListener("authChecked", function (event) {
 				const { loggedIn, authNeeded, user } = event.detail;
-				const memberAreaSection = document.getElementById("memberAreaSection");
+				const accountButtonsSection = document.getElementById("accountButtonsSection");
 
 				if (loggedIn) {
 					// User is logged in
 					console.log("User is logged in...");
-					memberAreaSection.style.display = "block";
+					accountButtonsSection.style.display = "block";
 				} else {
 					console.log("User is not logged in");
-					memberAreaSection.style.display = "none";
+					accountButtonsSection.style.display = "none";
 				}
 			});
 		</script>
@@ -275,11 +275,11 @@
 				</p>
 				<button
 					class="btn btn-primary main__button main__item-centered"
-					onclick="window.location.href='members.html';"
+					onclick="window.location.href=loggedIn?'members.html' : 'login.html';"
 				>
 					Go to the Member Portal
 				</button>
-				<div class="main__section-hidden main__item-centered">
+				<div class="main__section-hidden main__item-centered" id="accountButtonsSection">
 					<button
 						class="btn btn-primary main__button main__item-centered"
 						onclick="signOut()"
