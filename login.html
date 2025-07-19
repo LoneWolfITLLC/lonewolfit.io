@@ -37,6 +37,9 @@
 		</style>
 		<script>
 			redirectToPortal = true; // Set to true to redirect to the portal after login
+			function redirectToRegister() {
+				window.location.href = 'register.html' + window.location.search; // Preserve query string
+			}
 		</script>
 	</head>
 	<body>
@@ -84,15 +87,12 @@
 					Login with Google
 				</a>
 				<p class="main__intro main__item-centered" style="margin-top: 20px">
-					If you don't have an account, please
-					<a href="register.html" style="text-decoration: underline"
-						>register here</a
-					>.
+					If you don't have an account, please click the button below to register.
 				</p>
 				<button
 					class="btn btn-primary main__item-centered"
 					style="max-width: 200px"
-					onclick="window.location.href='register.html'"
+					onclick="redirectToRegister()"
 				>
 					Register New Account
 				</button>
@@ -136,7 +136,7 @@
 							required
 						/>
 						<label
-							onclick="window.location.href='reset.html';"
+							onclick="window.location.href='reset.html' + window.location.search;"
 							class="main__text-hyperlink main__item-centered"
 						>
 							Forgot your password? Click HERE</label

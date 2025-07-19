@@ -144,13 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					showAlert(text, false, this);
 					// Redirect to member portal after 2 seconds
 					setTimeout(() => {
-						const urlParams = new URLSearchParams(window.location.search);
-						const redirectUri = urlParams.get("redirect_uri");
-						if (redirectUri) {
-							window.location.href = "members.html?redirect_uri=" + redirectUri;
-						} else {
-							window.location.href = "members.html";
-						}
+						window.location.href = "login.html" + window.location.search; // Preserve query string
 					}, 3000);
 				} else {
 					showAlert(text, true, this);
