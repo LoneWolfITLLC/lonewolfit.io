@@ -288,7 +288,7 @@ window.addEventListener("authChecked", function () {
           formElem
         );
         setTimeout(() => {
-          window.location.href = "members.html";
+          window.location.href = "login.html" + window.location.search; // Preserve query string
         }, 2000);
       } else {
         const result = await response.json();
