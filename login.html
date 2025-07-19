@@ -37,6 +37,9 @@
 		</style>
 		<script>
 			redirectToPortal = true; // Set to true to redirect to the portal after login
+			function redirectToRegister() {
+				window.location.href = 'register.html' + window.location.search; // Preserve query string
+			}
 		</script>
 	</head>
 	<body>
@@ -133,6 +136,7 @@
 							required
 						/>
 						<label
+							onclick="window.location.href='reset.html' + window.location.search;"
 							onclick="window.location.href='reset.html' + window.location.search;"
 							class="main__text-hyperlink main__item-centered"
 						>
