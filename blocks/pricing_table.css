@@ -1,0 +1,93 @@
+.pricing-table {
+	width: 100%; /* Table fills container. */
+	max-width: 1100px; /* Restricts table width for readability. */
+	margin: 2rem auto 0 auto; /* Centers table and adds space above. */
+	border-collapse: separate; /* Keeps table borders separate for styling. */
+	border-spacing: 0; /* No extra space between table cells. */
+	background: #fafdff; /* Very light blue background for table. */
+	border-radius: 14px; /* Rounds table corners. */
+	box-shadow: 0 4px 24px rgba(0, 191, 255, 0.1),
+		0 1.5px 8px rgba(3, 30, 60, 0.08); /* Multi-layered shadow for table. */
+	overflow: hidden; /* Prevents content from overflowing table. */
+	font-size: 1.05rem; /* Slightly larger text for table. */
+	animation: fadeIn 1s; /* Fades table in on load. */
+}
+
+.pricing-table__th,
+.pricing-table__cell {
+	padding: 1.1rem 1rem; /* Padding for table cells. */
+	text-align: left; /* Left-aligns cell content. */
+	border-bottom: 1px solid #e0f7fa; /* Light blue border below cells. */
+}
+
+.pricing-table__th {
+	background: #e6f7ff; /* Light blue background for header. */
+	color: #031e3c; /* Deep blue text for header. */
+	font-size: 1.1rem; /* Slightly larger header text. */
+	font-weight: 700; /* Bold header text. */
+	letter-spacing: 0.5px; /* Slightly spaced header letters. */
+	border-bottom: 2px solid #b3e0ff; /* Thicker border below header. */
+}
+
+.pricing-table__row:last-child .pricing-table__cell {
+	border-bottom: none; /* Removes border from last row. */
+}
+
+.pricing-table__cell {
+	color: #002222; /* Deep teal for cell text. */
+	vertical-align: top; /* Aligns cell content to top. */
+}
+
+.pricing-table__cell s {
+	color: #b0b0b0; /* Gray for struck-through text. */
+	font-size: 0.98em; /* Slightly smaller for emphasis. */
+}
+
+@media (max-width: 900px) {
+	.pricing-table__th,
+	.pricing-table__cell {
+		padding: 0.7rem 0.5rem; /* Smaller padding for mobile. */
+		font-size: 0.98rem; /* Smaller text for mobile. */
+	}
+	.pricing-table {
+		font-size: 0.98rem; /* Smaller table text for mobile. */
+	}
+}
+
+@media (max-width: 600px) {
+	.pricing-table,
+	.pricing-table thead,
+	.pricing-table tbody,
+	.pricing-table__th,
+	.pricing-table__cell,
+	.pricing-table__row {
+		display: block; /* Stacks table elements for mobile. */
+		width: 100%; /* Table fills mobile screen. */
+	}
+	.pricing-table thead tr {
+		display: none; /* Hides table header row for mobile. */
+	}
+	.pricing-table__row {
+		margin-bottom: 1.5rem; /* Space below each row. */
+		border-radius: 10px; /* Rounds row corners. */
+		box-shadow: 0 2px 10px rgba(0, 191, 255, 0.08); /* Subtle shadow for mobile rows. */
+		background: #fafdff; /* Light background for mobile rows. */
+		padding: 0.5rem 0.5rem 0.7rem 0.5rem; /* Padding for mobile rows. */
+	}
+	.pricing-table__cell {
+		border: none; /* Removes borders for mobile. */
+		padding: 0.5rem 0.5rem; /* Smaller padding for mobile. */
+		position: relative; /* Allows for pseudo-element positioning. */
+	}
+	.pricing-table__cell:before {
+		content: attr(data-label); /* Displays cell label before content. */
+		font-weight: bold; /* Bold label for emphasis. */
+		color: #00bfff; /* Bright blue for label. */
+		display: block; /* Makes label a block element. */
+		margin-bottom: 0.2rem; /* Space below label. */
+	}
+}
+
+.pricing-table--fade-in {
+	animation: fadeIn 1s; /* Applies fadeIn animation to table. */
+}

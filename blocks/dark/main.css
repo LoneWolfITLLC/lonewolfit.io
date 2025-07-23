@@ -1,0 +1,129 @@
+@keyframes logo-glow-idle {
+	from {
+		box-shadow: 0 0 6px 1px #00ffe7, 0 0 12px 2px #00ffe7; /* Initial soft glow for idle logo. */
+	}
+
+	to {
+		box-shadow: 0 0 6px 3px #00ffe7, 0 0 12px 6px #00ffe7; /* More intense glow for idle logo. */
+	}
+}
+
+@keyframes logo-glow {
+	from {
+		box-shadow: 0 0 12px 2px #00ffe7, 0 0 24px 4px #00ffe7; /* Initial strong glow for active logo. */
+	}
+
+	to {
+		box-shadow: 0 0 12px 8px #00ffe7, 0 0 24px 12px #00ffe7; /* Maximum glow for active logo. */
+	}
+}
+
+body.dark-mode main {
+	background: #181a1b; /* Sets main content background to match page background. */
+	border: none; /* Removes any border for a seamless look. */
+	box-shadow: none; /* Removes any shadow for a flat appearance. */
+}
+
+body.dark-mode .main__section {
+	background: #23272a; /* Sets section background to a slightly lighter dark gray. */
+	border: 1px solid #222; /* Adds a thin, dark border for definition. */
+	box-shadow: 0 2px 16px rgba(0, 0, 0, 0.18); /* Adds a subtle shadow for depth. */
+}
+
+body.dark-mode .main__section-hidden {
+	background: none; /* No background for hidden sections. */
+	box-shadow: none; /* No shadow for hidden sections. */
+	border: none; /* No border for hidden sections. */
+}
+
+body.dark-mode .main__heading {
+	color: #01e8f8; /* Bright cyan for headings for strong contrast. */
+	text-shadow: 3px 0px 15px #00ffff; /* Glowing cyan shadow for neon effect. */
+}
+
+body.dark-mode .main__heading--no-glow {
+	text-shadow: none; /* Removes glow for accessibility. */
+}
+
+body.dark-mode .main__intro,
+body.dark-mode .main__text,
+body.dark-mode .main__text-small {
+	color: #e0e0e0; /* Light gray for all main text for readability. */
+}
+
+body.dark-mode .main__text-hyperlink {
+	color: #00bfff; /* Bright blue for hyperlinks for visibility. */
+}
+
+body.dark-mode .main__text-character-count {
+	color: #00bfff; /* Bright blue for character count text for visibility. */
+}
+
+body.dark-mode .main__image {
+	background: #181a1b; /* Matches image background to page background. */
+	border: 1px solid #222; /* Thin, dark border for definition. */
+}
+
+body.dark-mode .main__image--tech,
+body.dark-mode .main__image--cert {
+	background: #23272a; /* Slightly lighter background for tech/cert images. */
+	border: 1px solid #222; /* Thin, dark border for definition. */
+}
+
+body.dark-mode .main__image--tripleten {
+	background: #fff; /* White background for tripleten image for contrast. */
+}
+
+body.dark-mode .main__image--arlo {
+	background: #23272a; /* Slightly lighter background for profile image. */
+	border: 2px solid #00bfff; /* Bright blue border for emphasis. */
+}
+
+body.dark-mode .main__portfolio-item {
+	background: #23272a; /* Sets the portfolio item background to a dark gray for dark mode. */
+	border: 1px solid #222; /* Adds a thin, dark border for separation and definition. */
+	box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.125); /* Creates a subtle inner white glow for depth. */
+}
+
+body.dark-mode .main__portfolio-item:hover {
+	border-color: #00ffff; /* Changes border to neon cyan on hover for emphasis. */
+	box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.8); /* Intensifies inner glow with cyan for interactive feedback. */
+}
+
+body.dark-mode .main__portfolio-item:active {
+	border-color: #0077b6; /* Sets border to blue when active/clicked for feedback. */
+	box-shadow: inset 0 0 15px rgba(0, 255, 255, 0.5); /* Adds a moderate cyan glow when active/clicked. */
+}
+
+body.dark-mode .main__portfolio-text {
+	color: #b0b8c1; /* Sets portfolio text to a muted light blue for readability in dark mode. */
+}
+
+/* Add to styles_black.css for dark mode */
+body.dark-mode .main__alert {
+	background: #2a2320; /* Dark brown background for alert in dark mode. */
+	color: #ffff; /* White text for alert in dark mode. */
+}
+
+body.dark-mode .main__logo {
+	background: transparent; /* Transparent background for logo. */
+	border-radius: 50%; /* Circular logo for modern look. */
+	z-index: 1000; /* Ensures logo is above other elements. */
+	animation: logo-glow-idle 5s ease-in-out infinite alternate; /* Idle glowing animation for logo. */
+	transition: animation 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth transition for animation changes. */
+}
+
+body.dark-mode .main__logo:hover {
+	animation: logo-glow 5s ease-in-out infinite alternate; /* More intense glowing animation on hover. */
+	transition: animation 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth transition for animation changes. */
+}
+
+body.dark-mode .main__logo--no-glow {
+	animation: none; /* Disables logo animation for accessibility. */
+	box-shadow: none; /* Removes glow from logo. */
+}
+
+body.dark-mode .main__logo--no-glow:hover {
+	animation: none; /* Disables animation on hover for accessibility. */
+	box-shadow: none; /* Removes glow on hover. */
+}

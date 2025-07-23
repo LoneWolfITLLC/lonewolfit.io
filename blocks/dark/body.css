@@ -1,0 +1,9 @@
+body.dark-mode {
+	background: #181a1b; /* Sets the overall page background to a deep charcoal for dark mode. */
+	color: #e0e0e0; /* Sets the default text color to a light gray for readability. */
+}
+
+body.dark-mode .slide-in {
+	animation: slideIn 0.5s ease-out forwards; /* Applies slideIn animation for smooth entrance. */
+	/* Duration and easing function */
+}

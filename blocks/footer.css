@@ -1,0 +1,80 @@
+.footer {
+	background: #031e3c; /* Deep blue background for footer. */
+	color: #fff; /* White text for contrast. */
+	padding: 40px 20px; /* Large padding for spacious footer. */
+	text-align: center; /* Centers footer text. */
+	margin-top: 3rem; /* Space above footer. */
+	margin-bottom: 0; /* No space below footer. */
+	width: 100%; /* Footer fills container. */
+	box-sizing: border-box; /* Includes padding in width calculation. */
+}
+
+.footer__banner {
+	display: none !important; /* Hides banner for all cases. */
+}
+
+.footer__banner-firefox-text {
+	display: none !important; /* Hides Firefox-specific banner. */
+}
+
+.footer__content {
+	max-width: 1200px; /* Restricts footer content width. */
+	margin: 15px auto 0 auto; /* Centers content and adds space above. */
+}
+
+.footer__prepared-by {
+	font-size: 1.2em; /* Slightly larger text for emphasis. */
+	margin: 0; /* No extra margin. */
+}
+
+.footer__contact {
+	margin: 10px 0; /* Space above and below contact info. */
+}
+
+.footer__contact-link {
+	color: #add8e6; /* Light blue for links. */
+	text-decoration: none; /* Removes underline. */
+	transition: color 0.3s; /* Smooth color transition on hover. */
+}
+.footer__contact-link:hover {
+	color: #00ffff; /* Bright blue on hover. */
+}
+
+.footer__copyright {
+	margin: 10px 0; /* Space above and below copyright. */
+}
+
+.footer__links {
+	list-style: none; /* Removes bullets. */
+	padding: 0; /* No extra padding. */
+	margin: 20px 0 0 0; /* Space above links. */
+	display: flex; /* Flexbox for horizontal layout. */
+	justify-content: center; /* Centers links. */
+	flex-wrap: wrap; /* Allows links to wrap to new lines. */
+	gap: 20px; /* Space between links. */
+}
+
+.footer__link-item {
+	display: flex; /* Flexbox for link item. */
+	align-items: center; /* Vertically centers link icon/text. */
+}
+
+.footer__link {
+	color: #add8e6; /* Light blue for link text. */
+	text-decoration: none; /* Removes underline. */
+	transition: color 0.3s; /* Smooth color transition on hover. */
+	font-size: 1em; /* Standard font size for links. */
+}
+.footer__link:hover {
+	color: #00ffff; /* Bright blue on hover. */
+}
+
+.footer__link-item--icon {
+	margin-left: 20px; /* Space to the left of icon links. */
+}
+
+.footer__icon {
+	width: 30px; /* Icon width for consistency. */
+	height: 30px; /* Icon height for consistency. */
+	vertical-align: middle; /* Vertically aligns icon with text. */
+}

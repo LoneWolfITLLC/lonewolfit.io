@@ -1,0 +1,37 @@
+body.dark-mode .pricing-table {
+	background: #23272a; /* Sets table background to match dark mode. */
+	box-shadow: 0 4px 24px rgba(0, 191, 255, 0.18),
+		0 1.5px 8px rgba(0, 191, 255, 0.1); /* Adds multi-layered blue shadow for depth. */
+	color: #e0e0e0; /* Light gray for table text for readability. */
+}
+
+body.dark-mode .pricing-table__th {
+	background: #181a1b; /* Sets table header background to deep charcoal. */
+	color: #00bfff; /* Bright blue for table header text for emphasis. */
+	border-bottom: 2px solid #00bfff; /* Thick blue border below header for separation. */
+}
+
+body.dark-mode .pricing-table__cell {
+	color: #e0e0e0; /* Light gray for table cell text for readability. */
+	border-bottom: 1px solid #23272a; /* Thin, dark border below cells for separation. */
+}
+
+body.dark-mode .pricing-table__row {
+	background: #23272a; /* Sets table row background to match dark mode. */
+	box-shadow: 0 2px 10px rgba(0, 191, 255, 0.1); /* Adds subtle blue shadow for depth. */
+}
+
+body.dark-mode .pricing-table__cell s {
+	color: #555e6b; /* Muted blue-gray for struck-through text for de-emphasis. */
+}
+
+@media (max-width: 600px) {
+	body.dark-mode .pricing-table__row {
+		background: #23272a; /* Sets table row background to match dark mode for mobile. */
+		box-shadow: 0 2px 10px rgba(0, 191, 255, 0.12); /* Adds slightly stronger blue shadow for mobile. */
+	}
+
+	body.dark-mode .pricing-table__cell:before {
+		color: #00bfff; /* Bright blue for cell label for visibility on mobile. */
+	}
+}

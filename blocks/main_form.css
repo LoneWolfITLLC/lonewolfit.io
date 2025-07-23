@@ -1,0 +1,106 @@
+.main__form {
+	max-width: 400px; /* Restricts form width for readability. */
+	margin: 2rem auto; /* Centers form and adds space above. */
+	padding: 2rem 2rem 1.5rem 2rem; /* Padding inside form for comfort. */
+	background: #fafdff; /* Light background for form. */
+	border-radius: 16px; /* Rounds form corners. */
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.125); /* Subtle shadow for form. */
+	transition: box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+		transform 0.18s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth transitions for focus/hover. */
+}
+
+.main__form:focus-within,
+.main__form:hover {
+	box-shadow: 0 4px 18px rgba(0, 0, 0, 0.175); /* Deeper shadow on focus/hover. */
+}
+
+.main__form label {
+	color: #031e3c; /* Deep blue for label text. */
+	font-weight: 600; /* Bold label for emphasis. */
+	margin-top: 1rem; /* Space above label. */
+}
+
+.main__text-hyperlink {
+	color: #031e3c; /* Deep blue for hyperlink text. */
+	font-weight: 600; /* Bold hyperlink for emphasis. */
+	margin-top: 1rem; /* Space above hyperlink. */
+}
+
+.main__text-hyperlink:hover {
+	animation: hyperlink-glow 0.7s alternate infinite; /* Glowing animation on hover. */
+	transition: all 0.3s ease-in-out; /* Smooth transition for color and shadow. */
+}
+
+@keyframes hyperlink-glow {
+	from {
+		color: #0099cc; /* Starts with blue color. */
+		text-shadow: 2px 0px 12px #0099cc; /* Blue glow at start. */
+	}
+	to {
+		color: #00ffff; /* Ends with cyan color. */
+		text-shadow: 2px 0px 10px #00ffff; /* Cyan glow at end. */
+	}
+}
+
+.main__text-hyperlink:active {
+	color: #0077a3; /* Darker blue when active. */
+	text-shadow: 2px 0px 5px #00ffff88; /* Subtle glow when active. */
+	animation: none; /* Disables animation when active. */
+}
+
+.main__form .form-control {
+	margin-bottom: 1.2rem; /* Space below each input. */
+	border-radius: 8px; /* Rounds input corners. */
+	padding: 0.75rem 1rem; /* Padding inside input for comfort. */
+	font-size: 1rem; /* Standard input text size. */
+	transition: border-color 0.2s, box-shadow 0.2s; /* Smooth transitions for focus. */
+}
+
+.main__form .form-control:focus {
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25); /* Shadow on input focus. */
+	outline: none; /* Removes default outline. */
+}
+
+.main__alert {
+	display: none; /* Hidden by default. */
+	margin: 1rem auto 1.5rem auto; /* Centers alert and adds space above/below. */
+	max-width: 400px; /* Restricts alert width. */
+	padding: 1rem 1.5rem; /* Padding inside alert. */
+	background: #fff; /* White background for alert. */
+	border-radius: 8px; /* Rounds alert corners. */
+	font-weight: 600; /* Bold alert text. */
+	box-shadow: 0 2px 12px rgba(255, 193, 7, 0.08); /* Subtle yellow shadow for alert. */
+	text-align: center; /* Centers alert text. */
+	transition: opacity 0.3s ease-in-out; /* Smooth fade for alert. */
+}
+
+#passwordStrengthContainer.progress {
+	background: #ffffff; /* White background for password strength bar. */
+}
+
+.main__buttons--flex-center {
+	display: flex; /* Flexbox for button group. */
+	justify-content: center; /* Centers buttons horizontally. */
+	align-items: center; /* Vertically centers buttons. */
+	flex-wrap: wrap; /* Allows buttons to wrap to new lines. */
+	gap: 1rem; /* Space between buttons. */
+}
+
+.main__text-slider {
+	margin-top: 1.5rem; /* Space above slider text. */
+}
+
+.main__text-character-count {
+	margin-top: 0rem; /* Space above character count text. */
+	font-size: 0.9rem; /* Smaller text for character count. */
+	color: #666; /* Lighter gray for character count text. */
+	text-align: right; /* Aligns character count text to the left. */
+}
+
+.main__label-slider-group {
+	display: flex; /* Flexbox for slider label group. */
+	justify-content: space-around; /* Evenly spaces labels. */
+	align-items: center; /* Vertically centers labels. */
+	gap: 0.5rem; /* Space between labels. */
+	flex-wrap: nowrap; /* Prevents labels from wrapping. */
+}

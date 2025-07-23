@@ -1,0 +1,29 @@
+body.dark-mode .footer {
+	background: #181a1b; /* Sets footer background to very dark gray for dark mode. */
+	color: #b0b8c1; /* Sets footer text to muted light blue for readability. */
+	border-top: 1px solid #222; /* Adds a thin, dark border at the top for separation. */
+}
+
+body.dark-mode .footer__prepared-by {
+	color: #00bfff; /* Bright blue for prepared-by text for emphasis. */
+}
+
+body.dark-mode .footer__contact-link {
+	color: #00bfff; /* Bright blue for contact links for visibility. */
+}
+
+body.dark-mode .footer__contact-link:hover {
+	color: #fff; /* Changes contact link to white on hover for feedback. */
+}
+
+body.dark-mode .footer__copyright {
+	color: #b0b8c1; /* Muted light blue for copyright text for readability. */
+}
+
+body.dark-mode .footer__link {
+	color: #00bfff; /* Bright blue for footer links for visibility. */
+}
+
+body.dark-mode .footer__link:hover {
+	color: #fff; /* Changes footer link to white on hover for feedback. */
+}

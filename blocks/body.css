@@ -1,0 +1,28 @@
+body {
+	background: linear-gradient(
+		135deg,
+		#e6f7ff 0%,
+		#b3e0ff 50%,
+		#e0f7fa 100%
+	); /* Sets a diagonal gradient background from top left to bottom right, blending three colors for a soft look. */
+	min-height: 100vh; /* Ensures the body always fills at least the full viewport height, preventing whitespace at the bottom. */
+	border-radius: 0%; /* Removes any rounded corners from the body, keeping it rectangular. */
+	margin: 0; /* Eliminates default browser margin for a flush layout. */
+}
+
+@keyframes slideIn {
+	from {
+		transform: translateY(
+			-30px
+		); /* Starts element 30px above final position for slide effect. */
+		opacity: 0; /* Fully transparent at start. */
+	}
+	to {
+		transform: translateY(0); /* Moves element to final position. */
+		opacity: 1; /* Fully visible at end. */
+	}
+}
+
+.slide-in {
+	animation: slideIn 0.5s ease-out forwards; /* Applies slideIn animation for smooth entrance. */
+}

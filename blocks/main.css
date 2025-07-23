@@ -1,0 +1,206 @@
+.main {
+	width: 100%; /* Main content fills container. */
+	max-width: 1200px; /* Restricts main content width for readability. */
+	margin: 0 auto; /* Centers main content horizontally. */
+	padding: 2rem 1rem; /* Adds space around main content. */
+}
+
+.main__section {
+	margin-top: 80px; /* Adds space below header. */
+	margin-bottom: 3rem; /* Adds space below each section. */
+	background: #fff; /* White background for content clarity. */
+	border-radius: 12px; /* Softly rounds section corners. */
+	box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06); /* Subtle shadow for depth. */
+	padding: 2rem; /* Generous padding for content. */
+	scroll-margin-top: 100px; /* Ensures anchor links scroll below header. */
+}
+
+.main__section-hidden {
+	background: none; /* No background for hidden sections. */
+	border: none; /* No border for hidden sections. */
+	box-shadow: none; /* No shadow for hidden sections. */
+}
+
+.main__heading {
+	font-size: 2rem; /* Large heading for section titles. */
+	font-weight: 700; /* Bold heading for emphasis. */
+	color: #031e3c; /* Deep blue for strong contrast. */
+	margin-bottom: 1rem; /* Space below heading. */
+	margin-top: 0; /* No extra space above heading. */
+	margin-left: 0; /* No extra space to the left. */
+	margin-right: 0; /* No extra space to the right. */
+	white-space: nowrap; /* Prevents heading from wrapping. */
+	text-align: center; /* Centers heading text. */
+	text-shadow: 0 0 8px #00ffff, 0 0 16px #00ffff, 0 0 24px #031e3c; /* Glowing effect for headings. */
+}
+
+.main__heading--no-glow {
+	text-shadow: none; /* Removes glow for accessibility. */
+}
+
+@media (max-width: 768px) {
+	.main__heading {
+		font-size: 1.25rem; /* Smaller heading for mobile. */
+		margin-bottom: 0.75rem; /* Less space below heading. */
+		white-space: normal; /* Allows heading to wrap. */
+		text-align: center; /* Keeps heading centered. */
+	}
+}
+
+.main__intro,
+.main__text {
+	font-size: 1.1rem; /* Slightly larger text for readability. */
+	color: #333; /* Dark gray for body text. */
+	margin-bottom: 1.5rem; /* Space below paragraphs. */
+}
+
+.main__text-small {
+	font-size: 0.9rem; /* Smaller text for less important info. */
+	color: #555; /* Lighter gray for secondary text. */
+	margin-bottom: 1.5rem; /* Space below small text. */
+}
+
+.main__text--center {
+	text-align: center; /* Centers text horizontally. */
+}
+.main__text--bold {
+	font-weight: bold; /* Makes text bold. */
+}
+
+.main__image {
+	display: block; /* Makes image a block element. */
+	max-width: 100%; /* Prevents image from overflowing container. */
+	height: auto; /* Maintains image aspect ratio. */
+	margin: 1.5rem auto; /* Centers image with space above and below. */
+}
+
+.main__logo {
+	width: 80px; /* Logo width for consistency. */
+	margin-bottom: 20px; /* Space below logo. */
+	max-width: 80px; /* Prevents logo from exceeding set width. */
+	margin: 0 auto 10px auto; /* Centers logo horizontally and adds space below. */
+}
+
+.main__logo--no-glow {
+	animation: none; /* Disables logo animation. */
+	box-shadow: none; /* Removes logo shadow. */
+}
+
+.main__logo--no-glow:hover {
+	animation: none; /* Disables animation on hover. */
+	box-shadow: none; /* Removes shadow on hover. */
+}
+
+@media (max-width: 768px) {
+	.main__image {
+		max-width: calc(100% - 20px); /* Shrinks image for mobile. */
+		width: 100%; /* Ensures image fills container. */
+		margin: 10px auto; /* Less space for mobile. */
+	}
+}
+
+.main__image--tech {
+	border-radius: 15px; /* Rounds corners for tech image. */
+	box-shadow: 0 4px 24px rgba(0, 255, 255, 0.25),
+		0 1.5px 8px rgba(3, 30, 60, 0.12); /* Multi-layered shadow for depth. */
+	max-width: 350px; /* Restricts tech image size. */
+}
+
+.main__portfolio {
+	display: flex; /* Flexbox for portfolio layout. */
+	flex-wrap: wrap; /* Allows items to wrap to new lines. */
+	gap: 2rem; /* Large gap between portfolio items. */
+	margin-bottom: 1.5rem; /* Space below portfolio section. */
+}
+
+.main__portfolio-item {
+	flex: 1 1 250px; /* Flexible sizing for portfolio items. */
+	background: #fefefe; /* Light background for item. */
+	border-radius: 12px; /* Rounded corners for item. */
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.125); /* Subtle shadow for item. */
+	padding: 1rem; /* Padding inside item. */
+	display: flex; /* Flexbox for item content. */
+	align-items: center; /* Vertically centers item content. */
+	gap: 1.5rem; /* Space between item elements. */
+	transition: box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+		transform 0.18s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth hover/active transitions. */
+	max-height: 200px; /* Restricts item height. */
+	min-height: 150px; /* Ensures item is tall enough. */
+	max-width: fit-parent; /* Prevents item from exceeding parent width. */
+	position: relative; /* Allows for absolute positioning inside item. */
+	text-decoration: none; /* Removes underline from links. */
+	overflow: hidden; /* Prevents content from overflowing item. */
+}
+
+.main__portfolio-item:hover {
+	box-shadow: 0 4px 18px rgba(0, 0, 0, 0.175); /* Deeper shadow on hover for pop effect. */
+	transform: translateY(-1px); /* Slightly lifts item on hover. */
+}
+
+.main__portfolio-item:active {
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25); /* Stronger shadow when active. */
+	transform: translateY(3px); /* Pushes item down when clicked. */
+}
+
+@media (max-width: 768px) {
+	.main__portfolio-item {
+		max-height: max-content; /* Allows item to grow for mobile. */
+	}
+}
+
+.main__image--cert,
+.main__image--tripleten {
+	border-radius: 15px; /* Rounds corners for cert/tripleten images. */
+	box-shadow: 0 4px 18px rgba(0, 191, 255, 0.18),
+		0 1.5px 8px rgba(3, 30, 60, 0.1); /* Multi-layered shadow for depth. */
+	max-width: 100px; /* Restricts image size. */
+	background: #fefefe; /* Light background for image. */
+}
+
+.main__image--arlo {
+	border-radius: 50%; /* Makes image circular for profile. */
+	box-shadow: 10px 10px 24px rgba(3, 30, 60, 0.25); /* Deep shadow for profile image. */
+	max-width: 150px; /* Restricts profile image size. */
+	height: 150px; /* Sets fixed height for profile image. */
+	object-fit: cover; /* Ensures image covers area without distortion. */
+}
+
+.main__image--tripleten {
+	border-radius: 0%; /* Removes rounding for tripleten image. */
+	box-shadow: none; /* No shadow for tripleten image. */
+}
+
+.main__portfolio-text {
+	font-size: 1rem; /* Standard font size for portfolio text. */
+	color: #222; /* Dark text for readability. */
+	margin: 0; /* No extra margin. */
+}
+
+@media (max-width: 900px) {
+	.main__portfolio {
+		flex-direction: column; /* Stacks portfolio items vertically for mobile. */
+		gap: 1rem; /* Smaller gap for mobile. */
+	}
+	.main__portfolio-text {
+		font-size: 1rem; /* Standard font size for mobile. */
+	}
+}
+
+@media (max-width: 768px) {
+	.main__portfolio-text {
+		font-size: 0.75rem; /* Smaller text for mobile. */
+	}
+}
+
+.main__portfolio-button {
+	display: block; /* Button is block-level for easy centering. */
+	margin: 2rem auto 0 auto; /* Centers button and adds space above. */
+	text-align: center; /* Centers button text. */
+}
+
+.main__item-centered {
+	display: block; /* Block-level for centering. */
+	text-align: center; /* Centers content. */
+	margin-left: auto; /* Horizontally centers element. */
+	margin-right: auto; /* Horizontally centers element. */
+}

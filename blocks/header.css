@@ -1,0 +1,104 @@
+.header {
+	position: fixed; /* Keeps the header at the top of the viewport even when scrolling. */
+	width: 100%; /* Stretches the header to the full width of the viewport. */
+	background: #fff; /* Sets header background to white for contrast and clarity. */
+	display: flex; /* Uses flexbox for easy horizontal alignment of child elements. */
+	align-items: center; /* Vertically centers all header children. */
+	justify-content: flex-start; /* Aligns children to the left side of the header. */
+	flex-direction: row; /* Arranges children in a horizontal row. */
+	flex-wrap: nowrap; /* Prevents header items from wrapping to a new line. */
+	padding: 0 2rem; /* Adds space to the left and right of the header for breathing room. */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); /* Adds a subtle shadow below the header for depth. */
+	min-height: 80px; /* Ensures header is tall enough for logo and nav. */
+	z-index: 1000; /* Places header above most other elements. */
+	top: 0px; /* Anchors header to the top of the viewport. */
+	left: 0px; /* Anchors header to the left edge. */
+}
+
+.header__logo {
+	height: 56px; /* Sets logo height for consistency. */
+	width: auto; /* Maintains logo aspect ratio. */
+	margin-right: 10px; /* Adds space between logo and next element. */
+}
+
+.header__logo--no-glow {
+	animation: none; /* Disables any logo animation for a static look. */
+	box-shadow: none; /* Removes any glow or shadow from the logo. */
+}
+
+.header__title {
+	font-size: 2rem; /* Large, prominent site title. */
+	font-weight: 700; /* Bold font for emphasis. */
+	color: #002222; /* Deep teal for strong branding. */
+	letter-spacing: 1px; /* Slightly spaced letters for readability. */
+	line-height: 1.2; /* Tight line spacing for compactness. */
+	white-space: nowrap; /* Prevents title from breaking onto multiple lines. */
+	text-shadow: 0 0 8px #00ffff, 0 0 16px #00ffff, 0 0 24px #031e3c; /* Multi-layered glow for a techy effect. */
+	margin: 0; /* Removes default margin for tight layout. */
+}
+
+.header__title--no-glow {
+	text-shadow: none; /* Removes glow for accessibility or preference. */
+}
+
+.header__nav {
+	flex: 1; /* Navigation grows to fill available space. */
+	display: flex; /* Flexbox for easy nav alignment. */
+	justify-content: flex-end; /* Aligns nav items to the right. */
+}
+
+.header__nav-list {
+	display: flex; /* Flexbox for nav list. */
+	gap: 2rem; /* Large gap between nav items for clarity. */
+	list-style: none; /* Removes default bullets. */
+	margin: 0; /* No extra margin. */
+	padding: 0; /* No extra padding. */
+}
+
+.header__nav-item {
+	display: flex; /* Flexbox for nav item. */
+	align-items: center; /* Vertically centers nav link. */
+	white-space: nowrap; /* Prevents nav text from wrapping. */
+}
+
+/* Collapsible menu for screens <= 870px */
+@media (max-width: 870px) {
+	.header__nav {
+		position: absolute; /* Nav becomes absolutely positioned for overlay. */
+		top: 80px; /* Sits just below the header. */
+		right: 0; /* Anchors nav to the right edge. */
+		width: 220px; /* Fixed width for mobile nav. */
+		background: #fff; /* White background for contrast. */
+		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08); /* Deeper shadow for overlay effect. */
+		flex-direction: column; /* Stacks nav items vertically. */
+		align-items: flex-end; /* Aligns nav items to the right. */
+		padding: 1rem 0; /* Vertical padding for touch targets. */
+		z-index: 1100; /* Sits above header. */
+		transform: translateX(200%); /* Moves nav off-screen by default. */
+		opacity: 0; /* Hides nav visually. */
+		pointer-events: none; /* Prevents interaction when hidden. */
+		transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s; /* Smooth slide-in/out animation. */
+	}
+	.header__nav--open {
+		transform: translateX(0); /* Slides nav into view. */
+		opacity: 1; /* Makes nav visible. */
+		pointer-events: auto; /* Allows interaction. */
+	}
+	.header__nav-list {
+		flex-direction: column; /* Stacks nav links vertically. */
+		gap: 1rem; /* Smaller gap for mobile. */
+		width: 100%; /* Nav list fills container. */
+		align-items: center; /* Centers nav links. */
+	}
+	.navbar-toggle {
+		display: block; /* Shows hamburger menu. */
+		background: none; /* No background for icon. */
+		border: none; /* No border for icon. */
+		font-size: 2rem; /* Large icon for easy tapping. */
+		color: #031e3c; /* Dark blue for visibility. */
+		cursor: pointer; /* Pointer cursor for interactivity. */
+		margin-left: auto; /* Pushes icon to far right. */
+		z-index: 1200; /* Sits above nav. */
+		padding: 0.5rem 1rem; /* Padding for touch area. */
+	}
+}
