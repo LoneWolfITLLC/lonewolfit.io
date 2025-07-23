@@ -51,14 +51,21 @@
 			window.addEventListener("authChecked", function (event) {
 				const { loggedIn, authNeeded, user } = event.detail;
 				const accountButtonsSection = document.getElementById("accountButtonsSection");
+				const memberAreaText = document.getElementById("memberAreaText");
+				const memberAreaTextLoggedOut = document.getElementById("memberAreaTextLoggedOut");
+
 
 				if (loggedIn) {
 					// User is logged in
 					console.log("User is logged in...");
 					accountButtonsSection.style.display = "block";
+					memberAreaText.style.display = "block";
+					memberAreaTextLoggedOut.style.display = "none";
 				} else {
 					console.log("User is not logged in");
 					accountButtonsSection.style.display = "none";
+					memberAreaText.style.display = "none";
+					memberAreaTextLoggedOut.style.display = "block";
 				}
 			});
 		</script>
@@ -267,10 +274,14 @@
 			</section>
 			<section id="memberAreaSection" class="main__section">
 				<h2 class="main__heading">Member Area</h2>
-				<p class="main__text main__item-centered">
+				<p class="main__text main__item-centered" style="display: none;"id="memberAreaText">
 					Welcome to the member area! Thank you for being a valued member of the
 					Wolf Pack! Here you can manage your account, view invoices, and access
 					exclusive resources.
+				</p>
+				<p class="main__text main__item-centered" id="memberAreaTextLoggedOut">
+					Welcome to the member area! Please log in to access your account,
+					view invoices, and access exclusive resources.
 				</p>
 				<button
 					class="btn btn-primary main__button main__item-centered"
