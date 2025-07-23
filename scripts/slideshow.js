@@ -127,9 +127,9 @@ async function fetchTestimonials() {
   const token = getTokenFromSession ? getTokenFromSession() : null;
   try {
     let response;
-	response = await fetch(`${URL_BASE}/api/testimonials/approved`, {
-	  method: "GET",
-	});
+  response = await fetch(`${URL_BASE}/api/testimonials/approved`, {
+    method: "GET",
+  });
     if (!response.ok) throw new Error("Failed to fetch testimonials");
     testimonials = await response.json();
     if (typeof shuffleArray === "function") shuffleArray(testimonials);
@@ -178,22 +178,32 @@ window.addEventListener("authChecked", async function () {
   await fetchTestimonials();
   displaySlides();
 
-  // Add click-to-refresh on slideshow wrapper, excluding nav buttons
+  // Add click-to-refresh and nav button logic within slideshow__wrapper
   const wrapper = document.querySelector(".slideshow__wrapper");
   if (wrapper) {
-	let isRefreshing = false;
-	wrapper.addEventListener("click", async function (e) {
-	  // Exclude nav buttons (and their children)
-	  const navBtn = e.target.closest(
-		".slideshow__nav-btn--prev, .slideshow__nav-btn--next"
-	  );
-	  if (navBtn || isRefreshing) return;
-	  isRefreshing = true;
-	  try {
-		await fetchTestimonials();
-	  } finally {
-		isRefreshing = false;
-	  }
-	});
+    let isRefreshing = false;
+    wrapper.addEventListener("click", async function (e) {
+      // Handle nav buttons
+      const prevBtn = wrapper.querySelector('.slideshow__nav-btn--prev');
+      const nextBtn = wrapper.querySelector('.slideshow__nav-btn--next');
+      if (prevBtn && e.target.closest('.slideshow__nav-btn--prev')) {
+        changeSlide(-1);
+        return;
+      }
+      if (nextBtn && e.target.closest('.slideshow__nav-btn--next')) {
+        changeSlide(1);
+        return;
+      }
+      // Exclude nav buttons from refresh
+      const navBtn = e.target.closest('.slideshow__nav-btn--prev, .slideshow__nav-btn--next');
+      if (navBtn || isRefreshing) return;
+      isRefreshing = true;
+      try {
+        await fetchTestimonials();
+        await displaySlides();
+      } finally {
+        isRefreshing = false;
+      }
+    });
   }
 });

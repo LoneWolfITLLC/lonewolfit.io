@@ -16,6 +16,8 @@
 		<link rel="icon" href="./images/wolf-logo.png" type="image/png" />
 		<link href="./vendor/bootstrap.min.css" rel="stylesheet" />
 		<link href="./blocks/slideshow.css" rel="stylesheet" />
+		<link href="./blocks/testimonials.css" rel="stylesheet" />
+    	<link href="./blocks/dark/testimonials.css" rel="stylesheet" />
 		<link href="./styles/styles_modals_white.css" rel="stylesheet" />
 		<link href="./styles/styles_modals_black.css" rel="stylesheet" />
 		<link href="./styles/styles_white.css" rel="stylesheet" />
@@ -29,6 +31,7 @@
 		<script src="scripts/characterCount.js"></script>
 		<script src="scripts/slideshow.js"></script>
 		<script src="scripts/submitTestimonial.js"></script>
+		<script src="scripts/userTestimonialSlideshow.js"></script>
 		<script>
 			requireLogin = true; // Set to true to require login for this page
 			MAX_CHARACTER_COUNT = 250; // Set the maximum character count for testimonials
@@ -95,7 +98,7 @@
 				<p class="main__text main__item-centered">
 					We value your feedback! Please share your experience with Lone Wolf IT
 					below. Your testimonial helps us improve and lets others know what to
-					expect.
+					expect. Below are some testimonials from our clients:
 				</p>
 				<div class="slideshow__wrapper vignette" style="min-width: auto">
 					<div class="slideshow__container"></div>
@@ -122,7 +125,7 @@
 				</div>
 			</section>
 			<section class="main__section-hidden" id="userSubmissionSection">
-                <div
+				<div
 					id="alertUserSubmission"
 					class="alertDiv main__alert"
 					style="display: none"
@@ -168,6 +171,48 @@
 						Submit Testimonial
 					</button>
 				</form>
+			</section>
+			<section class="main__section" id="selfTestimonialSection">
+				<h1 class="main__heading main__item-centered">
+					Your Submitted Testimonials
+				</h1>
+				<div
+					id="alertSelfTestimonialList"
+					class="alertDiv main__alert"
+					style="display: none"
+				></div>
+				<p class="main__text main__item-centered">
+					Here are the testimonials you have submitted. You can delete
+					them as needed.
+				</p>
+				<div class="slideshow__wrapper vignette" style="min-width: auto" id="selfTestimonialSlideshow">
+					<div class="slideshow__container"></div>
+					<div
+						id="prev"
+						class="slideshow__nav-btn slideshow__nav-btn--prev"
+						onclick="changeSlide(-1)"
+					>
+						&lt;
+					</div>
+					<div class="slideshow"></div>
+					<div
+						id="next"
+						class="slideshow__nav-btn slideshow__nav-btn--next"
+						onclick="changeSlide(1)"
+					>
+						&gt;
+					</div>
+					<div
+						class="slideshow__loading-bar"
+						id="loadingBar"
+						style="display: none"
+					></div>
+				</div>
+				<div class="action-buttons">
+					<button class="action-btn" id="deleteButton">
+						<img src="images/ui/denybtn.png" alt="Delete" />
+					</button>
+				</div>
 			</section>
 		</main>
 		<footer class="footer">

@@ -15,6 +15,9 @@
     <meta name="author" content="Lone Wolf IT" />
     <link rel="icon" href="./images/wolf-logo.png" type="image/png" />
     <link href="./vendor/bootstrap.min.css" rel="stylesheet" />
+    <link href="./blocks/slideshow.css" rel="stylesheet" />
+    <link href="./blocks/testimonials.css" rel="stylesheet" />
+    <link href="./blocks/dark/testimonials.css" rel="stylesheet" />
     <link href="./styles/styles_white.css" rel="stylesheet" />
     <link href="./styles/styles_black.css" rel="stylesheet" />
     <link href="./styles/styles_modals_white.css" rel="stylesheet" />
@@ -25,6 +28,7 @@
     <script src="scripts/preferences.js"></script>
     <script src="scripts/darkmode.js"></script>
     <script src="scripts/accountFunctions.js"></script>
+    <script src="scripts/userTestimonialSlideshow.js"></script>
     <style>
       .main {
         min-height: 100vh;
@@ -141,6 +145,55 @@
           View Stripe Payments
         </button>
       </section>
+      <section class="main__section" id="selfTestimonialSection">
+				<h1 class="main__heading main__item-centered">
+					Your Submitted Testimonials
+				</h1>
+				<div
+					id="alertSelfTestimonialList"
+					class="alertDiv main__alert"
+					style="display: none"
+				></div>
+				<p class="main__text main__item-centered">
+					Here are the testimonials you have submitted. You can delete
+					them as needed. You can also submit new testimonials by clicking the button below.
+				</p>
+        <button
+          class="btn btn-primary main__item-centered"
+          onclick="window.location.href='submit_testimonial.html'"
+          style="margin-bottom: 10px;"
+        >
+          Submit New Testimonial
+        </button>
+				<div class="slideshow__wrapper vignette" style="min-width: auto" id="selfTestimonialSlideshow">
+					<div class="slideshow__container"></div>
+					<div
+						id="prev"
+						class="slideshow__nav-btn slideshow__nav-btn--prev"
+						onclick="changeSlide(-1)"
+					>
+						&lt;
+					</div>
+					<div class="slideshow"></div>
+					<div
+						id="next"
+						class="slideshow__nav-btn slideshow__nav-btn--next"
+						onclick="changeSlide(1)"
+					>
+						&gt;
+					</div>
+					<div
+						class="slideshow__loading-bar"
+						id="loadingBar"
+						style="display: none"
+					></div>
+				</div>
+				<div class="action-buttons">
+					<button class="action-btn" id="deleteButton">
+						<img src="images/ui/denybtn.png" alt="Delete" />
+					</button>
+				</div>
+			</section>
       <section class="main__section" id="accountManagementSection">
         <h2 class="main__heading">Account Management</h2>
         <p class="main__text main__item-centered">
