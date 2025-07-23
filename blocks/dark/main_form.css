@@ -50,8 +50,13 @@ body.dark-mode .main__form .form-control:focus {
 }
 
 body.dark-mode .main__form input::placeholder {
-	color: #fff !important; /* Sets the placeholder text color to white for visibility in dark mode. */
+	color: #8f8f8f !important; /* Sets the placeholder text color to light gray for visibility in dark mode. */
 	opacity: 1; /* Ensures the placeholder text is fully opaque and visible. */
+}
+
+body.dark-mode .main__form .form-control::placeholder {
+	color: #8f8f8f; /* Light gray for placeholder text in form controls. */
+	opacity: 1; /* Ensures full opacity for visibility. */
 }
 
 /* Glowing neon checkboxes for dark mode - full Bootstrap override */
