@@ -4,7 +4,6 @@
   gap: 40px;
   margin: 0 auto;
   list-style-type: none;
-  margin-bottom: 215px;
 }
 
 .recipes {
@@ -25,7 +24,7 @@
 .recipes__subtitle {
   max-width: 438px;
   margin: 0 0 80px;
-  font-family: "Noto Serif";
+  font-family: "Noto Serif", Georgia, "Times New Roman", Times, serif;
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
@@ -47,4 +46,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0;
+  padding: 0;
 }

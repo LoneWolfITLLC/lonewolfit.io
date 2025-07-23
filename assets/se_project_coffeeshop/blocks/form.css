@@ -15,6 +15,9 @@
   padding: 15px 20px;
   margin: 8px 0 32px;
   border: 1px solid #838383;
+  font-size: 20px;
+  line-height: 30px;
+  border-radius: 4px;
 }
 
 .form__input::placeholder {
@@ -30,6 +33,7 @@
   border-radius: 4px;
   border: none;
   color: #fff;
+  cursor: pointer;
   width: 100%;
   max-width: 385px;
   background-color: #1878dc;
