@@ -101,6 +101,7 @@
 							id="usernameResidential"
 							name="usernameResidential"
 							class="form-control"
+							placeholder="Enter a unique username..."
 							required
 						/>
 						<label for="firstNameResidential" class="form-label"
@@ -110,6 +111,7 @@
 							type="text"
 							class="form-control"
 							id="firstNameResidential"
+							placeholder="Your legal first name as it appears on your ID..."
 							required
 						/>
 						<label for="middleNameResidential" class="form-label"
@@ -119,6 +121,7 @@
 							type="text"
 							class="form-control"
 							id="middleNameResidential"
+							placeholder="Your legal middle name as it appears on your ID..."
 						/>
 						<label for="lastNameResidential" class="form-label"
 							>Last Name</label
@@ -127,6 +130,7 @@
 							type="text"
 							class="form-control"
 							id="lastNameResidential"
+							placeholder="Your legal last name as it appears on your ID..."
 							required
 						/>
 						<label for="phoneResidential" class="form-label"
@@ -138,6 +142,7 @@
 							id="phoneResidential"
 							required
 							pattern="[0-9]*"
+							placeholder="1234567890"
 							onkeypress="return event.charCode >= 48 && event.charCode <= 57"
 						/>
 						<label for="country" class="form-label">Country</label>
@@ -213,17 +218,25 @@
 							type="text"
 							class="form-control"
 							id="address1Residential"
+							placeholder="123 Main St (Street - as it appears on your ID...)"
 							required
 						/>
 						<label for="address2Residential" class="form-label"
 							>Address Line 2 (APT#/Unit)</label
 						>
 						<input type="text" class="form-control" id="address2Residential" />
+						<input
+							type="text"
+							class="form-control"
+							id="address2Residential"
+							placeholder="Apt 4B (APT # as it appears on your ID...)"
+						/>
 						<label for="cityResidential" class="form-label">City</label>
 						<input
 							type="text"
 							class="form-control"
 							id="cityResidential"
+							placeholder="Cupertino (City - as it appears on your ID...)"
 							required
 						/>
 						<label for="state" class="form-label">State</label>
@@ -236,6 +249,7 @@
 							type="text"
 							class="form-control"
 							id="zipCodeResidential"
+							placeholder="95014 (Zip Code - as it appears on your ID...)"
 							required
 						/>
 						<label for="emailResidential" class="form-label">Email</label>
@@ -243,6 +257,7 @@
 							type="email"
 							class="form-control"
 							id="emailResidential"
+							placeholder="you@example.com"
 							required
 							readonly
 						/>
@@ -286,7 +301,12 @@
 				<form id="registerFormBusiness" class="main__form">
 					<div class="form-group">
 						<label for="dbaNameBusiness" class="form-label">DBA Name</label>
-						<input type="text" class="form-control" id="dbaNameBusiness" />
+						<input
+							type="text"
+							class="form-control"
+							id="dbaNameBusiness"
+							placeholder="Your DBA name as it appears on your LLC-5.5/147C..."
+						/>
 						<label for="businessCountry" class="form-label"
 							>Business Country</label
 						>
@@ -341,6 +361,7 @@
 							type="text"
 							class="form-control"
 							id="businessAddress1Business"
+							placeholder="123 Main St"
 						/>
 						<label for="businessAddress2Business" class="form-label"
 							>Business Address Line 2 (Unit#)</label
@@ -349,11 +370,17 @@
 							type="text"
 							class="form-control"
 							id="businessAddress2Business"
+							placeholder="Suite 100 (Unit #)"
 						/>
 						<label for="businessCityBusiness" class="form-label"
 							>Business City</label
 						>
-						<input type="text" class="form-control" id="businessCityBusiness" />
+						<input
+							type="text"
+							class="form-control"
+							id="businessCityBusiness"
+							placeholder="Anytown"
+						/>
 						<label for="businessState" class="form-label">Business State</label>
 						<select class="form-control" id="businessState">
 							<option value="">Select a state</option>
@@ -366,6 +393,7 @@
 							type="text"
 							class="form-control"
 							id="businessZipCodeBusiness"
+							placeholder="12345"
 						/>
 						<label for="usernameBusiness" class="form-label">Username</label>
 						<input
@@ -373,6 +401,7 @@
 							id="usernameBusiness"
 							name="usernameBusiness"
 							class="form-control"
+							placeholder="Enter a unique username..."
 							required
 						/>
 						<label for="firstNameBusiness" class="form-label">First Name</label>
@@ -380,17 +409,24 @@
 							type="text"
 							class="form-control"
 							id="firstNameBusiness"
+							placeholder="Your legal first name as it appears on your ID..."
 							required
 						/>
 						<label for="middleNameBusiness" class="form-label"
 							>Middle Name</label
 						>
-						<input type="text" class="form-control" id="middleNameBusiness" />
+						<input
+							type="text"
+							class="form-control"
+							id="middleNameBusiness"
+							placeholder="Your legal middle name as it appears on your ID..."
+						/>
 						<label for="lastNameBusiness" class="form-label">Last Name</label>
 						<input
 							type="text"
 							class="form-control"
 							id="lastNameBusiness"
+							placeholder="Your legal last name as it appears on your ID..."
 							required
 						/>
 						<label for="phoneBusiness" class="form-label">Phone Number</label>
@@ -400,6 +436,7 @@
 							id="phoneBusiness"
 							required
 							pattern="[0-9]*"
+							placeholder="1234567890"
 							onkeypress="return event.charCode >= 48 && event.charCode <= 57"
 						/>
 						<label for="countryBusiness" class="form-label">Country</label>
@@ -475,12 +512,18 @@
 							type="text"
 							class="form-control"
 							id="address1Business"
+							placeholder="123 Main St (Street - as it appears on your ID...)"
 							required
 						/>
 						<label for="address2Business" class="form-label"
 							>Address Line 2 (APT#/Unit)</label
 						>
-						<input type="text" class="form-control" id="address2Business" />
+						<input
+							type="text"
+							class="form-control"
+							id="address2Business"
+							placeholder="APT 1B (Unit # - as it appears on your ID...)"
+						/>
 						<label for="cityBusiness" class="form-label">City</label>
 						<input
 							type="text"
@@ -510,6 +553,7 @@
 							type="email"
 							class="form-control"
 							id="emailBusiness"
+							placeholder="you@example.com"
 							required
 							readonly
 						/>
