@@ -82,7 +82,7 @@ body.dark-mode .payments__chevron {
 	width: 28px;
 	height: 28px;
 	margin-left: 16px;
-	background: url("../images/ui/collapse-white.png") center center no-repeat;
+	background: url('/images/ui/collapse-white.png') center center no-repeat;
 	background-size: 22px 22px;
 	transition: transform 0.3s cubic-bezier(0.4, 0.2, 0.2, 1), box-shadow 0.3s,
 		filter 0.3s;
