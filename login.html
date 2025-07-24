@@ -71,7 +71,7 @@
 					-OR-
 				</p>
 				<a
-					id="loginGoogle"
+					onclick="loginWithGoogle()"
 					class="btn btn-primary main__item-centered"
 					style="max-width: 200px"
 				>
@@ -83,7 +83,8 @@
 					Login with Google
 				</a>
 				<p class="main__intro main__item-centered" style="margin-top: 20px">
-					If you don't have an account, please click the button below to register.
+					If you don't have an account, please click the button below to
+					register.
 				</p>
 				<button
 					class="btn btn-primary main__item-centered"
@@ -146,6 +147,18 @@
 						>
 							Log In
 						</button>
+						<a
+							onclick="loginWithGoogle()"
+							class="btn btn-primary main__item-centered"
+							style="max-width: 200px; margin-top: 10px"
+						>
+							<img
+								src="images/ui/google-logo.png"
+								alt="Google Logo"
+								style="width: 25px; margin-right: 10px"
+							/>
+							Login with Google
+						</a>
 					</div>
 				</form>
 			</section>
