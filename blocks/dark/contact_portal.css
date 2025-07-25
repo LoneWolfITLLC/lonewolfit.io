@@ -25,14 +25,6 @@ body.dark-mode .contactform__item--expanded {
 body.dark-mode .contactform__summary {
     font-weight: 600;
     color: #00ffff;
-    margin-bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    user-select: none;
-    gap: 1.2rem;
-    padding-bottom: 6px;
     border-bottom: 1px solid #00ffff44;
     transition: background 0.2s;
     text-shadow: 0 0 8px #00ffffcc;
@@ -45,7 +37,6 @@ body.dark-mode .contactform__summary:active {
 body.dark-mode .contactform__user-label {
     color: #00bfff;
     font-weight: 400;
-    margin-right: 6px;
     text-shadow: 0 0 4px #00bfff99;
 }
 
@@ -58,41 +49,22 @@ body.dark-mode .contactform__user-name {
 body.dark-mode .contactform__summary-message {
     color: #00ffff;
     font-size: 1.02em;
-    flex: 1 1 40%;
-    min-width: 80px;
-    max-width: 280px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     text-shadow: 0 0 8px #00ffffcc;
 }
 
 body.dark-mode .contactform__summary-date {
     color: #00bfff;
     font-size: 0.98em;
-    min-width: 90px;
-    max-width: 200px;
-    text-align: right;
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    margin-left: auto;
-    flex-shrink: 0;
     text-shadow: 0 0 6px #00ffff99;
 }
 
 body.dark-mode .contactform__chevron {
-    display: inline-block !important;
-    width: 24px;
-    height: 24px;
-    margin-left: 12px;
     background: url('/images/ui/collapse-white.png') center center no-repeat;
     background-size: 20px 20px;
     transition: transform 0.3s cubic-bezier(0.4, 0.2, 0.2, 1), box-shadow 0.3s, filter 0.3s;
-    flex-shrink: 0;
-    position: static;
     filter: drop-shadow(0 0 6px #00ffffcc);
+    top: 24px;
+    right: 6px;
 }
 
 body.dark-mode .contactform__chevron:hover {
@@ -151,21 +123,13 @@ body.dark-mode .contactform__user-phone:focus {
 
 body.dark-mode .contactform__message {
     color: #00ffff;
-    font-size: 1.08em;
-    margin-bottom: 10px;
-    margin-top: 0;
-    word-break: break-word;
     background: #23272a;
-    border-radius: 8px;
-    padding: 10px 14px;
     border: 1.5px solid #00ffff44;
     box-shadow: 0 0 12px #00ffff33;
     text-shadow: 0 0 6px #00ffff99;
 }
 
 body.dark-mode .contactform__actions {
-    margin-top: 12px;
-    padding-left: 8px;
     border-left: 2px solid #00ffff;
     animation: fadeIn 0.4s cubic-bezier(0.4, 0.2, 0.2, 1);
     display: flex;

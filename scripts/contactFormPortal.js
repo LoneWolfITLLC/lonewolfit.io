@@ -52,15 +52,19 @@ window.addEventListener("authChecked", async function () {
             }
         }
 
-        // Collapsed summary: name, first 50 chars of message, date/time, chevron
+        // Collapsed summary: name, first 50 chars of message, date/time
         const summary = document.createElement("div");
         summary.className = "contactform__summary";
         summary.innerHTML = `
             <span class="contactform__user-name">${sub.name || "-"}</span>
             <span class="contactform__summary-message">${(sub.message || "-").slice(0, 50)}${(sub.message && sub.message.length > 50) ? "..." : ""}</span>
             <span class="contactform__summary-date">${dateStr}</span>
-            <span class="contactform__chevron" title="Expand"></span>
         `;
+
+        // Chevron as sibling to summary and details (child of item)
+        const chevron = document.createElement("span");
+        chevron.className = "contactform__chevron";
+        chevron.title = "Expand";
 
         // Expanded details: all info, all actions
         const details = document.createElement("div");
@@ -81,7 +85,6 @@ window.addEventListener("authChecked", async function () {
         `;
 
         // Chevron expand/collapse logic
-        const chevron = summary.querySelector(".contactform__chevron");
         let expanded = false;
         chevron.addEventListener("click", function (e) {
             e.stopPropagation();
@@ -90,9 +93,8 @@ window.addEventListener("authChecked", async function () {
             item.classList.toggle("contactform__item--expanded", expanded);
             chevron.classList.toggle("contactform__chevron--expanded", expanded);
         });
-        // Also expand/collapse on summary click (except chevron)
-        summary.addEventListener("click", function (e) {
-            if (e.target === chevron) return;
+        // Also expand/collapse on summary click
+        item.addEventListener("click", function () {
             expanded = !expanded;
             details.style.display = expanded ? "block" : "none";
             item.classList.toggle("contactform__item--expanded", expanded);
@@ -148,6 +150,7 @@ window.addEventListener("authChecked", async function () {
             });
         }
 
+        item.appendChild(chevron);
         item.appendChild(summary);
         item.appendChild(details);
         listDiv.appendChild(item);
