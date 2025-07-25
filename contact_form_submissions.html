@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Contact Form Submissions - Lone Wolf IT</title>
+		<meta
+			name="description"
+			content="View and manage all contact form submissions for Lone Wolf IT. Admin-only access."
+		/>
+		<meta
+			name="keywords"
+			content="contact form, admin, management, Lone Wolf IT, user portal"
+		/>
+		<meta name="author" content="Lone Wolf IT" />
+		<link rel="icon" href="./images/wolf-logo.png" type="image/png" />
+		<link href="./vendor/bootstrap.min.css" rel="stylesheet" />
+		<link href="./styles/styles_white.css" rel="stylesheet" />
+		<link href="./styles/styles_black.css" rel="stylesheet" />
+		<link href="./styles/styles_modals_white.css" rel="stylesheet" />
+		<link href="./styles/styles_modals_black.css" rel="stylesheet" />
+        <link href="./blocks/contact_portal.css" rel="stylesheet" />
+        <link href="./blocks/dark/contact_portal.css" rel="stylesheet" />
+		<style>
+			.main {
+				min-height: 100vh;
+			}
+			.main__section {
+				animation: fadeIn 0.8s ease-in;
+			}
+		</style>
+		<script src="scripts/auth.js"></script>
+		<script src="scripts/header.js"></script>
+		<script src="scripts/slide-in.js"></script>
+		<script src="scripts/alert.js"></script>
+		<script src="scripts/preferences.js"></script>
+		<script src="scripts/darkmode.js"></script>
+		<script src="scripts/contactFormPortal.js"></script>
+		<script>
+			requireLogin = true;
+			requireUserToBeAdmin = true;
+		</script>
+	</head>
+	<body>
+		<!-- Loading Modal -->
+		<div id="loadingModal" class="modal" tabindex="-1" style="display: none">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-body text-center">
+						<img src="images/ui/spin.png" alt="Loading..." class="spinner" />
+						<p class="main__text" style="color: #fff">
+							Loading, please wait...
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div
+			class="invoices__loading-bar"
+			id="contactFormSubmissionsLoadingBar"
+			style="display: none"
+		></div>
+		<header class="header">
+			<img
+				src="images/wolf-logo.png"
+				alt="Lone Wolf IT Logo"
+				class="header__logo"
+			/>
+			<h1 class="header__title">Lone Wolf IT</h1>
+			<nav class="header__nav" id="headerNav">
+				<ul class="header__nav-list">
+					<li class="header__nav-item">
+						<a href="index.html" class="header__nav-link">Home</a>
+					</li>
+					<li class="header__nav-item">
+						<a href="index.html#services" class="header__nav-link"
+							>Portfolio/Services</a
+						>
+					</li>
+					<li class="header__nav-item">
+						<a href="members.html" class="header__nav-link">Member Portal</a>
+					</li>
+					<li class="header__nav-item">
+						<a href="index.html#about" class="header__nav-link">About</a>
+					</li>
+					<li class="header__nav-item">
+						<a href="index.html#contact" class="header__nav-link">Contact</a>
+					</li>
+				</ul>
+			</nav>
+			<button
+				class="navbar-toggle"
+				id="navbarToggle"
+				aria-label="Open navigation menu"
+			>
+				&#9776;
+			</button>
+		</header>
+		<main class="main">
+			<section class="main__section" id="contactFormSubmissionsSection">
+				<img
+					src="./images/wolf-logo.png"
+					alt="Lone Wolf Logo"
+					class="main__logo main__item-centered"
+				/>
+				<h1 class="main__heading main__item-centered">
+					Contact Form Submissions Portal
+				</h1>
+				<p class="main__text main__item-centered">
+					View and manage all contact form submissions for Lone Wolf IT Services
+					LLC. This section is restricted to admin users only.
+				</p>
+				<p class="main__text main__item-centered">
+					If you have any questions or need assistance, please
+					<a href="index.html#contact" class="main__link">contact support</a>.
+				</p>
+			</section>
+			<section class="main__section" id="contactFormSubmissionsListSection">
+				<h1 class="main__heading main__item-centered" style="margin-bottom: 0">
+					Contact Form Submissions
+				</h1>
+				<button
+					id="refreshContactFormSubmissionsBtn"
+					class="btn btn-primary main__item-centered"
+					type="button"
+					title="Refresh Submissions List"
+                    style="margin-top: 10px; margin-bottom: 10px; min-width: 200px;"
+				>
+					Refresh
+				</button>
+				<div
+					id="alertContactFormSubmissionsList"
+					class="alertDiv main__alert"
+					style="display: none"
+				></div>
+				<div id="contactFormSubmissionsList"></div>
+			</section>
+		</main>
+		<footer class="footer">
+			<div class="footer__content">
+				<p class="footer__prepared-by">
+					Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
+				</p>
+				<p class="footer__contact">
+					Contact:
+					<a
+						href="mailto:arlo.lonewolfit@gmail.com"
+						class="footer__contact-link"
+						>arlo.lonewolfit@gmail.com</a
+					>
+				</p>
+				<p class="footer__copyright">
+					© 2025 Lone Wolf IT Services LLC | All Rights Reserved.
+				</p>
+				<ul class="footer__links">
+					<li class="footer__link-item">
+						<a href="pp.html" class="footer__link">Privacy Policy</a>
+					</li>
+					<li class="footer__link-item">
+						<a href="tos.html" class="footer__link">Terms of Service</a>
+					</li>
+					<li class="footer__link-item">
+						<a href="index.html#contact" class="footer__link">Contact Me</a>
+					</li>
+					<li class="footer__link-item footer__link-item--icon">
+						<a
+							href="https://www.facebook.com/lonewolfitservicesllc"
+							target="_blank"
+							class="footer__link"
+						>
+							<img
+								src="images/ui/facebook-icon.png"
+								alt="Facebook"
+								class="footer__icon"
+							/>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</footer>
+	</body>
+</html>

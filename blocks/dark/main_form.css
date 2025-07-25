@@ -49,6 +49,14 @@ body.dark-mode .main__form .form-control:focus {
 	color: #fff; /* White text on focus for readability. */
 }
 
+body.dark-mode .main__form input.form-control:disabled,
+body.dark-mode .main__form textarea.form-control:disabled,
+body.dark-mode .main__form select.form-control:disabled {
+	background: #181a1b; /* Deep charcoal background for disabled form controls. */
+	border: 1.5px solid #005f7d; /* Bright blue border for disabled form controls. */
+	color: #8f8f8f; /* Light gray for disabled form control text for readability. */
+}
+
 body.dark-mode .main__form input::placeholder {
 	color: #8f8f8f !important; /* Sets the placeholder text color to light gray for visibility in dark mode. */
 	opacity: 1; /* Ensures the placeholder text is fully opaque and visible. */

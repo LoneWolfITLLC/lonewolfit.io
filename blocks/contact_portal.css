@@ -1,0 +1,333 @@
+/* Hide message in summary if not enough space for chevron and date */
+@media (max-width: 550px) {
+	.contactform__summary-message {
+		display: none !important;
+	}
+	.contactform__summary-date {
+		min-width: 80px;
+		max-width: 120px;
+		font-size: 0.97em;
+	}
+	.contactform__chevron {
+		margin-left: 8px;
+	}
+}
+/* Ensure the submissions list is never smaller than 430px */
+#contactFormSubmissionsList {
+	min-width: 430px;
+	width: 100%;
+	box-sizing: border-box;
+}
+/* Responsive: Mobile-friendly adjustments for contact form submissions */
+@media (max-width: 800px) {
+	.contactform__item {
+		padding: 14px 6vw 12px 6vw;
+		margin: 12px 0;
+	}
+	.contactform__summary {
+		flex-direction: row;
+		gap: 0.5rem;
+		font-size: 1em;
+		padding-bottom: 4px;
+		align-items: center;
+		position: relative;
+		min-width: 0;
+		width: 100%;
+		box-sizing: border-box;
+	}
+	.contactform__summary-message {
+		max-width: 90px;
+		min-width: 0;
+		font-size: 0.98em;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		flex-shrink: 1;
+	}
+	.contactform__summary-date {
+		display: block;
+		color: #6c757d;
+		font-size: 0.95em;
+		min-width: 70px;
+		max-width: 90px;
+		text-align: right;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		margin-left: auto;
+		flex-shrink: 0;
+	}
+	.contactform__chevron {
+		margin-left: 6px;
+		width: 22px;
+		height: 22px;
+		background-size: 18px 18px;
+		flex-shrink: 0;
+		display: flex !important;
+		align-items: center;
+		justify-content: center;
+		position: static;
+		right: 0;
+	}
+	.contactform__details {
+		padding: 8px 0 0 0;
+	}
+	.contactform__user {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.5rem 0;
+		font-size: 0.98em;
+	}
+	.contactform__message {
+		font-size: 1em;
+		padding: 8px 8px;
+	}
+	.contactform__actions {
+		flex-direction: column;
+		gap: 0.5rem;
+		padding-left: 0;
+		border-left: none;
+		margin-top: 8px;
+	}
+	.contactform__email-btn,
+	.contactform__call-btn,
+	.contactform__delete-btn {
+		min-width: 90px;
+		width: 100%;
+		margin-right: 0;
+		font-size: 0.98em;
+	}
+}
+
+/* Contact Form Submissions Portal - Light Mode */
+
+.contactform__item {
+	background: #fff;
+	border-radius: 12px;
+	box-shadow: 0 4px 24px 0 rgba(0, 80, 180, 0.1),
+		0 1.5px 8px 0 rgba(0, 80, 180, 0.08);
+	margin: 18px 0;
+	padding: 22px 28px 18px 28px;
+	transition: box-shadow 0.35s cubic-bezier(0.4, 0.2, 0.2, 1), background 0.3s;
+	position: relative;
+	border: 1px solid #e3e8f0;
+}
+
+.contactform__item:hover {
+	box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.12),
+		0 1.5px 8px 0 rgba(0, 0, 0, 0.07);
+	border: 1.5px solid #e3e8f0;
+	background: linear-gradient(90deg, #fff 85%, #f5faff 100%);
+	transition: box-shadow 0.4s cubic-bezier(0.4, 0.2, 0.2, 1), border 0.3s,
+		background 0.3s;
+}
+
+.contactform__item--expanded {
+	box-shadow: 0 8px 32px 0 rgba(0, 80, 180, 0.18),
+		0 2.5px 16px 0 rgba(0, 80, 180, 0.12);
+	background: #f5faff;
+}
+
+.contactform__item--expanded:hover {
+	box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.22),
+		0 4px 24px 0 rgba(0, 0, 0, 0.12);
+	background: linear-gradient(90deg, #f5faff 80%, #fff 100%);
+	border: 2px solid #e3e8f0;
+	transition: box-shadow 0.4s cubic-bezier(0.4, 0.2, 0.2, 1), border 0.3s,
+		background 0.3s;
+}
+
+.contactform__summary {
+	font-weight: 600;
+	color: #0e2a47;
+	margin-bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	cursor: pointer;
+	user-select: none;
+	gap: 1.2rem;
+	padding-bottom: 6px;
+	border-bottom: 1px solid #e3e8f0;
+	transition: background 0.2s;
+}
+
+.contactform__summary:active {
+	background: #f5faff;
+}
+
+.contactform__user-label {
+	color: #6c757d;
+	font-weight: 400;
+	margin-right: 6px;
+}
+
+.contactform__user-name {
+	color: #0e2a47;
+	font-weight: 600;
+}
+
+.contactform__summary-message {
+	color: #0e2a47;
+	font-size: 1.02em;
+	flex: 1 1 40%;
+	min-width: 80px;
+	max-width: 280px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.contactform__summary-date {
+	color: #6c757d;
+	font-size: 0.98em;
+	min-width: 90px;
+	max-width: 200px;
+	text-align: right;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin-left: auto;
+	flex-shrink: 0;
+}
+
+.contactform__chevron {
+	display: inline-block !important;
+	width: 24px;
+	height: 24px;
+	margin-left: 12px;
+	background: url("../images/ui/collapse.png") center center no-repeat;
+	background-size: 20px 20px;
+	transition: transform 0.3s cubic-bezier(0.4, 0.2, 0.2, 1), box-shadow 0.3s,
+		filter 0.3s;
+	flex-shrink: 0;
+	position: static;
+}
+
+.contactform__chevron:hover {
+	filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.18)) brightness(1.08);
+}
+
+.contactform__chevron--expanded {
+	filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.22)) brightness(1.12);
+	transform: rotate(90deg);
+}
+
+.contactform__details {
+	display: block;
+	margin-top: 12px;
+	padding: 12px 0 0 0;
+	animation: fadeIn 0.4s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.contactform__user {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.2rem 2.2rem;
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.contactform__user-email,
+.contactform__user-phone {
+	color: #0056b3;
+	text-decoration: underline dotted;
+	transition: color 0.2s;
+}
+.contactform__user-email:hover,
+.contactform__user-phone:hover {
+	color: #031e3c;
+	text-decoration: underline;
+}
+.contactform__user-email:active,
+.contactform__user-phone:active {
+	color: #00bfff;
+}
+.contactform__user-email:focus,
+.contactform__user-phone:focus {
+	outline: 2px solid #00bfff;
+	outline-offset: 2px;
+}
+
+.contactform__message {
+	color: #0e2a47;
+	font-size: 1.08em;
+	margin-bottom: 10px;
+	margin-top: 0;
+	word-break: break-word;
+	background: #fafdff;
+	border-radius: 8px;
+	padding: 10px 14px;
+	border: 1px solid #e3e8f0;
+}
+
+.contactform__actions {
+	margin-top: 12px;
+	padding-left: 8px;
+	border-left: 2px solid #e3e8f0;
+	animation: fadeIn 0.4s cubic-bezier(0.4, 0.2, 0.2, 1);
+	display: flex;
+	gap: 1rem;
+	flex-wrap: wrap;
+}
+
+.contactform__email-btn,
+.contactform__call-btn,
+.contactform__delete-btn {
+	min-width: 120px;
+	margin-right: 10px;
+	font-weight: 500;
+	border-radius: 6px;
+	box-shadow: 0 2px 8px 0 rgba(0, 80, 180, 0.08);
+	transition: box-shadow 0.25s cubic-bezier(0.4, 0.2, 0.2, 1), background 0.2s,
+		color 0.2s;
+}
+
+.contactform__email-btn:hover,
+.contactform__call-btn:hover,
+.contactform__delete-btn:hover {
+	box-shadow: 0 4px 16px 0 rgba(0, 80, 180, 0.16);
+	filter: brightness(1.08);
+}
+
+.contactform__email-btn:active,
+.contactform__call-btn:active,
+.contactform__delete-btn:active {
+	background: #00ffff;
+	color: #031e3c;
+	box-shadow: 0 0 12px #00ffff88;
+	transition: background 0.2s, box-shadow 0.2s;
+}
+
+.contactform__email-btn:focus,
+.contactform__call-btn:focus,
+.contactform__delete-btn:focus {
+	outline: 2px solid #00bfff;
+	outline-offset: 2px;
+}
+
+.contactform__email-btn:disabled,
+.contactform__call-btn:disabled,
+.contactform__delete-btn:disabled,
+.contactform__email-btn[disabled],
+.contactform__call-btn[disabled],
+.contactform__delete-btn[disabled] {
+	background-color: #bfc9d8 !important;
+	color: #fff !important;
+	cursor: not-allowed;
+	opacity: 0.6;
+	pointer-events: none;
+	box-shadow: none;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
