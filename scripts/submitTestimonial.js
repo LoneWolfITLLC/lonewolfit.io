@@ -44,7 +44,7 @@ window.addEventListener("authChecked", function () {
 			});
 			const data = await response.json();
 			if (response.ok) {
-				window.location.hash = "#userSubmissionSection";
+				window.location.hash = "#selfTestimonialSection";
 				await fetchUserTestimonials(); // Refresh user testimonials
 				await displayUserSlides(); // Update user slides
 				showAlert(data.message || "Submitted your testimonial!", false, form);

@@ -32,12 +32,15 @@
 		<link rel="stylesheet" href="styles/styles_modals_white.css" />
 		<link rel="stylesheet" href="styles/styles_modals_black.css" />
 		<script src="scripts/auth.js"></script>
+		<script src="scripts/alert.js"></script>
 		<script src="scripts/header.js"></script>
 		<script src="scripts/slide-in.js"></script>
 		<script src="scripts/preferences.js"></script>
 		<script src="scripts/darkmode.js"></script>
 		<script src="scripts/accountFunctions.js"></script>
 		<script src="scripts/slideshow.js"></script>
+		<script src="scripts/characterCount.js"></script>
+		<script src="scripts/contactForm.js"></script>
 		<style>
 			.main {
 				min-height: 100vh;
@@ -48,6 +51,7 @@
 		</style>
 		<script>
 			requireLogin = false; // Set to true to require login for this page
+			MAX_CHARACTER_COUNT = 500; // Set the maximum character count for the contact form
 			window.addEventListener("authChecked", function (event) {
 				const { loggedIn, authNeeded, user } = event.detail;
 				const accountButtonsSection = document.getElementById("accountButtonsSection");
@@ -342,19 +346,100 @@
 					class="main__image main__image--arlo"
 				/>
 			</section>
-			<section id="contact" class="main__section main__section--contact">
+			<section id="contact" class="main__section main__section-hidden">
 				<h2 class="main__heading">Contact</h2>
-				<p class="main__text main__item-centered">
-					Get in touch with me for a consultation or support. I'm here to help
-					you succeed.
-				</p>
-				<button
-					class="btn btn-primary main__item-centered"
-					onclick="window.location.href='mailto:arlo.lonewolfit@gmail.com'"
-				>
-					Email Me
-				</button>
 				<!-- Create a contact form here. -->
+				<div
+					id="alertContactForm"
+					class="alertDiv main__alert"
+					style="display: none"
+				></div>
+				<form id="contactFormLoggedOut" class="main__form">
+					<fieldset class="form-group">
+						<label for="name">Name <span style="color:red;">*</span></label>
+						<input
+							type="text"
+							id="name"
+							class="form-control"
+							placeholder="Enter your name..."
+							required
+						/>
+						<label for="email">Email</label>
+						<input
+							type="email"
+							id="email"
+							class="form-control"
+							placeholder="Enter your email address..."
+						/>
+						<label for="phone">Phone <span style="color:red;">*</span></label>
+						<input
+							type="tel"
+							id="phone"
+							class="form-control"
+							pattern="[0-9]*"
+							placeholder="1234567890"
+							required
+						/>
+						<label for="message">Message <span style="color:red;">*</span></label>
+						<textarea
+							id="message"
+							class="form-control"
+							rows="3"
+							placeholder="Type your message here..."
+							required
+						></textarea>
+						<p class="main__text-character-count" id="characterCountLoggedOut">
+							0/500 characters
+						</p>
+						<button
+							type="submit"
+							class="btn btn-primary main__item-centered"
+							style="margin-top: 10px"
+							disabled
+						>
+							Send Message
+						</button>
+					</fieldset>
+				</form>
+				<form id="contactFormLoggedIn" class="main__form">
+					<fieldset class="form-group">
+						<label for="phone">Call back number <span style="color:red;">*</span></label>
+						<input
+							type="tel"
+							id="phone"
+							class="form-control"
+							pattern="[0-9]*"
+							placeholder="1234567890"
+						/>
+						<label for="useAccountPhoneNumberCheckbox" style="margin-top: 0px;">
+							<input
+								type="checkbox"
+								id="useAccountPhoneNumberCheckbox"
+								name="useAccountPhoneNumberCheckbox"
+							/>
+							Use my lonewolfit.io account phone number
+						</label>
+						<label for="message">Message <span style="color:red;">*</span></label>
+						<textarea
+							id="message"
+							class="form-control"
+							rows="3"
+							placeholder="Type your message here..."
+							required
+						></textarea>
+						<p class="main__text-character-count" id="characterCountLoggedIn">
+							0/500 characters
+						</p>
+						<button
+							type="submit"
+							class="btn btn-primary main__item-centered"
+							style="margin-top: 10px"
+							disabled
+						>
+							Send Message
+						</button>
+					</fieldset>
+				</form>
 			</section>
 		</main>
 		<footer class="footer">
