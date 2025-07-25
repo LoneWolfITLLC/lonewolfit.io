@@ -27,7 +27,6 @@
 
 .contactform__item:focus-within {
   box-shadow: 0 0 0 3px #00bfff, 0 8px 32px 0 rgba(0, 80, 180, 0.18);
-  border: 2px solid #00bfff;
   outline: none;
   transition: box-shadow 0.4s cubic-bezier(0.4, 0.2, 0.2, 1), border 0.3s;
 }

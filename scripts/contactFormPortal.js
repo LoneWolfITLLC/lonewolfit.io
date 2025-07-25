@@ -126,7 +126,10 @@ window.addEventListener("authChecked", async function () {
 			chevron.classList.toggle("contactform__chevron--expanded", expanded);
 		});
 		// Also expand/collapse on summary click
-		item.addEventListener("click", function () {
+		item.addEventListener("click", function (e) {
+			e.stopPropagation();
+			if (e.target.closest(".contactform__chevron")) return; // Ignore chevron clicks
+			if (e.target.closest(".btn")) return; // Ignore details clicks
 			expanded = !expanded;
 			details.style.display = expanded ? "block" : "none";
 			item.classList.toggle("contactform__item--expanded", expanded);
