@@ -77,4 +77,15 @@
 	width: 30px; /* Icon width for consistency. */
 	height: 30px; /* Icon height for consistency. */
 	vertical-align: middle; /* Vertically aligns icon with text. */
+	opacity: 1; /* Fully opaque by default. */
+	transition: opacity 0.25s; /* Smooth opacity transition on hover. */
+}
+
+.footer__icon:hover {
+	opacity: 0.5; /* Transparent on hover for effect. */
+}
+
+.footer__icon:focus {
+	outline: none; /* Removes focus outline for cleaner look. */
+	opacity: 0.3; /* More transparent on focus for effect. */;
 }
