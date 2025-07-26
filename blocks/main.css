@@ -21,6 +21,21 @@
 	box-shadow: none; /* No shadow for hidden sections. */
 }
 
+.main__section--portfolio {
+	background: #f9f9f9; /* Light gray background for portfolio sections. */
+	border: 1px solid #e0e0e0; /* Subtle border for separation. */
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05); /* Soft shadow for depth. */
+	padding: 1.5rem; /* Padding for content spacing. */
+	display: flex; /* Flexbox for layout. */
+	flex-direction: column; /* Stacks items vertically. */
+	align-items: center;
+	gap: 1.5rem; /* Space between items. */
+	margin-bottom: 2rem; /* Space below portfolio section. */
+	overflow: hidden; /* Prevents overflow of content. */
+	max-width: 100%; /* Ensures section does not exceed container width. */
+	max-height: 100%; /* Prevents section from exceeding container height. */
+}
+
 .main__heading {
 	font-size: 2rem; /* Large heading for section titles. */
 	font-weight: 700; /* Bold heading for emphasis. */
@@ -114,22 +129,31 @@
 }
 
 .main__portfolio-item {
-	flex: 1 1 250px; /* Flexible sizing for portfolio items. */
+	flex: 1 1 150px; /* Flexible sizing for portfolio items. */
 	background: #fefefe; /* Light background for item. */
+	border: none; /* No border for item. */
 	border-radius: 12px; /* Rounded corners for item. */
 	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.125); /* Subtle shadow for item. */
 	padding: 1rem; /* Padding inside item. */
 	display: flex; /* Flexbox for item content. */
 	align-items: center; /* Vertically centers item content. */
-	gap: 1.5rem; /* Space between item elements. */
 	transition: box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
 		transform 0.18s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth hover/active transitions. */
-	max-height: 200px; /* Restricts item height. */
-	min-height: 150px; /* Ensures item is tall enough. */
-	max-width: fit-parent; /* Prevents item from exceeding parent width. */
+	max-width: max-content; /* Prevents item from exceeding parent width. */
+	min-width: min-content;
+	width: 100%;
 	position: relative; /* Allows for absolute positioning inside item. */
 	text-decoration: none; /* Removes underline from links. */
 	overflow: hidden; /* Prevents content from overflowing item. */
+	font-size: x-large; /* Larger font size for item text. */
+	color: #031e3c; /* Dark blue text for item. */
+	text-align: center; /* Centers text inside item. */
+	gap: 2.2rem; /* Space between item elements. */
+	margin: 0; /* Centers item horizontally. */
+}
+
+.main__portfolio-item-triplepeaks {
+	min-width: min-content; /* Prevents item from shrinking too small. */
 }
 
 .main__portfolio-item:hover {
@@ -149,7 +173,9 @@
 }
 
 .main__image--cert,
-.main__image--tripleten {
+.main__image--tripleten,
+.main__image--triplepeaks,
+.main__image--tripleespresso {
 	border-radius: 15px; /* Rounds corners for cert/tripleten images. */
 	box-shadow: 0 4px 18px rgba(0, 191, 255, 0.18),
 		0 1.5px 8px rgba(3, 30, 60, 0.1); /* Multi-layered shadow for depth. */
@@ -168,6 +194,18 @@
 .main__image--tripleten {
 	border-radius: 0%; /* Removes rounding for tripleten image. */
 	box-shadow: none; /* No shadow for tripleten image. */
+}
+
+.main__image--triplepeaks {
+	border-radius: 0%; /* Removes rounding for triplepeaks image. */
+	box-shadow: none; /* No shadow for triplepeaks image. */
+	content: url("../assets/se_project_library/images/logo.svg"); /* Uses SVG for triplepeaks image. */
+}
+
+.main__image--tripleespresso {
+	border-radius: 0%; /* Removes rounding for tripleespresso image. */
+	box-shadow: none; /* No shadow for tripleespresso image. */
+	content: url("../assets/se_project_coffeeshop/images/logo_coffeeshop_dark.svg"); /* Uses SVG for tripleespresso image. */
 }
 
 .main__portfolio-text {

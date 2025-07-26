@@ -74,6 +74,16 @@ body.dark-mode .main__image--tripleten {
 	background: #fff; /* White background for tripleten image for contrast. */
 }
 
+body.dark-mode .main__image--triplepeaks {
+	content: url('/assets/se_project_library/images/logo_white.svg'); /* Uses dark mode specific image for triple peaks. */
+	background: transparent; /* Transparent background for triple peaks image. */
+}
+
+body.dark-mode .main__image--tripleespresso {
+	content: url('/assets/se_project_coffeeshop/images/logo_coffeeshop_light.svg'); /* Uses dark mode specific image for triple espresso. */
+	background: transparent; /* Transparent background for triple espresso image. */
+}
+
 body.dark-mode .main__image--arlo {
 	background: #23272a; /* Slightly lighter background for profile image. */
 	border: 2px solid #00bfff; /* Bright blue border for emphasis. */
@@ -83,11 +93,14 @@ body.dark-mode .main__portfolio-item {
 	background: #23272a; /* Sets the portfolio item background to a dark gray for dark mode. */
 	border: 1px solid #222; /* Adds a thin, dark border for separation and definition. */
 	box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.125); /* Creates a subtle inner white glow for depth. */
+	color: #fff; /* Sets text color to white for contrast against dark background. */
+	transition: color 0.3s, box-shadow 0.3s, border-color 0.3s; /* Smooth transitions for color and shadow changes. */
 }
 
 body.dark-mode .main__portfolio-item:hover {
 	border-color: #00ffff; /* Changes border to neon cyan on hover for emphasis. */
 	box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.8); /* Intensifies inner glow with cyan for interactive feedback. */
+	color: #00ffff; /* Changes text color to neon cyan on hover for visibility. */
 }
 
 body.dark-mode .main__portfolio-item:active {
