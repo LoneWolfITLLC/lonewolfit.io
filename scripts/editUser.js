@@ -361,7 +361,7 @@ window.addEventListener("authChecked", function (event) {
 function retrieveUserDetails() {
   const token = sessionStorage.getItem("jwt");
   if (!token) {
-    alert("No session found.");
+    alertModal("No session found.");
     return Promise.reject(new Error("No session found."));
   }
   document.getElementById("loadingModal").style.display = "block";
@@ -385,7 +385,7 @@ function retrieveUserDetails() {
     })
     .catch((err) => {
       document.getElementById("loadingModal").style.display = "none";
-      alert("Error: " + err.message);
+      alertModal("Error: " + err.message);
       return null;
     });
 }
@@ -411,7 +411,7 @@ function gatherFormData(formName) {
     );
     const phone = document.getElementById("phoneBusiness").value;
     if (isNaN(phone) || phone.length < 10) {
-      alert("Please enter a valid phone number.");
+      alertModal("Please enter a valid phone number.");
       return null;
     }
     formData.append("phone", phone);
@@ -447,7 +447,7 @@ function gatherFormData(formName) {
     );
     const phone = document.getElementById("phoneResidential").value;
     if (isNaN(phone) || phone.length < 10) {
-      alert("Please enter a valid phone number.");
+      alertModal("Please enter a valid phone number.");
       return null;
     }
     formData.append("phone", phone);
@@ -530,7 +530,7 @@ function handleEditUserSubmit(formName) {
   // Send PUT request to backend
   const token = sessionStorage.getItem("jwt");
   if (!token) {
-    alert("No session found. Please log in again.");
+    alertModal("No session found. Please log in again.");
     return;
   }
 
@@ -546,15 +546,15 @@ function handleEditUserSubmit(formName) {
     .then(async (response) => {
       document.getElementById("loadingModal").style.display = "none";
       if (response.ok) {
-        alert("User updated successfully!");
+        alertModal("User updated successfully!");
       } else {
         const errorText = await response.text();
-        alert("Error updating user: " + (errorText || response.statusText));
+        alertModal("Error updating user: " + (errorText || response.statusText));
       }
     })
     .catch((err) => {
       document.getElementById("loadingModal").style.display = "none";
-      alert("Network error: " + err.message);
+      alertModal("Network error: " + err.message);
     });
 }
 
@@ -564,7 +564,7 @@ function updateStripeCustomerDetails(formType) {
       ? document.getElementById("registerFormBusiness")
       : document.getElementById("registerForm");
   if (!form) {
-    alert("Form not found.");
+    alertModal("Form not found.");
     return;
   }
   const formData = gatherFormData(form.id);
@@ -592,7 +592,7 @@ function updateStripeCustomerDetails(formType) {
 
   const token = sessionStorage.getItem("jwt");
   if (!token) {
-    alert("No session found. Please log in again.");
+    alertModal("No session found. Please log in again.");
     return;
   }
 
@@ -608,11 +608,11 @@ function updateStripeCustomerDetails(formType) {
     .then(async (response) => {
       document.getElementById("loadingModal").style.display = "none";
       if (response.ok) {
-        alert("Stripe customer updated successfully!");
-        window.location.reload();
+        alertModal("Stripe customer updated successfully!");
+        setTimeout(() => window.location.reload(), 3000);
       } else {
         const errorText = await response.text();
-        alert(
+        alertModal(
           "Error updating Stripe customer: " +
             (errorText || response.statusText)
         );
@@ -620,6 +620,6 @@ function updateStripeCustomerDetails(formType) {
     })
     .catch((err) => {
       document.getElementById("loadingModal").style.display = "none";
-      alert("Network error: " + err.message);
+      alertModal("Network error: " + err.message);
     });
 }

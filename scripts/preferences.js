@@ -318,8 +318,8 @@ function savePreference(key, value) {
 		})
 		.catch((err) => {
 			console.error("Error saving preference:", err);
-			alert(
-				"An error occurred while saving your preference. Please try again later and check your connection."
+			alertModal(
+				"An error occurred while saving your preference: "+ err.message || "Please try again later and check your connection."
 			);
 			return false;
 		})

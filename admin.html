@@ -19,6 +19,7 @@
 		<link href="./styles/styles_black.css" rel="stylesheet" />
 		<link href="./styles/styles_modals_white.css" rel="stylesheet" />
 		<link href="./styles/styles_modals_black.css" rel="stylesheet" />
+		<script src="scripts/modals.js"></script>
 		<script src="scripts/auth.js"></script>
 		<script src="scripts/header.js"></script>
 		<script src="scripts/slide-in.js"></script>
@@ -66,49 +67,55 @@
 						data = { message: await res.text() };
 					}
 					if (!res.ok) {
-						alert(data.message || "Sync failed.");
+						alertModal(data.message || "Sync failed.");
 					} else {
-						alert(data.message || "Sync completed successfully.");
+						alertModal(data.message || "Sync completed successfully.");
 					}
 				} catch (err) {
 					hideLoading();
-					alert("An error occurred during sync: " + err);
+					alertModal("An error occurred during sync: " + err);
 				}
 			}
 
 			async function cleanupDeletedUserContent() {
-				showLoading();
-				try {
-					const token = sessionStorage.getItem("jwt");
-					const res = await fetch(
-						URL_BASE + "/api/cleanup-deleted-user-content",
-						{
-							method: "POST",
-							headers: {
-								"Content-Type": "application/json",
-								Authorization: `Bearer ${token}`,
-							},
+				confirmModal(
+					"Are you sure you want to permanently delete all content from deleted users? This action cannot be undone.",
+					async function (confirmed) {
+						if (!confirmed) return;
+						showLoading();
+						try {
+							const token = sessionStorage.getItem("jwt");
+							const res = await fetch(
+								URL_BASE + "/api/cleanup-deleted-user-content",
+								{
+									method: "POST",
+									headers: {
+										"Content-Type": "application/json",
+										Authorization: `Bearer ${token}`,
+									},
+								}
+							);
+							hideLoading();
+							let data;
+							let isJson = res.headers
+								.get("content-type")
+								?.includes("application/json");
+							if (isJson) {
+								data = await res.json();
+							} else {
+								data = { message: await res.text() };
+							}
+							if (!res.ok) {
+								alertModal(data.message || "Cleanup failed.");
+							} else {
+								alertModal(data.message || "Cleanup completed successfully.");
+							}
+						} catch (err) {
+							hideLoading();
+							alertModal("An error occurred during cleanup: " + err);
 						}
-					);
-					hideLoading();
-					let data;
-					let isJson = res.headers
-						.get("content-type")
-						?.includes("application/json");
-					if (isJson) {
-						data = await res.json();
-					} else {
-						data = { message: await res.text() };
 					}
-					if (!res.ok) {
-						alert(data.message || "Cleanup failed.");
-					} else {
-						alert(data.message || "Cleanup completed successfully.");
-					}
-				} catch (err) {
-					hideLoading();
-					alert("An error occurred during cleanup: " + err);
-				}
+				);
 			}
 
 			window.addEventListener("authChecked", function (event) {

@@ -1,67 +1,19 @@
 function signOut(ofAllDevices = false) {
   const token = sessionStorage.getItem("jwt");
   if (!token) {
-    alert("No session found. You are already signed out.");
+    alertModal("No session found. You are already signed out.");
     window.location.href = "index.html";
     return;
   }
   let confirmMessage = ofAllDevices
     ? "Are you sure you want to sign out of all devices?"
     : "Are you sure you want to sign out?";
-  if (!confirm(confirmMessage)) {
-    return;
-  }
-  document.getElementById("loadingModal").style.display = "block";
-
-  fetch(URL_BASE + "/api/auth/sign-out", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify({
-      doNotSignOutAllDevices: !ofAllDevices,
-    }),
-  })
-    .then((response) => {
-      if (response.ok) {
-        sessionStorage.removeItem("jwt");
-        document.getElementById("loadingModal").style.display = "none";
-        alert(
-          ofAllDevices
-            ? "You have been signed out of all devices."
-            : "You have been signed out."
-        );
-        window.location.href = "index.html";
-      } else {
-        // If the fetch call returns 401, redirect the user to the login page and remove the token from session storage.
-        if (response.status === 401) {
-          sessionStorage.removeItem("jwt");
-          document.getElementById("loadingModal").style.display = "none";
-          alert("Session expired. Please log in again.");
-          window.location.href = "login.html#emailloginSection";
-          return;
-        } else {
-          return response.text().then((text) => {
-            document.getElementById("loadingModal").style.display = "none";
-            alert("Sign out failed: " + text);
-          });
-        }
-      }
-    })
-    .catch((err) => {
-      document.getElementById("loadingModal").style.display = "none";
-      alert("Sign out failed: " + err.message);
-    });
-}
-function resetPassword() {
-  const token = sessionStorage.getItem("jwt");
-  if (token) {
-    if (!confirm("Are you sure you want to reset your password?")) {
+  confirmModal(confirmMessage, function(result) {
+    if (!result) {
       return;
     }
-
-    document.getElementById("loadingModal").style.display = "block";
+    var loadingModal = document.getElementById("loadingModal");
+    if (loadingModal) loadingModal.style.display = "block";
     fetch(URL_BASE + "/api/auth/sign-out", {
       method: "POST",
       headers: {
@@ -69,74 +21,132 @@ function resetPassword() {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        doNotSignOutAllDevices: false,
+        doNotSignOutAllDevices: !ofAllDevices,
       }),
     })
       .then((response) => {
         if (response.ok) {
           sessionStorage.removeItem("jwt");
-          document.getElementById("loadingModal").style.display = "none";
-          alert(
-            "You have been signed out of all devices. You can now reset your password."
+          if (loadingModal) loadingModal.style.display = "none";
+          alertModal(
+            ofAllDevices
+              ? "You have been signed out of all devices."
+              : "You have been signed out."
           );
-          window.location.href = "reset.html";
+          setTimeout(() => {
+            window.location.href = "index.html";
+          }, 2000);
         } else {
-          return response.text().then((text) => {
-            document.getElementById("loadingModal").style.display = "none";
-            alert("Sign out failed: " + text);
-          });
+          if (response.status === 401) {
+            sessionStorage.removeItem("jwt");
+            if (loadingModal) loadingModal.style.display = "none";
+            alertModal("Session expired. Please log in again.");
+            window.location.href = "login.html#emailloginSection";
+            return;
+          } else {
+            return response.text().then((text) => {
+              if (loadingModal) loadingModal.style.display = "none";
+              alertModal("Sign out failed: " + text);
+            });
+          }
         }
       })
       .catch((err) => {
-        document.getElementById("loadingModal").style.display = "none";
-        alert("Sign out failed: " + err.message);
+        if (loadingModal) loadingModal.style.display = "none";
+        alertModal("Sign out failed: " + err.message);
       });
+  });
+}
+function resetPassword() {
+  const token = sessionStorage.getItem("jwt");
+  if (token) {
+    confirmModal("Are you sure you want to reset your password?", function(result) {
+      if (!result) {
+        return;
+      }
+      var loadingModal = document.getElementById("loadingModal");
+      if (loadingModal) loadingModal.style.display = "block";
+      fetch(URL_BASE + "/api/auth/sign-out", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          doNotSignOutAllDevices: false,
+        }),
+      })
+        .then((response) => {
+          if (response.ok) {
+            sessionStorage.removeItem("jwt");
+            if (loadingModal) loadingModal.style.display = "none";
+            alertModal(
+              "You have been signed out of all devices. You can now reset your password."
+            );
+            setTimeout(() => {
+              window.location.href = "reset.html";
+            }, 3000);
+          } else {
+            return response.text().then((text) => {
+              if (loadingModal) loadingModal.style.display = "none";
+              alertModal("Sign out failed: " + text);
+            });
+          }
+        })
+        .catch((err) => {
+          if (loadingModal) loadingModal.style.display = "none";
+          alertModal("Sign out failed: " + err.message);
+        });
+    });
   }
 }
 function deleteAccount(redirectUri = "index.html") {
   const token = sessionStorage.getItem("jwt");
   if (!token) {
-    alert("No session found. You are already signed out.");
+    alertModal("No session found. You are already signed out.");
     window.location.href = "index.html";
     return;
   }
-  if (
-    !confirm(
-      "Are you sure you want to delete your account? This action cannot be undone."
-    )
-  ) {
-    return;
-  }
-  const deleteConfirmation = prompt(
-    "Type 'DELETE' to confirm account deletion:"
-  );
-  if (deleteConfirmation !== "DELETE") {
-    alert("Account deletion canceled.");
-    return;
-  }
-  document.getElementById("loadingModal").style.display = "block";
-  fetch(URL_BASE + "/api/auth/delete-account", {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  })
-    .then((response) => {
-      if (response.ok) {
-        sessionStorage.removeItem("jwt");
-        document.getElementById("loadingModal").style.display = "none";
-        alert("Your account has been deleted.");
-        window.location.href = redirectUri;
-      } else {
-        return response.text().then((text) => {
-          document.getElementById("loadingModal").style.display = "none";
-          alert("Account deletion failed: " + text);
-        });
+  confirmModal(
+    "Are you sure you want to delete your account? This action cannot be undone.",
+    function(result) {
+      if (!result) {
+        return;
       }
-    })
-    .catch((err) => {
-      document.getElementById("loadingModal").style.display = "none";
-      alert("Account deletion failed: " + err.message);
-    });
+      promptModal("Type 'DELETE' to confirm account deletion:", "", function(deleteConfirmation) {
+        if (deleteConfirmation !== "DELETE") {
+          alertModal("Account deletion canceled.");
+          return;
+        }
+        var loadingModal = document.getElementById("loadingModal");
+        if (loadingModal) loadingModal.style.display = "block";
+        fetch(URL_BASE + "/api/auth/delete-account", {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((response) => {
+            if (response.ok) {
+              sessionStorage.removeItem("jwt");
+              if (loadingModal) loadingModal.style.display = "none";
+              alertModal("Your account has been deleted.");
+              setTimeout(() => {
+                window.location.href = redirectUri;
+              }, 2000);
+            } else {
+              return response.text().then((text) => {
+                if (loadingModal) loadingModal.style.display = "none";
+                alertModal("Account deletion failed: " + text);
+              });
+            }
+          })
+          .catch((err) => {
+            if (loadingModal) loadingModal.style.display = "none";
+            alertModal("Account deletion failed: " + err.message);
+          });
+      });
+    }
+  );
 }

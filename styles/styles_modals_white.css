@@ -1,3 +1,36 @@
+/* ─── CUSTOM MODAL STYLES ─── */
+#alertModal .modal-content {
+    background: linear-gradient(135deg, #fafdff 70%, #e3f0ff 100%);
+    border-radius: 14px;
+    box-shadow: 0 4px 32px rgba(0, 80, 180, 0.18), 0 1.5px 8px rgba(0, 80, 180, 0.08);
+    border: 1px solid #e3e8f0;
+    padding: 1.5rem 2.5rem;
+    max-width: 400px;
+    margin: 0 auto;
+    display: block;
+}
+
+#confirmModal .modal-content {
+    background: linear-gradient(120deg, #fff 80%, #eafff7 100%);
+    border-radius: 14px;
+    box-shadow: 0 4px 32px rgba(0, 180, 80, 0.18), 0 1.5px 8px rgba(0, 180, 80, 0.08);
+    border: 1px solid #e3e8f0;
+    padding: 1.5rem 2.5rem;
+    max-width: 400px;
+    margin: 0 auto;
+    display: block;
+}
+
+#promptModal .modal-content {
+    background: linear-gradient(120deg, #fff 80%, #fffbe3 100%);
+    border-radius: 14px;
+    box-shadow: 0 4px 32px rgba(180, 160, 0, 0.18), 0 1.5px 8px rgba(180, 160, 0, 0.08);
+    border: 1px solid #e3e8f0;
+    padding: 1.5rem 2.5rem;
+    max-width: 400px;
+    margin: 0 auto;
+    display: block;
+}
 #invoice-modal {
     display: none;
     position: fixed;
@@ -54,21 +87,6 @@
     position: relative;
     border: 1px solid #ccc;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-}
-
-.close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 20px;
-}
-
-.close-button:hover,
-.close-button:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
 }
 
 .refresh-button {
