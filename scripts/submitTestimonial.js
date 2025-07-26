@@ -44,10 +44,10 @@ window.addEventListener("authChecked", function () {
 			});
 			const data = await response.json();
 			if (response.ok) {
-				window.location.hash = "#selfTestimonialSection";
+				window.location.hash = "#userSubmissionSection";
+				showAlert(data.message || "Submitted your testimonial!", false, form);
 				await fetchUserTestimonials(); // Refresh user testimonials
 				await displayUserSlides(); // Update user slides
-				showAlert(data.message || "Submitted your testimonial!", false, form);
 				textarea.value = "";
 				checkbox.checked = false;
 				validate();
@@ -58,6 +58,9 @@ window.addEventListener("authChecked", function () {
 				}
 				await fetchTestimonials(); // Refresh public testimonials
 				await displaySlides(); // Update public slides
+				setTimeout(() => {
+					window.location.hash = "#selfTestimonialSection";
+				}, 2000);
 			} else {
 				window.location.hash = "#userSubmissionSection";
 				showAlert(

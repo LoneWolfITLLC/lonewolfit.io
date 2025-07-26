@@ -187,7 +187,7 @@
     box-sizing: border-box;
   }
   .contactform__summary-message {
-    max-width: 90px;
+    max-width: 150px;
     min-width: 0;
     font-size: 0.98em;
     overflow: hidden;
@@ -200,7 +200,7 @@
     color: #6c757d;
     font-size: 0.95em;
     min-width: 70px;
-    max-width: 90px;
+    max-width: 180px;
     text-align: right;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -256,7 +256,7 @@
   }
   .contactform__summary-date {
     min-width: 80px;
-    max-width: 120px;
+    max-width: 150px;
     font-size: 0.97em;
   }
   .contactform__chevron {
@@ -266,7 +266,7 @@
 
 @media (max-width: 480px) {
   .contactform__summary-date {
-    min-width: 80px;
+    min-width: 100px;
     max-width: 50px;
     font-size: 0.95em;
   }
