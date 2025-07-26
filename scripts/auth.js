@@ -115,10 +115,19 @@ async function onLoad() {
   const logged = await checkAuthentication(token);
   authNeeded = logged === null;
   loggedIn = logged !== null;
+  const urlParams = new URLSearchParams(window.location.search);
+  const redirectUri = urlParams.get("redirect_uri");
   const allowedHtmlRegex = /^\/?[a-zA-Z0-9_-]+\.html$/i;
+  if(redirectUri && !allowedHtmlRegex.test(redirectUri)) {
+    console.warn("Invalid redirect_uri detected.");
+    urlParams.delete("redirect_uri");
+    const newUrl =
+      window.location.pathname +
+      (urlParams.toString() ? "?" + urlParams.toString() : "") +
+      window.location.hash;
+    window.history.replaceState({}, document.title, newUrl);
+  }
   if (loggedIn && logged) {
-    const urlParams = new URLSearchParams(window.location.search);
-    const redirectUri = urlParams.get("redirect_uri");
     const adminUser = logged.user.adminUser;
     // Clean up redirect_uri if already on the correct portal
     if (
