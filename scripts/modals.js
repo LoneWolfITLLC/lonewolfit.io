@@ -31,6 +31,12 @@ function alertModal(message) {
 		}
 	});
 
+	modal.addEventListener("keydown", (e) => {
+		if (e.key === "Enter" || e.key === "Escape") {
+			modal.remove();
+		}
+	});
+	modal.focus();
 	// Native alert returns undefined
 	return undefined;
 }
@@ -117,8 +123,12 @@ function confirmModal(message, onConfirm) {
 	overlay.addEventListener("click", (event) => {
 		// Do nothing
 	});
-	modal.addEventListener("click", (event) => {
-		// Only close if close/cancel/confirm pressed
+	modal.addEventListener("keydown", (e) => {
+		if (e.key === "Escape") {
+			e.preventDefault();
+			cleanup();
+			if (typeof onConfirm === "function") onConfirm(false);
+		}
 	});
 }
 
@@ -208,8 +218,12 @@ function promptModal(message, defaultValue = "", onConfirm) {
 	overlay.addEventListener("click", (event) => {
 		// Do nothing
 	});
-	modal.addEventListener("click", (event) => {
-		// Only close if close/cancel/confirm pressed
+	modal.addEventListener("keydown", (e) => {
+		if (e.key === "Escape") {
+			e.preventDefault();
+			cleanup();
+			if (typeof onConfirm === "function") onConfirm(false);
+		}
 	});
 	input.focus();
 }
