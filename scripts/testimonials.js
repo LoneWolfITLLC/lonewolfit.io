@@ -338,24 +338,24 @@ async function displayTestimonialList() {
     actionsDiv.style.display = "none";
     if (userDetails !== null) {
       userParagraph.innerHTML = `
-		<span class="testimonials__user-label">Submitted by:</span> <span class="testimonials__user-name">${userDetails.first_name} ${userDetails.last_name}</span>
-		<span class="testimonials__chevron"></span>
-	  `;
+    <span class="testimonials__user-label">Submitted by:</span> <span class="testimonials__user-name">${userDetails.first_name} ${userDetails.last_name}</span>
+    <span class="testimonials__chevron"></span>
+    `;
       actionsDiv.innerHTML = `
-		<p class="testimonials__text">Client Testimonial: ${testimonial.testimonial}</p>
-		<button class="btn btn-primary testimonials__edit-btn" data-index="${index}" style="margin-bottom: 10px;">Edit Testimonial</button>
-		<button class="btn btn-delete testimonials__delete-btn" data-id="${testimonial.id}" style="margin-bottom: 10px;">Delete Testimonial</button>
-	  `;
+    <p class="testimonials__text">Client Testimonial: ${testimonial.testimonial}</p>
+    <button class="btn btn-primary testimonials__edit-btn" data-index="${index}" style="margin-bottom: 10px;">Edit Testimonial</button>
+    <button class="btn btn-delete testimonials__delete-btn" data-id="${testimonial.id}" style="margin-bottom: 10px;">Delete Testimonial</button>
+    `;
     } else {
       userParagraph.innerHTML = `
-		<span class="testimonials__user-label">Submitted by:</span> <span class="testimonials__user-name">Deleted User</span>
-		<span class="testimonials__chevron"></span>
-	  `;
+    <span class="testimonials__user-label">Submitted by:</span> <span class="testimonials__user-name">Deleted User</span>
+    <span class="testimonials__chevron"></span>
+    `;
       actionsDiv.innerHTML = `
-		<p class="testimonials__text">Client Testimonial: ${testimonial.testimonial}</p>
-		<button class="btn btn-primary testimonials__edit-btn" data-index="${index}" style="margin-bottom: 10px;">Edit Testimonial</button>
-		<button class="btn btn-delete testimonials__delete-btn" data-id="${testimonial.id}" style="margin-bottom: 10px;">Delete Testimonial</button>
-	  `;
+    <p class="testimonials__text">Client Testimonial: ${testimonial.testimonial}</p>
+    <button class="btn btn-primary testimonials__edit-btn" data-index="${index}" style="margin-bottom: 10px;">Edit Testimonial</button>
+    <button class="btn btn-delete testimonials__delete-btn" data-id="${testimonial.id}" style="margin-bottom: 10px;">Delete Testimonial</button>
+    `;
     }
     testimonialItem.appendChild(userParagraph);
     testimonialItem.appendChild(actionsDiv);
@@ -407,14 +407,16 @@ async function displayTestimonialList() {
       });
     actionsDiv
       .querySelector(".testimonials__delete-btn")
-      .addEventListener("click", async function () {
+      .addEventListener("click", function () {
         const idToDelete = this.dataset.id;
-        const confirmation = confirm(
-          "Are you sure you want to delete this testimonial?"
+        confirmModal(
+          "Are you sure you want to delete this testimonial?",
+          function (confirmation) {
+            if (confirmation) {
+              deleteTestimonial(idToDelete, "approved"); // Pass correct context
+            }
+          }
         );
-        if (confirmation) {
-          await deleteTestimonial(idToDelete, "approved"); // Pass correct context
-        }
       });
     testimonialList.appendChild(testimonialItem);
   }
@@ -496,13 +498,19 @@ window.addEventListener("authChecked", async function () {
 
   document
     .getElementById("denyButton")
-    ?.addEventListener("click", async function () {
+    ?.addEventListener("click", function () {
       // Only operate on unapproved testimonials (slideshow)
-      await deleteTestimonial(
-        unapprovedTestimonials[currentCenterSlide]?.id,
-        "unapproved"
+      const idToDelete = unapprovedTestimonials[currentCenterSlide]?.id;
+      confirmModal(
+        "Are you sure you want to delete this testimonial?",
+        function (confirmation) {
+          if (confirmation) {
+            deleteTestimonial(idToDelete, "unapproved").then(() => {
+              displayTestimonialList(); // Refresh approved list after deny/delete
+            });
+          }
+        }
       );
-      await displayTestimonialList(); // Refresh approved list after deny/delete
     });
 
   document.getElementById("editButton")?.addEventListener("click", function () {

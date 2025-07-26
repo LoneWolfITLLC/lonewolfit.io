@@ -4,51 +4,62 @@ async function deleteUserTestimonial(id) {
 		? slideshowWrapper.querySelector(".slideshow__loading-bar")
 		: null;
 	if (!id) return;
-	const confirmDelete = confirm(
-		"Are you sure you want to delete this testimonial?"
+	confirmModal(
+		"Are you sure you want to delete this testimonial?",
+		async function (confirmDelete) {
+			if (!confirmDelete) return;
+			let token =
+				typeof getTokenFromSession === "function"
+					? getTokenFromSession()
+					: null;
+			if (!token) {
+				window.location.href = "login.html";
+				return;
+			}
+			if (loadingBar) loadingBar.style.display = "block";
+			try {
+				const response = await fetch(
+					`${URL_BASE}/api/user/delete-testimonial`,
+					{
+						method: "DELETE",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${token}`,
+						},
+						body: JSON.stringify({ testimonialId: id }),
+					}
+				);
+				const data = await response.json();
+				if (!response.ok) {
+					showAlert(
+						data.message || "Error deleting testimonial.",
+						true,
+						slideshowWrapper
+					);
+					return;
+				}
+				// Remove deleted testimonial from array
+				userTestimonials = userTestimonials.filter((t) => t.id !== id);
+				// Adjust current slide index if needed
+				if (currentUserSlide >= userTestimonials.length) {
+					currentUserSlide = Math.max(0, userTestimonials.length - 1);
+				}
+				await fetchUserTestimonials(); // Refresh user testimonials
+				await displayUserSlides(); // Update display
+				await fetchTestimonials(); // Refresh public testimonials
+				await displaySlides(); // Update public slides
+				showAlert("Testimonial deleted successfully!", false, slideshowWrapper);
+			} catch (error) {
+				showAlert(
+					"Network error deleting testimonial.",
+					true,
+					slideshowWrapper
+				);
+			} finally {
+				if (loadingBar) loadingBar.style.display = "none";
+			}
+		}
 	);
-	if (!confirmDelete) return;
-	let token =
-		typeof getTokenFromSession === "function" ? getTokenFromSession() : null;
-	if (!token) {
-		window.location.href = "login.html";
-		return;
-	}
-	if (loadingBar) loadingBar.style.display = "block";
-	try {
-		const response = await fetch(`${URL_BASE}/api/user/delete-testimonial`, {
-			method: "DELETE",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${token}`,
-			},
-			body: JSON.stringify({ testimonialId: id }),
-		});
-		const data = await response.json();
-		if (!response.ok) {
-			showAlert(
-				data.message || "Error deleting testimonial.",
-				true,
-				slideshowWrapper
-			);
-			return;
-		}
-		// Remove deleted testimonial from array
-		userTestimonials = userTestimonials.filter((t) => t.id !== id);
-		// Adjust current slide index if needed
-		if (currentUserSlide >= userTestimonials.length) {
-			currentUserSlide = Math.max(0, userTestimonials.length - 1);
-		}
-		await fetchUserTestimonials(); // Refresh user testimonials
-		await displayUserSlides(); // Update display
-		await fetchTestimonials(); // Refresh public testimonials
-		await displaySlides(); // Update public slides
-		showAlert("Testimonial deleted successfully!", false, slideshowWrapper);
-	} catch (error) {
-		showAlert("Network error deleting testimonial.", true, slideshowWrapper);
-	} finally {
-		if (loadingBar) loadingBar.style.display = "none";
-	}
 }
 // User Testimonial Slideshow: displays testimonials for the logged-in user
 let userTestimonials = [];
