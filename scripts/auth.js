@@ -115,6 +115,7 @@ async function onLoad() {
   const logged = await checkAuthentication(token);
   authNeeded = logged === null;
   loggedIn = logged !== null;
+  const allowedHtmlRegex = /^\/?[a-zA-Z0-9_-]+\.html$/i;
   if (loggedIn && logged) {
     const urlParams = new URLSearchParams(window.location.search);
     const redirectUri = urlParams.get("redirect_uri");
@@ -150,7 +151,7 @@ async function onLoad() {
     }
 
     if (adminUser) {
-      if (redirectUri && !redirectToPortal) {
+      if (redirectUri && !redirectToPortal && allowedHtmlRegex.test(redirectUri)) {
         window.location.href = redirectUri;
       } else if (
         redirectToPortal &&
@@ -160,7 +161,7 @@ async function onLoad() {
         window.location.href = ADMIN_PATH;
       }
     } else {
-      if (redirectUri && !redirectToPortal) {
+      if (redirectUri && !redirectToPortal && allowedHtmlRegex.test(redirectUri)) {
         window.location.href = redirectUri;
       } else if (
         (redirectToPortal &&
