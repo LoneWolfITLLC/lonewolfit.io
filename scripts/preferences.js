@@ -151,46 +151,46 @@ function initPreferencesPage(darkMode, autoDarkMode, logoGlow, titleTextGlow) {
 }
 
 function applyLogoGlow(isLogoGlow) {
-    const header__logo = document.querySelector(".header__logo");
-    const main__logo = document.querySelector(".main__logo");
+	const header__logo = document.querySelector(".header__logo");
+	const main__logo = document.querySelector(".main__logo");
 
-    if (header__logo) {
-        if (isLogoGlow) {
-            header__logo.classList.remove("header__logo--no-glow");
-        } else {
-            header__logo.classList.add("header__logo--no-glow");
+	if (header__logo) {
+		if (isLogoGlow) {
+			header__logo.classList.remove("header__logo--no-glow");
+		} else {
+			header__logo.classList.add("header__logo--no-glow");
 		}
-    }
+	}
 
-    if (main__logo) {
-        if (isLogoGlow) {
+	if (main__logo) {
+		if (isLogoGlow) {
 			// Remove the BEM hoverable class to allow native :hover to work
 			main__logo.classList.remove("main__logo--no-glow");
-        } else {
-            main__logo.classList.add("main__logo--no-glow");
-        }
-    }
+		} else {
+			main__logo.classList.add("main__logo--no-glow");
+		}
+	}
 }
 
 function applyTitleTextGlow(isTitleTextGlow) {
-    const titleText = document.querySelector(".header__title");
-    const mainSectionHeaders = document.querySelectorAll(".main__heading");
+	const titleText = document.querySelector(".header__title");
+	const mainSectionHeaders = document.querySelectorAll(".main__heading");
 
-    if (titleText) {
-        if (isTitleTextGlow) {
-            titleText.classList.remove("header__title--no-glow");
-        } else {
-            titleText.classList.add("header__title--no-glow");
-        }
-    }
+	if (titleText) {
+		if (isTitleTextGlow) {
+			titleText.classList.remove("header__title--no-glow");
+		} else {
+			titleText.classList.add("header__title--no-glow");
+		}
+	}
 
-    mainSectionHeaders.forEach((header) => {
-        if (isTitleTextGlow) {
-            header.classList.remove("main__heading--no-glow");
-        } else {
-            header.classList.add("main__heading--no-glow");
-        }
-    });
+	mainSectionHeaders.forEach((header) => {
+		if (isTitleTextGlow) {
+			header.classList.remove("main__heading--no-glow");
+		} else {
+			header.classList.add("main__heading--no-glow");
+		}
+	});
 }
 //TODO Apply each preference to the page
 function applyPreferences({ darkMode, logoGlow, titleTextGlow }) {
@@ -242,7 +242,7 @@ window.addEventListener("preAuthChecked", () => {
 				logoGlow: resolvedLogoGlow,
 				titleTextGlow: resolvedTitleTextGlow,
 			});
-			
+
 			// Only initialize preferences page logic if on preferences.html
 			if (window.location.pathname === "/preferences.html") {
 				initPreferencesPage(
@@ -318,9 +318,17 @@ function savePreference(key, value) {
 		})
 		.catch((err) => {
 			console.error("Error saving preference:", err);
-			alertModal(
-				"An error occurred while saving your preference: "+ err.message || "Please try again later and check your connection."
-			);
+			if (isDefined(alertModal) && typeof alertModal === "function") {
+				alertModal(
+					"An error occurred while saving your preference: " + err.message ||
+						"Please try again later and check your connection."
+				);
+			} else {
+				alert(
+					"An error occurred while saving your preference: " + err.message ||
+						"Please try again later and check your connection."
+				);
+			}
 			return false;
 		})
 		.finally(() => {
