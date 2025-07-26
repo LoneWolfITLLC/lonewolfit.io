@@ -91,7 +91,7 @@ async function fetchAndDisplayInvoices() {
 					}</p>
 					${
 						invoice.status === "open"
-							? `<a href="${invoice.hosted_invoice_url}" target="_blank" class="btn btn-success invoices__pay-btn">Pay Now</a>`
+							? `<a href="${invoice.hosted_invoice_url}" target="_blank" class="btn btn-success">Pay Now</a>`
 							: ""
 					}
 				</div>

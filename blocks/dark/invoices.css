@@ -104,22 +104,6 @@ body.dark-mode .invoices__actions {
 	margin-top: 10px;
 }
 
-body.dark-mode .invoices__pay-btn {
-	min-width: 120px;
-	font-weight: 600;
-	background: #00bfff;
-	color: #032e4c;
-	border: 1.5px solid #00ffff;
-	box-shadow: 0 2px 12px #00ffff44;
-	transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s,
-		color 0.3s;
-}
-body.dark-mode .invoices__pay-btn:hover {
-	background: #00ffff;
-	color: #032e4c;
-	box-shadow: 0 0 24px #00ffffcc;
-}
-
 body.dark-mode .invoices__chevron {
 	display: inline-block;
 	width: 28px;
