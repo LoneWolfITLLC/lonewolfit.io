@@ -6,33 +6,29 @@
   box-shadow: 0 4px 24px 0 rgba(0, 80, 180, 0.10), 0 1.5px 8px 0 rgba(0, 80, 180, 0.08);
   margin: 18px 0;
   padding: 22px 28px 18px 28px;
-  transition: box-shadow 0.35s cubic-bezier(0.4, 0.2, 0.2, 1), background 0.3s;
+  transition: box-shadow 0.35s cubic-bezier(0.4, 0.2, 0.2, 1), background 0.3s, height 0.3s smooth, max-height 0.3s smooth;
   position: relative;
   border: 1px solid #e3e8f0;
-  animation: fadeIn 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
 
 .contactform__item:hover {
   box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.12), 0 1.5px 8px 0 rgba(0, 0, 0, 0.07);
   border: 1.5px solid #e3e8f0;
   background: linear-gradient(90deg, #fff 85%, #f5faff 100%);
-  transition: box-shadow 0.4s cubic-bezier(0.4, 0.2, 0.2, 1), border 0.3s, background 0.3s;
-  animation: none;
+  transition: box-shadow 0.4s cubic-bezier(0.4, 0.2, 0.2, 1), border 0.3s, background 0.3s, height 0.3s smooth, max-height 0.3s smooth;
 }
 
 .contactform__item:active {
   box-shadow: 0 8px 32px 0 rgba(0, 80, 180, 0.18), 0 2.5px 16px 0 rgba(0, 80, 180, 0.12);
   background: #f5faff;
   border: 2px solid #e3e8f0;
-  transition: box-shadow 0.4s cubic-bezier(0.4, 0.2, 0.2, 1), border 0.3s, background 0.3s;
-  animation: none;
+  transition: box-shadow 0.4s cubic-bezier(0.4, 0.2, 0.2, 1), border 0.3s, background 0.3s, height 0.3s smooth, max-height 0.3s smooth;
 }
 
 .contactform__item:focus-within {
   box-shadow: 0 0 0 3px #00bfff, 0 8px 32px 0 rgba(0, 80, 180, 0.18);
   outline: none;
-  transition: box-shadow 0.4s cubic-bezier(0.4, 0.2, 0.2, 1), border 0.3s;
-  animation: none;
+  transition: box-shadow 0.4s cubic-bezier(0.4, 0.2, 0.2, 1), border 0.3s, height 0.3s smooth, max-height 0.3s smooth;
 }
 
 .contactform__summary {
@@ -278,15 +274,4 @@
   min-width: 280px;
   width: 100%;
   box-sizing: border-box;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
