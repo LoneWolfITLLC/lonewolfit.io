@@ -72,14 +72,14 @@ window.addEventListener("authChecked", async function () {
 		const summary = document.createElement("div");
 		summary.className = "contactform__summary";
 		summary.innerHTML = `
-            <span class="contactform__user-name">${sub.name || "-"}</span>
-            <span class="contactform__summary-message">${(
+			<span class="contactform__user-name">${sub.name || "-"}</span>
+			<span class="contactform__summary-message">${(
 							sub.message || "-"
 						).slice(0, 50)}${
 			sub.message && sub.message.length > 50 ? "..." : ""
 		}</span>
-            <span class="contactform__summary-date">${dateStr}</span>
-        `;
+			<span class="contactform__summary-date">${dateStr}</span>
+		`;
 
 		// Chevron as sibling to summary and details (child of item)
 		const chevron = document.createElement("span");
@@ -91,30 +91,30 @@ window.addEventListener("authChecked", async function () {
 		details.className = "contactform__details";
 		details.style.display = "none";
 		details.innerHTML = `
-            <div class="contactform__user">
-                <span class="contactform__user-label">Name:</span> <span class="contactform__user-name">${
+			<div class="contactform__user">
+				<span class="contactform__user-label">Name:</span> <span class="contactform__user-name">${
 									sub.name || "-"
 								}</span>
-                <span class="contactform__user-label">Email:</span> <a href="mailto:${
+				<span class="contactform__user-label">Email:</span> <a href="mailto:${
 									sub.email || ""
 								}" class="contactform__user-email">${sub.email || "-"}</a>
-                <span class="contactform__user-label">Phone:</span> <a href="tel:${
+				<span class="contactform__user-label">Phone:</span> <a href="tel:${
 									sub.phone || ""
 								}" class="contactform__user-phone">${sub.phone || "-"}</a>
-            </div>
-            <div class="contactform__message"><strong>Message:</strong><br>${
+			</div>
+			<div class="contactform__message"><strong>Message:</strong><br>${
 							sub.message || "-"
 						}</div>
-            <div class="contactform__actions">
-                <button class="btn btn-primary contactform__call-btn" title="Call Client" ${
+			<div class="contactform__actions">
+				<button class="btn btn-primary contactform__call-btn" title="Call Client" ${
 									sub.phone ? "" : "disabled"
 								}>Call Client</button>
-                <button class="btn btn-secondary contactform__email-btn" title="Send Email to Client" ${
+				<button class="btn btn-secondary contactform__email-btn" title="Send Email to Client" ${
 									sub.email ? "" : "disabled"
 								}>Send Email</button>
-                <button class="btn btn-danger contactform__delete-btn" title="Delete Submission">Delete Message</button>
-            </div>
-        `;
+				<button class="btn btn-delete contactform__delete-btn" title="Delete Submission">Delete Message</button>
+			</div>
+		`;
 
 		// Chevron expand/collapse logic
 		let expanded = false;
@@ -158,12 +158,11 @@ window.addEventListener("authChecked", async function () {
 		// Delete
 		const deleteBtn = details.querySelector(".contactform__delete-btn");
 		if (deleteBtn) {
-			deleteBtn.addEventListener("click", async function () {
-				if (!confirm("Are you sure you want to delete this submission?"))
-					return;
-				if (loadingBar) loadingBar.style.display = "block";
-				try {
-					const response = await fetch(
+			deleteBtn.addEventListener("click", function () {
+				confirmModal("Are you sure you want to delete this submission?", function(result) {
+					if (!result) return;
+					if (loadingBar) loadingBar.style.display = "block";
+					fetch(
 						URL_BASE + `/api/admin/contact-form/submission/${sub.id}`,
 						{
 							method: "DELETE",
@@ -173,24 +172,28 @@ window.addEventListener("authChecked", async function () {
 								}`,
 							},
 						}
-					);
-					const text = await response.text();
-					if (!response.ok) {
-						showAlert(text || "Error deleting submission.", true, alertDiv);
-						return;
-					}
-					showAlert("Submission deleted successfully.", false, alertDiv);
-					item.remove();
-					// If no more items, show empty message
-					if (!listDiv.querySelector(".contactform__item")) {
-						listDiv.innerHTML =
-							'<div class="main__text main__item-centered">No contact form submissions found.</div>';
-					}
-				} catch (err) {
-					showAlert("Network error deleting submission.", true, alertDiv);
-				} finally {
-					if (loadingBar) loadingBar.style.display = "none";
-				}
+					)
+						.then(async (response) => {
+							const text = await response.text();
+							if (!response.ok) {
+								showAlert(text || "Error deleting submission.", true, alertDiv);
+								return;
+							}
+							showAlert("Submission deleted successfully.", false, alertDiv);
+							item.remove();
+							// If no more items, show empty message
+							if (!listDiv.querySelector(".contactform__item")) {
+								listDiv.innerHTML =
+									'<div class="main__text main__item-centered">No contact form submissions found.</div>';
+							}
+						})
+						.catch((err) => {
+							showAlert("Network error deleting submission.", true, alertDiv);
+						})
+						.finally(() => {
+							if (loadingBar) loadingBar.style.display = "none";
+						});
+				});
 			});
 		}
 

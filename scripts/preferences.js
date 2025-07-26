@@ -356,6 +356,17 @@ function deletePreference(key) {
 		.then((response) => response.ok)
 		.catch((err) => {
 			console.error("Error deleting preference:", err);
+			if (isDefined(alertModal) && typeof alertModal === "function") {
+				alertModal(
+					"An error occurred while deleting your preference: " + err.message ||
+						"Please try again later and check your connection."
+				);
+			} else {
+				alert(
+					"An error occurred while deleting your preference: " + err.message ||
+						"Please try again later and check your connection."
+				);
+			}
 			return false;
 		})
 		.finally(() => {
