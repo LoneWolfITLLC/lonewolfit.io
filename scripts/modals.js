@@ -85,7 +85,7 @@ function confirmModal(message, onConfirm) {
 
   // Focus trap
   const focusable = [closeButton, confirmBtn, cancelBtn];
-  let focusIdx = 1; // default to Confirm
+  let focusIdx = 0; // default to Confirm
   modal.focus();
   modal.addEventListener("keydown", (e) => {
     if (e.key === "Tab") {
@@ -180,7 +180,7 @@ function promptModal(message, defaultValue = "", onConfirm) {
 
   // Focus trap
   const focusable = [closeButton, confirmBtn, cancelBtn, input];
-  let focusIdx = 1; // default to OK
+  let focusIdx = 0; // default to Close
   modal.focus();
   modal.addEventListener("keydown", (e) => {
     if (e.key === "Tab") {
