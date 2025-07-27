@@ -206,39 +206,38 @@ async function buttonFunctions() {
   // DELETE USER HANDLER
   const deleteBtn = document.getElementById("deleteUserBtn");
   deleteBtn.addEventListener("click", async () => {
-    if (
-      !confirm(
-        "Are you sure you want to delete this user? This cannot be undone."
-      )
-    ) {
-      return;
-    }
-    const token = getTokenFromSession();
-    const editorId = document.getElementById("editorId").value;
-    showLoading();
-    const res = await fetch(URL_BASE + "/api/admin/delete-account", {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ editorId }),
-    });
-    hideLoading();
-    if (res.ok) {
-      showMessage("User deleted successfully.", true);
-      // Wait 2 seconds before hiding the modal
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      hideModal("editUserModal");
-      loadUsers();
-    } else {
-      let errorMsg = "Failed to delete user";
-      try {
-        const errJson = await res.json().catch(() => null);
-        errorMsg = errJson?.error || errJson?.message || errorMsg;
-      } catch {}
-      showMessage(errorMsg, false);
-      //OPTIONAL: Hide modal
-    }
+    confirmModal(
+      "Are you sure you want to delete this user? This cannot be undone.",
+      async function (confirmed) {
+        if (!confirmed) return;
+        const token = getTokenFromSession();
+        const editorId = document.getElementById("editorId").value;
+        showLoading();
+        const res = await fetch(URL_BASE + "/api/admin/delete-account", {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ editorId }),
+        });
+        hideLoading();
+        if (res.ok) {
+          showMessage("User deleted successfully.", true);
+          // Wait 2 seconds before hiding the modal
+          await new Promise((resolve) => setTimeout(resolve, 2000));
+          hideModal("editUserModal");
+          loadUsers();
+        } else {
+          let errorMsg = "Failed to delete user";
+          try {
+            const errJson = await res.json().catch(() => null);
+            errorMsg = errJson?.error || errJson?.message || errorMsg;
+          } catch {}
+          showMessage(errorMsg, false);
+          //OPTIONAL: Hide modal
+        }
+      }
+    );
   });
 }
