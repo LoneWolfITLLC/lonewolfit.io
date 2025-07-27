@@ -10,14 +10,14 @@ function showModal(id) {
   // Remove any existing modal first
   hideModal(id);
 
-  // Modal HTML (matches your provided markup)
+  // Modal HTML (all IDs are unique to editUser context)
   const modal = document.createElement("div");
   modal.id = id;
   modal.className = "modal";
   modal.tabIndex = -1;
   modal.style.display = "flex";
   modal.innerHTML = `
-    <div class="modal-dialog" id="editModalBody">
+    <div class="modal-dialog" id="editUserModalBody">
       <form
         id="editUserForm"
         class="modal-content"
@@ -28,11 +28,11 @@ function showModal(id) {
           <button
             type="button"
             class="modal-close-button"
-            id="closeEditModalBtn"
+            id="closeEditUserModalBtn"
           ></button>
         </div>
         <div
-          id="editModalAlert"
+          id="editUserModalAlert"
           class="alertDiv main__alert"
           style="display: none"
         ></div>
@@ -159,29 +159,146 @@ function showModal(id) {
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-delete" id="deleteUserBtn">
-            Delete User
-          </button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
           <button
             type="button"
             class="btn btn-primary"
-            id="cancelEditModalBtn"
+            id="cancelEditUserModalBtn"
           >
             Cancel
           </button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-delete" id="deleteUserModalBtn">
+            Delete User
+          </button>
         </div>
       </form>
     </div>
   `;
   document.body.appendChild(modal);
 
-  // Attach close/cancel button handlers
-  document.getElementById("closeEditModalBtn").onclick = () => hideModal(id);
-  document.getElementById("cancelEditModalBtn").onclick = () => hideModal(id);
+  const deleteBtn = document.getElementById("deleteUserModalBtn");
+  deleteBtn.addEventListener("click", function (e) {
+    confirmModal(
+      "Are you sure you want to delete this user? This cannot be undone.",
+      async function (confirmed) {
+        if (!confirmed) {
+          // Do nothing, leave modal open and allow table/modal events
+          return;
+        }
+        const token = getTokenFromSession();
+        const editorId = document.getElementById("editorId").value;
+        showLoading();
+        const res = await fetch(URL_BASE + "/api/admin/delete-account", {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ editorId }),
+        });
+        hideLoading();
+        if (res.ok) {
+          showMessage("User deleted successfully.", true);
+          await new Promise((resolve) => setTimeout(resolve, 2000));
+          hideModal("editUserModal");
+          loadUsers();
+        } else {
+          let errorMsg = "Failed to delete user";
+          try {
+            const errJson = await res.json().catch(() => null);
+            errorMsg = errJson?.error || errJson?.message || errorMsg;
+          } catch {}
+          showMessage(errorMsg, false);
+        }
+      }
+    );
+  });
 
-  // Attach form and delete button logic
-  buttonFunctions();
+  // Handle form submit
+  document
+    .getElementById("editUserForm")
+    .addEventListener("submit", async function (e) {
+      try {
+        e.preventDefault();
+        // Gather form data as a plain object
+        const data = {
+          editorId: document.getElementById("editorId").value,
+          firstName: document.getElementById("firstName").value,
+          middleName: document.getElementById("middleName").value,
+          lastName: document.getElementById("lastName").value,
+          username: document.getElementById("username").value,
+          email: document.getElementById("email").value,
+          phone: document.getElementById("phone").value,
+          address: document.getElementById("address").value,
+          dbaName: document.getElementById("dbaName").value,
+          businessAddress: document.getElementById("businessAddress").value,
+          stripeCustomerId: document.getElementById("stripeCustomerId").value,
+          endUserCanEdit: document
+            .getElementById("endUserCanEdit")
+            .checked.toString(),
+          adminUser: document.getElementById("adminUser").checked.toString(),
+        };
+
+        const token = getTokenFromSession();
+        showLoading();
+        const res = await fetch(URL_BASE + "/api/admin/edit-user", {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+        hideLoading();
+        if (!res.ok) {
+          let errorMsg = "Update failed";
+          if (res instanceof Response) {
+            // If err is a fetch Response object
+            try {
+              const errJson = await res.json().catch(() => null);
+              errorMsg = errJson?.error || errJson?.message || errorMsg;
+            } catch {}
+          } else if (res && res.error) {
+            errorMsg = res.error;
+          } else if (res && res.message) {
+            errorMsg = res.message;
+          }
+          showMessage(errorMsg, false);
+        } else {
+          showMessage("User updated!", true);
+          showLoading();
+          await updateStripeCustomer(
+            new FormData(document.getElementById("editUserForm"))
+          );
+          hideLoading();
+          loadUsers();
+          //wait 2 seconds before hiding the loading modal with a promise
+          await new Promise((resolve) => setTimeout(resolve, 2000));
+          hideModal("editUserModal");
+          return;
+        }
+      } catch (err) {
+        let errorMsg = "Update failed";
+        if (err instanceof Response) {
+          // If err is a fetch Response object
+          try {
+            const errJson = await err.json();
+            errorMsg = errJson?.error || errJson?.message || errorMsg;
+          } catch {}
+        } else if (err && err.error) {
+          errorMsg = err.error;
+        } else if (err && err.message) {
+          errorMsg = err.message;
+        }
+        showMessage(errorMsg, false);
+      }
+    });
+
+  // Attach close/cancel button handlers
+  document.getElementById("closeEditUserModalBtn").onclick = () =>
+    hideModal(id);
+  document.getElementById("cancelEditUserModalBtn").onclick = () =>
+    hideModal(id);
 }
 
 function hideModal(id) {
@@ -194,9 +311,10 @@ function hideModal(id) {
 // Use showAlert from alert.js for all messages
 function showMessage(message, isSuccess) {
   // Use the alertDiv in the editUserForm element form...
-  let modalElement = document.getElementById("editModalBody");
+  let modalElement = document.getElementById("editUserModalBody");
   // If modalElement is not found, fallback to the main section
-  if (!modalElement) modalElement = document.getElementById("editUserAlert");
+  if (!modalElement)
+    modalElement = document.getElementById("editUserModalAlert");
   showAlert(message, !isSuccess, modalElement);
 }
 
@@ -297,126 +415,5 @@ async function updateStripeCustomer(fd) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  });
-}
-
-async function buttonFunctions() {
-  // Handle form submit
-  document
-    .getElementById("editUserForm")
-    .addEventListener("submit", async function (e) {
-      try {
-        e.preventDefault();
-        // Gather form data as a plain object
-        const data = {
-          editorId: document.getElementById("editorId").value,
-          firstName: document.getElementById("firstName").value,
-          middleName: document.getElementById("middleName").value,
-          lastName: document.getElementById("lastName").value,
-          username: document.getElementById("username").value,
-          email: document.getElementById("email").value,
-          phone: document.getElementById("phone").value,
-          address: document.getElementById("address").value,
-          dbaName: document.getElementById("dbaName").value,
-          businessAddress: document.getElementById("businessAddress").value,
-          stripeCustomerId: document.getElementById("stripeCustomerId").value,
-          endUserCanEdit: document
-            .getElementById("endUserCanEdit")
-            .checked.toString(),
-          adminUser: document.getElementById("adminUser").checked.toString(),
-        };
-
-        const token = getTokenFromSession();
-        showLoading();
-        const res = await fetch(URL_BASE + "/api/admin/edit-user", {
-          method: "PUT",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        });
-        hideLoading();
-        if (!res.ok) {
-          let errorMsg = "Update failed";
-          if (res instanceof Response) {
-            // If err is a fetch Response object
-            try {
-              const errJson = await res.json().catch(() => null);
-              errorMsg = errJson?.error || errJson?.message || errorMsg;
-            } catch {}
-          } else if (res && res.error) {
-            errorMsg = res.error;
-          } else if (res && res.message) {
-            errorMsg = res.message;
-          }
-          showMessage(errorMsg, false);
-        } else {
-          showMessage("User updated!", true);
-          showLoading();
-          await updateStripeCustomer(
-            new FormData(document.getElementById("editUserForm"))
-          );
-          hideLoading();
-          loadUsers();
-          //wait 2 seconds before hiding the loading modal with a promise
-          await new Promise((resolve) => setTimeout(resolve, 2000));
-          hideModal("editUserModal");
-          return;
-        }
-      } catch (err) {
-        let errorMsg = "Update failed";
-        if (err instanceof Response) {
-          // If err is a fetch Response object
-          try {
-            const errJson = await err.json();
-            errorMsg = errJson?.error || errJson?.message || errorMsg;
-          } catch {}
-        } else if (err && err.error) {
-          errorMsg = err.error;
-        } else if (err && err.message) {
-          errorMsg = err.message;
-        }
-        showMessage(errorMsg, false);
-      }
-    });
-  // DELETE USER HANDLER
-  const deleteBtn = document.getElementById("deleteUserBtn");
-  deleteBtn.addEventListener("click", function () {
-    confirmModal(
-      "Are you sure you want to delete this user? This cannot be undone.",
-      async function (confirmed) {
-        if (!confirmed) {
-          // Do nothing, leave modal open and allow table/modal events
-          return;
-        }
-        // No need for e.preventDefault() here!
-        const token = getTokenFromSession();
-        const editorId = document.getElementById("editorId").value;
-        showLoading();
-        const res = await fetch(URL_BASE + "/api/admin/delete-account", {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ editorId }),
-        });
-        hideLoading();
-        if (res.ok) {
-          showMessage("User deleted successfully.", true);
-          await new Promise((resolve) => setTimeout(resolve, 2000));
-          hideModal("editUserModal");
-          loadUsers();
-        } else {
-          let errorMsg = "Failed to delete user";
-          try {
-            const errJson = await res.json().catch(() => null);
-            errorMsg = errJson?.error || errJson?.message || errorMsg;
-          } catch {}
-          showMessage(errorMsg, false);
-        }
-      }
-    );
   });
 }
