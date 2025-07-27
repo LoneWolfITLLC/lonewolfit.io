@@ -18,7 +18,7 @@ body.dark-mode .btn-primary:disabled {
 }
 
 body.dark-mode .btn-primary:hover {
-	background-color: #00bfff;
+	background-color: #00e8f8;
 	color: #ffffff;
 	box-shadow: 0 0 32px #00ffffcc, 0 0 12px #00ffff99;
 	animation: steampunkGlowCyan 0.8s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
@@ -26,7 +26,7 @@ body.dark-mode .btn-primary:hover {
 }
 
 body.dark-mode .btn-primary:active {
-	background-color: #00e8f8;
+	background-color: #00bfff;
 	color: #ffffff;
 	box-shadow: 0 0 24px #00ffff99, 0 0 8px #00ffff44;
 	animation: steampunkGlowCyanActive 0.7s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
