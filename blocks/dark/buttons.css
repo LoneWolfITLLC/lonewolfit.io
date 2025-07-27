@@ -1,4 +1,3 @@
-
 body.dark-mode .btn-primary {
 	background-color: #031e3c;
 	border: none;
@@ -33,6 +32,16 @@ body.dark-mode .btn-primary:active {
 	opacity: 1;
 }
 
+/* Focused, animated glow for dark mode buttons */
+body.dark-mode .btn-primary:focus {
+    background-color: #00e8f8;
+    color: #fff;
+    outline: none;
+    box-shadow: 0 0 0 4px #00ffffcc, 0 0 24px #00ffffcc;
+    text-shadow: 0 0 16px #00ffffcc;
+    animation: steampunkGlowCyanFocused 0.8s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
+}
+
 body.dark-mode .btn-delete {
 	background-color: #2a2320;
 	border: none;
@@ -57,6 +66,16 @@ body.dark-mode .btn-delete:active {
 	box-shadow: 0 0 24px #ff444499, 0 0 8px #ff444444;
 	animation: steampunkGlowRedActive 0.7s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
 	opacity: 1;
+}
+
+/* Focused, animated glow for dark mode buttons */
+body.dark-mode .btn-delete:focus {
+    background-color: #ff4444;
+    color: #fff;
+    outline: none;
+    box-shadow: 0 0 0 4px #ff4444cc, 0 0 24px #ff4444cc;
+    text-shadow: 0 0 16px #ff4444cc;
+    animation: steampunkGlowRedFocused 0.8s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
 }
 
 body.dark-mode .btn-secondary {
@@ -93,6 +112,16 @@ body.dark-mode .btn-secondary:active {
 	opacity: 1;
 }
 
+/* Focused, animated glow for dark mode buttons */
+body.dark-mode .btn-secondary:focus {
+    background-color: #ff9500;
+    color: #fff;
+    outline: none;
+    box-shadow: 0 0 0 4px #ff9500cc, 0 0 24px #ff9500cc;
+    text-shadow: 0 0 16px #ff9500cc;
+    animation: steampunkGlowOrangeFocused 0.8s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
+}
+
 body.dark-mode .btn-success {
 	background-color: #1a3c28;
 	border: none;
@@ -126,6 +155,16 @@ body.dark-mode .btn-success:active {
 	box-shadow: 0 0 24px #aaffaa99, 0 0 8px #00ffff44;
 	animation: steampunkGlowGreenBlueActive 0.7s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
 	opacity: 1;
+}
+
+/* Focused, animated glow for dark mode buttons */
+body.dark-mode .btn-success:focus {
+    background-color: #66ff66;
+    color: #fff;
+    outline: none;
+    box-shadow: 0 0 0 4px #aaffaacc, 0 0 24px #aaffaacc;
+    text-shadow: 0 0 16px #aaffaacc;
+    animation: steampunkGlowGreenBlueFocused 0.8s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
 }
 
 @keyframes steampunkGlowCyan {
@@ -207,5 +246,50 @@ body.dark-mode .btn-success:active {
 		box-shadow: 0 0 32px #aaffaacc, 0 0 16px #00ffff99;
 		text-shadow: 0 0 24px #aaffaa, 0 0 16px #00ffffcc;
 	}
+}
+
+/* Even brighter/bigger focused glow animations for dark mode buttons */
+@keyframes steampunkGlowCyanFocused {
+    0% {
+        box-shadow: 0 0 32px #00ffffcc, 0 0 16px #00ffff99, 0 0 48px #00ffff88;
+        text-shadow: 0 0 24px #00ffffcc, 0 0 8px #00ffff99;
+    }
+    100% {
+        box-shadow: 0 0 64px #00ffffee, 0 0 32px #00ffffcc, 0 0 96px #00ffff88;
+        text-shadow: 0 0 48px #00ffffee, 0 0 16px #00ffffcc;
+    }
+}
+
+@keyframes steampunkGlowRedFocused {
+    0% {
+        box-shadow: 0 0 32px #ff4444cc, 0 0 16px #ff444499, 0 0 48px #ff444488;
+        text-shadow: 0 0 24px #ff4444cc, 0 0 8px #ff444499;
+    }
+    100% {
+        box-shadow: 0 0 64px #ff4444ee, 0 0 32px #ff4444cc, 0 0 96px #ff444488;
+        text-shadow: 0 0 48px #ff4444ee, 0 0 16px #ff4444cc;
+    }
+}
+
+@keyframes steampunkGlowOrangeFocused {
+    0% {
+        box-shadow: 0 0 32px #ff9500cc, 0 0 16px #ff950099, 0 0 48px #ff950088;
+        text-shadow: 0 0 24px #ff9500cc, 0 0 8px #ff950099;
+    }
+    100% {
+        box-shadow: 0 0 64px #ff9500ee, 0 0 32px #ff9500cc, 0 0 96px #ff950088;
+        text-shadow: 0 0 48px #ff9500ee, 0 0 16px #ff9500cc;
+    }
+}
+
+@keyframes steampunkGlowGreenBlueFocused {
+    0% {
+        box-shadow: 0 0 32px #aaffaacc, 0 0 16px #00ffff99, 0 0 48px #aaffaa88;
+        text-shadow: 0 0 24px #aaffaacc, 0 0 8px #00ffff99;
+    }
+    100% {
+        box-shadow: 0 0 64px #aaffaaee, 0 0 32px #00ffffcc, 0 0 96px #aaffaa88;
+        text-shadow: 0 0 48px #aaffaaee, 0 0 16px #00ffffcc;
+    }
 }
 
