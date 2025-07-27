@@ -1,17 +1,194 @@
 window.addEventListener("authChecked", async (event) => {
   const admin = event.detail.user ? event.detail.user.adminUser : false;
   if (admin) {
-    await buttonFunctions();
     await loadUsers();
   }
 });
 
 // Helper to show/hide modals
 function showModal(id) {
-  document.getElementById(id).style.display = "flex";
+  // Remove any existing modal first
+  hideModal(id);
+
+  // Modal HTML (matches your provided markup)
+  const modal = document.createElement("div");
+  modal.id = id;
+  modal.className = "modal";
+  modal.tabIndex = -1;
+  modal.style.display = "flex";
+  modal.innerHTML = `
+    <div class="modal-dialog" id="editModalBody">
+      <form
+        id="editUserForm"
+        class="modal-content"
+        enctype="multipart/form-data"
+      >
+        <div class="modal-header">
+          <h5 class="modal-title">Edit User</h5>
+          <button
+            type="button"
+            class="modal-close-button"
+            id="closeEditModalBtn"
+          ></button>
+        </div>
+        <div
+          id="editModalAlert"
+          class="alertDiv main__alert"
+          style="display: none"
+        ></div>
+        <div class="modal-body">
+          <input type="hidden" name="editorId" id="editorId" />
+
+          <div class="mb-2">
+            <label for="firstName" class="form-label">First Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="firstName"
+              name="firstName"
+              required
+              autocomplete="given-name"
+            />
+          </div>
+          <div class="mb-2">
+            <label>Middle Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="middleName"
+              name="middleName"
+            />
+          </div>
+          <div class="mb-2">
+            <label>Last Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="lastName"
+              name="lastName"
+              required
+            />
+          </div>
+          <div class="mb-2">
+            <label>Username</label>
+            <input
+              type="text"
+              class="form-control"
+              id="username"
+              name="username"
+              required
+            />
+          </div>
+          <div class="mb-2">
+            <label>Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              required
+            />
+          </div>
+          <div class="mb-2">
+            <label>Phone</label>
+            <input
+              type="text"
+              class="form-control"
+              id="phone"
+              name="phone"
+              required
+            />
+          </div>
+          <div class="mb-2">
+            <label>
+              Address<br /><small>(add1,add2,city,state,zip,country)</small>
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              id="address"
+              name="address"
+              required
+            />
+          </div>
+          <div class="mb-2">
+            <label>Stripe Cust. ID</label>
+            <input
+              type="text"
+              class="form-control"
+              id="stripeCustomerId"
+              name="stripeCustomerId"
+              required
+            />
+          </div>
+          <div class="mb-2">
+            <label>DBA Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="dbaName"
+              name="dbaName"
+            />
+          </div>
+          <div class="mb-2">
+            <label>Business Address</label>
+            <input
+              type="text"
+              class="form-control"
+              id="businessAddress"
+              name="businessAddress"
+            />
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="endUserCanEdit"
+              name="endUserCanEdit"
+            />
+            <label class="form-check-label">End-user can edit</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="adminUser"
+              name="adminUser"
+            />
+            <label class="form-check-label">Admin user</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-delete" id="deleteUserBtn">
+            Delete User
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            id="cancelEditModalBtn"
+          >
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  // Attach close/cancel button handlers
+  document.getElementById("closeEditModalBtn").onclick = () => hideModal(id);
+  document.getElementById("cancelEditModalBtn").onclick = () => hideModal(id);
+
+  // Attach form and delete button logic
+  buttonFunctions();
 }
+
 function hideModal(id) {
-  document.getElementById(id).style.display = "none";
+  const modal = document.getElementById(id);
+  if (modal) {
+    modal.remove();
+  }
 }
 
 // Use showAlert from alert.js for all messages
@@ -205,12 +382,15 @@ async function buttonFunctions() {
     });
   // DELETE USER HANDLER
   const deleteBtn = document.getElementById("deleteUserBtn");
-  deleteBtn.addEventListener("click", function (e) {
+  deleteBtn.addEventListener("click", function () {
     confirmModal(
       "Are you sure you want to delete this user? This cannot be undone.",
       async function (confirmed) {
-        if (!confirmed) return; // Don't prevent default if cancelled
-        e.preventDefault();
+        if (!confirmed) {
+          // Do nothing, leave modal open and allow table/modal events
+          return;
+        }
+        // No need for e.preventDefault() here!
         const token = getTokenFromSession();
         const editorId = document.getElementById("editorId").value;
         showLoading();
