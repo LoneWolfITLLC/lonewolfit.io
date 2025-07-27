@@ -205,7 +205,8 @@ async function buttonFunctions() {
     });
   // DELETE USER HANDLER
   const deleteBtn = document.getElementById("deleteUserBtn");
-  deleteBtn.addEventListener("click", async () => {
+  deleteBtn.addEventListener("click", async function (e) {
+    e.preventDefault();
     confirmModal(
       "Are you sure you want to delete this user? This cannot be undone.",
       async function (confirmed) {
