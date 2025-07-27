@@ -75,6 +75,7 @@ function renderTable() {
 
 // Open modal, pre-fill form
 function openEditModal(u) {
+  showModal("editUserModal");
   document.getElementById("editorId").value = u.id;
   document.getElementById("firstName").value = u.first_name;
   document.getElementById("middleName").value = u.middle_name || "";
@@ -88,7 +89,6 @@ function openEditModal(u) {
   document.getElementById("businessAddress").value = u.businessAddress || "";
   document.getElementById("endUserCanEdit").checked = Boolean(u.endUserCanEdit);
   document.getElementById("adminUser").checked = Boolean(u.adminUser);
-  showModal("editUserModal");
 }
 
 // Update Stripe customer (optional, can be called after user update)
