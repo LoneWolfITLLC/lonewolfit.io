@@ -205,12 +205,12 @@ async function buttonFunctions() {
     });
   // DELETE USER HANDLER
   const deleteBtn = document.getElementById("deleteUserBtn");
-  deleteBtn.addEventListener("click", async function (e) {
-    e.preventDefault();
+  deleteBtn.addEventListener("click", function (e) {
     confirmModal(
       "Are you sure you want to delete this user? This cannot be undone.",
       async function (confirmed) {
-        if (!confirmed) return;
+        if (!confirmed) return; // Don't prevent default if cancelled
+        e.preventDefault();
         const token = getTokenFromSession();
         const editorId = document.getElementById("editorId").value;
         showLoading();
@@ -225,7 +225,6 @@ async function buttonFunctions() {
         hideLoading();
         if (res.ok) {
           showMessage("User deleted successfully.", true);
-          // Wait 2 seconds before hiding the modal
           await new Promise((resolve) => setTimeout(resolve, 2000));
           hideModal("editUserModal");
           loadUsers();
@@ -236,7 +235,6 @@ async function buttonFunctions() {
             errorMsg = errJson?.error || errJson?.message || errorMsg;
           } catch {}
           showMessage(errorMsg, false);
-          //OPTIONAL: Hide modal
         }
       }
     );
