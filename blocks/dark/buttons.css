@@ -24,22 +24,22 @@ body.dark-mode .btn-primary:hover {
 	opacity: 1;
 }
 
+/* Focused, animated glow for dark mode buttons */
+body.dark-mode .btn-primary:focus {
+    background-color: #00cbe0; /* Between #00e8f8 (hover) and #00bfff (active) */
+    color: #fff;
+    outline: none;
+    box-shadow: 0 0 0 4px #00ffffcc, 0 0 24px #00ffffcc;
+    text-shadow: 0 0 16px #00ffffcc;
+    animation: steampunkGlowCyanFocused 0.8s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
+}
+
 body.dark-mode .btn-primary:active {
 	background-color: #00bfff;
 	color: #ffffff;
 	box-shadow: 0 0 24px #00ffff99, 0 0 8px #00ffff44;
 	animation: steampunkGlowCyanActive 0.7s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
 	opacity: 1;
-}
-
-/* Focused, animated glow for dark mode buttons */
-body.dark-mode .btn-primary:focus {
-    background-color: #00e8f8;
-    color: #fff;
-    outline: none;
-    box-shadow: 0 0 0 4px #00ffffcc, 0 0 24px #00ffffcc;
-    text-shadow: 0 0 16px #00ffffcc;
-    animation: steampunkGlowCyanFocused 0.8s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
 }
 
 body.dark-mode .btn-delete {
@@ -59,6 +59,15 @@ body.dark-mode .btn-delete:hover {
 	animation: steampunkGlowRed 0.8s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
 	opacity: 1;
 }
+/* Focused, animated glow for dark mode buttons */
+body.dark-mode .btn-delete:focus {
+    background-color: #ff6666; /* Between #ff4444 (hover) and #ff8888 (active) */
+    color: #fff;
+    outline: none;
+    box-shadow: 0 0 0 4px #ff4444cc, 0 0 24px #ff4444cc;
+    text-shadow: 0 0 16px #ff4444cc;
+    animation: steampunkGlowRedFocused 0.8s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
+}
 
 body.dark-mode .btn-delete:active {
 	background-color: #ff8888;
@@ -66,16 +75,6 @@ body.dark-mode .btn-delete:active {
 	box-shadow: 0 0 24px #ff444499, 0 0 8px #ff444444;
 	animation: steampunkGlowRedActive 0.7s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
 	opacity: 1;
-}
-
-/* Focused, animated glow for dark mode buttons */
-body.dark-mode .btn-delete:focus {
-    background-color: #ff4444;
-    color: #fff;
-    outline: none;
-    box-shadow: 0 0 0 4px #ff4444cc, 0 0 24px #ff4444cc;
-    text-shadow: 0 0 16px #ff4444cc;
-    animation: steampunkGlowRedFocused 0.8s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
 }
 
 body.dark-mode .btn-secondary {
@@ -104,22 +103,22 @@ body.dark-mode .btn-secondary:hover {
 	opacity: 1;
 }
 
+/* Focused, animated glow for dark mode buttons */
+body.dark-mode .btn-secondary:focus {
+    background-color: #ff7a1a; /* Between #e66000 (hover) and #a63d00 (active) */
+    color: #fff;
+    outline: none;
+    box-shadow: 0 0 0 4px #ff9500cc, 0 0 24px #ff9500cc;
+    text-shadow: 0 0 16px #ff9500cc;
+    animation: steampunkGlowOrangeFocused 0.8s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
+}
+
 body.dark-mode .btn-secondary:active {
 	background-color: #a63d00;
 	color: #ffffff;
 	box-shadow: 0 0 24px #ff950099, 0 0 8px #ff950044;
 	animation: steampunkGlowOrangeActive 0.7s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
 	opacity: 1;
-}
-
-/* Focused, animated glow for dark mode buttons */
-body.dark-mode .btn-secondary:focus {
-    background-color: #ff9500;
-    color: #fff;
-    outline: none;
-    box-shadow: 0 0 0 4px #ff9500cc, 0 0 24px #ff9500cc;
-    text-shadow: 0 0 16px #ff9500cc;
-    animation: steampunkGlowOrangeFocused 0.8s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
 }
 
 body.dark-mode .btn-success {
@@ -149,22 +148,22 @@ body.dark-mode .btn-success:hover {
 	opacity: 1;
 }
 
+/* Focused, animated glow for dark mode buttons */
+body.dark-mode .btn-success:focus {
+    background-color: #88ff88; /* Between #66ff66 (hover) and #aaffaa (active) */
+    color: #fff;
+    outline: none;
+    box-shadow: 0 0 0 4px #aaffaacc, 0 0 24px #aaffaacc;
+    text-shadow: 0 0 16px #aaffaacc;
+    animation: steampunkGlowGreenBlueFocused 0.8s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
+}
+
 body.dark-mode .btn-success:active {
 	background-color: #aaffaa;
 	color: #ffffff;
 	box-shadow: 0 0 24px #aaffaa99, 0 0 8px #00ffff44;
 	animation: steampunkGlowGreenBlueActive 0.7s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
 	opacity: 1;
-}
-
-/* Focused, animated glow for dark mode buttons */
-body.dark-mode .btn-success:focus {
-    background-color: #66ff66;
-    color: #fff;
-    outline: none;
-    box-shadow: 0 0 0 4px #aaffaacc, 0 0 24px #aaffaacc;
-    text-shadow: 0 0 16px #aaffaacc;
-    animation: steampunkGlowGreenBlueFocused 0.8s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
 }
 
 @keyframes steampunkGlowCyan {

@@ -18,17 +18,19 @@ function getCookie(name) {
 // Prevent duplicate event listeners
 let listenersAddedPreferences = false;
 
-function initPreferencesPage(darkMode, autoDarkMode, logoGlow, titleTextGlow) {
+function initPreferencesPage(darkMode, autoDarkMode, logoGlow, titleTextGlow, buttonGlow) {
 	const darkModeToggle = document.getElementById("darkModePref");
 	const autoDarkModeToggle = document.getElementById("autoDarkModePref");
 	const logoGlowToggle = document.getElementById("logoGlowPref");
 	const titleTextGlowToggle = document.getElementById("titleTextGlowPref");
+	const buttonGlowToggle = document.getElementById("buttonGlowPref");
 
 	if (
 		!darkModeToggle ||
 		!autoDarkModeToggle ||
 		!logoGlowToggle ||
-		!titleTextGlowToggle
+		!titleTextGlowToggle || 
+		!buttonGlowToggle
 	)
 		return;
 
@@ -37,6 +39,7 @@ function initPreferencesPage(darkMode, autoDarkMode, logoGlow, titleTextGlow) {
 	autoDarkModeToggle.classList.toggle("active", autoDarkMode === "on");
 	logoGlowToggle.classList.toggle("active", logoGlow === "on");
 	titleTextGlowToggle.classList.toggle("active", titleTextGlow === "on");
+	buttonGlowToggle.classList.toggle("active", buttonGlow === "on");
 
 	// Disable dark mode toggle if auto dark mode is on
 	if (autoDarkMode === "on") {
@@ -146,6 +149,22 @@ function initPreferencesPage(darkMode, autoDarkMode, logoGlow, titleTextGlow) {
 			);
 		});
 
+		buttonGlowToggle.addEventListener("click", (e) => {
+			e.preventDefault(); // Prevent default behavior
+			const isButtonGlow = buttonGlowToggle.classList.toggle("active");
+			savePreference("buttonGlow", isButtonGlow ? "on" : "off").then((success) => {
+				if (!success) {
+					// Revert the toggle state if saving fails
+					buttonGlowToggle.classList.toggle("active", !isButtonGlow);
+				} else {
+					// Optionally, apply button glow effect here if needed
+					if (typeof applyButtonGlow === "function") {
+						applyButtonGlow(darkMode, isButtonGlow);
+					}
+				}
+			});
+		});
+
 		listenersAddedPreferences = true; // Mark listeners as added
 	}
 }
@@ -193,11 +212,38 @@ function applyTitleTextGlow(isTitleTextGlow) {
 	});
 }
 //TODO Apply each preference to the page
-function applyPreferences({ darkMode, logoGlow, titleTextGlow }) {
+function applyPreferences({ darkMode, logoGlow, titleTextGlow, buttonGlow }) {
 	// Only apply logo glow if logoGlow is "on"
 	applyLogoGlow(logoGlow === "on");
 	applyTitleTextGlow(titleTextGlow === "on");
+	applyButtonGlow(darkMode, buttonGlow === "on");
 }
+
+function applyButtonGlow(darkMode, isButtonGlow) {
+	const menu_sliders = document.querySelectorAll(".menu__item-slider");
+	if (menu_sliders) {
+		menu_sliders.forEach((menu_slider) => {
+			if (isButtonGlow) {
+				menu_slider.classList.remove("menu__item-slider--no-glow");
+			} else {
+				menu_slider.classList.add("menu__item-slider--no-glow");
+			}
+		});
+	}
+	if(!darkMode || darkMode !== "on") {
+		// If dark mode is off, we don't apply button glow settings
+		return;
+	}
+	const buttons = document.querySelectorAll(".btn");
+	buttons.forEach((button) => {
+		if (isButtonGlow) {
+			button.classList.remove("btn--no-glow");
+		} else {
+			button.classList.add("btn--no-glow");
+		}
+	});
+}
+
 window.addEventListener("preAuthChecked", () => {
 	const darkMode = createAndLoadPreference(
 		"darkMode",
@@ -209,12 +255,14 @@ window.addEventListener("preAuthChecked", () => {
 	);
 	const logoGlow = createAndLoadPreference("logoGlow", "on");
 	const titleTextGlow = createAndLoadPreference("titleTextGlow", "on");
-	Promise.all([darkMode, autoDarkMode, logoGlow, titleTextGlow]).then(
+	const buttonGlow = createAndLoadPreference("buttonGlow", "on");
+	Promise.all([darkMode, autoDarkMode, logoGlow, titleTextGlow, buttonGlow]).then(
 		([
 			resolvedDarkMode,
 			resolvedAutoDarkMode,
 			resolvedLogoGlow,
 			resolvedTitleTextGlow,
+			resolvedButtonGlow
 		]) => {
 			window.dispatchEvent(triggerDarkModeEvent);
 
@@ -224,7 +272,8 @@ window.addEventListener("preAuthChecked", () => {
 					resolvedDarkMode,
 					resolvedAutoDarkMode,
 					resolvedLogoGlow,
-					resolvedTitleTextGlow
+					resolvedTitleTextGlow,
+					resolvedButtonGlow
 				);
 			}
 
@@ -233,6 +282,7 @@ window.addEventListener("preAuthChecked", () => {
 				darkMode: resolvedDarkMode,
 				logoGlow: resolvedLogoGlow,
 				titleTextGlow: resolvedTitleTextGlow,
+				buttonGlow: resolvedButtonGlow
 			};
 
 			// Ensure applyPreferences runs only after loggedIn is defined
@@ -241,6 +291,7 @@ window.addEventListener("preAuthChecked", () => {
 				autoDarkMode: resolvedAutoDarkMode,
 				logoGlow: resolvedLogoGlow,
 				titleTextGlow: resolvedTitleTextGlow,
+				buttonGlow: resolvedButtonGlow
 			});
 
 			// Only initialize preferences page logic if on preferences.html
@@ -249,7 +300,8 @@ window.addEventListener("preAuthChecked", () => {
 					resolvedDarkMode,
 					resolvedAutoDarkMode,
 					resolvedLogoGlow,
-					resolvedTitleTextGlow
+					resolvedTitleTextGlow,
+					resolvedButtonGlow
 				);
 			}
 		}

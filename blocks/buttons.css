@@ -20,7 +20,17 @@
 	outline: none;
 	background-color: #022a4d;
 	text-shadow: 0 0 8px #00ffff;
-	animation: glowing-active-primary 0.7s infinite alternate;
+	animation: glowing-focus-primary 0.7s infinite alternate;
+}
+
+/* ACTIVE styles for regular mode buttons */
+.btn-primary:active {
+    background-color: #00bfff;
+    color: #fff;
+    outline: none;
+    box-shadow: 0 0 0 4px #00ffff99, 0 0 24px #00ffff99;
+    text-shadow: 0 0 16px #00ffff99;
+    animation: glowing-primary-active 0.7s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
 }
 
 .btn-delete {
@@ -42,8 +52,18 @@
 	outline: none;
 	background-color: #640000;
 	text-shadow: 0 0 8px #ff3333;
-	animation: glowing-active-delete 0.7s infinite alternate;
+	animation: glowing-focus-delete 0.7s infinite alternate;
 	color: #fff;
+}
+
+/* ACTIVE styles for regular mode buttons */
+.btn-delete:active {
+    background-color: #ff4444;
+    color: #fff;
+    outline: none;
+    box-shadow: 0 0 0 4px #ff444499, 0 0 24px #ff444499;
+    text-shadow: 0 0 16px #ff444499;
+    animation: glowing-red-active 0.7s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
 }
 
 .btn-secondary {
@@ -72,7 +92,17 @@
 	outline: none;
 	background-color: #e66000;
 	text-shadow: 0 0 8px #ff9500;
-	animation: glowing-active-secondary 0.7s infinite alternate;
+	animation: glowing-focus-secondary 0.7s infinite alternate;
+}
+
+/* ACTIVE styles for regular mode buttons */
+.btn-secondary:active {
+    background-color: #ff9500;
+    color: #fff;
+    outline: none;
+    box-shadow: 0 0 0 4px #ff950099, 0 0 24px #ff950099;
+    text-shadow: 0 0 16px #ff950099;
+    animation: glowing-orange-active 0.7s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
 }
 
 .btn-success {
@@ -103,8 +133,33 @@
 	background-color: #34d058;
 	text-shadow: 0 0 8px #34d058;
 	color: #fff;
-	animation: glowing-active-success 0.7s infinite alternate;
+	animation: glowing-focus-success 0.7s infinite alternate;
 }
+
+/* ACTIVE styles for regular mode buttons */
+.btn-success:active {
+    background-color: #aaffaa;
+    color: #fff;
+    outline: none;
+    box-shadow: 0 0 0 4px #aaffaa99, 0 0 24px #aaffaa99;
+    text-shadow: 0 0 16px #aaffaa99;
+    animation: glowing-greenblue-active 0.7s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
+}
+
+.btn--no-glow {
+	box-shadow: none !important;
+	text-shadow: none !important;
+	animation: none !important;
+}
+
+.btn--no-glow:hover,
+.btn--no-glow:active,
+.btn--no-glow:focus {
+	box-shadow: none !important;
+	text-shadow: none !important;
+	animation: none !important;
+}
+
 
 @keyframes glowing-red {
 	from {
@@ -160,7 +215,7 @@
 }
 
 /* Keyframes for even brighter focus glows */
-@keyframes glowing-active-primary {
+@keyframes glowing-focus-primary {
     from {
         box-shadow: inset 0px 0px 16px #00ffff;
         text-shadow: 0 0 12px #00ffff;
@@ -171,7 +226,7 @@
     }
 }
 
-@keyframes glowing-active-delete {
+@keyframes glowing-focus-delete {
     from {
         box-shadow: inset 0px 0px 16px #ff2222;
         text-shadow: 0 0 12px #ff6666;
@@ -182,7 +237,7 @@
     }
 }
 
-@keyframes glowing-active-secondary {
+@keyframes glowing-focus-secondary {
     from {
         box-shadow: inset 0px 0px 16px #ffae42;
         text-shadow: 0 0 12px #ffd580;
@@ -193,7 +248,7 @@
     }
 }
 
-@keyframes glowing-active-success {
+@keyframes glowing-focus-success {
     from {
         box-shadow: inset 0px 0px 16px #43ff7a;
         text-shadow: 0 0 12px #7fff9e;
@@ -202,6 +257,51 @@
         box-shadow: inset 0px 0px 32px #7fff9e;
         text-shadow: 0 0 24px #43ff7a;
     }
+}
+
+/* Glowing animations for active state */
+@keyframes glowing-primary-active {
+	0% {
+		box-shadow: inset 0 0 24px #00ffff;
+		text-shadow: 0 0 8px #00ffff;
+	}
+	100% {
+		box-shadow: inset 0 0 32px #00ffff;
+		text-shadow: 0 0 16px #00ffff;
+	}
+}
+
+@keyframes glowing-red-active {
+	0% {
+		box-shadow: inset 0 0 24px #ff4444;
+		text-shadow: 0 0 8px #ff4444;
+	}
+	100% {
+		box-shadow: inset 0 0 32px #ff4444;
+		text-shadow: 0 0 16px #ff4444;
+	}
+}
+
+@keyframes glowing-orange-active {
+	0% {
+		box-shadow: inset 0 0 24px #ff9500;
+		text-shadow: 0 0 8px #ff9500;
+	}
+	100% {
+		box-shadow: inset 0 0 32px #ff9500;
+		text-shadow: 0 0 16px #ff9500;
+	}
+}
+
+@keyframes glowing-greenblue-active {
+	0% {
+		box-shadow: inset 0 0 24px #34d058;
+		text-shadow: 0 0 8px #34d058;
+	}
+	100% {
+		box-shadow: inset 0 0 32px #34d058;
+		text-shadow: 0 0 16px #34d058;
+	}
 }
 
 .header__nav-link {
@@ -339,6 +439,18 @@
 
 .menu__item-slider:hover::before {
 	animation: glow-box-shadow 1s ease-in-out infinite;
+}
+
+.menu__item-slider--no-glow {
+	animation: none !important;
+	box-shadow: none !important;
+}
+
+.menu__item-slider--no-glow::before,
+.menu__item-slider--no-glow:hover::before,
+.menu__item-slider--no-glow:hover {
+	animation: none !important;
+	box-shadow: none !important;
 }
 
 @keyframes glow-box-shadow {
