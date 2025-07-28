@@ -26,8 +26,8 @@ window.addEventListener("authChecked", async function () {
 				}
 			);
 			if (!response.ok) {
-				const text = await response.json();
-				showAlert(text.message || "Error fetching submissions.", true, alertDiv);
+				const text = await response.text();
+				showAlert(text || "Error fetching submissions.", true, alertDiv);
 				return;
 			}
 			const submissions = await response.json();
@@ -174,9 +174,9 @@ window.addEventListener("authChecked", async function () {
 						}
 					)
 						.then(async (response) => {
-							const text = await response.json();
+							const text = await response.text();
 							if (!response.ok) {
-								showAlert(text.message || "Error deleting submission.", true, alertDiv);
+								showAlert(text || "Error deleting submission.", true, alertDiv);
 								return;
 							}
 							showAlert("Submission deleted successfully.", false, alertDiv);
