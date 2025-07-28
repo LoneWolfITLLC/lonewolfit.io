@@ -317,22 +317,42 @@ function showModal(id) {
     }
   });
 
-  const buttonGlow = getPreference("buttonGlow").then(value => value === "on");
-  if(darkMode) {
-    const confirmBtn = document.querySelector("#editUserForm button[type='submit']");
-    buttonGlow.then(isGlowing => {
-      if(isGlowing) {
+  const buttonGlow = getPreference("buttonGlow").then(
+    (value) => value === "on"
+  );
+  if (darkMode) {
+    const confirmBtn = document.querySelector(
+      "#editUserForm button[type='submit']"
+    );
+    buttonGlow.then((isGlowing) => {
+      if (isGlowing) {
         confirmBtn.classList.remove("btn--no-glow");
-        document.getElementById("cancelEditUserModalBtn").classList.remove("btn--no-glow");
-        document.getElementById("deleteUserModalBtn").classList.remove("btn--no-glow");
-      }
-      else{
+        document
+          .getElementById("cancelEditUserModalBtn")
+          .classList.remove("btn--no-glow");
+        document
+          .getElementById("deleteUserModalBtn")
+          .classList.remove("btn--no-glow");
+      } else {
         confirmBtn.classList.add("btn--no-glow");
-        document.getElementById("cancelEditUserModalBtn").classList.add("btn--no-glow");
-        document.getElementById("deleteUserModalBtn").classList.add("btn--no-glow");
+        document
+          .getElementById("cancelEditUserModalBtn")
+          .classList.add("btn--no-glow");
+        document
+          .getElementById("deleteUserModalBtn")
+          .classList.add("btn--no-glow");
       }
     });
   }
+
+  const modalBlur = getPreference("blur").then((value) => value === "on");
+  modalBlur.then((isBlurred) => {
+    if (isBlurred) {
+      modal.classList.remove("modal--no-blur");
+    } else {
+      modal.classList.add("modal--no-blur");
+    }
+  });
 }
 
 function hideModal(id) {

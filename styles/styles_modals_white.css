@@ -31,6 +31,7 @@
     margin: 0 auto;
     display: block;
 }
+
 #invoice-modal {
     display: none;
     position: fixed;
@@ -221,6 +222,13 @@
     /* Center horizontally */
     z-index: 1050;
     /* Bootstrap modal z-index */
+    backdrop-filter: blur(5px);
+    /* Optional: add a blur effect */
+}
+
+.modal--no-blur {
+    backdrop-filter: none;
+    /* Remove blur effect */
 }
 
 .modal-body {

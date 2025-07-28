@@ -35,6 +35,15 @@ function alertModal(message) {
     }
   });
 
+  const modalBlur = getPreference("blur").then((value) => value === "on");
+  modalBlur.then((isBlurred) => {
+    if (isBlurred) {
+      modal.classList.remove("modal--no-blur");
+    } else {
+      modal.classList.add("modal--no-blur");
+    }
+  });
+
   const closeButton = modal.querySelector(".modal-close-button");
   closeButton.addEventListener("click", () => {
     modal.remove();
@@ -57,19 +66,6 @@ function alertModal(message) {
 }
 
 function confirmModal(message, onConfirm) {
-  //make sure this retuns a boolean
-  const existingConfirm = document.getElementById("confirmModal");
-  if (existingConfirm) existingConfirm.remove();
-  const existingOverlay = document.querySelector(".modal-overlay");
-  if (existingOverlay) existingOverlay.remove();
-
-  // Overlay to block background
-  const overlay = document.createElement("div");
-  overlay.className = "modal-overlay";
-  overlay.style =
-    "position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.4);z-index:9998;";
-  document.body.appendChild(overlay);
-
   const modal = document.createElement("div");
   modal.className = "modal";
   modal.id = "confirmModal";
@@ -131,6 +127,15 @@ function confirmModal(message, onConfirm) {
     }
   });
 
+  const modalBlur = getPreference("blur").then((value) => value === "on");
+  modalBlur.then((isBlurred) => {
+    if (isBlurred) {
+      modal.classList.remove("modal--no-blur");
+    } else {
+      modal.classList.add("modal--no-blur");
+    }
+  });
+
   // Focus trap
   const focusable = [closeButton, confirmBtn, cancelBtn];
   let focusIdx = 0; // default to Confirm
@@ -147,14 +152,13 @@ function confirmModal(message, onConfirm) {
       if (document.activeElement === cancelBtn) cancelBtn.click();
       if (document.activeElement === closeButton) closeButton.click();
     } else if (e.key === "Escape") {
-      // Do nothing, block closing with Escape
+      closeButton.click();
       e.preventDefault();
     }
   });
 
   function cleanup() {
     modal.remove();
-    overlay.remove();
   }
 
   closeButton.addEventListener("click", () => {
@@ -169,13 +173,11 @@ function confirmModal(message, onConfirm) {
     cleanup();
     if (typeof onConfirm === "function") onConfirm(true);
   });
-  // Prevent closing by clicking overlay
-  overlay.addEventListener("click", (event) => {
-    // Do nothing
-  });
-  modal.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      e.preventDefault();
+  modal.addEventListener("click", (event) => {
+    if (
+      event.target === modal &&
+      event.target !== modal.querySelector(".modal-content")
+    ) {
       cleanup();
       if (typeof onConfirm === "function") onConfirm(false);
     }
@@ -183,19 +185,6 @@ function confirmModal(message, onConfirm) {
 }
 
 function promptModal(message, defaultValue = "", onConfirm) {
-  //make sure this returns a string or null
-  const existingPrompt = document.getElementById("promptModal");
-  if (existingPrompt) existingPrompt.remove();
-  const existingOverlay = document.querySelector(".modal-overlay");
-  if (existingOverlay) existingOverlay.remove();
-
-  // Overlay to block background
-  const overlay = document.createElement("div");
-  overlay.className = "modal-overlay";
-  overlay.style =
-    "position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.4);z-index:9998;";
-  document.body.appendChild(overlay);
-
   const modal = document.createElement("div");
   modal.className = "modal";
   modal.id = "promptModal";
@@ -259,6 +248,15 @@ function promptModal(message, defaultValue = "", onConfirm) {
     }
   });
 
+  const modalBlur = getPreference("blur").then((value) => value === "on");
+  modalBlur.then((isBlurred) => {
+    if (isBlurred) {
+      modal.classList.remove("modal--no-blur");
+    } else {
+      modal.classList.add("modal--no-blur");
+    }
+  });
+
   // Focus trap
   const focusable = [closeButton, confirmBtn, cancelBtn, input];
   let focusIdx = 0; // default to Close
@@ -283,7 +281,6 @@ function promptModal(message, defaultValue = "", onConfirm) {
 
   function cleanup() {
     modal.remove();
-    overlay.remove();
   }
 
   closeButton.addEventListener("click", () => {
@@ -299,13 +296,18 @@ function promptModal(message, defaultValue = "", onConfirm) {
     cleanup();
     if (typeof onConfirm === "function") onConfirm(value);
   });
-  // Prevent closing by clicking overlay
-  overlay.addEventListener("click", (event) => {
-    // Do nothing
-  });
   modal.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       e.preventDefault();
+      cleanup();
+      if (typeof onConfirm === "function") onConfirm(false);
+    }
+  });
+  modal.addEventListener("click", (event) => {
+    if (
+      event.target === modal &&
+      event.target !== modal.querySelector(".modal-content")
+    ) {
       cleanup();
       if (typeof onConfirm === "function") onConfirm(false);
     }
