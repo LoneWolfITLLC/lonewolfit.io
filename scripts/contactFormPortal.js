@@ -214,7 +214,7 @@ window.addEventListener("authChecked", async function () {
                 }
               })
               .catch((err) => {
-                showAlert("Network error deleting submission.", true, alertDiv);
+                showAlert("Network error deleting submission: " + err.message, true, alertDiv);
               })
               .finally(() => {
                 if (loadingBar) loadingBar.style.display = "none";
