@@ -184,11 +184,10 @@ async function submitContactFormLoggedIn() {
 				useAccountPhoneNumber,
 			}),
 		});
-		const json = await response.json();
 		const text = await response.text();
 		window.location.hash = "#contact";
 		if (!response.ok) {
-			if(json.message && json.message.trim() === "Malformed token") {
+			if(text && text.trim() === "Malformed token") {
 				showAlert("Token expired. Please login again...", true, form);
 				setTimeout(() => {
 					window.location.href = "login.html";
