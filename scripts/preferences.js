@@ -431,7 +431,7 @@ function getPreference(key) {
 	if (!token) {
 		return Promise.resolve(null);
 	}
-	showLoading();
+	// showLoading();
 	// Add a cache-busting query parameter to the URL
 	const cacheBuster = `&_=${Date.now()}`;
 	return fetch(
@@ -456,9 +456,6 @@ function getPreference(key) {
 		.catch((err) => {
 			console.error("Error getting preference:", err);
 			return null;
-		})
-		.finally(() => {
-			hideLoading();
 		});
 }
 
