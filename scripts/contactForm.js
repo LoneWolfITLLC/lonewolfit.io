@@ -152,7 +152,8 @@ async function submitContactFormLoggedOut() {
 		if (charCount) charCount.textContent = "0/500 characters";
 	} catch (err) {
 		window.location.hash = "#contact";
-		showAlert("Network error. Please try again later.", true, form);
+		console.error("Error submitting contact form:", err);
+		showAlert("Network error: " + err.message, true, form);
 	}
 }
 
@@ -208,6 +209,7 @@ async function submitContactFormLoggedIn() {
 		if (charCount) charCount.textContent = "0/500 characters";
 	} catch (err) {
 		window.location.hash = "#contact";
-		showAlert("Network error. Please try again later.", true, form);
+		console.error("Error submitting contact form:", err);
+		showAlert("Network error: " + err.message, true, form);
 	}
 }

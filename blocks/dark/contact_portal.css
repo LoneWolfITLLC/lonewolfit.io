@@ -130,6 +130,12 @@ body.dark-mode .contactform__actions {
     flex-wrap: wrap;
 }
 
+body.dark-mode .contactform__delete-btn,
+body.dark-mode .contactform__email-btn,
+body.dark-mode .contactform__delete-btn {
+    opacity: 1;
+}
+
 @keyframes contactFormGlow {
     0% {
         box-shadow: 0 0 8px #00ffff55, 0 0 2px #00ffff22;
