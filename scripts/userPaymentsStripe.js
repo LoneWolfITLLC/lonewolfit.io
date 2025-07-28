@@ -26,7 +26,18 @@ async function fetchAndDisplayUserPayments() {
 			},
 		});
 		if (!response.ok) {
-			throw new Error("Failed to fetch payments.");
+			const text = await response.text();
+			const json = JSON.parse(text);
+			if (json.message && json.message.trim() === "Malformed token") {
+				alertModal("Token expired. Please login again...");
+				setTimeout(() => {
+					window.location.href = "login.html?redirect_uri=payments.html";
+				}, 3000);
+				return;
+			}
+			alertModal("Failed to fetch payments: " + (json.message || text));
+			console.error("Failed to fetch payments:", text);
+			return;
 		}
 		const data = await response.json();
 		if (!data.data || data.data.length === 0) {

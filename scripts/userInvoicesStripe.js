@@ -28,7 +28,18 @@ async function fetchAndDisplayInvoices() {
 			},
 		});
 		if (!response.ok) {
-			throw new Error("Failed to fetch invoices.");
+			const text = await response.text();
+			const json = JSON.parse(text);
+			if (json.message && json.message.trim() === "Malformed token") {
+				alertModal("Token expired. Please login again...");
+				setTimeout(() => {
+					window.location.href = "login.html?redirect_uri=invoices.html";
+				}, 3000);
+				return;
+			}
+			alertModal("Failed to fetch invoices: " + (json.message || text));
+			console.error("Failed to fetch invoices:", text);
+			return;
 		}
 		const data = await response.json();
 		if (!data.data || data.data.length === 0) {

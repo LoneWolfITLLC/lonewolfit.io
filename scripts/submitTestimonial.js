@@ -29,10 +29,6 @@ window.addEventListener("authChecked", function () {
 		if (loadingModal) loadingModal.style.display = "block";
 		let token =
 			typeof getTokenFromSession === "function" ? getTokenFromSession() : null;
-		if (!token) {
-			window.location.href = "login.html";
-			return;
-		}
 		try {
 			const response = await fetch(URL_BASE + "/api/submit-testimonial", {
 				method: "POST",
@@ -70,7 +66,9 @@ window.addEventListener("authChecked", function () {
 				);
 				if (data.message && data.message.trim() === "Malformed token") {
 					showAlert("Token expired. Please login again...", true, form);
-					window.location.href = "login.html";
+					setTimeout(() => {
+						window.location.href = "login.html?redirect_uri=submit_testimonial.html#userSubmissionSection";
+					}, 2000);
 					return;
 				}
 			}

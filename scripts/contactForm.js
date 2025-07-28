@@ -191,7 +191,7 @@ async function submitContactFormLoggedIn() {
 			if(json.message && json.message.trim() === "Malformed token") {
 				showAlert("Token expired. Please login again...", true, form);
 				setTimeout(() => {
-					window.location.href = "login.html";
+					window.location.href = "login.html?redirect_uri=index.html#contact";
 				}, 3000);
 				return;
 			}

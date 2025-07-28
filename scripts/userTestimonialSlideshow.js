@@ -12,10 +12,6 @@ async function deleteUserTestimonial(id) {
 				typeof getTokenFromSession === "function"
 					? getTokenFromSession()
 					: null;
-			if (!token) {
-				window.location.href = "login.html";
-				return;
-			}
 			if (loadingBar) loadingBar.style.display = "block";
 			try {
 				const response = await fetch(
@@ -31,6 +27,15 @@ async function deleteUserTestimonial(id) {
 				);
 				const data = await response.json();
 				if (!response.ok) {
+					if(data.message && data.message.trim() === "Malformed token") {
+						alertModal("Token expired. Please login again...");
+						if (loadingBar) loadingBar.style.display = "none";
+						updateNavButtons();
+						setTimeout(() => {
+						  window.location.href = "login.html";
+						}, 3000);
+						return;
+					}
 					showAlert(
 						data.message || "Error deleting testimonial.",
 						true,
@@ -81,15 +86,6 @@ async function fetchUserTestimonials() {
 
 	let token =
 		typeof getTokenFromSession === "function" ? getTokenFromSession() : null;
-	if (!token) {
-		showAlert(
-			"You must be logged in to view your testimonials.",
-			true,
-			slideshowWrapper
-		);
-		if (loadingBar) loadingBar.style.display = "none";
-		return;
-	}
 	try {
 		const response = await fetch(`${URL_BASE}/api/users/testimonials`, {
 			method: "GET",
@@ -100,6 +96,14 @@ async function fetchUserTestimonials() {
 		});
 		if (!response.ok) {
 			const data = await response.json();
+			if(data.message && data.message.trim() === "Malformed token") {
+				alertModal("Token expired. Please login again...");
+				setTimeout(() => {
+					window.location.href = "login.html";
+				}, 3000);
+				userTestimonials = [];
+				return;
+			}
 			showAlert(
 				data.message || "Error retrieving testimonials.",
 				true,

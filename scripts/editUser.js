@@ -529,10 +529,6 @@ function handleEditUserSubmit(formName) {
 
   // Send PUT request to backend
   const token = sessionStorage.getItem("jwt");
-  if (!token) {
-    alertModal("No session found. Please log in again.");
-    return;
-  }
 
   document.getElementById("loadingModal").style.display = "block";
   fetch(URL_BASE + "/api/auth/edit-user", {
@@ -549,7 +545,17 @@ function handleEditUserSubmit(formName) {
         alertModal("User updated successfully!");
       } else {
         const errorText = await response.text();
-        alertModal("Error updating user: " + (errorText || response.statusText));
+        const json = JSON.parse(errorText);
+        if (json.message && json.message.trim() === "Malformed token") {
+          alertModal(
+            "Token expired. Please login again...",
+          );
+          setTimeout(() => {
+            window.location.href = "login.html?redirect_uri=edit_user.html";
+          }, 3000);
+          return;
+        }
+        alertModal("Error updating user: " + (errorText || response.statusText || json.message || "Unknown error"));
       }
     })
     .catch((err) => {
@@ -591,11 +597,6 @@ function updateStripeCustomerDetails(formType) {
   data.address = parseAddress(data.address);
 
   const token = sessionStorage.getItem("jwt");
-  if (!token) {
-    alertModal("No session found. Please log in again.");
-    return;
-  }
-
   document.getElementById("loadingModal").style.display = "block";
   fetch(URL_BASE + "/api/auth/update-stripe-customer", {
     method: "POST",
@@ -612,9 +613,10 @@ function updateStripeCustomerDetails(formType) {
         setTimeout(() => window.location.reload(), 3000);
       } else {
         const errorText = await response.text();
+        const json = JSON.parse(errorText);
         alertModal(
           "Error updating Stripe customer: " +
-            (errorText || response.statusText)
+            (json.message || errorText || response.statusText || "Unknown error")
         );
       }
     })
