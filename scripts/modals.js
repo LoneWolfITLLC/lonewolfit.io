@@ -83,6 +83,20 @@ function confirmModal(message, onConfirm) {
   const confirmBtn = modal.querySelector(".btn-primary");
   const cancelBtn = modal.querySelector(".btn-delete");
 
+  const darkMode = document.body.classList.contains("dark-mode");
+  const buttonGlow = getPreference("buttonGlow") === "on";
+
+  if(darkMode) {
+    if(buttonGlow) {
+      confirmBtn.classList.remove("btn--no-glow");
+      cancelBtn.classList.remove("btn--no-glow");
+    }
+    else{
+      confirmBtn.classList.add("btn--no-glow");
+      cancelBtn.classList.add("btn--no-glow");
+    }
+  }
+
   // Focus trap
   const focusable = [closeButton, confirmBtn, cancelBtn];
   let focusIdx = 0; // default to Confirm
@@ -177,6 +191,20 @@ function promptModal(message, defaultValue = "", onConfirm) {
   const confirmBtn = modal.querySelector(".btn-primary");
   const cancelBtn = modal.querySelector(".btn-delete");
   const input = modal.querySelector(".modal-prompt-input");
+
+  const darkMode = document.body.classList.contains("dark-mode");
+  const buttonGlow = getPreference("buttonGlow") === "on";
+
+  if(darkMode) {
+    if(buttonGlow) {
+      confirmBtn.classList.remove("btn--no-glow");
+      cancelBtn.classList.remove("btn--no-glow");
+    }
+    else{
+      confirmBtn.classList.add("btn--no-glow");
+      cancelBtn.classList.add("btn--no-glow");
+    }
+  }
 
   // Focus trap
   const focusable = [closeButton, confirmBtn, cancelBtn, input];

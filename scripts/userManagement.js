@@ -299,6 +299,24 @@ function showModal(id) {
     hideModal(id);
   document.getElementById("cancelEditUserModalBtn").onclick = () =>
     hideModal(id);
+
+  const darkMode = document.body.classList.contains("dark-mode");
+  const buttonGlow = getPreference("buttonGlow") === "on";
+
+  if(darkMode) {
+    const confirmBtn = document.querySelector("#editUserForm button[type='submit']");
+    if(buttonGlow) {
+      confirmBtn.classList.remove("btn--no-glow");
+      document.getElementById("cancelEditUserModalBtn").classList.remove("btn--no-glow");
+      document.getElementById("deleteUserModalBtn").classList.remove("btn--no-glow");
+    }
+    else{
+      confirmBtn.classList.add("btn--no-glow");
+      document.getElementById("cancelEditUserModalBtn").classList.add("btn--no-glow");
+      document.getElementById("deleteUserModalBtn").classList.add("btn--no-glow");
+    }
+  }
+
 }
 
 function hideModal(id) {
