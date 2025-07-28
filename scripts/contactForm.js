@@ -187,14 +187,14 @@ async function submitContactFormLoggedIn() {
 		const text = await response.text();
 		window.location.hash = "#contact";
 		if (!response.ok) {
-			if(text && text.trim() === "Malformed token") {
+			if(text.message && text.message.trim() === "Malformed token") {
 				showAlert("Token expired. Please login again...", true, form);
 				setTimeout(() => {
 					window.location.href = "login.html";
 				}, 3000);
 				return;
 			}
-			showAlert(text || "Error submitting contact form.", true, form);
+			showAlert(text.message || text || "Error submitting contact form.", true, form);
 			return;
 		}
 		showAlert(
