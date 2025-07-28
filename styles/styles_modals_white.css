@@ -143,6 +143,13 @@
     transition: opacity 0.3s;
 }
 
+.modal--no-glow,
+.modal--no-glow:hover,
+.modal--no-glow:focus-within {
+    animation: none !important;
+    box-shadow: none !important;
+}
+
 @keyframes loading-animation {
     0% {
         transform: scaleX(0);

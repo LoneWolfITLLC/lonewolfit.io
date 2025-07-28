@@ -301,6 +301,22 @@ function showModal(id) {
     hideModal(id);
 
   const darkMode = document.body.classList.contains("dark-mode");
+
+  const modalGlow = getPreference("modalGlow").then((value) => value === "on");
+  modalGlow.then((isGlowing) => {
+    if (darkMode) {
+      if (isGlowing) {
+        modal.querySelectorAll(".modal-content").forEach((content) => {
+          content.classList.remove("modal--no-glow");
+        });
+      } else {
+        modal.querySelectorAll(".modal-content").forEach((content) => {
+          content.classList.add("modal--no-glow");
+        });
+      }
+    }
+  });
+
   const buttonGlow = getPreference("buttonGlow").then(value => value === "on");
   if(darkMode) {
     const confirmBtn = document.querySelector("#editUserForm button[type='submit']");

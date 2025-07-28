@@ -20,6 +20,21 @@ function alertModal(message) {
 
   document.body.appendChild(modal);
 
+  const modalGlow = getPreference("modalGlow").then((value) => value === "on");
+  modalGlow.then((isGlowing) => {
+    if (document.body.classList.contains("dark-mode")) {
+      if (isGlowing) {
+        modal.querySelectorAll(".modal-content").forEach((content) => {
+          content.classList.remove("modal--no-glow");
+        });
+      } else {
+        modal.querySelectorAll(".modal-content").forEach((content) => {
+          content.classList.add("modal--no-glow");
+        });
+      }
+    }
+  });
+
   const closeButton = modal.querySelector(".modal-close-button");
   closeButton.addEventListener("click", () => {
     modal.remove();
@@ -84,9 +99,27 @@ function confirmModal(message, onConfirm) {
   const cancelBtn = modal.querySelector(".btn-delete");
 
   const darkMode = document.body.classList.contains("dark-mode");
-  const buttonGlow = getPreference("buttonGlow").then(value => value === "on");
 
-  buttonGlow.then(isGlowing => {
+  const modalGlow = getPreference("modalGlow").then((value) => value === "on");
+  modalGlow.then((isGlowing) => {
+    if (darkMode) {
+      if (isGlowing) {
+        modal.querySelectorAll(".modal-content").forEach((content) => {
+          content.classList.remove("modal--no-glow");
+        });
+      } else {
+        modal.querySelectorAll(".modal-content").forEach((content) => {
+          content.classList.add("modal--no-glow");
+        });
+      }
+    }
+  });
+
+  const buttonGlow = getPreference("buttonGlow").then(
+    (value) => value === "on"
+  );
+
+  buttonGlow.then((isGlowing) => {
     if (darkMode) {
       if (isGlowing) {
         confirmBtn.classList.remove("btn--no-glow");
@@ -194,9 +227,27 @@ function promptModal(message, defaultValue = "", onConfirm) {
   const input = modal.querySelector(".modal-prompt-input");
 
   const darkMode = document.body.classList.contains("dark-mode");
-  const buttonGlow = getPreference("buttonGlow").then(value => value === "on");
 
-  buttonGlow.then(isGlowing => {
+  const modalGlow = getPreference("modalGlow").then((value) => value === "on");
+  modalGlow.then((isGlowing) => {
+    if (darkMode) {
+      if (isGlowing) {
+        modal.querySelectorAll(".modal-content").forEach((content) => {
+          content.classList.remove("modal--no-glow");
+        });
+      } else {
+        modal.querySelectorAll(".modal-content").forEach((content) => {
+          content.classList.add("modal--no-glow");
+        });
+      }
+    }
+  });
+
+  const buttonGlow = getPreference("buttonGlow").then(
+    (value) => value === "on"
+  );
+
+  buttonGlow.then((isGlowing) => {
     if (darkMode) {
       if (isGlowing) {
         confirmBtn.classList.remove("btn--no-glow");

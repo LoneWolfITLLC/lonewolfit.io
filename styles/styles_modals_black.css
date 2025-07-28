@@ -1,10 +1,18 @@
-body.dark-mode .modal-content,
-body.dark-mode #editUserModal .modal-content {
+body.dark-mode .modal-content{
     background: #1a222d !important;
     color: #e0f7ff;
     border-radius: 12px;
     box-shadow: 0 0 32px 8px #00ffffcc, 0 0 64px 16px #00ffff55, 0 2px 24px rgba(0, 255, 255, 0.18);
     transition: box-shadow 0.3s, background 0.3s;
+    animation: breathing-shadow-idle 3s ease-in-out infinite;
+}
+/* Breathing hover effect */
+body.dark-mode .modal-content:hover {
+    animation: breathing-shadow-hover 3s ease-in-out infinite;
+}
+
+body.dark-mode .modal-content:focus-within {
+    animation: breathing-shadow 2s ease-in-out infinite;
 }
 
 body.dark-mode #loadingModal .modal-content {
@@ -15,9 +23,11 @@ body.dark-mode #loadingModal .modal-content {
     pointer-events: none;
 }
 
-body.dark-mode #loadingModal .modal-content:hover {
+body.dark-mode #loadingModal .modal-content:hover,
+body.dark-mode #loadingModal .modal-content:focus-within {
     box-shadow: none !important;
     background: transparent !important;
+    animation: none !important;
 }
 
 body.dark-mode #loadingModal .modal-content>* {
@@ -26,11 +36,6 @@ body.dark-mode #loadingModal .modal-content>* {
     border: none !important;
     pointer-events: auto;
     opacity: 1 !important;
-}
-
-/* Breathing hover effect */
-body.dark-mode #editUserModal .modal-content:hover {
-    animation: breathing-shadow 2s ease-in-out infinite;
 }
 
 @keyframes breathing-shadow {
@@ -44,6 +49,30 @@ body.dark-mode #editUserModal .modal-content:hover {
 
     100% {
         box-shadow: 0 0 32px 8px #00ffffcc, 0 0 64px 16px #00ffff55, 0 2px 24px rgba(0, 255, 255, 0.18);
+    }
+}
+
+@keyframes breathing-shadow-hover {
+    0% {
+        box-shadow: 0 0 20px 4px #00ffff88, 0 0 40px 8px #00ffff33, 0 2px 12px rgba(0, 255, 255, 0.10);
+    }
+    50% {
+        box-shadow: 0 0 28px 8px #00ffffaa, 0 0 56px 12px #00ffff44, 0 4px 18px rgba(0, 255, 255, 0.16);
+    }
+    100% {
+        box-shadow: 0 0 20px 4px #00ffff88, 0 0 40px 8px #00ffff33, 0 2px 12px rgba(0, 255, 255, 0.10);
+    }
+}
+
+@keyframes breathing-shadow-idle {
+    0% {
+        box-shadow: 0 0 16px 4px #00ffff77, 0 0 32px 8px #00ffff33, 0 1px 8px rgba(0, 255, 255, 0.08);
+    }
+    50% {
+        box-shadow: 0 0 24px 8px #00ffff99, 0 0 48px 12px #00ffff44, 0 2px 12px rgba(0, 255, 255, 0.14);
+    }
+    100% {
+        box-shadow: 0 0 16px 4px #00ffff77, 0 0 32px 8px #00ffff33, 0 1px 8px rgba(0, 255, 255, 0.08);
     }
 }
 
