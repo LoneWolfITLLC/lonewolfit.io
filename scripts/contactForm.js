@@ -185,16 +185,17 @@ async function submitContactFormLoggedIn() {
 			}),
 		});
 		const text = await response.text();
+		const json = JSON.parse(text);
 		window.location.hash = "#contact";
 		if (!response.ok) {
-			if(text.message && text.message.trim() === "Malformed token") {
+			if(json.message && json.message.trim() === "Malformed token") {
 				showAlert("Token expired. Please login again...", true, form);
 				setTimeout(() => {
 					window.location.href = "login.html";
 				}, 3000);
 				return;
 			}
-			showAlert(text.message || text || "Error submitting contact form.", true, form);
+			showAlert(json.message || text || "Error submitting contact form.", true, form);
 			return;
 		}
 		showAlert(
