@@ -44,9 +44,9 @@ function signOut(ofAllDevices = false) {
             window.location.href = "login.html#emailloginSection";
             return;
           } else {
-            return response.text().then((text) => {
+            return response.json().then((text) => {
               if (loadingModal) loadingModal.style.display = "none";
-              alertModal("Sign out failed: " + text);
+              alertModal("Sign out failed: " + text.message);
             });
           }
         }
@@ -87,9 +87,9 @@ function resetPassword() {
               window.location.href = "reset.html";
             }, 3000);
           } else {
-            return response.text().then((text) => {
+            return response.json().then((text) => {
               if (loadingModal) loadingModal.style.display = "none";
-              alertModal("Sign out failed: " + text);
+              alertModal("Sign out failed: " + text.message);
             });
           }
         })
@@ -136,9 +136,9 @@ function deleteAccount(redirectUri = "index.html") {
                 window.location.href = redirectUri;
               }, 2000);
             } else {
-              return response.text().then((text) => {
+              return response.json().then((text) => {
                 if (loadingModal) loadingModal.style.display = "none";
-                alertModal("Account deletion failed: " + text);
+                alertModal("Account deletion failed: " + text.message);
               });
             }
           })

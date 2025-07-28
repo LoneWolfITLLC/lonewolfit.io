@@ -133,10 +133,10 @@ async function submitContactFormLoggedOut() {
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ name, email, phone, message }),
 		});
-		const text = await response.text();
+		const text = await response.json();
 		if (!response.ok) {
 			window.location.hash = "#contact";
-			showAlert(text || "Error submitting contact form.", true, form);
+			showAlert(text.message || "Error submitting contact form.", true, form);
 			return;
 		}
 		window.location.hash = "#contact";
@@ -183,10 +183,15 @@ async function submitContactFormLoggedIn() {
 				useAccountPhoneNumber,
 			}),
 		});
-		const text = await response.text();
+		const text = await response.json();
 		window.location.hash = "#contact";
 		if (!response.ok) {
-			showAlert(text || "Error submitting contact form.", true, form);
+			if(text.message && text.message.trim() === "Malformed token") {
+				showAlert("Token expired. Please login again...", true, form);
+				window.location.href = "login.html";
+				return;
+			}
+			showAlert(text.message || "Error submitting contact form.", true, form);
 			return;
 		}
 		showAlert(
