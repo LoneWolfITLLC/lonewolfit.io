@@ -232,7 +232,7 @@ function applyTitleTextGlow(isTitleTextGlow) {
 }
 
 function applyModalGlow(darkMode, isModalGlow) {
-	if(!darkMode || darkMode !== "on") {
+	if(!darkMode || darkMode !== "on" || darkMode === "off") {
 		// If dark mode is off, we don't apply modal glow settings
 		return;
 	}
@@ -269,7 +269,7 @@ function applyButtonGlow(darkMode, isButtonGlow) {
 			}
 		});
 	}
-	if(!darkMode || darkMode !== "on" || !document.body.classList.contains("dark-mode")) {
+	if(!darkMode || darkMode !== "on" || darkMode === "off") {
 		// If dark mode is off, we don't apply button glow settings
 		return;
 	}
