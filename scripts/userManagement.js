@@ -301,22 +301,22 @@ function showModal(id) {
     hideModal(id);
 
   const darkMode = document.body.classList.contains("dark-mode");
-  const buttonGlow = getPreference("buttonGlow") === "on";
-
+  const buttonGlow = getPreference("buttonGlow").then(value => value === "on");
   if(darkMode) {
     const confirmBtn = document.querySelector("#editUserForm button[type='submit']");
-    if(buttonGlow) {
-      confirmBtn.classList.remove("btn--no-glow");
-      document.getElementById("cancelEditUserModalBtn").classList.remove("btn--no-glow");
-      document.getElementById("deleteUserModalBtn").classList.remove("btn--no-glow");
-    }
-    else{
-      confirmBtn.classList.add("btn--no-glow");
-      document.getElementById("cancelEditUserModalBtn").classList.add("btn--no-glow");
-      document.getElementById("deleteUserModalBtn").classList.add("btn--no-glow");
-    }
+    buttonGlow.then(isGlowing => {
+      if(isGlowing) {
+        confirmBtn.classList.remove("btn--no-glow");
+        document.getElementById("cancelEditUserModalBtn").classList.remove("btn--no-glow");
+        document.getElementById("deleteUserModalBtn").classList.remove("btn--no-glow");
+      }
+      else{
+        confirmBtn.classList.add("btn--no-glow");
+        document.getElementById("cancelEditUserModalBtn").classList.add("btn--no-glow");
+        document.getElementById("deleteUserModalBtn").classList.add("btn--no-glow");
+      }
+    });
   }
-
 }
 
 function hideModal(id) {
