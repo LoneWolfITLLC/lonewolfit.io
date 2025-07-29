@@ -1,3 +1,16 @@
+function closeModalWithAnimation(modal) {
+	modal.querySelectorAll(".modal-content").forEach((content) => {
+		content.classList.add("modal-content--closing");
+	});
+	modal.classList.add("modal--closing");
+	modal.addEventListener(
+		"animationend",
+		() => {
+			modal.remove();
+		},
+		{ once: true }
+	);
+}
 function alertModal(message) {
 	const modal = document.createElement("div");
 	modal.className = "modal";
@@ -48,18 +61,18 @@ function alertModal(message) {
 
 	const closeButton = modal.querySelector(".modal-close-button");
 	closeButton.addEventListener("click", () => {
-		modal.remove();
+		closeModalWithAnimation(modal);
 	});
 
 	modal.addEventListener("click", (event) => {
 		if (event.target === modal) {
-			modal.remove();
+			closeModalWithAnimation(modal);
 		}
 	});
 
 	modal.addEventListener("keydown", (e) => {
 		if (e.key === "Enter" || e.key === "Escape") {
-			modal.remove();
+			closeModalWithAnimation(modal);
 		}
 	});
 	modal.focus();
@@ -164,7 +177,7 @@ function confirmModal(message, onConfirm) {
 	});
 
 	function cleanup() {
-		modal.remove();
+		closeModalWithAnimation(modal);
 	}
 
 	closeButton.addEventListener("click", () => {
@@ -290,7 +303,7 @@ function promptModal(message, defaultValue = "", onConfirm) {
 	});
 
 	function cleanup() {
-		modal.remove();
+		closeModalWithAnimation(modal);
 	}
 
 	closeButton.addEventListener("click", () => {

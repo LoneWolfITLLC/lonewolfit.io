@@ -358,7 +358,7 @@ function showModal(id) {
 function hideModal(id) {
   const modal = document.getElementById(id);
   if (modal) {
-    modal.remove();
+    closeModalWithAnimation(modal);
   }
 }
 

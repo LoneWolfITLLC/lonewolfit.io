@@ -122,11 +122,8 @@ async function submitContactFormLoggedOut() {
 	const email = form.querySelector("#email").value.trim();
 	const phone = form.querySelector("#phone").value.trim();
 	const message = form.querySelector("#message").value.trim();
-	const alertDiv =
-		form.closest("section")?.querySelector(".alertDiv") ||
-		form.querySelector(".alertDiv") ||
-		form;
 
+	showLoading();
 	try {
 		const response = await fetch(URL_BASE + "/api/contact-form/submit", {
 			method: "POST",
@@ -136,14 +133,14 @@ async function submitContactFormLoggedOut() {
 		const text = await response.text();
 		if (!response.ok) {
 			window.location.hash = "#contact";
-			showAlert(text || "Error submitting contact form.", true, form);
+			hideLoading();
+			alertModal(text || "Error submitting contact form.");
 			return;
 		}
 		window.location.hash = "#contact";
-		showAlert(
-			"Thank you! Your message has been submitted successfully.",
-			false,
-			form
+		hideLoading();
+		alertModal(
+			"Thank you! Your message has been submitted successfully."
 		);
 		// Reset form fields
 		form.reset();
@@ -153,7 +150,8 @@ async function submitContactFormLoggedOut() {
 	} catch (err) {
 		window.location.hash = "#contact";
 		console.error("Error submitting contact form:", err);
-		showAlert("Network error: " + err.message, true, form);
+		hideLoading();
+		alertModal("Network error: " + err.message);
 	}
 }
 
@@ -164,11 +162,9 @@ async function submitContactFormLoggedIn() {
 	const checkbox = form.querySelector("#useAccountPhoneNumberCheckbox");
 	const message = form.querySelector("#message").value.trim();
 	const useAccountPhoneNumber = checkbox && checkbox.checked;
-	const alertDiv =
-		form.closest("section")?.querySelector(".alertDiv") ||
-		form.querySelector(".alertDiv") ||
-		form;
 
+
+	showLoading();
 	try {
 		const response = await fetch(URL_BASE + "/api/user/contact-form/submit", {
 			method: "POST",
@@ -192,19 +188,20 @@ async function submitContactFormLoggedIn() {
 		window.location.hash = "#contact";
 		if (!response.ok) {
 			if(json.message && json.message.trim() === "Malformed token") {
-				showAlert("Token expired. Please login again...", true, form);
+				hideLoading();
+				alertModal("Token expired. Please login again...");
 				setTimeout(() => {
 					window.location.href = "login.html?redirect_uri=index.html#contact";
 				}, 3000);
 				return;
 			}
-			showAlert(json.message || text || "Error submitting contact form.", true, form);
+			hideLoading();
+			alertModal(json.message || text || "Error submitting contact form.");
 			return;
 		}
-		showAlert(
-			"Thank you! Your message has been submitted successfully.",
-			false,
-			form
+		hideLoading();
+		alertModal(
+			"Thank you! Your message has been submitted successfully."
 		);
 		// Reset form fields
 		form.reset();
@@ -214,6 +211,7 @@ async function submitContactFormLoggedIn() {
 	} catch (err) {
 		window.location.hash = "#contact";
 		console.error("Error submitting contact form:", err);
-		showAlert("Network error: " + err.message, true, form);
+		hideLoading();
+		alertModal("Network error: " + err.message);
 	}
 }

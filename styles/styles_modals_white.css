@@ -1,3 +1,13 @@
+@keyframes modalFadeOut {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.9); }
+}
+
+@keyframes modalBGFadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
 /* ─── CUSTOM MODAL STYLES ─── */
 #alertModal .modal-content {
     background: linear-gradient(135deg, #fafdff 70%, #e3f0ff 100%);
@@ -149,6 +159,14 @@
 .modal--no-glow:focus-within {
     animation: none !important;
     box-shadow: none !important;
+}
+
+.modal-content--closing {
+    animation: modalFadeOut 0.35s ease forwards !important;
+}
+
+.modal--closing {
+    animation: modalBGFadeOut 0.35s ease forwards !important;
 }
 
 @keyframes loading-animation {
