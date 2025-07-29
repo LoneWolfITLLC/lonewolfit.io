@@ -19,17 +19,17 @@ function alertModal(message) {
 	modal.style.animation = "fadeIn 0.3s ease";
 	modal.style.zIndex = "9999";
 	modal.innerHTML = `
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="modal-close-button" tabindex="0">&nbsp;</button>
-                </div>
-                <div class="modal-body">
-                    <p>${message}</p>
-                </div>
-            </div>
-        </div>
-    `;
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="modal-close-button" tabindex="0">&nbsp;</button>
+				</div>
+				<div class="modal-body">
+					<p>${message}</p>
+				</div>
+			</div>
+		</div>
+	`;
 
 	document.body.appendChild(modal);
 
@@ -180,25 +180,21 @@ function confirmModal(message, onConfirm) {
 		closeModalWithAnimation(modal);
 	}
 
-	closeButton.addEventListener("click", () => {
-		cleanup();
-		if (typeof onConfirm === "function") onConfirm(false);
-	});
-	cancelBtn.addEventListener("click", () => {
-		cleanup();
-		if (typeof onConfirm === "function") onConfirm(false);
-	});
-	confirmBtn.addEventListener("click", () => {
-		cleanup();
-		if (typeof onConfirm === "function") onConfirm(true);
-	});
+	function handleClose(result) {
+		if (!modal.classList.contains("modal--closing")) {
+			cleanup();
+			if (typeof onConfirm === "function") onConfirm(result);
+		}
+	}
+	closeButton.addEventListener("click", () => handleClose(false));
+	cancelBtn.addEventListener("click", () => handleClose(false));
+	confirmBtn.addEventListener("click", () => handleClose(true));
 	modal.addEventListener("click", (event) => {
 		if (
 			event.target === modal &&
 			event.target !== modal.querySelector(".modal-content")
 		) {
-			cleanup();
-			if (typeof onConfirm === "function") onConfirm(false);
+			handleClose(false);
 		}
 	});
 }
@@ -306,24 +302,19 @@ function promptModal(message, defaultValue = "", onConfirm) {
 		closeModalWithAnimation(modal);
 	}
 
-	closeButton.addEventListener("click", () => {
-		cleanup();
-		if (typeof onConfirm === "function") onConfirm(null);
-	});
-	cancelBtn.addEventListener("click", () => {
-		cleanup();
-		if (typeof onConfirm === "function") onConfirm(null);
-	});
-	confirmBtn.addEventListener("click", () => {
-		const value = input.value;
-		cleanup();
-		if (typeof onConfirm === "function") onConfirm(value);
-	});
+	function handleClose(result) {
+		if (!modal.classList.contains("modal--closing")) {
+			cleanup();
+			if (typeof onConfirm === "function") onConfirm(result);
+		}
+	}
+	closeButton.addEventListener("click", () => handleClose(null));
+	cancelBtn.addEventListener("click", () => handleClose(null));
+	confirmBtn.addEventListener("click", () => handleClose(input.value));
 	modal.addEventListener("keydown", (e) => {
 		if (e.key === "Escape") {
 			e.preventDefault();
-			cleanup();
-			if (typeof onConfirm === "function") onConfirm(false);
+			handleClose(false);
 		}
 	});
 	modal.addEventListener("click", (event) => {
@@ -331,8 +322,7 @@ function promptModal(message, defaultValue = "", onConfirm) {
 			event.target === modal &&
 			event.target !== modal.querySelector(".modal-content")
 		) {
-			cleanup();
-			if (typeof onConfirm === "function") onConfirm(false);
+			handleClose(false);
 		}
 	});
 	input.focus();
