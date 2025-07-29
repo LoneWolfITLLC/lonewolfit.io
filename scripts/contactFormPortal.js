@@ -27,7 +27,10 @@ window.addEventListener("authChecked", async function () {
       );
       if (!response.ok) {
         const text = await response.text();
-		const json = JSON.parse(text);
+        let json = {};
+        try {
+          json = JSON.parse(text);
+        } catch (err) {}
         if (json.message && json.message.trim() === "Malformed token") {
           showAlert("Token expired. Please login again...", true, alertDiv);
           setTimeout(() => {
@@ -182,7 +185,10 @@ window.addEventListener("authChecked", async function () {
             })
               .then(async (response) => {
                 const text = await response.text();
-                const json = JSON.parse(text);
+                let json = {};
+                try {
+                  json = JSON.parse(text);
+                } catch (err) {}
                 if (!response.ok) {
                   if (
                     json.message &&
@@ -214,7 +220,11 @@ window.addEventListener("authChecked", async function () {
                 }
               })
               .catch((err) => {
-                showAlert("Network error deleting submission: " + err.message, true, alertDiv);
+                showAlert(
+                  "Network error deleting submission: " + err.message,
+                  true,
+                  alertDiv
+                );
               })
               .finally(() => {
                 if (loadingBar) loadingBar.style.display = "none";

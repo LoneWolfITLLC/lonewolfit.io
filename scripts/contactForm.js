@@ -185,7 +185,10 @@ async function submitContactFormLoggedIn() {
 			}),
 		});
 		const text = await response.text();
-		const json = JSON.parse(text);
+		let json = {};
+        try {
+          json = JSON.parse(text);
+        } catch (err) {}
 		window.location.hash = "#contact";
 		if (!response.ok) {
 			if(json.message && json.message.trim() === "Malformed token") {

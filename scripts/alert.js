@@ -10,6 +10,16 @@ function showAlert(message, isError, formElem) {
     // fallback to global alert if not found
     alertDiv = document.getElementById("alert");
   }
+  if (!alertDiv) {
+    console.warn("No alertDiv found to show message:", message);
+    if(typeof alertModal === "function") {
+      alertModal(message);
+    }
+    else{
+      alert(message);
+    }
+    return;
+  }
   alertDiv.style.display = "block";
   alertDiv.style.opacity = "1";
   alertDiv.innerHTML = message;

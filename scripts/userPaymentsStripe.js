@@ -27,7 +27,10 @@ async function fetchAndDisplayUserPayments() {
 		});
 		if (!response.ok) {
 			const text = await response.text();
-			const json = JSON.parse(text);
+			let json = {};
+			try {
+				json = JSON.parse(text);
+			} catch (err) {}
 			if (json.message && json.message.trim() === "Malformed token") {
 				alertModal("Token expired. Please login again...");
 				setTimeout(() => {

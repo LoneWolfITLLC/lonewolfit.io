@@ -174,7 +174,7 @@ function initPreferencesPage(
           } else {
             // Optionally, apply button glow effect here if needed
             if (typeof applyButtonGlow === "function") {
-              applyButtonGlow(darkMode, isButtonGlow);
+              applyButtonGlow(darkMode, autoDarkMode, isButtonGlow);
             }
           }
         }
@@ -295,6 +295,7 @@ function applyBlur(isBlur) {
 //TODO Apply each preference to the page
 function applyPreferences({
   darkMode,
+  autoDarkMode,
   logoGlow,
   titleTextGlow,
   buttonGlow,
@@ -304,12 +305,12 @@ function applyPreferences({
   // Only apply logo glow if logoGlow is "on"
   applyLogoGlow(logoGlow === "on");
   applyTitleTextGlow(titleTextGlow === "on");
-  applyButtonGlow(darkMode, buttonGlow === "on");
+  applyButtonGlow(darkMode, autoDarkMode, buttonGlow === "on");
   applyModalGlow(darkMode, modalGlow === "on");
   applyBlur(blur === "on");
 }
 
-function applyButtonGlow(darkMode, isButtonGlow) {
+function applyButtonGlow(darkMode, autoDarkMode, isButtonGlow) {
   const menu_sliders = document.querySelectorAll(".menu__item-slider");
   if (menu_sliders) {
     menu_sliders.forEach((menu_slider) => {
@@ -320,8 +321,9 @@ function applyButtonGlow(darkMode, isButtonGlow) {
       }
     });
   }
-  if (!darkMode || darkMode !== "on" || darkMode === "off") {
+  if (!darkMode || darkMode !== "on" || darkMode === "off" || (darkMode === "on" && autoDarkMode === "on")) {
     // If dark mode is off, we don't apply button glow settings
+	// Or if it is on but disabled by auto dark mode
     return;
   }
   const buttons = document.querySelectorAll(".btn");
