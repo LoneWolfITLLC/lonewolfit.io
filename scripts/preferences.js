@@ -421,10 +421,10 @@ window.addEventListener("preAuthChecked", () => {
 });
 
 //Returns the value for a given preference key, or creates it with a default value if it doesn't exist
-//Returns null if the user is not logged in.
+//Returns default_value if the user is not logged in.
 async function createAndLoadPreference(key, default_value) {
   const token = sessionStorage.getItem("jwt");
-  if (!token) {
+  if (!token || isDefined(loggedIn) && loggedIn === false) {
     return Promise.resolve(default_value);
   }
   showLoading();
