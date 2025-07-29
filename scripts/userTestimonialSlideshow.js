@@ -86,6 +86,11 @@ async function fetchUserTestimonials() {
 
 	let token =
 		typeof getTokenFromSession === "function" ? getTokenFromSession() : null;
+	if (!token) {
+		if (loadingBar) loadingBar.style.display = "none";	
+		alertModal("You must be logged in to view your testimonials.");
+		return;
+	}
 	try {
 		const response = await fetch(`${URL_BASE}/api/users/testimonials`, {
 			method: "GET",
