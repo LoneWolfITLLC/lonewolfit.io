@@ -1,11 +1,11 @@
 function alertModal(message) {
-  const modal = document.createElement("div");
-  modal.className = "modal";
-  modal.id = "alertModal";
-  modal.tabIndex = -1;
-  modal.style.animation = "fadeIn 0.3s ease";
-  modal.style.zIndex = "9999";
-  modal.innerHTML = `
+	const modal = document.createElement("div");
+	modal.className = "modal";
+	modal.id = "alertModal";
+	modal.tabIndex = -1;
+	modal.style.animation = "fadeIn 0.3s ease";
+	modal.style.zIndex = "9999";
+	modal.innerHTML = `
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -18,61 +18,63 @@ function alertModal(message) {
         </div>
     `;
 
-  document.body.appendChild(modal);
+	document.body.appendChild(modal);
 
-  const modalGlow = getPreference("modalGlow").then((value) => value === "on");
-  modalGlow.then((isGlowing) => {
-    if (document.body.classList.contains("dark-mode")) {
-      if (isGlowing) {
-        modal.querySelectorAll(".modal-content").forEach((content) => {
-          content.classList.remove("modal--no-glow");
-        });
-      } else {
-        modal.querySelectorAll(".modal-content").forEach((content) => {
-          content.classList.add("modal--no-glow");
-        });
-      }
-    }
-  });
+	const modalGlow = getPreference("modalGlow").then((value) => value === "on");
+	modalGlow.then((isGlowing) => {
+		if (document.body.classList.contains("dark-mode")) {
+			if (isGlowing) {
+				modal.querySelectorAll(".modal-content").forEach((content) => {
+					content.classList.remove("modal--no-glow");
+				});
+			} else {
+				modal.querySelectorAll(".modal-content").forEach((content) => {
+					content.classList.add("modal--no-glow");
+				});
+			}
+		}
+	});
 
-  const modalBlur = getPreference("blur").then((value) => value === "on");
-  modalBlur.then((isBlurred) => {
-    if (isBlurred) {
-      modal.classList.remove("modal--no-blur");
-    } else {
-      modal.classList.add("modal--no-blur");
-    }
-  });
+	if (loggedIn) {
+		const modalBlur = getPreference("blur").then((value) => value === "on");
+		modalBlur.then((isBlurred) => {
+			if (isBlurred) {
+				modal.classList.remove("modal--no-blur");
+			} else {
+				modal.classList.add("modal--no-blur");
+			}
+		});
+	}
 
-  const closeButton = modal.querySelector(".modal-close-button");
-  closeButton.addEventListener("click", () => {
-    modal.remove();
-  });
+	const closeButton = modal.querySelector(".modal-close-button");
+	closeButton.addEventListener("click", () => {
+		modal.remove();
+	});
 
-  modal.addEventListener("click", (event) => {
-    if (event.target === modal) {
-      modal.remove();
-    }
-  });
+	modal.addEventListener("click", (event) => {
+		if (event.target === modal) {
+			modal.remove();
+		}
+	});
 
-  modal.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === "Escape") {
-      modal.remove();
-    }
-  });
-  modal.focus();
-  // Native alert returns undefined
-  return undefined;
+	modal.addEventListener("keydown", (e) => {
+		if (e.key === "Enter" || e.key === "Escape") {
+			modal.remove();
+		}
+	});
+	modal.focus();
+	// Native alert returns undefined
+	return undefined;
 }
 
 function confirmModal(message, onConfirm) {
-  const modal = document.createElement("div");
-  modal.className = "modal";
-  modal.id = "confirmModal";
-  modal.tabIndex = -1;
-  modal.style.zIndex = "9999";
-  modal.style.animation = "fadeIn 0.3s ease";
-  modal.innerHTML = `
+	const modal = document.createElement("div");
+	modal.className = "modal";
+	modal.id = "confirmModal";
+	modal.tabIndex = -1;
+	modal.style.zIndex = "9999";
+	modal.style.animation = "fadeIn 0.3s ease";
+	modal.innerHTML = `
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -88,110 +90,114 @@ function confirmModal(message, onConfirm) {
             </div>
         </div>
     `;
-  document.body.appendChild(modal);
+	document.body.appendChild(modal);
 
-  const closeButton = modal.querySelector(".modal-close-button");
-  const confirmBtn = modal.querySelector(".btn-primary");
-  const cancelBtn = modal.querySelector(".btn-delete");
+	const closeButton = modal.querySelector(".modal-close-button");
+	const confirmBtn = modal.querySelector(".btn-primary");
+	const cancelBtn = modal.querySelector(".btn-delete");
 
-  const darkMode = document.body.classList.contains("dark-mode");
+	const darkMode = document.body.classList.contains("dark-mode");
 
-  const modalGlow = getPreference("modalGlow").then((value) => value === "on");
-  modalGlow.then((isGlowing) => {
-    if (darkMode) {
-      if (isGlowing) {
-        modal.querySelectorAll(".modal-content").forEach((content) => {
-          content.classList.remove("modal--no-glow");
-        });
-      } else {
-        modal.querySelectorAll(".modal-content").forEach((content) => {
-          content.classList.add("modal--no-glow");
-        });
-      }
-    }
-  });
+	if (loggedIn) {
+		const modalGlow = getPreference("modalGlow").then(
+			(value) => value === "on"
+		);
+		modalGlow.then((isGlowing) => {
+			if (darkMode) {
+				if (isGlowing) {
+					modal.querySelectorAll(".modal-content").forEach((content) => {
+						content.classList.remove("modal--no-glow");
+					});
+				} else {
+					modal.querySelectorAll(".modal-content").forEach((content) => {
+						content.classList.add("modal--no-glow");
+					});
+				}
+			}
+		});
 
-  const buttonGlow = getPreference("buttonGlow").then(
-    (value) => value === "on"
-  );
+		const buttonGlow = getPreference("buttonGlow").then(
+			(value) => value === "on"
+		);
 
-  buttonGlow.then((isGlowing) => {
-    if (darkMode) {
-      if (isGlowing) {
-        confirmBtn.classList.remove("btn--no-glow");
-        cancelBtn.classList.remove("btn--no-glow");
-      } else {
-        confirmBtn.classList.add("btn--no-glow");
-        cancelBtn.classList.add("btn--no-glow");
-      }
-    }
-  });
+		buttonGlow.then((isGlowing) => {
+			if (darkMode) {
+				if (isGlowing) {
+					confirmBtn.classList.remove("btn--no-glow");
+					cancelBtn.classList.remove("btn--no-glow");
+				} else {
+					confirmBtn.classList.add("btn--no-glow");
+					cancelBtn.classList.add("btn--no-glow");
+				}
+			}
+		});
 
-  const modalBlur = getPreference("blur").then((value) => value === "on");
-  modalBlur.then((isBlurred) => {
-    if (isBlurred) {
-      modal.classList.remove("modal--no-blur");
-    } else {
-      modal.classList.add("modal--no-blur");
-    }
-  });
+		const modalBlur = getPreference("blur").then((value) => value === "on");
+		modalBlur.then((isBlurred) => {
+			if (isBlurred) {
+				modal.classList.remove("modal--no-blur");
+			} else {
+				modal.classList.add("modal--no-blur");
+			}
+		});
+	}
 
-  // Focus trap
-  const focusable = [closeButton, confirmBtn, cancelBtn];
-  let focusIdx = 0; // default to Confirm
-  modal.focus();
-  modal.addEventListener("keydown", (e) => {
-    if (e.key === "Tab") {
-      e.preventDefault();
-      focusIdx =
-        (focusIdx + (e.shiftKey ? -1 : 1) + focusable.length) %
-        focusable.length;
-      focusable[focusIdx].focus();
-    } else if (e.key === "Enter") {
-      if (document.activeElement === confirmBtn) confirmBtn.click();
-      if (document.activeElement === cancelBtn) cancelBtn.click();
-      if (document.activeElement === closeButton) closeButton.click();
-    } else if (e.key === "Escape") {
-      closeButton.click();
-      e.preventDefault();
-    }
-  });
+	// Focus trap
+	const focusable = [closeButton, confirmBtn, cancelBtn];
+	let focusIdx = 0; // default to Confirm
+	modal.focus();
+	modal.addEventListener("keydown", (e) => {
+		if (e.key === "Tab") {
+			e.preventDefault();
+			focusIdx =
+				(focusIdx + (e.shiftKey ? -1 : 1) + focusable.length) %
+				focusable.length;
+			focusable[focusIdx].focus();
+		} else if (e.key === "Enter") {
+			if (document.activeElement === confirmBtn) confirmBtn.click();
+			if (document.activeElement === cancelBtn) cancelBtn.click();
+			if (document.activeElement === closeButton) closeButton.click();
+		} else if (e.key === "Escape") {
+			closeButton.click();
+			e.preventDefault();
+		}
+	});
 
-  function cleanup() {
-    modal.remove();
-  }
+	function cleanup() {
+		modal.remove();
+	}
 
-  closeButton.addEventListener("click", () => {
-    cleanup();
-    if (typeof onConfirm === "function") onConfirm(false);
-  });
-  cancelBtn.addEventListener("click", () => {
-    cleanup();
-    if (typeof onConfirm === "function") onConfirm(false);
-  });
-  confirmBtn.addEventListener("click", () => {
-    cleanup();
-    if (typeof onConfirm === "function") onConfirm(true);
-  });
-  modal.addEventListener("click", (event) => {
-    if (
-      event.target === modal &&
-      event.target !== modal.querySelector(".modal-content")
-    ) {
-      cleanup();
-      if (typeof onConfirm === "function") onConfirm(false);
-    }
-  });
+	closeButton.addEventListener("click", () => {
+		cleanup();
+		if (typeof onConfirm === "function") onConfirm(false);
+	});
+	cancelBtn.addEventListener("click", () => {
+		cleanup();
+		if (typeof onConfirm === "function") onConfirm(false);
+	});
+	confirmBtn.addEventListener("click", () => {
+		cleanup();
+		if (typeof onConfirm === "function") onConfirm(true);
+	});
+	modal.addEventListener("click", (event) => {
+		if (
+			event.target === modal &&
+			event.target !== modal.querySelector(".modal-content")
+		) {
+			cleanup();
+			if (typeof onConfirm === "function") onConfirm(false);
+		}
+	});
 }
 
 function promptModal(message, defaultValue = "", onConfirm) {
-  const modal = document.createElement("div");
-  modal.className = "modal";
-  modal.id = "promptModal";
-  modal.tabIndex = -1;
-  modal.style.zIndex = "9999";
-  modal.style.animation = "fadeIn 0.3s ease";
-  modal.innerHTML = `
+	const modal = document.createElement("div");
+	modal.className = "modal";
+	modal.id = "promptModal";
+	modal.tabIndex = -1;
+	modal.style.zIndex = "9999";
+	modal.style.animation = "fadeIn 0.3s ease";
+	modal.innerHTML = `
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -208,109 +214,113 @@ function promptModal(message, defaultValue = "", onConfirm) {
             </div>
         </div>
     `;
-  document.body.appendChild(modal);
+	document.body.appendChild(modal);
 
-  const closeButton = modal.querySelector(".modal-close-button");
-  const confirmBtn = modal.querySelector(".btn-primary");
-  const cancelBtn = modal.querySelector(".btn-delete");
-  const input = modal.querySelector(".modal-prompt-input");
+	const closeButton = modal.querySelector(".modal-close-button");
+	const confirmBtn = modal.querySelector(".btn-primary");
+	const cancelBtn = modal.querySelector(".btn-delete");
+	const input = modal.querySelector(".modal-prompt-input");
 
-  const darkMode = document.body.classList.contains("dark-mode");
+	const darkMode = document.body.classList.contains("dark-mode");
 
-  const modalGlow = getPreference("modalGlow").then((value) => value === "on");
-  modalGlow.then((isGlowing) => {
-    if (darkMode) {
-      if (isGlowing) {
-        modal.querySelectorAll(".modal-content").forEach((content) => {
-          content.classList.remove("modal--no-glow");
-        });
-      } else {
-        modal.querySelectorAll(".modal-content").forEach((content) => {
-          content.classList.add("modal--no-glow");
-        });
-      }
-    }
-  });
+	if (loggedIn) {
+		const modalGlow = getPreference("modalGlow").then(
+			(value) => value === "on"
+		);
+		modalGlow.then((isGlowing) => {
+			if (darkMode) {
+				if (isGlowing) {
+					modal.querySelectorAll(".modal-content").forEach((content) => {
+						content.classList.remove("modal--no-glow");
+					});
+				} else {
+					modal.querySelectorAll(".modal-content").forEach((content) => {
+						content.classList.add("modal--no-glow");
+					});
+				}
+			}
+		});
 
-  const buttonGlow = getPreference("buttonGlow").then(
-    (value) => value === "on"
-  );
+		const buttonGlow = getPreference("buttonGlow").then(
+			(value) => value === "on"
+		);
 
-  buttonGlow.then((isGlowing) => {
-    if (darkMode) {
-      if (isGlowing) {
-        confirmBtn.classList.remove("btn--no-glow");
-        cancelBtn.classList.remove("btn--no-glow");
-      } else {
-        confirmBtn.classList.add("btn--no-glow");
-        cancelBtn.classList.add("btn--no-glow");
-      }
-    }
-  });
+		buttonGlow.then((isGlowing) => {
+			if (darkMode) {
+				if (isGlowing) {
+					confirmBtn.classList.remove("btn--no-glow");
+					cancelBtn.classList.remove("btn--no-glow");
+				} else {
+					confirmBtn.classList.add("btn--no-glow");
+					cancelBtn.classList.add("btn--no-glow");
+				}
+			}
+		});
 
-  const modalBlur = getPreference("blur").then((value) => value === "on");
-  modalBlur.then((isBlurred) => {
-    if (isBlurred) {
-      modal.classList.remove("modal--no-blur");
-    } else {
-      modal.classList.add("modal--no-blur");
-    }
-  });
+		const modalBlur = getPreference("blur").then((value) => value === "on");
+		modalBlur.then((isBlurred) => {
+			if (isBlurred) {
+				modal.classList.remove("modal--no-blur");
+			} else {
+				modal.classList.add("modal--no-blur");
+			}
+		});
+	}
 
-  // Focus trap
-  const focusable = [closeButton, confirmBtn, cancelBtn, input];
-  let focusIdx = 0; // default to Close
-  modal.focus();
-  modal.addEventListener("keydown", (e) => {
-    if (e.key === "Tab") {
-      e.preventDefault();
-      focusIdx =
-        (focusIdx + (e.shiftKey ? -1 : 1) + focusable.length) %
-        focusable.length;
-      focusable[focusIdx].focus();
-    } else if (e.key === "Enter") {
-      if (document.activeElement === confirmBtn) confirmBtn.click();
-      if (document.activeElement === cancelBtn) cancelBtn.click();
-      if (document.activeElement === closeButton) closeButton.click();
-      if (document.activeElement === input) confirmBtn.click();
-    } else if (e.key === "Escape") {
-      // Do nothing, block closing with Escape
-      e.preventDefault();
-    }
-  });
+	// Focus trap
+	const focusable = [closeButton, confirmBtn, cancelBtn, input];
+	let focusIdx = 0; // default to Close
+	modal.focus();
+	modal.addEventListener("keydown", (e) => {
+		if (e.key === "Tab") {
+			e.preventDefault();
+			focusIdx =
+				(focusIdx + (e.shiftKey ? -1 : 1) + focusable.length) %
+				focusable.length;
+			focusable[focusIdx].focus();
+		} else if (e.key === "Enter") {
+			if (document.activeElement === confirmBtn) confirmBtn.click();
+			if (document.activeElement === cancelBtn) cancelBtn.click();
+			if (document.activeElement === closeButton) closeButton.click();
+			if (document.activeElement === input) confirmBtn.click();
+		} else if (e.key === "Escape") {
+			// Do nothing, block closing with Escape
+			e.preventDefault();
+		}
+	});
 
-  function cleanup() {
-    modal.remove();
-  }
+	function cleanup() {
+		modal.remove();
+	}
 
-  closeButton.addEventListener("click", () => {
-    cleanup();
-    if (typeof onConfirm === "function") onConfirm(null);
-  });
-  cancelBtn.addEventListener("click", () => {
-    cleanup();
-    if (typeof onConfirm === "function") onConfirm(null);
-  });
-  confirmBtn.addEventListener("click", () => {
-    const value = input.value;
-    cleanup();
-    if (typeof onConfirm === "function") onConfirm(value);
-  });
-  modal.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      e.preventDefault();
-      cleanup();
-      if (typeof onConfirm === "function") onConfirm(false);
-    }
-  });
-  modal.addEventListener("click", (event) => {
-    if (
-      event.target === modal &&
-      event.target !== modal.querySelector(".modal-content")
-    ) {
-      cleanup();
-      if (typeof onConfirm === "function") onConfirm(false);
-    }
-  });
-  input.focus();
+	closeButton.addEventListener("click", () => {
+		cleanup();
+		if (typeof onConfirm === "function") onConfirm(null);
+	});
+	cancelBtn.addEventListener("click", () => {
+		cleanup();
+		if (typeof onConfirm === "function") onConfirm(null);
+	});
+	confirmBtn.addEventListener("click", () => {
+		const value = input.value;
+		cleanup();
+		if (typeof onConfirm === "function") onConfirm(value);
+	});
+	modal.addEventListener("keydown", (e) => {
+		if (e.key === "Escape") {
+			e.preventDefault();
+			cleanup();
+			if (typeof onConfirm === "function") onConfirm(false);
+		}
+	});
+	modal.addEventListener("click", (event) => {
+		if (
+			event.target === modal &&
+			event.target !== modal.querySelector(".modal-content")
+		) {
+			cleanup();
+			if (typeof onConfirm === "function") onConfirm(false);
+		}
+	});
+	input.focus();
 }
