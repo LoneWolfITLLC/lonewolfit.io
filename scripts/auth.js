@@ -169,30 +169,52 @@ async function onLoad() {
 			} else if (
 				redirectToPortal &&
 				!window.location.pathname.endsWith(ADMIN_PATH) &&
-				!requireLogin && allowedHtmlRegex.test(redirectUri)
+				!requireLogin &&
+				allowedHtmlRegex.test(redirectUri)
 			) {
 				window.location.href = ADMIN_PATH;
 			}
 		} else {
+			// If the user is not an admin, redirect to members.html if not already there
 			if (
-				redirectUri &&
-				!redirectToPortal &&
-				allowedHtmlRegex.test(redirectUri)
+				requireUserToBeAdmin &&
+				!window.location.pathname.endsWith(MEMBER_PATH) &&
+				requireLogin
 			) {
-				window.location.href = redirectUri;
-			} else if (
-				(redirectToPortal &&
-					!window.location.pathname.endsWith(MEMBER_PATH) &&
-					!requireLogin) ||
-				(requireUserToBeAdmin &&
-					!adminUser &&
-					!window.location.pathname.endsWith(MEMBER_PATH) &&
-					allowedHtmlRegex.test(redirectUri))
-			) {
-				window.location.href = MEMBER_PATH;
+				if (typeof alertModal === "function") {
+					alertModal(
+						"You must be an admin to view this page. You will be redirected to the members page."
+					);
+				} else {
+					console.warn(
+						"You must be an admin to view this page. You will be redirected to the members page."
+					);
+					alert(
+						"You must be an admin to view this page. You will be redirected to the members page."
+					);
+				}
+				setTimeout(() => {
+					window.location.href = MEMBER_PATH;
+				}, 3000);
+			} else {
+				if (
+					redirectUri &&
+					!redirectToPortal &&
+					allowedHtmlRegex.test(redirectUri)
+				) {
+					window.location.href = redirectUri;
+				} else if (
+					(redirectToPortal &&
+						!window.location.pathname.endsWith(MEMBER_PATH) &&
+						!requireLogin) ||
+					(!adminUser &&
+						!window.location.pathname.endsWith(MEMBER_PATH) &&
+						allowedHtmlRegex.test(redirectUri))
+				) {
+					window.location.href = MEMBER_PATH;
+				}
 			}
 		}
-
 		// If already on /members.html, do not redirect
 	} else if (token) {
 		//delete token stored here...
