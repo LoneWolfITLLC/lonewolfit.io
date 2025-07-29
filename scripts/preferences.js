@@ -424,7 +424,7 @@ window.addEventListener("preAuthChecked", () => {
 //Returns default_value if the user is not logged in.
 async function createAndLoadPreference(key, default_value) {
   const token = sessionStorage.getItem("jwt");
-  if (!token || (typeof loggedIn !== "undefined" && loggedIn === false)) {
+  if (!token || (typeof loggedIn !== "undefined" && !loggedIn)) {
     return Promise.resolve(default_value);
   }
   showLoading();
