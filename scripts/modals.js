@@ -116,8 +116,7 @@ function alertModal(message, locked = false) {
 		}
 	});
 	modal.focus();
-	// Native alert returns undefined
-	return undefined;
+	return modal; // Return the modal element for further manipulation if needed
 }
 
 function confirmModal(message, onConfirm) {
@@ -237,6 +236,7 @@ function confirmModal(message, onConfirm) {
 			handleClose(false);
 		}
 	});
+	return modal; // Return the modal element for further manipulation if needed
 }
 
 function promptModal(message, defaultValue = "", onConfirm) {
@@ -365,4 +365,5 @@ function promptModal(message, defaultValue = "", onConfirm) {
 		}
 	});
 	input.focus();
+	return modal; // Return the modal element for further manipulation if needed
 }

@@ -41,7 +41,9 @@ window.addEventListener("authChecked", function () {
       if (response.ok) {
         window.location.hash = "#userSubmissionSection";
         hideLoading();
-        alertModal(data.message || "Submitted your testimonial!");
+        const successModal = alertModal(
+          data.message || "Submitted your testimonial!"
+        );
         await fetchUserTestimonials(); // Refresh user testimonials
         await displayUserSlides(); // Update user slides
         textarea.value = "";
@@ -55,12 +57,12 @@ window.addEventListener("authChecked", function () {
         await fetchTestimonials(); // Refresh public testimonials
         await displaySlides(); // Update public slides
         setTimeout(() => {
+          closeModalWithAnimation(successModal);
           window.location.hash = "#selfTestimonialSection";
         }, 2000);
       } else {
         hideLoading();
         window.location.hash = "#userSubmissionSection";
-        alertModal(data.message || "An error occurred. Please try again.");
         if (data.message && data.message.trim() === "Malformed token") {
           alertModal("Token expired. Please login again...", true);
           setTimeout(() => {
@@ -69,6 +71,7 @@ window.addEventListener("authChecked", function () {
           }, 2000);
           return;
         }
+        alertModal(data.message || "An error occurred. Please try again.");
       }
     } catch (error) {
       hideLoading();
