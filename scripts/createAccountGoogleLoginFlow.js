@@ -3,14 +3,12 @@ function getQueryParam(name) {
 	return urlParams.get(name);
 }
 
-// Helper: show/hide loading modal
+//––––– loading modal toggles –––––
 function showLoading() {
-	const loadingModal = document.getElementById("loadingModal");
-	if (loadingModal) loadingModal.style.display = "flex";
+	if(typeof loadingModal === "function" && !document.getElementById("loadingModal")) loadingModal();
 }
 function hideLoading() {
-	const loadingModal = document.getElementById("loadingModal");
-	if (loadingModal) loadingModal.style.display = "none";
+	if(typeof closeModalWithAnimation === "function") closeModalWithAnimation(document.getElementById("loadingModal"));
 }
 
 // Helper: show alert using alert.js

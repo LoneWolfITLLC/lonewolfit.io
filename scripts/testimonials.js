@@ -105,8 +105,7 @@ async function fetchApprovedTestimonials() {
 	approvedTestimonials = []; // Reset approved testimonials array
 	currentEditSlide = -1; // Reset current edit slide index
 	const token = getTokenFromSession && getTokenFromSession();
-	const loadingModal = document.getElementById("loadingModal");
-	if (loadingModal) loadingModal.style.display = "block";
+	showLoading();
 	if (token) {
 		try {
 			const response = await fetch(
@@ -135,7 +134,7 @@ async function fetchApprovedTestimonials() {
 					"Error Fetching Unapproved Testimonials: " +
 						(json.message || text || "Unknown error")
 				);
-				if (loadingModal) loadingModal.style.display = "none";
+				hideLoading();
 				return;
 			}
 			approvedTestimonials = await response.json();
@@ -146,12 +145,11 @@ async function fetchApprovedTestimonials() {
 	} else {
 		alertModal("Fetching Approved Testimonials failed.");
 	}
-	if (loadingModal) loadingModal.style.display = "none";
+	hideLoading();
 }
 
 async function fetchUserDetailsWithoutToken(userId) {
-	const loadingModal = document.getElementById("loadingModal");
-	if (loadingModal) loadingModal.style.display = "block";
+	showLoading();
 	try {
 		const response = await fetch(
 			`${URL_BASE}/api/auth/get-user-details/withouttoken`,
@@ -162,14 +160,14 @@ async function fetchUserDetailsWithoutToken(userId) {
 			}
 		);
 		if (!response.ok) {
-			if (loadingModal) loadingModal.style.display = "none";
+			hideLoading();
 			return null;
 		}
 		const data = await response.json();
-		if (loadingModal) loadingModal.style.display = "none";
+		hideLoading();
 		return data;
 	} catch (error) {
-		if (loadingModal) loadingModal.style.display = "none";
+		hideLoading();
 		return null;
 	}
 }

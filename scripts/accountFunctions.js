@@ -12,8 +12,7 @@ function signOut(ofAllDevices = false) {
 		if (!result) {
 			return;
 		}
-		var loadingModal = document.getElementById("loadingModal");
-		if (loadingModal) loadingModal.style.display = "block";
+		showLoading();
 		fetch(URL_BASE + "/api/auth/sign-out", {
 			method: "POST",
 			headers: {
@@ -28,7 +27,7 @@ function signOut(ofAllDevices = false) {
 				if (response.ok) {
 					sessionStorage.removeItem("jwt");
 					loggedIn = false;
-					if (loadingModal) loadingModal.style.display = "none";
+					hideLoading();
 					alertModal(
 						ofAllDevices
 							? "You have been signed out of all devices."
@@ -40,21 +39,21 @@ function signOut(ofAllDevices = false) {
 				} else {
 					if (response.status === 401) {
 						sessionStorage.removeItem("jwt");
-						if (loadingModal) loadingModal.style.display = "none";
+						hideLoading();
 						alertModal("Session expired. Please log in again.");
 						loggedIn = false;
 						window.location.href = "login.html#emailloginSection";
 						return;
 					} else {
 						return response.json().then((text) => {
-							if (loadingModal) loadingModal.style.display = "none";
+							hideLoading();
 							alertModal("Sign out failed: " + text.message);
 						});
 					}
 				}
 			})
 			.catch((err) => {
-				if (loadingModal) loadingModal.style.display = "none";
+				hideLoading();
 				alertModal("Sign out failed: " + err.message);
 			});
 	});
@@ -68,8 +67,7 @@ function resetPassword() {
 				if (!result) {
 					return;
 				}
-				var loadingModal = document.getElementById("loadingModal");
-				if (loadingModal) loadingModal.style.display = "block";
+				showLoading();
 				fetch(URL_BASE + "/api/auth/sign-out", {
 					method: "POST",
 					headers: {
@@ -83,7 +81,7 @@ function resetPassword() {
 					.then((response) => {
 						if (response.ok) {
 							sessionStorage.removeItem("jwt");
-							if (loadingModal) loadingModal.style.display = "none";
+							hideLoading();
 							alertModal(
 								"You have been signed out of all devices. You can now reset your password."
 							);
@@ -92,13 +90,13 @@ function resetPassword() {
 							}, 3000);
 						} else {
 							return response.json().then((text) => {
-								if (loadingModal) loadingModal.style.display = "none";
+								hideLoading();
 								alertModal("Sign out failed: " + text.message);
 							});
 						}
 					})
 					.catch((err) => {
-						if (loadingModal) loadingModal.style.display = "none";
+						hideLoading();
 						alertModal("Sign out failed: " + err.message);
 					});
 			}
@@ -126,8 +124,7 @@ function deleteAccount(redirectUri = "index.html") {
 						alertModal("Account deletion canceled.");
 						return;
 					}
-					var loadingModal = document.getElementById("loadingModal");
-					if (loadingModal) loadingModal.style.display = "block";
+					showLoading();
 					fetch(URL_BASE + "/api/auth/delete-account", {
 						method: "DELETE",
 						headers: {
@@ -138,20 +135,20 @@ function deleteAccount(redirectUri = "index.html") {
 						.then((response) => {
 							if (response.ok) {
 								sessionStorage.removeItem("jwt");
-								if (loadingModal) loadingModal.style.display = "none";
+								hideLoading();
 								alertModal("Your account has been deleted.");
 								setTimeout(() => {
 									window.location.href = redirectUri;
 								}, 2000);
 							} else {
 								return response.json().then((text) => {
-									if (loadingModal) loadingModal.style.display = "none";
+									hideLoading();
 									alertModal("Account deletion failed: " + text.message);
 								});
 							}
 						})
 						.catch((err) => {
-							if (loadingModal) loadingModal.style.display = "none";
+							hideLoading();
 							alertModal("Account deletion failed: " + err.message);
 						});
 				}

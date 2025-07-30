@@ -79,9 +79,8 @@ document.addEventListener("DOMContentLoaded", function () {
 		.addEventListener("submit", async function (event) {
 			event.preventDefault();
 			const email = document.getElementById("email").value.trim();
-			const loadingModal = document.getElementById("loadingModal");
 			const alertDiv = document.getElementById("alertEmail");
-			loadingModal.style.display = "block";
+			showLoading();
 			try {
 				const response = await fetch("/api/auth/send-verification-code", {
 					method: "POST",
@@ -105,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			} catch (error) {
 				showAlert("Error: " + error.message, true, this);
 			}
-			loadingModal.style.display = "none";
+			hideLoading();
 		});
 	document
 		.getElementById("newPasswordForm")
@@ -125,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				showAlert("Passwords do not match.", true, this);
 				return;
 			}
-			loadingModal.style.display = "block";
+			showLoading();
 			try {
 				const response = await fetch("/api/auth/reset-password", {
 					method: "POST",
@@ -152,6 +151,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			} catch (error) {
 				showAlert("Error: " + error.message, true, this);
 			}
-			loadingModal.style.display = "none";
+			hideLoading();
 		});
 }); // <-- Add this closing brace to end the DOMContentLoaded event listener

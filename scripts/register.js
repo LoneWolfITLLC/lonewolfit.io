@@ -158,7 +158,7 @@ window.addEventListener("authChecked", function () {
     // ...existing code...
 
     // Show loading modal
-    document.getElementById("loadingModal").style.display = "block";
+    showLoading();
     try {
       // POST to backend registration endpoint
       const response = await fetch("/api/auth/register", {
@@ -167,7 +167,7 @@ window.addEventListener("authChecked", function () {
       });
 
       // Hide loading modal
-      document.getElementById("loadingModal").style.display = "none";
+      hideLoading();
 
       if (response.ok) {
         showAlert(
@@ -188,7 +188,7 @@ window.addEventListener("authChecked", function () {
         );
       }
     } catch (err) {
-      document.getElementById("loadingModal").style.display = "none";
+      hideLoading();
       showAlert("An error occurred. Please try again later.", true, formElem);
     }
   }
@@ -234,14 +234,14 @@ window.addEventListener("authChecked", function () {
     // Add event listener for resend code button
     const resendButton = document.getElementById("resendCodeButton");
     resendButton.addEventListener("click", async function () {
-      document.getElementById("loadingModal").style.display = "block";
+      showLoading();
       try {
         const response = await fetch("/api/auth/resend-verification", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email }),
         });
-        document.getElementById("loadingModal").style.display = "none";
+        hideLoading();
         if (response.ok) {
           showAlert(
             "Verification email resent! Please check your inbox.",
@@ -257,7 +257,7 @@ window.addEventListener("authChecked", function () {
           );
         }
       } catch (err) {
-        document.getElementById("loadingModal").style.display = "none";
+        hideLoading();
         showAlert(
           "An error occurred while resending the verification email.",
           true,
@@ -270,14 +270,14 @@ window.addEventListener("authChecked", function () {
   // Handle verification code submission
   async function handleVerification(email) {
     const code = document.getElementById("verificationCode").value;
-    document.getElementById("loadingModal").style.display = "block";
+    showLoading();
     try {
       const response = await fetch("/api/auth/verify-registration", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, code }),
       });
-      document.getElementById("loadingModal").style.display = "none";
+      hideLoading();
       const formElem = document
         .getElementById("verifyAccountButton")
         .closest("form");
@@ -299,7 +299,7 @@ window.addEventListener("authChecked", function () {
         );
       }
     } catch (err) {
-      document.getElementById("loadingModal").style.display = "none";
+      hideLoading();
       const formElem = document
         .getElementById("verifyAccountButton")
         .closest("form");

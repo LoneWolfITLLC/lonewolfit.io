@@ -11,6 +11,28 @@ function closeModalWithAnimation(modal) {
 		{ once: true }
 	);
 }
+function loadingModal() {
+	const modal = document.createElement("div");
+	modal.className = "modal";
+	modal.id = "loadingModal";
+	modal.tabIndex = -1;
+	modal.style.animation = "fadeIn 0.3s ease";
+	modal.style.zIndex = "9999";
+	modal.innerHTML = `
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-body text-center">
+					<img src="images/ui/spin.png" alt="Loading..." class="spinner" />
+						<p class="main__text" style="color: #fff">
+							Loading, please wait...
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	`;
+	document.body.appendChild(modal);
+}
 function alertModal(message) {
 	const modal = document.createElement("div");
 	modal.className = "modal";

@@ -364,7 +364,7 @@ function retrieveUserDetails() {
 		alertModal("No session found.");
 		return Promise.reject(new Error("No session found."));
 	}
-	document.getElementById("loadingModal").style.display = "block";
+	showLoading();
 	return fetch(URL_BASE + "/api/auth/get-user-details", {
 		method: "GET",
 		headers: {
@@ -380,11 +380,11 @@ function retrieveUserDetails() {
 			}
 		})
 		.then((data) => {
-			document.getElementById("loadingModal").style.display = "none";
+			hideLoading();
 			return data;
 		})
 		.catch((err) => {
-			document.getElementById("loadingModal").style.display = "none";
+			hideLoading();
 			alertModal("Error: " + err.message);
 			return null;
 		});
@@ -530,7 +530,7 @@ function handleEditUserSubmit(formName) {
 	// Send PUT request to backend
 	const token = sessionStorage.getItem("jwt");
 
-	document.getElementById("loadingModal").style.display = "block";
+	showLoading();
 	fetch(URL_BASE + "/api/auth/edit-user", {
 		method: "PUT",
 		headers: {
@@ -540,7 +540,7 @@ function handleEditUserSubmit(formName) {
 		body: JSON.stringify(data),
 	})
 		.then(async (response) => {
-			document.getElementById("loadingModal").style.display = "none";
+			hideLoading();
 			if (response.ok) {
 				alertModal("User updated successfully!");
 			} else {
@@ -566,7 +566,7 @@ function handleEditUserSubmit(formName) {
 			}
 		})
 		.catch((err) => {
-			document.getElementById("loadingModal").style.display = "none";
+			hideLoading();
 			alertModal("Network error: " + err.message);
 		});
 }
@@ -604,7 +604,7 @@ function updateStripeCustomerDetails(formType) {
 	data.address = parseAddress(data.address);
 
 	const token = sessionStorage.getItem("jwt");
-	document.getElementById("loadingModal").style.display = "block";
+	showLoading();
 	fetch(URL_BASE + "/api/auth/update-stripe-customer", {
 		method: "POST",
 		headers: {
@@ -614,7 +614,7 @@ function updateStripeCustomerDetails(formType) {
 		body: JSON.stringify(data),
 	})
 		.then(async (response) => {
-			document.getElementById("loadingModal").style.display = "none";
+			hideLoading();
 			if (response.ok) {
 				alertModal("Stripe customer updated successfully!");
 				setTimeout(() => window.location.reload(), 3000);
@@ -631,7 +631,7 @@ function updateStripeCustomerDetails(formType) {
 			}
 		})
 		.catch((err) => {
-			document.getElementById("loadingModal").style.display = "none";
+			hideLoading();
 			alertModal("Network error: " + err.message);
 		});
 }

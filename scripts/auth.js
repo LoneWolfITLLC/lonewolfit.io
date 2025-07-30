@@ -44,12 +44,10 @@ window.addEventListener("unload", (event) => {
 
 //––––– loading modal toggles –––––
 function showLoading() {
-	const loadingModal = document.getElementById("loadingModal");
-	if (loadingModal) loadingModal.style.display = "flex";
+	if(typeof loadingModal === "function" && !document.getElementById("loadingModal")) loadingModal();
 }
 function hideLoading() {
-	const loadingModal = document.getElementById("loadingModal");
-	if (loadingModal) loadingModal.style.display = "none";
+	if(typeof closeModalWithAnimation === "function") closeModalWithAnimation(document.getElementById("loadingModal"));
 }
 function getTokenFromSession() {
 	const token = sessionStorage.getItem("jwt");

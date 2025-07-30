@@ -272,6 +272,9 @@ function applyModalGlow(isModalGlow) {
         modal.classList.add("modal--no-glow");
       }
     }
+    else{
+      modal.classList.add("modal--no-glow");
+    }
   });
 }
 

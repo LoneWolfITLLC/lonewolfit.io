@@ -10,7 +10,6 @@ window.addEventListener("authChecked", function () {
 			? window.MAX_CHARACTER_COUNT
 			: 250;
 	const alertDiv = document.getElementById("alertUserSubmission");
-	const loadingModal = document.getElementById("loadingModal");
 
 	function validate() {
 		const textLen = textarea.value.trim().length;
@@ -26,7 +25,7 @@ window.addEventListener("authChecked", function () {
 	form.addEventListener("submit", async function (e) {
 		e.preventDefault();
 		if (submitBtn.disabled) return;
-		if (loadingModal) loadingModal.style.display = "block";
+		showLoading();
 		let token =
 			typeof getTokenFromSession === "function" ? getTokenFromSession() : null;
 		try {
@@ -82,7 +81,7 @@ window.addEventListener("authChecked", function () {
 				form
 			);
 		} finally {
-			if (loadingModal) loadingModal.style.display = "none";
+			hideLoading();
 		}
 	});
 });

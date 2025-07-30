@@ -65,7 +65,7 @@ window.addEventListener("authChecked", function () {
 
 			const email = document.getElementById("email").value;
 			const password = document.getElementById("password").value;
-			document.getElementById("loadingModal").style.display = "block";
+			showLoading();
 			try {
 				const response = await fetch(URL_BASE + "/api/auth/login", {
 					method: "POST",
@@ -98,7 +98,7 @@ window.addEventListener("authChecked", function () {
 					emailLoginSection
 				);
 			}
-			document.getElementById("loadingModal").style.display = "none";
+			hideLoading();
 		});
 
 	// Helper to show/hide sections for verification step
@@ -126,7 +126,7 @@ window.addEventListener("authChecked", function () {
 			const alertDiv = verifyLoginSection.querySelector(".alertDiv");
 			alertDiv.style.display = "none";
 			alertDiv.innerHTML = "";
-			document.getElementById("loadingModal").style.display = "block";
+			showLoading();
 			try {
 				const response = await fetch(URL_BASE + "/api/auth/verify-login", {
 					method: "POST",
@@ -177,7 +177,7 @@ window.addEventListener("authChecked", function () {
 					verifyLoginSection
 				);
 			}
-			document.getElementById("loadingModal").style.display = "none";
+			hideLoading();
 		});
 
 	// Resend verification code
@@ -186,7 +186,7 @@ window.addEventListener("authChecked", function () {
 		.addEventListener("click", async (e) => {
 			e.preventDefault();
 			const email = document.getElementById("email").value;
-			document.getElementById("loadingModal").style.display = "block";
+			showLoading();
 			try {
 				const response = await fetch(
 					URL_BASE + "/api/auth/resend-verification-login",
@@ -220,7 +220,7 @@ window.addEventListener("authChecked", function () {
 					verifyLoginSection
 				);
 			}
-			document.getElementById("loadingModal").style.display = "none";
+			hideLoading();
 		});
 	const verificationCodeInput = document.getElementById("verificationCode");
 	const verifyAccountButton = document.getElementById("verifyAccountButton");
