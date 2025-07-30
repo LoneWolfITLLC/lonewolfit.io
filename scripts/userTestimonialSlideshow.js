@@ -42,6 +42,7 @@ async function deleteUserTestimonial(id) {
           );
           return;
         }
+		hideLoading();
         // Remove deleted testimonial from array
         userTestimonials = userTestimonials.filter((t) => t.id !== id);
         // Adjust current slide index if needed
