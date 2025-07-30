@@ -33,14 +33,15 @@ function loadingModal() {
 	`;
 	document.body.appendChild(modal);
 }
-function alertModal(message) {
+function alertModal(message, locked = false) {
 	const modal = document.createElement("div");
 	modal.className = "modal";
 	modal.id = "alertModal";
 	modal.tabIndex = -1;
 	modal.style.animation = "fadeIn 0.3s ease";
 	modal.style.zIndex = "9999";
-	modal.innerHTML = `
+	if (!locked) {
+		modal.innerHTML = `
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -51,7 +52,21 @@ function alertModal(message) {
 				</div>
 			</div>
 		</div>
-	`;
+		`;
+	}
+	else{
+		modal.innerHTML = `
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+				</div>
+				<div class="modal-body">
+					<p>${message}</p>
+				</div>
+			</div>
+		</div>
+		`;
+	}
 
 	if (loggedIn) {
 		const modalBlur = getPreference("blur").then((value) => value === "on");
@@ -82,20 +97,22 @@ function alertModal(message) {
 
 	document.body.appendChild(modal);
 
-	const closeButton = modal.querySelector(".modal-close-button");
-	closeButton.addEventListener("click", () => {
-		closeModalWithAnimation(modal);
-	});
+	if (!locked) {
+		const closeButton = modal.querySelector(".modal-close-button");
+		closeButton.addEventListener("click", () => {
+			closeModalWithAnimation(modal);
+		});
+	}
 
 	modal.addEventListener("click", (event) => {
 		if (event.target === modal) {
-			closeModalWithAnimation(modal);
+			if (!locked) closeModalWithAnimation(modal);
 		}
 	});
 
 	modal.addEventListener("keydown", (e) => {
 		if (e.key === "Enter" || e.key === "Escape") {
-			closeModalWithAnimation(modal);
+			if (!locked) closeModalWithAnimation(modal);
 		}
 	});
 	modal.focus();

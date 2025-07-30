@@ -181,7 +181,8 @@ async function onLoad() {
 			) {
 				if (typeof alertModal === "function") {
 					alertModal(
-						"You must be an admin to view this page. You will be redirected to the members page."
+						"You must be an admin to view this page. You will be redirected to the members page.",
+						true
 					);
 				} else {
 					console.warn(
