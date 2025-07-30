@@ -68,7 +68,7 @@ async function fetchUnapprovedTestimonials() {
 					json = JSON.parse(text);
 				} catch (err) {}
 				if (json.message && json.message.trim() === "Malformed token") {
-					alertModal("Token expired. Please login again...");
+					alertModal("Token expired. Please login again...", true);
 					if (loadingBar) loadingBar.style.display = "none";
 					updateNavButtons();
 					setTimeout(() => {
@@ -122,7 +122,7 @@ async function fetchApprovedTestimonials() {
 					json = JSON.parse(text);
 				} catch (err) {}
 				if (json.message && json.message.trim() === "Malformed token") {
-					alertModal("Token expired. Please login again...");
+					alertModal("Token expired. Please login again...", true);
 					if (loadingBar) loadingBar.style.display = "none";
 					updateNavButtons();
 					setTimeout(() => {

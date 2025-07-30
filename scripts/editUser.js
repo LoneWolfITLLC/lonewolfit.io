@@ -550,7 +550,7 @@ function handleEditUserSubmit(formName) {
 					json = JSON.parse(errorText);
 				} catch (err) {}
 				if (json.message && json.message.trim() === "Malformed token") {
-					alertModal("Token expired. Please login again...");
+					alertModal("Token expired. Please login again...", true);
 					setTimeout(() => {
 						window.location.href = "login.html?redirect_uri=edit_user.html";
 					}, 3000);

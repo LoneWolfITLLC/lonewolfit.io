@@ -64,7 +64,7 @@ window.addEventListener("authChecked", function () {
 					form
 				);
 				if (data.message && data.message.trim() === "Malformed token") {
-					showAlert("Token expired. Please login again...", true, form);
+					alertModal("Token expired. Please login again...", true);
 					setTimeout(() => {
 						window.location.href = "login.html?redirect_uri=submit_testimonial.html#userSubmissionSection";
 					}, 2000);

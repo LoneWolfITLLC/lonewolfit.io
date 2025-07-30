@@ -28,7 +28,7 @@ async function deleteUserTestimonial(id) {
 				const data = await response.json();
 				if (!response.ok) {
 					if(data.message && data.message.trim() === "Malformed token") {
-						alertModal("Token expired. Please login again...");
+						alertModal("Token expired. Please login again...", true);
 						if (loadingBar) loadingBar.style.display = "none";
 						updateNavButtons();
 						setTimeout(() => {
@@ -102,7 +102,7 @@ async function fetchUserTestimonials() {
 		if (!response.ok) {
 			const data = await response.json();
 			if(data.message && data.message.trim() === "Malformed token") {
-				alertModal("Token expired. Please login again...");
+				alertModal("Token expired. Please login again...", true);
 				setTimeout(() => {
 					window.location.href = "login.html";
 				}, 3000);

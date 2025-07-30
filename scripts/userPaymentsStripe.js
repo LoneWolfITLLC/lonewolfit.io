@@ -32,7 +32,7 @@ async function fetchAndDisplayUserPayments() {
 				json = JSON.parse(text);
 			} catch (err) {}
 			if (json.message && json.message.trim() === "Malformed token") {
-				alertModal("Token expired. Please login again...");
+				alertModal("Token expired. Please login again...", true);
 				setTimeout(() => {
 					window.location.href = "login.html?redirect_uri=payments.html";
 				}, 3000);

@@ -36,7 +36,7 @@ async function fetchApprovedTestimonials() {
 				json = JSON.parse(text);
 			} catch (err) {}
 			if (json.message && json.message.trim() === "Malformed token") {
-				alertModal("Token expired. Please login again...");
+				alertModal("Token expired. Please login again...", true);
 				setTimeout(() => {
 					window.location.href =
 						"login.html?redirect_uri=delete_testimonials.html";
@@ -176,7 +176,7 @@ async function deleteTestimonial(id) {
 						errorData.message &&
 						errorData.message.trim() === "Malformed token"
 					) {
-						alertModal("Token expired. Please login again...");
+						alertModal("Token expired. Please login again...", true);
 						setTimeout(() => {
 							window.location.href =
 								"login.html?redirect_uri=delete_testimonials.html";

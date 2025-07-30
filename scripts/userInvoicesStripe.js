@@ -34,7 +34,7 @@ async function fetchAndDisplayInvoices() {
 				json = JSON.parse(text);
 			} catch (err) {}
 			if (json.message && json.message.trim() === "Malformed token") {
-				alertModal("Token expired. Please login again...");
+				alertModal("Token expired. Please login again...", true);
 				setTimeout(() => {
 					window.location.href = "login.html?redirect_uri=invoices.html";
 				}, 3000);

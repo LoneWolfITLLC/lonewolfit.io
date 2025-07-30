@@ -31,7 +31,8 @@ function signOut(ofAllDevices = false) {
 					alertModal(
 						ofAllDevices
 							? "You have been signed out of all devices."
-							: "You have been signed out."
+							: "You have been signed out.",
+						true
 					);
 					setTimeout(() => {
 						window.location.href = "index.html";
@@ -40,7 +41,7 @@ function signOut(ofAllDevices = false) {
 					if (response.status === 401) {
 						sessionStorage.removeItem("jwt");
 						hideLoading();
-						alertModal("Session expired. Please log in again.");
+						alertModal("Session expired. Please log in again.", true);
 						loggedIn = false;
 						window.location.href = "login.html#emailloginSection";
 						return;
@@ -83,7 +84,8 @@ function resetPassword() {
 							sessionStorage.removeItem("jwt");
 							hideLoading();
 							alertModal(
-								"You have been signed out of all devices. You can now reset your password."
+								"You have been signed out of all devices. You can now reset your password.",
+								true
 							);
 							setTimeout(() => {
 								window.location.href = "reset.html";
@@ -136,7 +138,7 @@ function deleteAccount(redirectUri = "index.html") {
 							if (response.ok) {
 								sessionStorage.removeItem("jwt");
 								hideLoading();
-								alertModal("Your account has been deleted.");
+								alertModal("Your account has been deleted.", true);
 								setTimeout(() => {
 									window.location.href = redirectUri;
 								}, 2000);

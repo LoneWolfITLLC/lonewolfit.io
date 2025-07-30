@@ -32,7 +32,7 @@ window.addEventListener("authChecked", async function () {
           json = JSON.parse(text);
         } catch (err) {}
         if (json.message && json.message.trim() === "Malformed token") {
-          showAlert("Token expired. Please login again...", true, alertDiv);
+          alertModal("Token expired. Please login again...", true);
           setTimeout(() => {
             window.location.href =
               "login.html?redirect_uri=contact_form_submissions.html";
@@ -194,11 +194,7 @@ window.addEventListener("authChecked", async function () {
                     json.message &&
                     json.message.trim() === "Malformed token"
                   ) {
-                    showAlert(
-                      "Token expired. Please login again...",
-                      true,
-                      form
-                    );
+                    alertModal("Token expired. Please login again...", true);
                     setTimeout(() => {
                       window.location.href = "login.html";
                     }, 3000);
