@@ -20,7 +20,7 @@ function loadingModal() {
 	modal.style.zIndex = "9999";
 	modal.innerHTML = `
 		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
+			<div class="modal-content modal--no-glow">
 				<div class="modal-body text-center">
 					<img src="images/ui/spin.png" alt="Loading..." class="spinner" />
 						<p class="main__text" style="color: #fff">
