@@ -47,7 +47,7 @@ function showLoading() {
 	if(typeof loadingModal === "function" && !document.getElementById("loadingModal")) loadingModal();
 }
 function hideLoading() {
-	if(typeof closeModalWithAnimation === "function") closeModalWithAnimation(document.getElementById("loadingModal"));
+	if(typeof closeModalWithAnimation === "function" && document.getElementById("loadingModal")) closeModalWithAnimation(document.getElementById("loadingModal"));
 }
 function getTokenFromSession() {
 	const token = sessionStorage.getItem("jwt");
