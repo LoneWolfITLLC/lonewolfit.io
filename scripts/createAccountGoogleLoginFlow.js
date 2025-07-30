@@ -295,13 +295,13 @@ window.addEventListener("authChecked", async function () {
 					const respData = await response.json();
 					const token = respData.token;
 					sessionStorage.setItem("jwt", token);
-					showAlertDiv("Account created successfully!", false, residentialForm);
+					alertModal("Account created successfully! Redirecting...", true);
 					console.log("Login successful, token stored in sessionStorage.");
 					//wait one second before redirecting
 					window.location.hash = "#registerSectionResidential";
 					await new Promise((resolve) => setTimeout(resolve, 2000));
 					const redirectUri = getQueryParam("redirect_uri") || "";
-					if (data.adminUser) {
+					if (respData.adminUser) {
 						// Only append redirect_uri if it is not the admin or member portal itself
 						if (
 							redirectUri &&
@@ -321,10 +321,10 @@ window.addEventListener("authChecked", async function () {
 					}
 				} else {
 					const errorText = await response.text();
-					showAlertDiv("Error: " + errorText, true, residentialForm);
+					alertModal("Error: " + errorText);
 				}
 			} catch (err) {
-				showAlertDiv("Network error: " + err.message, true, residentialForm);
+				alertModal("Network error: " + err.message);
 			}
 			hideLoading();
 			window.location.hash = "#registerSectionResidential";
@@ -350,7 +350,7 @@ window.addEventListener("authChecked", async function () {
 					const token = respData.token;
 					sessionStorage.setItem("jwt", token);
 					console.log("Login successful, token stored in sessionStorage.");
-					showAlertDiv("Account created successfully!", false, businessForm);
+					alertModal("Account created successfully! Redirecting...", true);
 					//wait one second before redirecting
 					window.location.hash = "#registerSectionBusiness";
 					await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -375,10 +375,10 @@ window.addEventListener("authChecked", async function () {
 					}
 				} else {
 					const errorText = await response.text();
-					showAlertDiv("Error: " + errorText, true, businessForm);
+					alertModal("Error: " + errorText);
 				}
 			} catch (err) {
-				showAlertDiv("Network error: " + err.message, true, businessForm);
+				alertModal("Network error: " + err.message);
 			}
 			hideLoading();
 			window.location.hash = "#registerSectionBusiness";
