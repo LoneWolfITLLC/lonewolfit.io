@@ -76,8 +76,7 @@ window.addEventListener("authChecked", function () {
       alertModal(
         `Unable to submit testimonial. Error: ${
           error && error.toString ? error.toString() : String(error)
-        }`,
-        true
+        }`
       );
     }
   });
