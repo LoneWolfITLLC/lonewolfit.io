@@ -166,6 +166,20 @@ body.dark-mode .btn-success:active {
 	opacity: 1;
 }
 
+body.dark-mode .btn--no-glow {
+	box-shadow: none !important;
+	text-shadow: none !important;
+	animation: none !important;
+}
+
+body.dark-mode .btn--no-glow:hover,
+body.dark-mode .btn--no-glow:active,
+body.dark-mode .btn--no-glow:focus {
+	box-shadow: none !important;
+	text-shadow: none !important;
+	animation: none !important;
+}
+
 @keyframes steampunkGlowCyan {
 	0% {
 		box-shadow: 0 0 12px #00ffff55, 0 0 4px #00ffff22;

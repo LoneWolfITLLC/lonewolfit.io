@@ -38,6 +38,13 @@ body.dark-mode #loadingModal .modal-content>* {
     opacity: 1 !important;
 }
 
+body.dark-mode .modal--no-glow,
+body.dark-mode .modal--no-glow:hover,
+body.dark-mode .modal--no-glow:focus-within {
+    animation: none !important;
+    box-shadow: none !important;
+}
+
 @keyframes breathing-shadow {
     0% {
         box-shadow: 0 0 32px 8px #00ffffcc, 0 0 64px 16px #00ffff55, 0 2px 24px rgba(0, 255, 255, 0.18);

@@ -174,7 +174,7 @@ function initPreferencesPage(
           } else {
             // Optionally, apply button glow effect here if needed
             if (typeof applyButtonGlow === "function") {
-              applyButtonGlow(darkMode, autoDarkMode, isButtonGlow);
+              applyButtonGlow(isButtonGlow);
             }
           }
         }
@@ -192,7 +192,7 @@ function initPreferencesPage(
           } else {
             // Optionally, apply modal glow effect here if needed
             if (typeof applyModalGlow === "function") {
-              applyModalGlow(darkMode, isModalGlow);
+              applyModalGlow(isModalGlow);
             }
           }
         }
@@ -262,12 +262,7 @@ function applyTitleTextGlow(isTitleTextGlow) {
   });
 }
 
-function applyModalGlow(darkMode, isModalGlow) {
-  if (!darkMode || darkMode !== "on" || darkMode === "off") {
-    // If dark mode is off, we don't apply modal glow settings
-    return;
-  }
-
+function applyModalGlow(isModalGlow) {
   const modals = document.querySelectorAll(".modal-content");
   modals.forEach((modal) => {
     if (modal.parentElement.id !== "loadingModal") {
@@ -305,12 +300,12 @@ function applyPreferences({
   // Only apply logo glow if logoGlow is "on"
   applyLogoGlow(logoGlow === "on");
   applyTitleTextGlow(titleTextGlow === "on");
-  applyButtonGlow(darkMode, autoDarkMode, buttonGlow === "on");
-  applyModalGlow(darkMode, modalGlow === "on");
+  applyButtonGlow(buttonGlow === "on");
+  applyModalGlow(modalGlow === "on");
   applyBlur(blur === "on");
 }
 
-function applyButtonGlow(darkMode, autoDarkMode, isButtonGlow) {
+function applyButtonGlow(isButtonGlow) {
   const menu_sliders = document.querySelectorAll(".menu__item-slider");
   if (menu_sliders) {
     menu_sliders.forEach((menu_slider) => {
@@ -320,11 +315,6 @@ function applyButtonGlow(darkMode, autoDarkMode, isButtonGlow) {
         menu_slider.classList.add("menu__item-slider--no-glow");
       }
     });
-  }
-  if (!darkMode || darkMode !== "on" || darkMode === "off" || (darkMode === "on" && autoDarkMode === "on")) {
-    // If dark mode is off, we don't apply button glow settings
-	// Or if it is on but disabled by auto dark mode
-    return;
   }
   const buttons = document.querySelectorAll(".btn");
   buttons.forEach((button) => {

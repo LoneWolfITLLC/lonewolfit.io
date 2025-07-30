@@ -154,13 +154,6 @@
     transition: opacity 0.3s;
 }
 
-.modal--no-glow,
-.modal--no-glow:hover,
-.modal--no-glow:focus-within {
-    animation: none !important;
-    box-shadow: none !important;
-}
-
 .modal-content--closing {
     animation: modalFadeOut 0.35s ease forwards !important;
 }
