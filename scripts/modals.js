@@ -53,23 +53,6 @@ function alertModal(message) {
 		</div>
 	`;
 
-	document.body.appendChild(modal);
-
-	const modalGlow = getPreference("modalGlow").then((value) => value === "on");
-	modalGlow.then((isGlowing) => {
-		if (document.body.classList.contains("dark-mode")) {
-			if (isGlowing) {
-				modal.querySelectorAll(".modal-content").forEach((content) => {
-					content.classList.remove("modal--no-glow");
-				});
-			} else {
-				modal.querySelectorAll(".modal-content").forEach((content) => {
-					content.classList.add("modal--no-glow");
-				});
-			}
-		}
-	});
-
 	if (loggedIn) {
 		const modalBlur = getPreference("blur").then((value) => value === "on");
 		modalBlur.then((isBlurred) => {
@@ -79,7 +62,25 @@ function alertModal(message) {
 				modal.classList.add("modal--no-blur");
 			}
 		});
+		const modalGlow = getPreference("modalGlow").then(
+			(value) => value === "on"
+		);
+		modalGlow.then((isGlowing) => {
+			if (document.body.classList.contains("dark-mode")) {
+				if (isGlowing) {
+					modal.querySelectorAll(".modal-content").forEach((content) => {
+						content.classList.remove("modal--no-glow");
+					});
+				} else {
+					modal.querySelectorAll(".modal-content").forEach((content) => {
+						content.classList.add("modal--no-glow");
+					});
+				}
+			}
+		});
 	}
+
+	document.body.appendChild(modal);
 
 	const closeButton = modal.querySelector(".modal-close-button");
 	closeButton.addEventListener("click", () => {
@@ -125,12 +126,6 @@ function confirmModal(message, onConfirm) {
             </div>
         </div>
     `;
-	document.body.appendChild(modal);
-
-	const closeButton = modal.querySelector(".modal-close-button");
-	const confirmBtn = modal.querySelector(".btn-primary");
-	const cancelBtn = modal.querySelector(".btn-delete");
-
 	const darkMode = document.body.classList.contains("dark-mode");
 
 	if (loggedIn) {
@@ -176,6 +171,12 @@ function confirmModal(message, onConfirm) {
 			}
 		});
 	}
+
+	document.body.appendChild(modal);
+
+	const closeButton = modal.querySelector(".modal-close-button");
+	const confirmBtn = modal.querySelector(".btn-primary");
+	const cancelBtn = modal.querySelector(".btn-delete");
 
 	// Focus trap
 	const focusable = [closeButton, confirmBtn, cancelBtn];
@@ -245,13 +246,6 @@ function promptModal(message, defaultValue = "", onConfirm) {
             </div>
         </div>
     `;
-	document.body.appendChild(modal);
-
-	const closeButton = modal.querySelector(".modal-close-button");
-	const confirmBtn = modal.querySelector(".btn-primary");
-	const cancelBtn = modal.querySelector(".btn-delete");
-	const input = modal.querySelector(".modal-prompt-input");
-
 	const darkMode = document.body.classList.contains("dark-mode");
 
 	if (loggedIn) {
@@ -297,6 +291,12 @@ function promptModal(message, defaultValue = "", onConfirm) {
 			}
 		});
 	}
+	document.body.appendChild(modal);
+
+	const closeButton = modal.querySelector(".modal-close-button");
+	const confirmBtn = modal.querySelector(".btn-primary");
+	const cancelBtn = modal.querySelector(".btn-delete");
+	const input = modal.querySelector(".modal-prompt-input");
 
 	// Focus trap
 	const focusable = [closeButton, confirmBtn, cancelBtn, input];
