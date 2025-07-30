@@ -16,6 +16,7 @@ function showModal(id) {
   modal.className = "modal";
   modal.tabIndex = -1;
   modal.style.display = "flex";
+  modal.style.animation = "fadeIn 0.3s ease";
   modal.innerHTML = `
     <div class="modal-dialog" id="editUserModalBody">
       <form
