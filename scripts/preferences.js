@@ -537,12 +537,10 @@ function getPreference(key) {
     return Promise.resolve(null);
   }
   // showLoading();
-  // Add a cache-busting query parameter to the URL
-  const cacheBuster = `&_=${Date.now()}`;
   return fetch(
     `${URL_BASE}/api/user/get-preference?preference_key=${encodeURIComponent(
       key
-    )}${cacheBuster}`,
+    )}`,
     {
       method: "GET",
       credentials: "include",
