@@ -558,7 +558,7 @@ function handleEditUserSubmit(formName) {
 				}
 				alertModal(
 					"Error updating user: " +
-						(errorText ||
+						(json.error || errorText ||
 							response.statusText ||
 							json.message ||
 							"Unknown error")
@@ -623,7 +623,7 @@ function updateStripeCustomerDetails(formType) {
 				const json = JSON.parse(errorText);
 				alertModal(
 					"Error updating Stripe customer: " +
-						(json.message ||
+						(json.error || json.message ||
 							errorText ||
 							response.statusText ||
 							"Unknown error")
