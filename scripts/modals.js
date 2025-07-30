@@ -1,4 +1,5 @@
 function closeModalWithAnimation(modal) {
+	if(!modal || modal.classList.contains("modal--closing")) return;
 	modal.querySelectorAll(".modal-content").forEach((content) => {
 		content.classList.add("modal-content--closing");
 	});
@@ -32,6 +33,7 @@ function loadingModal() {
 		</div>
 	`;
 	document.body.appendChild(modal);
+	return modal; // Return the modal element for further manipulation if needed
 }
 function alertModal(message, locked = false) {
 	const modal = document.createElement("div");
