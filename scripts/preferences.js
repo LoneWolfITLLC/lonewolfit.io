@@ -25,6 +25,7 @@ function initPreferencesPage(
   titleTextGlow,
   buttonGlow,
   modalGlow,
+  formGlow,
   blur
 ) {
   const darkModeToggle = document.getElementById("darkModePref");
@@ -33,6 +34,7 @@ function initPreferencesPage(
   const titleTextGlowToggle = document.getElementById("titleTextGlowPref");
   const buttonGlowToggle = document.getElementById("buttonGlowPref");
   const modalGlowToggle = document.getElementById("modalGlowPref");
+  const formGlowToggle = document.getElementById("formGlowPref");
   const blurToggle = document.getElementById("blurPref");
 
   if (
@@ -42,6 +44,7 @@ function initPreferencesPage(
     !titleTextGlowToggle ||
     !buttonGlowToggle ||
     !modalGlowToggle ||
+    !formGlowToggle ||
     !blurToggle
   )
     return;
@@ -53,6 +56,7 @@ function initPreferencesPage(
   titleTextGlowToggle.classList.toggle("active", titleTextGlow === "on");
   buttonGlowToggle.classList.toggle("active", buttonGlow === "on");
   modalGlowToggle.classList.toggle("active", modalGlow === "on");
+  formGlowToggle.classList.toggle("active", formGlow === "on");
   blurToggle.classList.toggle("active", blur === "on");
 
   // Disable dark mode toggle if auto dark mode is on
@@ -215,6 +219,22 @@ function initPreferencesPage(
       });
     });
 
+    formGlowToggle.addEventListener("click", (e) => {
+      e.preventDefault(); // Prevent default behavior
+      const isFormGlow = formGlowToggle.classList.toggle("active");
+      savePreference("formGlow", isFormGlow ? "on" : "off").then((success) => {
+        if (!success) {
+          // Revert the toggle state if saving fails
+          formGlowToggle.classList.toggle("active", !isFormGlow);
+        } else {
+          // Optionally, apply form glow effect here if needed
+          if (typeof applyFormGlow === "function") {
+            applyFormGlow(isFormGlow);
+          }
+        }
+      });
+    });
+
     listenersAddedPreferences = true; // Mark listeners as added
   }
 }
@@ -298,13 +318,15 @@ function applyPreferences({
   titleTextGlow,
   buttonGlow,
   modalGlow,
-  blur,
+  formGlow,
+  blur
 }) {
   // Only apply logo glow if logoGlow is "on"
   applyLogoGlow(logoGlow === "on");
   applyTitleTextGlow(titleTextGlow === "on");
   applyButtonGlow(buttonGlow === "on");
   applyModalGlow(modalGlow === "on");
+  applyFormGlow(formGlow === "on");
   applyBlur(blur === "on");
 }
 
@@ -327,8 +349,33 @@ function applyButtonGlow(isButtonGlow) {
       button.classList.add("btn--no-glow");
     }
   });
+  const checkboxes = document.querySelectorAll(".form-check-input");
+  checkboxes.forEach((checkbox) => {
+    if (isButtonGlow) {
+      checkbox.classList.remove("btn--no-glow");
+    } else {
+      checkbox.classList.add("btn--no-glow");
+    }
+  });
 }
-
+function applyFormGlow(isFormGlow) {
+  const forms = document.querySelectorAll(".main__form");
+  forms.forEach((form) => {
+    if (isFormGlow) {
+      form.classList.remove("main__form--no-glow");
+    } else {
+      form.classList.add("main__form--no-glow");
+    }
+  });
+  const formControls = document.querySelectorAll(".form-control");
+  formControls.forEach((control) => {
+    if (isFormGlow) {
+      control.classList.remove("form-control--no-glow");
+    } else {
+      control.classList.add("form-control--no-glow");
+    }
+  });
+}
 window.addEventListener("preAuthChecked", () => {
   const darkMode = createAndLoadPreference(
     "darkMode",
@@ -342,6 +389,7 @@ window.addEventListener("preAuthChecked", () => {
   const titleTextGlow = createAndLoadPreference("titleTextGlow", "on");
   const buttonGlow = createAndLoadPreference("buttonGlow", "on");
   const modalGlow = createAndLoadPreference("modalGlow", "on");
+  const formGlow = createAndLoadPreference("formGlow", "on");
   const blur = createAndLoadPreference("blur", "on");
   Promise.all([
     darkMode,
@@ -350,6 +398,7 @@ window.addEventListener("preAuthChecked", () => {
     titleTextGlow,
     buttonGlow,
     modalGlow,
+    formGlow,
     blur,
   ]).then(
     ([
@@ -359,6 +408,7 @@ window.addEventListener("preAuthChecked", () => {
       resolvedTitleTextGlow,
       resolvedButtonGlow,
       resolvedModalGlow,
+      resolvedFormGlow,
       resolvedBlur,
     ]) => {
       window.dispatchEvent(triggerDarkModeEvent);
@@ -372,6 +422,7 @@ window.addEventListener("preAuthChecked", () => {
           resolvedTitleTextGlow,
           resolvedButtonGlow,
           resolvedModalGlow,
+          resolvedFormGlow,
           resolvedBlur
         );
       }
@@ -383,6 +434,7 @@ window.addEventListener("preAuthChecked", () => {
         titleTextGlow: resolvedTitleTextGlow,
         buttonGlow: resolvedButtonGlow,
         modalGlow: resolvedModalGlow,
+        formGlow: resolvedFormGlow,
         blur: resolvedBlur,
       };
 
@@ -394,6 +446,7 @@ window.addEventListener("preAuthChecked", () => {
         titleTextGlow: resolvedTitleTextGlow,
         buttonGlow: resolvedButtonGlow,
         modalGlow: resolvedModalGlow,
+        formGlow: resolvedFormGlow,
         blur: resolvedBlur,
       });
 
@@ -406,6 +459,7 @@ window.addEventListener("preAuthChecked", () => {
           resolvedTitleTextGlow,
           resolvedButtonGlow,
           resolvedModalGlow,
+          resolvedFormGlow,
           resolvedBlur
         );
       }

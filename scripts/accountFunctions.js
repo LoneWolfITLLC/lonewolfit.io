@@ -28,15 +28,18 @@ function signOut(ofAllDevices = false) {
 					sessionStorage.removeItem("jwt");
 					loggedIn = false;
 					hideLoading();
-					alertModal(
+					const successAlertModal = alertModal(
 						ofAllDevices
 							? "You have been signed out of all devices."
 							: "You have been signed out.",
 						true
 					);
 					setTimeout(() => {
-						window.location.href = "index.html";
+						closeModalWithAnimation(successAlertModal);
 					}, 2000);
+					setTimeout(() => {
+						window.location.href = "index.html";
+					}, 2250);
 				} else {
 					if (response.status === 401) {
 						sessionStorage.removeItem("jwt");
@@ -83,13 +86,16 @@ function resetPassword() {
 						if (response.ok) {
 							sessionStorage.removeItem("jwt");
 							hideLoading();
-							alertModal(
+							const successAlertModal = alertModal(
 								"You have been signed out of all devices. You can now reset your password.",
 								true
 							);
 							setTimeout(() => {
+								closeModalWithAnimation(successAlertModal);
+							}, 2000);
+							setTimeout(() => {
 								window.location.href = "reset.html";
-							}, 3000);
+							}, 2250);
 						} else {
 							return response.json().then((text) => {
 								hideLoading();
@@ -138,10 +144,13 @@ function deleteAccount(redirectUri = "index.html") {
 							if (response.ok) {
 								sessionStorage.removeItem("jwt");
 								hideLoading();
-								alertModal("Your account has been deleted.", true);
+								const successAlertModal = alertModal("Your account has been deleted.", true);
+								setTimeout(() => {
+									closeModalWithAnimation(successAlertModal);
+								}, 2000);
 								setTimeout(() => {
 									window.location.href = redirectUri;
-								}, 2000);
+								}, 2250);
 							} else {
 								return response.json().then((text) => {
 									hideLoading();
