@@ -3,8 +3,8 @@ function validateContactFormLoggedOut() {
 	const form = document.getElementById("contactFormLoggedOut");
 	if (!form) return false;
 	const name = form.querySelector("#name");
-	const phone = form.querySelector("#phone");
-	const message = form.querySelector("#message");
+	const phone = form.querySelector("#phoneLoggedOut");
+	const message = form.querySelector("#messageLoggedOut");
 	let valid = true;
 	if (!name.value.trim()) valid = false;
 	if (!/^[0-9]{10}$/.test(phone.value.trim())) valid = false;
