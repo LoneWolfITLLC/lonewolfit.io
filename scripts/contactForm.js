@@ -120,8 +120,8 @@ async function submitContactFormLoggedOut() {
 	if (!form) return;
 	const name = form.querySelector("#name").value.trim();
 	const email = form.querySelector("#email").value.trim();
-	const phone = form.querySelector("#phone").value.trim();
-	const message = form.querySelector("#message").value.trim();
+	const phone = form.querySelector("#phoneLoggedOut").value.trim();
+	const message = form.querySelector("#messageLoggedOut").value.trim();
 
 	showLoading();
 	try {

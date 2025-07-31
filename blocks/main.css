@@ -173,9 +173,7 @@
 }
 
 .main__image--cert,
-.main__image--tripleten,
-.main__image--triplepeaks,
-.main__image--tripleespresso {
+.main__image--tripleten {
 	border-radius: 15px; /* Rounds corners for cert/tripleten images. */
 	box-shadow: 0 4px 18px rgba(0, 191, 255, 0.18),
 		0 1.5px 8px rgba(3, 30, 60, 0.1); /* Multi-layered shadow for depth. */
@@ -196,16 +194,14 @@
 	box-shadow: none; /* No shadow for tripleten image. */
 }
 
-.main__image--triplepeaks {
-	border-radius: 0%; /* Removes rounding for triplepeaks image. */
-	box-shadow: none; /* No shadow for triplepeaks image. */
-	content: url("../assets/se_project_library/images/logo.svg"); /* Uses SVG for triplepeaks image. */
+.main__image--triplepeaks::before {
+	content: url("../assets/se_project_library/images/logo.svg"); /* Uses dark mode specific image for triple peaks. */
+	background: transparent; /* Transparent background for triple peaks image. */
 }
 
-.main__image--tripleespresso {
-	border-radius: 0%; /* Removes rounding for tripleespresso image. */
-	box-shadow: none; /* No shadow for tripleespresso image. */
+.main__image--tripleespresso::before {
 	content: url("../assets/se_project_coffeeshop/images/logo_coffeeshop_dark.svg"); /* Uses SVG for tripleespresso image. */
+	background: transparent; /* Transparent background for triple espresso image. */
 }
 
 .main__portfolio-text {

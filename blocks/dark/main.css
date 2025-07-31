@@ -74,12 +74,12 @@ body.dark-mode .main__image--tripleten {
 	background: #fff; /* White background for tripleten image for contrast. */
 }
 
-body.dark-mode .main__image--triplepeaks {
+body.dark-mode .main__image--triplepeaks::before {
 	content: url('/assets/se_project_library/images/logo_white.svg'); /* Uses dark mode specific image for triple peaks. */
 	background: transparent; /* Transparent background for triple peaks image. */
 }
 
-body.dark-mode .main__image--tripleespresso {
+body.dark-mode .main__image--tripleespresso::before {
 	content: url('/assets/se_project_coffeeshop/images/logo_coffeeshop_light.svg'); /* Uses dark mode specific image for triple espresso. */
 	background: transparent; /* Transparent background for triple espresso image. */
 }
