@@ -45,7 +45,7 @@ body.dark-mode .modal--no-glow:focus-within {
     box-shadow: none !important;
 }
 
-body.dark-mode .modal--no-glow .modal-content--closing {
+.modal--no-glow .modal-content--closing {
     animation: modalFadeOut 0.35s ease forwards !important;
 }
 
