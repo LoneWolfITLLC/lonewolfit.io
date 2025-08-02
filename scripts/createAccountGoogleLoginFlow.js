@@ -67,9 +67,10 @@ window.addEventListener("authChecked", async function () {
 
 	// Fetch temp user data
 	const email = getQueryParam("email");
+	const allowedHtmlRegex = /^\/?[a-zA-Z0-9_-]+\.html$/i;
 	if (!email) {
 		hideLoading();
-		window.location.href = getQueryParam("redirect_uri") || "index.html";
+		window.location.href = allowedHtmlRegex.test(getQueryParam("redirect_uri")) ? getQueryParam("redirect_uri") : "login.html";
 		return;
 	}
 	let tempUserData = null;
@@ -93,7 +94,7 @@ window.addEventListener("authChecked", async function () {
 		if (!tempUserData || !tempUserData.first_name || !tempUserData.last_name) {
 			const errmodal = alertModal("No temporary user data available.", true);
 			setTimeout(() => {
-				window.location.href = getQueryParam("redirect_uri") || "index.html";
+				window.location.href = allowedHtmlRegex.test(getQueryParam("redirect_uri")) ? getQueryParam("redirect_uri") : "login.html";
 				closeModalWithAnimation(errmodal);
 			}, 2000);
 			hideLoading();
@@ -102,7 +103,7 @@ window.addEventListener("authChecked", async function () {
 	} catch (err) {
 		const errmodal = alertModal("Network error: " + err.message, true);
 		setTimeout(() => {
-			window.location.href = getQueryParam("redirect_uri") || "index.html";
+			window.location.href = allowedHtmlRegex.test(getQueryParam("redirect_uri")) ? getQueryParam("redirect_uri") : "login.html";
 			closeModalWithAnimation(errmodal);
 		}, 2000);
 		hideLoading();
