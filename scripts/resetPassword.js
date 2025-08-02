@@ -91,20 +91,23 @@ document.addEventListener("DOMContentLoaded", function () {
 				});
 				const text = await response.text();
 				if (response.ok) {
-					showAlert(text, false, this);
+					hideLoading();
+					const alertVerificationCodeSentModal = alertModal(text, true);
 					//Hide the reset form and show the new password section after three seconds
 					setTimeout(() => {
 						document.getElementById("mainSection").style.display = "none";
 						document.getElementById("resetSection").style.display = "block";
 						window.location.hash = "resetSection"; // Scroll to new password section
+						closeModalWithAnimation(alertVerificationCodeSentModal);
 					}, 3000);
 				} else {
-					showAlert(text, true, this);
+					hideLoading();
+					alertModal(text);
 				}
 			} catch (error) {
-				showAlert("Error: " + error.message, true, this);
+				hideLoading();
+				alertModal("Error: " + error.message);
 			}
-			hideLoading();
 		});
 	document
 		.getElementById("newPasswordForm")
@@ -121,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			const loadingModal = document.getElementById("loadingModal");
 			const alertDiv = document.getElementById("alertNewPassword");
 			if (password !== passwordConfirm) {
-				showAlert("Passwords do not match.", true, this);
+				alertModal("Passwords do not match.");
 				return;
 			}
 			showLoading();
@@ -140,17 +143,20 @@ document.addEventListener("DOMContentLoaded", function () {
 				});
 				const text = await response.text();
 				if (response.ok) {
-					showAlert(text, false, this);
+					hideLoading();
+					const successAlertModal = alertModal(text, true);
 					// Redirect to member portal after 2 seconds
 					setTimeout(() => {
 						window.location.href = "login.html" + window.location.search; // Preserve query string
+						closeModalWithAnimation(successAlertModal);
 					}, 3000);
 				} else {
-					showAlert(text, true, this);
+					hideLoading();
+					alertModal(text);
 				}
 			} catch (error) {
-				showAlert("Error: " + error.message, true, this);
+				hideLoading();
+				alertModal("Error: " + error.message);
 			}
-			hideLoading();
 		});
 }); // <-- Add this closing brace to end the DOMContentLoaded event listener

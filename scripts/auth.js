@@ -44,10 +44,18 @@ window.addEventListener("unload", (event) => {
 
 //––––– loading modal toggles –––––
 function showLoading() {
-	if(typeof loadingModal === "function" && !document.getElementById("loadingModal")) loadingModal();
+	if (
+		typeof loadingModal === "function" &&
+		!document.getElementById("loadingModal")
+	)
+		loadingModal();
 }
 function hideLoading() {
-	if(typeof closeModalWithAnimation === "function" && document.getElementById("loadingModal")) closeModalWithAnimation(document.getElementById("loadingModal"));
+	if (
+		typeof closeModalWithAnimation === "function" &&
+		document.getElementById("loadingModal")
+	)
+		closeModalWithAnimation(document.getElementById("loadingModal"));
 }
 function getTokenFromSession() {
 	const token = sessionStorage.getItem("jwt");
@@ -230,4 +238,14 @@ async function onLoad() {
 		},
 	});
 	window.dispatchEvent(authEvent);
+	setInterval(() => {
+		const token = sessionStorage.getItem("jwt");
+		if (token) {
+			fetch("/api/user/ping", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ token }),
+			});
+		}
+	}, 60000); // every 60 seconds
 }

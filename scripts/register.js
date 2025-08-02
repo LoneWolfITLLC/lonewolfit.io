@@ -170,26 +170,30 @@ window.addEventListener("authChecked", function () {
       hideLoading();
 
       if (response.ok) {
-        showAlert(
+        const regSucModal = alertModal(
           "Registration successful! Please check your email for a verification code.",
-          false,
-          formElem
+          true
         );
         setTimeout(() => {
           showVerificationSection(formData.get("email"));
           window.location.hash = "#verifyRegistrationSection";
+          closeModalWithAnimation(regSucModal);
         }, 3000);
       } else {
         const result = await response.text();
-        showAlert(
-          result || "Registration failed. Please try again.",
-          true,
-          formElem
+        const jsonresult = null;
+        try {
+          jsonresult = JSON.parse(result);
+        } catch (e) {
+          console.error("Error parsing JSON:", e);
+        }
+        alertModal(
+          jsonresult?.message || result || "Registration failed. Please try again."
         );
       }
     } catch (err) {
       hideLoading();
-      showAlert("An error occurred. Please try again later.", true, formElem);
+      alertModal("An error occurred. Please try again later.");
     }
   }
 
@@ -243,25 +247,19 @@ window.addEventListener("authChecked", function () {
         });
         hideLoading();
         if (response.ok) {
-          showAlert(
-            "Verification email resent! Please check your inbox.",
-            false,
-            resendButton.closest("form")
+          alertModal(
+            "Verification email resent! Please check your inbox."
           );
         } else {
           const result = await response.json();
-          showAlert(
-            result.message || "Failed to resend verification email.",
-            true,
-            resendButton.closest("form")
+          alertModal(
+            result.message || "Failed to resend verification email."
           );
         }
       } catch (err) {
         hideLoading();
-        showAlert(
-          "An error occurred while resending the verification email.",
-          true,
-          resendButton.closest("form")
+        alertModal(
+          "An error occurred while resending the verification email: " + err.message
         );
       }
     });
@@ -282,20 +280,18 @@ window.addEventListener("authChecked", function () {
         .getElementById("verifyAccountButton")
         .closest("form");
       if (response.ok) {
-        showAlert(
+        const succmodal = alertModal(
           "Verification successful! Redirecting to login...",
-          false,
-          formElem
+          true
         );
         setTimeout(() => {
           window.location.href = "login.html" + window.location.search; // Preserve query string
+          closeModalWithAnimation(succmodal);
         }, 2000);
       } else {
         const result = await response.json();
-        showAlert(
-          result.message || "Verification failed. Please try again.",
-          true,
-          formElem
+        alertModal(
+          result.message || "Verification failed. Please try again."
         );
       }
     } catch (err) {
@@ -303,7 +299,7 @@ window.addEventListener("authChecked", function () {
       const formElem = document
         .getElementById("verifyAccountButton")
         .closest("form");
-      showAlert("An error occurred. Please try again later.", true, formElem);
+      alertModal("An error occurred: " + err.message);
     }
   }
 

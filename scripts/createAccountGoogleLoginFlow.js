@@ -11,22 +11,6 @@ function hideLoading() {
 	if(typeof closeModalWithAnimation === "function" && document.getElementById("loadingModal")) closeModalWithAnimation(document.getElementById("loadingModal"));
 }
 
-// Helper: show alert using alert.js
-function showAlertDiv(message, isError, formElem) {
-	if (typeof showAlert === "function") {
-		showAlert(message, isError, formElem);
-	} else {
-		// fallback
-		const alertDiv =
-			formElem?.querySelector(".alertDiv") || document.getElementById("alert");
-		if (alertDiv) {
-			alertDiv.style.display = "block";
-			alertDiv.textContent = message;
-			alertDiv.style.backgroundColor = isError ? "#dc3545" : "#28a745";
-		}
-	}
-}
-
 // Enable/disable submit button based on required fields
 function updateSubmitState(form) {
 	if (!form) return;
@@ -97,26 +81,29 @@ window.addEventListener("authChecked", async function () {
 		});
 		if (!response.ok) {
 			const errorText = await response.text();
-			showAlertDiv("Error: " + errorText, true, activeForm);
+			const errmodal = alertModal("Error: " + errorText, true);
 			setTimeout(() => {
 				window.location.href = getQueryParam("redirect_uri") || "index.html";
+				closeModalWithAnimation(errmodal);
 			}, 2000);
 			hideLoading();
 			return;
 		}
 		tempUserData = await response.json();
 		if (!tempUserData || !tempUserData.first_name || !tempUserData.last_name) {
-			showAlertDiv("No temporary user data available.", true, activeForm);
+			const errmodal = alertModal("No temporary user data available.", true);
 			setTimeout(() => {
 				window.location.href = getQueryParam("redirect_uri") || "index.html";
+				closeModalWithAnimation(errmodal);
 			}, 2000);
 			hideLoading();
 			return;
 		}
 	} catch (err) {
-		showAlertDiv("Network error: " + err.message, true, activeForm);
+		const errmodal = alertModal("Network error: " + err.message, true);
 		setTimeout(() => {
 			window.location.href = getQueryParam("redirect_uri") || "index.html";
+			closeModalWithAnimation(errmodal);
 		}, 2000);
 		hideLoading();
 		return;
