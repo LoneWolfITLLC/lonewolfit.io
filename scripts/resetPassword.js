@@ -152,7 +152,15 @@ document.addEventListener("DOMContentLoaded", function () {
 					}, 3000);
 				} else {
 					hideLoading();
-					alertModal(text);
+					if(response.status === 404) {
+						const errmodal = alertModal("Reset password session not found or expired. Please try again after waiting for the redirection...", true);
+						setTimeout(() => {
+							closeModalWithAnimation(errmodal);
+							window.location.reload();
+						}, 3000);
+						return;
+					}
+					else alertModal(text);
 				}
 			} catch (error) {
 				hideLoading();

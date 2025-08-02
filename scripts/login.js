@@ -165,7 +165,15 @@ window.addEventListener("authChecked", function () {
           }
         } else {
           const errorData = await response.text();
-          alertModal(
+          if(response.status === 404) {
+            const errmodal = alertModal("Login session not found or expired. Please try logging in again after waiting for the refresh...", true);
+            setTimeout(() => {
+              closeModalWithAnimation(errmodal);
+              window.location.reload();
+            }, 3000);
+          }
+
+          else alertModal(
             errorData || "Verification failed! Please try again."
           );
         }
@@ -209,7 +217,13 @@ window.addEventListener("authChecked", function () {
           } catch (e) {
             console.error("Error parsing JSON:", e);
           }
-          alertModal(
+          if (response.status === 404) {
+            const errmodal = alertModal("Login session not found or expired. Please try logging in again after waiting for the reload...", true);
+            setTimeout(() => {
+              closeModalWithAnimation(errmodal);
+              window.location.reload();
+            }, 3000);
+          } else alertModal(
             "Error resending verification code: " +
               (jsonData?.message || errorData || "Please try again.")
           );
