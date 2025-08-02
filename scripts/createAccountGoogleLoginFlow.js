@@ -82,11 +82,17 @@ window.addEventListener("authChecked", async function () {
 		});
 		if (!response.ok) {
 			const errorText = await response.text();
-			const errmodal = alertModal("Error: " + errorText, true);
+			const errorJSON = null;
+			try {
+				errorJSON = JSON.parse(errorText);
+			} catch (e) {
+				// Ignore JSON parse errors
+			}
+			const errmodal = alertModal(errorJSON.message ||errorText || "No temporary user data available.", true);
 			setTimeout(() => {
-				window.location.href = getQueryParam("redirect_uri") || "index.html";
+				window.location.href = allowedHtmlRegex.test(getQueryParam("redirect_uri")) ? getQueryParam("redirect_uri") : "login.html";
 				closeModalWithAnimation(errmodal);
-			}, 2000);
+			}, 3000);
 			hideLoading();
 			return;
 		}
