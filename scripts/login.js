@@ -138,13 +138,19 @@ window.addEventListener("authChecked", function () {
         });
 
         if (response.ok) {
+          hideLoading();
+          const successModal = alertModal(
+            "Login successful! Redirecting to your account...",
+            true
+          );
           const data = await response.json();
           const token = data.token;
           sessionStorage.setItem("jwt", token);
           tempEmail = null; // Clear temp email after successful login
           console.log("Login successful, token stored in sessionStorage.");
-          //wait one second before redirecting
+          //wait two seconds before redirecting
           await new Promise((resolve) => setTimeout(resolve, 2000));
+          closeModalWithAnimation(successModal);
           if (data.adminUser) {
             // Only append redirect_uri if it is not the admin or member portal itself
             if (
@@ -164,6 +170,7 @@ window.addEventListener("authChecked", function () {
             else window.location.href = `members.html`;
           }
         } else {
+          hideLoading();
           const errorData = await response.text();
           if(response.status === 404) {
             const errmodal = alertModal("Login session not found or expired. Please try logging in again after waiting for the refresh...", true);
@@ -178,12 +185,12 @@ window.addEventListener("authChecked", function () {
           );
         }
       } catch (error) {
+        hideLoading();
         console.error("Error verifying code:", error);
         alertModal(
           "Verification failed due to network error: " + error.message
         );
       }
-      hideLoading();
     });
 
   // Resend verification code
