@@ -88,7 +88,7 @@ window.addEventListener("authChecked", async function () {
 			} catch (e) {
 				// Ignore JSON parse errors
 			}
-			const errmodal = alertModal(errorJSON.message ||errorText || "No temporary user data available.", true);
+			const errmodal = alertModal(errorJSON?.message ||errorText || "No temporary user data available.", true);
 			setTimeout(() => {
 				window.location.href = allowedHtmlRegex.test(getQueryParam("redirect_uri")) ? getQueryParam("redirect_uri") : "login.html";
 				closeModalWithAnimation(errmodal);
