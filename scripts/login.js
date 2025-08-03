@@ -92,7 +92,7 @@ window.addEventListener("authChecked", function () {
 					try {
 						errorData = JSON.parse(errorMessage);
 					} catch (e) {
-						console.error("Error parsing error message:", e);
+            //DO nothing
 					}
 					alertModal(
 						errorData?.message ||
@@ -182,7 +182,7 @@ window.addEventListener("authChecked", function () {
 					try {
 						errorJson = JSON.parse(errorData);
 					} catch (e) {
-						console.error("Error parsing error message:", e);
+            //DO nothing
 					}
 					if (response.status === 404) {
 						const errmodal = alertModal(
@@ -236,7 +236,7 @@ window.addEventListener("authChecked", function () {
 					try {
 						jsonData = JSON.parse(errorData);
 					} catch (e) {
-						console.error("Error parsing JSON:", e);
+						//DO nothing
 					}
 					if (response.status === 404) {
 						const errmodal = alertModal(
