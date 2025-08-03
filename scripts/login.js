@@ -88,8 +88,9 @@ window.addEventListener("authChecked", function () {
           tempEmail = null;
           hideLoading();
           const errorData = await response.json();
+          const errorMessage = await response.text();
           alertModal(
-            errorData.message || "Login failed! Please try again."
+            errorData.message || errorMessage || "Login failed! Please try again."
           );
         }
       } catch (error) {
