@@ -185,7 +185,7 @@ window.addEventListener("authChecked", function () {
 				try {
 					jsonresult = JSON.parse(result);
 				} catch (e) {
-					console.error("Error parsing JSON:", e);
+					//DO nothing
 				}
 				alertModal(
 					jsonresult?.message ||

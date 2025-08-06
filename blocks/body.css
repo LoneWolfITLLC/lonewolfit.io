@@ -8,6 +8,11 @@ body {
 	min-height: 100vh; /* Ensures the body always fills at least the full viewport height, preventing whitespace at the bottom. */
 	border-radius: 0%; /* Removes any rounded corners from the body, keeping it rectangular. */
 	margin: 0; /* Eliminates default browser margin for a flush layout. */
+	-moz-osx-font-smoothing: grayscale;
+  	-webkit-font-smoothing: antialiased;
+	-webkit-text-size-adjust: 100%; /* Prevents text size adjustment in WebKit browsers. */
+	-ms-text-size-adjust: 100%; /* Prevents text size adjustment in Internet Explorer. */
+	-moz-text-size-adjust: 100%; /* Prevents text size adjustment in Firefox. */
 }
 
 @keyframes slideIn {

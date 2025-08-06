@@ -55,7 +55,7 @@
 
 @media (max-width: 768px) {
 	.main__heading {
-		font-size: 1.25rem; /* Smaller heading for mobile. */
+		font-size: 1.4rem; /* Smaller heading for mobile. */
 		margin-bottom: 0.75rem; /* Less space below heading. */
 		white-space: normal; /* Allows heading to wrap. */
 		text-align: center; /* Keeps heading centered. */
@@ -223,6 +223,9 @@
 @media (max-width: 768px) {
 	.main__portfolio-text {
 		font-size: 0.75rem; /* Smaller text for mobile. */
+	}
+	.main__text {
+		font-size: 0.9rem; /* Smaller text for mobile. */
 	}
 }
 
