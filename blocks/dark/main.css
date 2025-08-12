@@ -84,7 +84,7 @@ body.dark-mode .main__image--tripleespresso::before {
 	background: transparent; /* Transparent background for triple espresso image. */
 }
 
-body.dark-mode .main__image--spots {
+body.dark-mode .main__image--spots::before {
 	content: url('/images/ui/spots_logo_white.png');
 	background: transparent; /* Transparent background for spots image. */
 }
