@@ -84,6 +84,11 @@ body.dark-mode .main__image--tripleespresso::before {
 	background: transparent; /* Transparent background for triple espresso image. */
 }
 
+body.dark-mode .main__image--spots {
+	content: url('/images/ui/spots_logo_white.png');
+	background: transparent; /* Transparent background for spots image. */
+}
+
 body.dark-mode .main__image--arlo {
 	background: #23272a; /* Slightly lighter background for profile image. */
 	border: 2px solid #00bfff; /* Bright blue border for emphasis. */

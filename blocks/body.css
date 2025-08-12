@@ -13,6 +13,7 @@ body {
 	-webkit-text-size-adjust: 100%; /* Prevents text size adjustment in WebKit browsers. */
 	-ms-text-size-adjust: 100%; /* Prevents text size adjustment in Internet Explorer. */
 	-moz-text-size-adjust: 100%; /* Prevents text size adjustment in Firefox. */
+	text-rendering: optimizeLegibility; /* Enhances text rendering for better readability. */
 }
 
 @keyframes slideIn {

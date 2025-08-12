@@ -204,6 +204,11 @@
 	background: transparent; /* Transparent background for triple espresso image. */
 }
 
+.main__image--spots::before {
+	content: url("../assets/se_project_spots/images/logo.svg");
+	background: transparent; /* Transparent background for spots image. */
+}
+
 .main__portfolio-text {
 	font-size: 1rem; /* Standard font size for portfolio text. */
 	color: #222; /* Dark text for readability. */
