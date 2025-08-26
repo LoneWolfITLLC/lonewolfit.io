@@ -16,7 +16,6 @@
   color: #212121;
   font-family: "Poppins Medium", Arial, Helvetica, sans-serif;
   font-weight: 500;
-  font-style: Medium;
   font-size: 20px;
   line-height: 120%;
   letter-spacing: 0%;
@@ -42,6 +41,7 @@
 .card__like-btn:hover {
   opacity: 1;
   transition: opacity 0.3s ease;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 627px) {
@@ -51,5 +51,6 @@
 
   .card__title {
     max-width: 265px;
+    font-size: 16px;
   }
 }
