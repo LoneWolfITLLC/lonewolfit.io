@@ -1,6 +1,6 @@
 .profile {
   display: flex;
-  padding: 34px 0 20px;
+  padding: 20px 0;
   border-bottom: 1px rgba(33, 33, 33, 0.4) solid;
 }
 
@@ -55,7 +55,7 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 100%;
-  letter-spacing: 0%;
+  letter-spacing: 0;
   opacity: 0.7;
   width: 118px;
   height: 16px;
@@ -105,8 +105,7 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 100%;
-  letter-spacing: 0%;
-  flex-wrap: none;
+  letter-spacing: 0;
   white-space: nowrap;
   background-color: #212121;
   color: #fcf5e5;
