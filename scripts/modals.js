@@ -17,11 +17,11 @@ function loadingModal() {
 	modal.className = "modal";
 	modal.id = "loadingModal";
 	modal.tabIndex = -1;
-	modal.style.animation = "fadeIn 0.3s ease";
+	modal.style.animation = "modalBGFadeIn 0.35s ease forwards";
 	modal.style.zIndex = "9999";
 	modal.innerHTML = `
 		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content modal--no-glow">
+			<div class="modal-content modal--no-glow modal-content--opening">
 				<div class="modal-body text-center">
 					<img src="images/ui/spin.png" alt="Loading..." class="spinner" />
 						<p class="main__text" style="color: #fff">
@@ -33,6 +33,11 @@ function loadingModal() {
 		</div>
 	`;
 	document.body.appendChild(modal);
+	modal.addEventListener("animationend", () => {
+		modal.querySelectorAll(".modal-content").forEach((content) => {
+			content.classList.remove("modal-content--opening");
+		});
+	}, {once: true})
 	return modal; // Return the modal element for further manipulation if needed
 }
 function alertModal(message, locked = false) {
@@ -40,12 +45,12 @@ function alertModal(message, locked = false) {
 	modal.className = "modal";
 	modal.id = "alertModal";
 	modal.tabIndex = -1;
-	modal.style.animation = "fadeIn 0.3s ease";
+	modal.style.animation = "modalBGFadeIn 0.35s ease forwards";
 	modal.style.zIndex = "9999";
 	if (!locked) {
 		modal.innerHTML = `
 		<div class="modal-dialog">
-			<div class="modal-content">
+			<div class="modal-content modal-content--opening">
 				<div class="modal-header">
 					<button class="modal-close-button" tabindex="0">&nbsp;</button>
 				</div>
@@ -59,7 +64,7 @@ function alertModal(message, locked = false) {
 	else{
 		modal.innerHTML = `
 		<div class="modal-dialog">
-			<div class="modal-content">
+			<div class="modal-content modal-content--opening">
 				<div class="modal-header">
 				</div>
 				<div class="modal-body">
@@ -99,6 +104,12 @@ function alertModal(message, locked = false) {
 
 	document.body.appendChild(modal);
 
+	modal.addEventListener("animationend", () => {
+		modal.querySelectorAll(".modal-content").forEach((content) => {
+			content.classList.remove("modal-content--opening");
+		});
+	}, {once: true})
+
 	if (!locked) {
 		const closeButton = modal.querySelector(".modal-close-button");
 		closeButton.addEventListener("click", () => {
@@ -127,10 +138,10 @@ function confirmModal(message, onConfirm) {
 	modal.id = "confirmModal";
 	modal.tabIndex = -1;
 	modal.style.zIndex = "9999";
-	modal.style.animation = "fadeIn 0.3s ease";
+	modal.style.animation = "modalBGFadeIn 0.35s ease forwards";
 	modal.innerHTML = `
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content modal-content--opening">
                 <div class="modal-header">
                     <button class="modal-close-button" tabindex="0">&nbsp;</button>
                 </div>
@@ -192,6 +203,12 @@ function confirmModal(message, onConfirm) {
 
 	document.body.appendChild(modal);
 
+	modal.addEventListener("animationend", () => {
+		modal.querySelectorAll(".modal-content").forEach((content) => {
+			content.classList.remove("modal-content--opening");
+		});
+	}, {once: true})
+
 	const closeButton = modal.querySelector(".modal-close-button");
 	const confirmBtn = modal.querySelector(".btn-primary");
 	const cancelBtn = modal.querySelector(".btn-delete");
@@ -247,10 +264,10 @@ function promptModal(message, defaultValue = "", onConfirm) {
 	modal.id = "promptModal";
 	modal.tabIndex = -1;
 	modal.style.zIndex = "9999";
-	modal.style.animation = "fadeIn 0.3s ease";
+	modal.style.animation = "modalBGFadeIn 0.35s ease forwards";
 	modal.innerHTML = `
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content modal-content--opening">
                 <div class="modal-header">
                     <button class="modal-close-button" tabindex="0">&nbsp;</button>
                 </div>
@@ -311,6 +328,12 @@ function promptModal(message, defaultValue = "", onConfirm) {
 		});
 	}
 	document.body.appendChild(modal);
+
+	modal.addEventListener("animationend", () => {
+		modal.querySelectorAll(".modal-content").forEach((content) => {
+			content.classList.remove("modal-content--opening");
+		});
+	}, {once: true})
 
 	const closeButton = modal.querySelector(".modal-close-button");
 	const confirmBtn = modal.querySelector(".btn-primary");

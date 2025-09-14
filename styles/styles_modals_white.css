@@ -8,6 +8,16 @@
     100% { opacity: 0; }
 }
 
+@keyframes modalFadeIn {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes modalBGFadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
 /* ─── CUSTOM MODAL STYLES ─── */
 #alertModal .modal-content {
     background: linear-gradient(135deg, #fafdff 70%, #e3f0ff 100%);
@@ -160,6 +170,10 @@
 
 .modal--closing {
     animation: modalBGFadeOut 0.35s ease forwards !important;
+}
+
+.modal-content--opening {
+    animation: modalFadeIn 0.35s ease forwards !important;
 }
 
 @keyframes loading-animation {
