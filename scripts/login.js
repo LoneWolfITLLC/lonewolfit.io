@@ -87,16 +87,14 @@ window.addEventListener("authChecked", function () {
 				} else {
 					tempEmail = null;
 					hideLoading();
-					const errorMessage = await response.text();
-					const errorData = null;
+					let errorData = await response.text();
+					let errorJson = null;
 					try {
-						errorData = JSON.parse(errorMessage);
-					} catch (e) {
-            //DO nothing
-					}
+						errorJson = JSON.parse(errorData);
+					} catch (e) {}
 					alertModal(
-						errorData?.message ||
-							errorMessage ||
+						errorJson?.message ||
+							errorData ||
 							"Login failed! Please try again."
 					);
 				}
@@ -177,8 +175,8 @@ window.addEventListener("authChecked", function () {
 					}
 				} else {
 					hideLoading();
-					const errorData = await response.text();
-					const errorJson = null;
+					let errorData = await response.text();
+					let errorJson = null;
 					try {
 						errorJson = JSON.parse(errorData);
 					} catch (e) {
@@ -195,9 +193,9 @@ window.addEventListener("authChecked", function () {
 						}, 3000);
 					} else
 						alertModal(
+							errorJson?.message ||
 							errorData ||
-								errorJson?.message ||
-								"Verification failed! Please try again."
+							"Verification failed! Please try again."
 						);
 				}
 			} catch (error) {
@@ -231,7 +229,7 @@ window.addEventListener("authChecked", function () {
 					alertModal("Verification code resent! Please check your email.");
 				} else {
 					hideLoading();
-					const errorData = await response.text();
+					let errorData = await response.text();
 					let jsonData = null;
 					try {
 						jsonData = JSON.parse(errorData);

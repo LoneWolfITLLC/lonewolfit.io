@@ -180,8 +180,8 @@ window.addEventListener("authChecked", function () {
 					closeModalWithAnimation(regSucModal);
 				}, 3000);
 			} else {
-				const result = await response.text();
-				const jsonresult = null;
+				let result = await response.text();
+				let jsonresult = null;
 				try {
 					jsonresult = JSON.parse(result);
 				} catch (e) {
