@@ -53,15 +53,6 @@
 	text-shadow: none; /* Removes glow for accessibility. */
 }
 
-@media (max-width: 768px) {
-	.main__heading {
-		font-size: 1.4rem; /* Smaller heading for mobile. */
-		margin-bottom: 0.75rem; /* Less space below heading. */
-		white-space: normal; /* Allows heading to wrap. */
-		text-align: center; /* Keeps heading centered. */
-	}
-}
-
 .main__intro,
 .main__text {
 	font-size: 1.1rem; /* Slightly larger text for readability. */
@@ -221,16 +212,16 @@
 		gap: 1rem; /* Smaller gap for mobile. */
 	}
 	.main__portfolio-text {
-		font-size: 1rem; /* Standard font size for mobile. */
-	}
-}
-
-@media (max-width: 768px) {
-	.main__portfolio-text {
 		font-size: 0.75rem; /* Smaller text for mobile. */
 	}
 	.main__text {
 		font-size: 0.9rem; /* Smaller text for mobile. */
+	}
+	.main__heading {
+		font-size: 1.4rem; /* Smaller heading for mobile. */
+		margin-bottom: 0.75rem; /* Less space below heading. */
+		white-space: normal; /* Allows heading to wrap. */
+		text-align: center; /* Keeps heading centered. */
 	}
 }
 
