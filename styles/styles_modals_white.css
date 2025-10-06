@@ -298,20 +298,26 @@
     /* Use your close icon, center and cover */
     background-image: url('../images/ui/closebtn-black.png');
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: cover;
     background-size: 24px 24px;
-    opacity: 0.7;
+    opacity: 0.4;
     transition: opacity 0.2s, box-shadow 0.2s;
     /* Remove default content property */
     content: '';
 }
 
-.modal-close-button:hover,
-.modal-close-button:focus {
-    opacity: 0.5;
+.modal-close-button:hover {
+    opacity: 0.7;
     background-image: url('../images/ui/closebtn-black.png');
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: cover;
+}
+
+.modal-close-button:active {
+    opacity: 0.9;
+    background-image: url('../images/ui/closebtn-black.png');
+    background-repeat: no-repeat;
+    background-position: cover;
 }
 
 /* ─── EDIT USER MODAL STYLING ─── */
