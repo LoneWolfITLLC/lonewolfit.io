@@ -3,7 +3,7 @@ body.dark-mode .modal-content{
     color: #e0f7ff;
     border-radius: 12px;
     box-shadow: 0 0 32px 8px #00ffffcc, 0 0 64px 16px #00ffff55, 0 2px 24px rgba(0, 255, 255, 0.18);
-    transition: box-shadow 0.3s, background 0.3s;
+    transition: box-shadow 0.3s, animation 1s cubic-bezier(0.455, 0.03, 0.515, 0.955);
     animation: breathing-shadow-idle 3s ease-in-out infinite;
 }
 /* Breathing hover effect */
