@@ -16,12 +16,12 @@ function showEditUserModal(id) {
   modal.className = "modal";
   modal.tabIndex = -1;
   modal.style.display = "flex";
-  modal.style.animation = "fadeIn 0.3s ease";
+  modal.style.animation = "modalBGFadeIn 0.35s ease forwards";
   modal.innerHTML = `
     <div class="modal-dialog" id="editUserModalBody">
       <form
         id="editUserForm"
-        class="modal-content"
+        class="modal-content modal-content--opening"
         enctype="multipart/form-data"
       >
         <div class="modal-header">
@@ -229,6 +229,12 @@ function showEditUserModal(id) {
     }
   });
   document.body.appendChild(modal);
+
+  modal.addEventListener("animationend", () => {
+		modal.querySelectorAll(".modal-content").forEach((content) => {
+			content.classList.remove("modal-content--opening");
+		});
+	}, {once: true})
 
   const deleteBtn = document.getElementById("deleteUserModalBtn");
   deleteBtn.addEventListener("click", function (e) {
