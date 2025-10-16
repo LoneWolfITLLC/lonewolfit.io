@@ -400,10 +400,10 @@
     }
 
     .modal-close-button {
-        top: 5px;
-        right: 5px;
-        width: 28px;
-        height: 28px;
+        top: 5px !important;
+        right: 5px !important;
+        width: 28px !important;
+        height: 28px !important;
     }
 }
 
@@ -427,9 +427,9 @@
     }
 
     .modal-close-button {
-        top: 3px;
-        right: 3px;
-        width: 24px;
-        height: 24px;
+        top: 3px !important;
+        right: 3px !important;
+        width: 24px !important;
+        height: 24px !important;
     }
 }
