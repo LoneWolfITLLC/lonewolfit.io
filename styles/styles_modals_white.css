@@ -398,6 +398,13 @@
     #alertModal .modal-content {
         padding: 0.75rem 1.25rem;
     }
+
+    .modal-close-button {
+        top: 5px;
+        right: 5px;
+        width: 28px;
+        height: 28px;
+    }
 }
 
 @media (max-width: 450px) {
@@ -417,5 +424,12 @@
 
     #alertModal .modal-content {
         padding: 0.5rem 1rem;
+    }
+
+    .modal-close-button {
+        top: 3px;
+        right: 3px;
+        width: 24px;
+        height: 24px;
     }
 }
