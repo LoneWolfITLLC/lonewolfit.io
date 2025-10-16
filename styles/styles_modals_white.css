@@ -381,3 +381,41 @@
     align-items: unset !important;
     justify-content: unset !important;
 }
+
+@media (max-width: 768px) {
+    .modal-content {
+        margin: 50px auto;
+        padding: 10px;
+    }
+    #confirmModal .modal-content {
+        padding: 0.75rem 1.25rem;
+    }
+
+    #promptModal .modal-content {
+        padding: 0.75rem 1.25rem;
+    }
+
+    #alertModal .modal-content {
+        padding: 0.75rem 1.25rem;
+    }
+}
+
+@media (max-width: 450px) {
+    .modal-content {
+        margin: 25px auto;
+        width: calc(100% - 20px);
+        padding: 0.5rem 1rem;
+    }
+
+    #confirmModal .modal-content {
+        padding: 0.5rem 1rem;
+    }
+
+    #promptModal .modal-content {
+        padding: 0.5rem 1rem;
+    }
+
+    #alertModal .modal-content {
+        padding: 0.5rem 1rem;
+    }
+}
