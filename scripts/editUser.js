@@ -558,9 +558,8 @@ function handleEditUserSubmit(formName) {
 				}
 				alertModal(
 					"Error updating user: " +
-						(json.error || errorText ||
+						(json.message || json.error || errorText ||
 							response.statusText ||
-							json.message ||
 							"Unknown error")
 				);
 			}
