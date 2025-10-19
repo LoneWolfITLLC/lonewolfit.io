@@ -117,6 +117,7 @@
 	flex-wrap: wrap; /* Allows items to wrap to new lines. */
 	gap: 2rem; /* Large gap between portfolio items. */
 	margin-bottom: 1.5rem; /* Space below portfolio section. */
+	justify-content: center; /* Centers portfolio items. */
 }
 
 .main__portfolio-item {
@@ -133,6 +134,7 @@
 	max-width: max-content; /* Prevents item from exceeding parent width. */
 	min-width: min-content;
 	width: 100%;
+	min-height: 120px; /* Ensures minimum height for item. */
 	position: relative; /* Allows for absolute positioning inside item. */
 	text-decoration: none; /* Removes underline from links. */
 	overflow: hidden; /* Prevents content from overflowing item. */
@@ -208,7 +210,6 @@
 
 @media (max-width: 900px) {
 	.main__portfolio {
-		flex-direction: column; /* Stacks portfolio items vertically for mobile. */
 		gap: 1rem; /* Smaller gap for mobile. */
 	}
 	.main__portfolio-text {
