@@ -117,14 +117,14 @@
 }
 
 .profile__add-btn:hover {
-  background-color: rgba(33, 33, 33, 0.8);
+  background-color: #424242;
   transition: background-color 0.3s ease, box-shadow 0.3s ease-in-out,
     transform 0.3s ease-in-out;
   cursor: pointer;
 }
 
 .profile__add-btn:active {
-  background-color: #545454;
+  background-color: #848484;
   box-shadow: 1px 3px 12px rgba(33, 33, 33, 0.4);
   transform: translateY(2px);
 }
