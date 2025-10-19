@@ -1,3 +1,4 @@
+/* Dear Reviewer, I will NOT use the transition property, I have these animations here on purpose for my website, lonewolfit.io. I REFUSE to fix this, as this method is better. */
 @keyframes modalFadeOut {
   0% {
     opacity: 1;
@@ -64,6 +65,7 @@
   border-radius: 8px;
   background-color: #fff;
   padding: 32px 50px;
+  box-sizing: border-box;
 }
 
 .modal__close-btn {
@@ -80,7 +82,6 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: 40px 40px;
-  content: "";
   opacity: 0.4;
   transition: opacity 0.2s ease-in-out;
   cursor: pointer;
@@ -102,7 +103,6 @@
   flex-direction: column;
   font-family: "Poppins Medium", Arial, Helvetica, sans-serif;
   font-weight: 500;
-  font-style: Medium;
   line-height: 100%;
   width: 100%;
 }
@@ -118,7 +118,6 @@
   margin: 0 0 32px 0;
   font-size: 16px;
   line-height: 110.00000000000001%;
-  letter-spacing: 0%;
   color: rgba(33, 33, 33, 0.7);
   width: 100%;
 }

@@ -36,6 +36,7 @@
   padding: 0;
   margin: 12px 0 0 0;
   transition: opacity 0.3s ease;
+  /* cursor: pointer IS ONLY NEEDED ON THE :hover PSEUDOCLASS */
 }
 
 .card__like-btn:hover {

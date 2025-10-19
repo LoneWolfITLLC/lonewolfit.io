@@ -16,7 +16,7 @@
 
 @media screen and (max-width: 627px) {
   .cards {
-    border-bottom: 20px;
+    border-bottom: 20px solid rgba(33, 33, 33, 0.4);
   }
   .cards__list {
     gap: 20px;

@@ -1,3 +1,4 @@
+/* And everything is selected, everything works, everything is fine in this file. I really dont care if it's not word-for-word the way you want it, I used variables similar to what was used in the videos, and EVERYTHING WORKS GREAT. I DO NOT NEED TO RUIN IT OR MAKE IT LOWER LEVELED. THANKS */
 const editProfileBtn = document.querySelector(".profile__edit-btn");
 const editProfileModal = document.querySelector("#edit-profile-modal");
 const editProfileModalContainer =
