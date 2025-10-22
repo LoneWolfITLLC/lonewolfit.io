@@ -1,8 +1,6 @@
 /* And everything is selected, everything works, everything is fine in this file. I really dont care if it's not word-for-word the way you want it, I used variables similar to what was used in the videos, and EVERYTHING WORKS GREAT. I DO NOT NEED TO RUIN IT OR MAKE IT LOWER LEVELED. THANKS */
 const editProfileBtn = document.querySelector(".profile__edit-btn");
 const editProfileModal = document.querySelector("#edit-profile-modal");
-const editProfileModalContainer =
-  editProfileModal.querySelector(".modal__container");
 const editProfileCloseBtn = editProfileModal.querySelector(".modal__close-btn");
 const editProfileNameInput = document.querySelector("#profile-name-input");
 const editProfileDescriptionInput = document.querySelector(
@@ -11,7 +9,6 @@ const editProfileDescriptionInput = document.querySelector(
 const editProfileForm = editProfileModal.querySelector(".modal__form");
 const newPostBtn = document.querySelector(".profile__add-btn");
 const newPostModal = document.querySelector("#new-post-modal");
-const newPostModalContent = newPostModal.querySelector(".modal__container");
 const newPostCloseBtn = newPostModal.querySelector(".modal__close-btn");
 const newPostForm = newPostModal.querySelector(".modal__form");
 const newPostImageLinkInput = document.querySelector("#image-link-input");
