@@ -149,6 +149,10 @@
 	min-width: min-content; /* Prevents item from shrinking too small. */
 }
 
+.main__portfolio-item-tripleten {
+	min-width: min-content; /* Prevents item from shrinking too small. */
+}
+
 .main__portfolio-item:hover {
 	box-shadow: 0 4px 18px rgba(0, 0, 0, 0.175); /* Deeper shadow on hover for pop effect. */
 	transform: translateY(-1px); /* Slightly lifts item on hover. */
@@ -187,6 +191,17 @@
 	box-shadow: none; /* No shadow for tripleten image. */
 }
 
+.main__portfolio-item-tripleten::before {
+    content: "";
+    display: inline-block;
+    width: 96px;        /* adjust to desired size */
+    height: 48px;       /* adjust to desired size */
+    background-image: url('/images/tripleten-logo.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+}
 .main__image--triplepeaks::before {
 	content: url("../assets/se_project_library/images/logo.svg"); /* Uses dark mode specific image for triple peaks. */
 	background: transparent; /* Transparent background for triple peaks image. */

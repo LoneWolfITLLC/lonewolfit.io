@@ -70,8 +70,9 @@ body.dark-mode .main__image--cert {
 	border: 1px solid #222; /* Thin, dark border for definition. */
 }
 
-body.dark-mode .main__image--tripleten {
-	background: #fff; /* White background for tripleten image for contrast. */
+body.dark-mode .main__portfolio-item-tripleten::before {
+	background-image: url('/images/tripleten-logo-white.png');
+	/* background: transparent; Transparent background for tripleten image. */
 }
 
 body.dark-mode .main__image--triplepeaks::before {
