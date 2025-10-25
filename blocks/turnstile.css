@@ -30,7 +30,11 @@
 
 @media (max-width: 768px) {
     .cf-turnstile-wrapper {
-        max-width: 280px !important; /* smaller max width on tablets */
+        transform-origin: left center;
+        max-width: 280px !important;
+    }
+    .cf-turnstile-wrapper.scale-down {
+        transform: scale(0.9);
     }
     .cf-turnstile-wrapper .cf-turnstile,
     .cf-turnstile-wrapper iframe {
@@ -45,7 +49,7 @@
         max-width: 240px !important;
     }
     .cf-turnstile-wrapper.scale-down {
-        transform: scale(0.95);
+        transform: scale(0.85);
     }
 
     .cf-turnstile-wrapper .cf-turnstile,
