@@ -231,6 +231,41 @@
 						mo.observe(wrapper, { childList: true, subtree: true });
 					}
 				})();
+                // --- NEW: attach a wrapper-level listener to trigger the form validation functions ---
+                // This ensures validateContactFormLoggedOut / validateContactFormLoggedIn run when the widget state changes.
+                (function attachWrapperValidation() {
+                    if (wrapper.dataset.validationAttached === "1") return;
+                    const validateFnName =
+                        keyName === "loggedOut"
+                            ? "validateContactFormLoggedOut"
+                            : keyName === "loggedIn"
+                            ? "validateContactFormLoggedIn"
+                            : null;
+                    if (!validateFnName) return;
+                    const triggerValidation = () => {
+                        try {
+                            if (typeof window[validateFnName] === "function") {
+                                window[validateFnName]();
+                            }
+                        } catch (e) {}
+                    };
+                    try {
+                        wrapper.addEventListener("turnstile:verified", triggerValidation);
+                        wrapper.addEventListener("turnstile:expired", triggerValidation);
+                        wrapper.addEventListener("turnstile:error", triggerValidation);
+                        // also trigger when hidden input changes (if present)
+                        const hidden =
+                            wrapper.querySelector('input[name="cf-turnstile-response"]') ||
+                            form.querySelector('input[name="cf-turnstile-response"]');
+                        if (hidden) {
+                            hidden.addEventListener("input", triggerValidation);
+                            hidden.addEventListener("change", triggerValidation);
+                        }
+                        wrapper.dataset.validationAttached = "1";
+                    } catch (e) {
+                        /* silent fail */
+                    }
+                })();
 				_pendingRenders.delete(wrapper);
 				return wid;
 			} catch (err) {
