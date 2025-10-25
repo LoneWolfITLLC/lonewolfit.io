@@ -1,100 +1,90 @@
 /* Layout wrapper for the Cloudflare Turnstile widget */
 .cf-turnstile-wrapper {
-    margin-top: 12px;
-    margin-bottom: 8px;
-    display: flex;
-    justify-content: center; /* change to .center class to center */
-    align-items: center;
-    width: 100%;
-    max-width: 420px; /* limits widget width so it doesn't grow too large */
-    box-sizing: border-box;
-    transition: opacity 0.22s ease, transform 0.22s ease;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+	margin-top: 12px;
+	margin-bottom: 8px;
+	display: flex;
+	justify-content: center; /* change to .center class to center */
+	align-items: center;
+	width: 100%;
+	max-width: 420px; /* limits widget width so it doesn't grow too large */
+	box-sizing: border-box;
+	transition: opacity 0.22s ease, transform 0.22s ease;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 /* Utility class to center the widget when desired */
 .cf-turnstile-wrapper.center {
-    justify-content: center;
+	justify-content: center;
 }
 
 /* Make the injected widget responsive and prevent layout shift */
 .cf-turnstile-wrapper .cf-turnstile,
 .cf-turnstile-wrapper iframe {
-    width: 100% !important;
-    max-width: 360px;
-    box-sizing: border-box;
-    display: block;
-    transition: box-shadow 0.25s ease, transform 0.25s ease, opacity 0.2s ease;
+	width: 100% !important;
+	max-width: 360px;
+	box-sizing: border-box;
+	display: block;
+	transition: box-shadow 0.25s ease, transform 0.25s ease, opacity 0.2s ease;
 }
-
-@media (max-width: 768px) {
-    .cf-turnstile-wrapper {
-        transform-origin: left center;
-        max-width: 280px !important;
-    }
-    .cf-turnstile-wrapper.scale-down {
-        transform: scale(0.9);
-    }
-    .cf-turnstile-wrapper .cf-turnstile,
-    .cf-turnstile-wrapper iframe {
-        max-width: 240px !important;
-    }
-}
-
 
 @media (max-width: 480px) {
-    .cf-turnstile-wrapper {
-        max-width: 240px !important;
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-        padding-left: 0;
-        padding-right: 0;
-        transform-origin: center;
-    }
+	/* Visible container width we want on small screens */
+	.cf-turnstile-wrapper {
+		width: 240px !important; /* target visual width */
+		max-width: 100%;
+		overflow: hidden; /* hide the extra portion of the original iframe */
+		margin-left: auto;
+		margin-right: auto;
+		padding: 0;
+		box-sizing: border-box;
+		transform-origin: top center;
+	}
 
-    .cf-turnstile-wrapper .cf-turnstile,
-    .cf-turnstile-wrapper iframe {
-        max-width: 240px !important;
-        width: 100% !important;
-        transform: scale(0.95);
-        transform-origin: center;
-    }
+	/* Turnstile widget / iframe: scale down from its native width (~320px) */
+	.cf-turnstile-wrapper .cf-turnstile,
+	.cf-turnstile-wrapper iframe {
+		width: 320px !important; /* treat iframe as its native width */
+		height: auto !important;
+		transform: scale(0.75); /* 320 * 0.75 = 240 visible width */
+		transform-origin: 0 0; /* align scaled content with wrapper top-left */
+		display: block;
+		box-sizing: border-box;
+	}
 }
 
 /* Subtle focus/glow when user interacts with widget (dark & light modes) */
 .cf-turnstile-wrapper:focus-within {
-    outline: none;
-    box-shadow: 0 6px 30px rgba(0,0,0,0.12);
+	outline: none;
+	box-shadow: 0 6px 30px rgba(0, 0, 0, 0.12);
 }
 
 /* Disabled/blocked state (e.g. while submitting) */
 .cf-turnstile-wrapper.loading {
-    opacity: 0.6;
-    pointer-events: none;
-    filter: grayscale(0.25);
+	opacity: 0.6;
+	pointer-events: none;
+	filter: grayscale(0.25);
 }
 
 /* Dark mode tweaks: slightly stronger drop shadow and subtle cyan tint */
 body.dark-mode .cf-turnstile-wrapper {
-    filter: drop-shadow(0 10px 30px rgba(0, 60, 80, 0.25));
+	filter: drop-shadow(0 10px 30px rgba(0, 60, 80, 0.25));
 }
 
 body.dark-mode .cf-turnstile-wrapper:focus-within {
-    box-shadow: 0 8px 36px rgba(0, 180, 200, 0.10), 0 2px 8px rgba(0,0,0,0.4);
+	box-shadow: 0 8px 36px rgba(0, 180, 200, 0.1), 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 /* Ensure images or injected inline elements inside the wrapper scale nicely */
 .cf-turnstile-wrapper img,
 .cf-turnstile-wrapper svg {
-    max-width: 100%;
-    height: auto;
-    display: block;
+	max-width: 100%;
+	height: auto;
+	display: block;
 }
 
 /* Optional spacing tweak so submit button doesn't crowd the widget */
 .cf-turnstile-wrapper + button[type="submit"],
 .cf-turnstile-wrapper + input[type="submit"] {
-    margin-top: 10px;
+	margin-top: 10px;
 }
