@@ -124,70 +124,8 @@
 			}
 
 			try {
-				// build validation callback mapping
-				const validateFnName =
-					keyName === "loggedOut"
-						? "validateContactFormLoggedOut"
-						: keyName === "loggedIn"
-						? "validateContactFormLoggedIn"
-						: null;
-
-				const opts = {
-					sitekey: _siteKey,
-					callback: function (token) {
-						// mark that we have a token for quick checks
-						try {
-							wrapper.dataset.turnstileHasToken = "1";
-						} catch (e) {}
-						// dispatch event for other listeners
-						try {
-							form.dispatchEvent(
-								new CustomEvent("turnstile:verified", { detail: { token } })
-							);
-						} catch (e) {}
-						// run the project's validation function if present
-						if (
-							validateFnName &&
-							typeof window[validateFnName] === "function"
-						) {
-							try {
-								window[validateFnName]();
-							} catch (e) {}
-						}
-					},
-					"expired-callback": function () {
-						try {
-							delete wrapper.dataset.turnstileHasToken;
-						} catch (e) {}
-						try {
-							form.dispatchEvent(new Event("turnstile:expired"));
-						} catch (e) {}
-						if (
-							validateFnName &&
-							typeof window[validateFnName] === "function"
-						) {
-							try {
-								window[validateFnName]();
-							} catch (e) {}
-						}
-					},
-					"error-callback": function () {
-						try {
-							form.dispatchEvent(new Event("turnstile:error"));
-						} catch (e) {}
-						if (
-							validateFnName &&
-							typeof window[validateFnName] === "function"
-						) {
-							try {
-								window[validateFnName]();
-							} catch (e) {}
-						}
-					},
-				};
-
 				// perform actual render
-				const wid = window.turnstile.render(wrapper, opts);
+				const wid = window.turnstile.render(wrapper, { sitekey: _siteKey });
 				const mapKey =
 					form.id ||
 					keyName ||
@@ -199,6 +137,17 @@
 				// mark wrapper as rendered to prevent duplicate widgets
 				wrapper.dataset.turnstileRendered = "1";
 				_pendingRenders.delete(wrapper);
+                wrapper.addEventListener("click", () => {
+                    // on any click, try to focus the widget iframe (improves UX on some browsers)
+                    try {
+                        const iframe = wrapper.querySelector("iframe");
+                        if (iframe) iframe.focus();
+                        // trigger form validation update if applicable
+                        try {
+                            form.dispatchEvent(new Event("input"));
+                        } catch (e) {}
+                    } catch (e) {}
+                });
 				return wid;
 			} catch (err) {
 				console.error("Turnstile render failed", err);
