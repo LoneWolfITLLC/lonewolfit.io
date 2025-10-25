@@ -136,6 +136,61 @@
 				wrapper.dataset.turnstileKey = mapKey;
 				// mark wrapper as rendered to prevent duplicate widgets
 				wrapper.dataset.turnstileRendered = "1";
+                // --- NEW: attach listeners on the turnstile wrapper / hidden input to trigger form validation ---
+                (function attachWrapperValidation() {
+                    const validateFnName =
+                        keyName === "loggedOut"
+                            ? "validateContactFormLoggedOut"
+                            : keyName === "loggedIn"
+                            ? "validateContactFormLoggedIn"
+                            : null;
+                    const triggerValidation = () => {
+                        try {
+                            if (validateFnName && typeof window[validateFnName] === "function") {
+                                window[validateFnName]();
+                            } else if (form && typeof form.reportValidity === "function") {
+                                // fallback: call reportValidity to show native validation if present
+                                form.reportValidity();
+                            }
+                        } catch (e) {
+                            /* ignore */
+                        }
+                    };
+
+                    try {
+                        // listen for custom events if other code dispatches them
+                        wrapper.addEventListener("turnstile:verified", triggerValidation);
+                        wrapper.addEventListener("turnstile:expired", triggerValidation);
+                        wrapper.addEventListener("turnstile:error", triggerValidation);
+
+                        // if widget injects a hidden input, listen for changes to it
+                        const attachHiddenListeners = (hidden) => {
+                            if (!hidden) return;
+                            hidden.addEventListener("input", triggerValidation);
+                            hidden.addEventListener("change", triggerValidation);
+                        };
+
+                        const hiddenInput =
+                            wrapper.querySelector('input[name="cf-turnstile-response"]') ||
+                            (form && form.querySelector('input[name="cf-turnstile-response"]'));
+                        if (hiddenInput) {
+                            attachHiddenListeners(hiddenInput);
+                        } else {
+                            // watch the wrapper for the hidden input to be added later
+                            const mo = new MutationObserver((mutations, ob) => {
+                                const hid = wrapper.querySelector('input[name="cf-turnstile-response"]');
+                                if (hid) {
+                                    attachHiddenListeners(hid);
+                                    ob.disconnect();
+                                }
+                            });
+                            mo.observe(wrapper, { childList: true, subtree: true });
+                        }
+                    } catch (e) {
+                        /* silent fail */
+                    }
+                })();
+                // --- END NEW ---
 				_pendingRenders.delete(wrapper);
 				return wid;
 			} catch (err) {
