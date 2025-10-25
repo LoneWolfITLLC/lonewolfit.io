@@ -28,13 +28,29 @@
     transition: box-shadow 0.25s ease, transform 0.25s ease, opacity 0.2s ease;
 }
 
+@media (max-width: 768px) {
+    .cf-turnstile-wrapper {
+        max-width: 320px; /* smaller max width on tablets */
+    }
+    .cf-turnstile-wrapper .cf-turnstile,
+    .cf-turnstile-wrapper iframe {
+        max-width: 280px;
+    }
+}
+
 /* Slight scale-down on very small viewports to avoid overflow */
 @media (max-width: 480px) {
     .cf-turnstile-wrapper {
         transform-origin: left center;
+        max-width: 280px;
     }
     .cf-turnstile-wrapper.scale-down {
         transform: scale(0.95);
+    }
+
+    .cf-turnstile-wrapper .cf-turnstile,
+    .cf-turnstile-wrapper iframe {
+        max-width: 240px;
     }
 }
 
