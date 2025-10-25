@@ -187,7 +187,7 @@
 				};
 
 				// perform actual render
-				const wid = window.turnstile.render(wrapper, { sitekey: _siteKey });
+				const wid = window.turnstile.render(wrapper, opts);
 				const mapKey =
 					form.id ||
 					keyName ||
