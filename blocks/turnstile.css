@@ -42,7 +42,7 @@
 @media (max-width: 480px) {
     .cf-turnstile-wrapper {
         transform-origin: left center;
-        max-width: 280px !important;
+        max-width: 240px !important;
     }
     .cf-turnstile-wrapper.scale-down {
         transform: scale(0.95);
@@ -50,7 +50,7 @@
 
     .cf-turnstile-wrapper .cf-turnstile,
     .cf-turnstile-wrapper iframe {
-        max-width: 240px !important;
+        max-width: 200px !important;
     }
 }
 
