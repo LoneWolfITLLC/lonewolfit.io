@@ -9,6 +9,30 @@ function validateContactFormLoggedOut() {
 	if (!name.value.trim()) valid = false;
 	if (!/^[0-9]{10}$/.test(phone.value.trim())) valid = false;
 	if (!message.value.trim()) valid = false;
+
+	// ReCAPTCHA / Turnstile check: only enforce if widget was injected
+	const hasWidget =
+		!!form.querySelector(".cf-turnstile-wrapper") ||
+		!!form.querySelector('input[name="cf-turnstile-response"]');
+	if (hasWidget) {
+		let token = null;
+		try {
+			if (
+				window.TurnstileHelper &&
+				typeof window.TurnstileHelper.getTokenForForm === "function"
+			) {
+				token = window.TurnstileHelper.getTokenForForm(form);
+			} else {
+				const input = form.querySelector('input[name="cf-turnstile-response"]');
+				if (input && input.value) token = input.value;
+			}
+		} catch (e) {
+			console.warn("Turnstile token read error:", e);
+			token = null;
+		}
+		if (!token) valid = false;
+	}
+
 	return valid;
 }
 
@@ -29,6 +53,30 @@ function validateContactFormLoggedIn() {
 		if (!/^[0-9]{10}$/.test(phone.value.trim())) valid = false;
 	}
 	if (!message.value.trim()) valid = false;
+
+	// ReCAPTCHA / Turnstile check: only enforce if widget was injected
+	const hasWidget =
+		!!form.querySelector(".cf-turnstile-wrapper") ||
+		!!form.querySelector('input[name="cf-turnstile-response"]');
+	if (hasWidget) {
+		let token = null;
+		try {
+			if (
+				window.TurnstileHelper &&
+				typeof window.TurnstileHelper.getTokenForForm === "function"
+			) {
+				token = window.TurnstileHelper.getTokenForForm(form);
+			} else {
+				const input = form.querySelector('input[name="cf-turnstile-response"]');
+				if (input && input.value) token = input.value;
+			}
+		} catch (e) {
+			console.warn("Turnstile token read error:", e);
+			token = null;
+		}
+		if (!token) valid = false;
+	}
+
 	return valid;
 }
 
@@ -47,6 +95,27 @@ window.addEventListener("authChecked", async function () {
 	const submitBtnLoggedOut = contactFormLoggedOut.querySelector(
 		'button[type="submit"]'
 	);
+
+	// Inject Turnstile widgets (best-effort)
+	try {
+		if (
+			window.TurnstileHelper &&
+			typeof window.TurnstileHelper.renderIntoFormSafe === "function"
+		) {
+			// render into both forms if present (safe — no throw)
+			await window.TurnstileHelper.renderIntoFormSafe(
+				contactFormLoggedOut,
+				"loggedOut"
+			);
+			await window.TurnstileHelper.renderIntoFormSafe(
+				contactFormLoggedIn,
+				"loggedIn"
+			);
+		}
+	} catch (e) {
+		// non-fatal — widget failed to render
+		console.warn("Turnstile render error:", e);
+	}
 
 	// Helper to update submit button state
 	function updateLoggedInBtn() {
@@ -123,27 +192,46 @@ async function submitContactFormLoggedOut() {
 	const phone = form.querySelector("#phoneLoggedOut").value.trim();
 	const message = form.querySelector("#messageLoggedOut").value.trim();
 
+	// get turnstile token (best-effort)
+	let turnstileToken = null;
+	try {
+		if (
+			window.TurnstileHelper &&
+			typeof window.TurnstileHelper.getTokenForForm === "function"
+		) {
+			turnstileToken = window.TurnstileHelper.getTokenForForm(form);
+		}
+	} catch (e) {
+		console.warn("Error getting Turnstile token:", e);
+	}
+
 	showLoading();
 	try {
 		const response = await fetch(URL_BASE + "/api/contact-form/submit", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ name, email, phone, message }),
+			body: JSON.stringify({ name, email, phone, message, turnstileToken }),
 		});
 		const text = await response.text();
 		if (!response.ok) {
 			window.location.hash = "#contact";
 			hideLoading();
 			alertModal(text || "Error submitting contact form.");
+			// reset widget so user can try again
+			try {
+				window.TurnstileHelper && window.TurnstileHelper.resetForForm(form);
+			} catch (e) {}
 			return;
 		}
 		window.location.hash = "#contact";
 		hideLoading();
-		alertModal(
-			"Thank you! Your message has been submitted successfully."
-		);
+		alertModal("Thank you! Your message has been submitted successfully.");
 		// Reset form fields
 		form.reset();
+		// reset widget
+		try {
+			window.TurnstileHelper && window.TurnstileHelper.resetForForm(form);
+		} catch (e) {}
 		// Optionally reset character count
 		const charCount = document.getElementById("characterCountLoggedOut");
 		if (charCount) charCount.textContent = "0/500 characters";
@@ -152,6 +240,9 @@ async function submitContactFormLoggedOut() {
 		console.error("Error submitting contact form:", err);
 		hideLoading();
 		alertModal("Network error: " + err.message);
+		try {
+			window.TurnstileHelper && window.TurnstileHelper.resetForForm(form);
+		} catch (e) {}
 	}
 }
 
@@ -163,6 +254,18 @@ async function submitContactFormLoggedIn() {
 	const message = form.querySelector("#message").value.trim();
 	const useAccountPhoneNumber = checkbox && checkbox.checked;
 
+	// get turnstile token (best-effort)
+	let turnstileToken = null;
+	try {
+		if (
+			window.TurnstileHelper &&
+			typeof window.TurnstileHelper.getTokenForForm === "function"
+		) {
+			turnstileToken = window.TurnstileHelper.getTokenForForm(form);
+		}
+	} catch (e) {
+		console.warn("Error getting Turnstile token:", e);
+	}
 
 	showLoading();
 	try {
@@ -178,16 +281,17 @@ async function submitContactFormLoggedIn() {
 				message,
 				phone: useAccountPhoneNumber ? undefined : phone,
 				useAccountPhoneNumber,
+				turnstileToken,
 			}),
 		});
 		const text = await response.text();
 		let json = {};
-        try {
-          json = JSON.parse(text);
-        } catch (err) {}
+		try {
+			json = JSON.parse(text);
+		} catch (err) {}
 		window.location.hash = "#contact";
 		if (!response.ok) {
-			if(json.message && json.message.trim() === "Malformed token") {
+			if (json.message && json.message.trim() === "Malformed token") {
 				hideLoading();
 				alertModal("Token expired. Please login again...", true);
 				setTimeout(() => {
@@ -197,14 +301,20 @@ async function submitContactFormLoggedIn() {
 			}
 			hideLoading();
 			alertModal(json.message || text || "Error submitting contact form.");
+			// reset widget so user can try again
+			try {
+				window.TurnstileHelper && window.TurnstileHelper.resetForForm(form);
+			} catch (e) {}
 			return;
 		}
 		hideLoading();
-		alertModal(
-			"Thank you! Your message has been submitted successfully."
-		);
+		alertModal("Thank you! Your message has been submitted successfully.");
 		// Reset form fields
 		form.reset();
+		// reset widget
+		try {
+			window.TurnstileHelper && window.TurnstileHelper.resetForForm(form);
+		} catch (e) {}
 		// Optionally reset character count
 		const charCount = document.getElementById("characterCountLoggedIn");
 		if (charCount) charCount.textContent = "0/500 characters";
@@ -213,5 +323,8 @@ async function submitContactFormLoggedIn() {
 		console.error("Error submitting contact form:", err);
 		hideLoading();
 		alertModal("Network error: " + err.message);
+		try {
+			window.TurnstileHelper && window.TurnstileHelper.resetForForm(form);
+		} catch (e) {}
 	}
 }

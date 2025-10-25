@@ -3,6 +3,7 @@
 @import url('../blocks/dark/header.css');
 @import url('../blocks/dark/main.css');
 @import url('../blocks/dark/main_form.css');
+@import url('../blocks/turnstile.css');
 @import url('../blocks/dark/footer.css');
 /* Global Animations */
 @keyframes slideIn {

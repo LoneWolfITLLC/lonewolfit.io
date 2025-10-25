@@ -1,0 +1,75 @@
+/* Layout wrapper for the Cloudflare Turnstile widget */
+.cf-turnstile-wrapper {
+    margin-top: 12px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: center; /* change to .center class to center */
+    align-items: center;
+    width: 100%;
+    max-width: 420px; /* limits widget width so it doesn't grow too large */
+    box-sizing: border-box;
+    transition: opacity 0.22s ease, transform 0.22s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Utility class to center the widget when desired */
+.cf-turnstile-wrapper.center {
+    justify-content: center;
+}
+
+/* Make the injected widget responsive and prevent layout shift */
+.cf-turnstile-wrapper .cf-turnstile,
+.cf-turnstile-wrapper iframe {
+    width: 100% !important;
+    max-width: 360px;
+    box-sizing: border-box;
+    display: block;
+    transition: box-shadow 0.25s ease, transform 0.25s ease, opacity 0.2s ease;
+}
+
+/* Slight scale-down on very small viewports to avoid overflow */
+@media (max-width: 480px) {
+    .cf-turnstile-wrapper {
+        transform-origin: left center;
+    }
+    .cf-turnstile-wrapper.scale-down {
+        transform: scale(0.95);
+    }
+}
+
+/* Subtle focus/glow when user interacts with widget (dark & light modes) */
+.cf-turnstile-wrapper:focus-within {
+    outline: none;
+    box-shadow: 0 6px 30px rgba(0,0,0,0.12);
+}
+
+/* Disabled/blocked state (e.g. while submitting) */
+.cf-turnstile-wrapper.loading {
+    opacity: 0.6;
+    pointer-events: none;
+    filter: grayscale(0.25);
+}
+
+/* Dark mode tweaks: slightly stronger drop shadow and subtle cyan tint */
+body.dark-mode .cf-turnstile-wrapper {
+    filter: drop-shadow(0 10px 30px rgba(0, 60, 80, 0.25));
+}
+
+body.dark-mode .cf-turnstile-wrapper:focus-within {
+    box-shadow: 0 8px 36px rgba(0, 180, 200, 0.10), 0 2px 8px rgba(0,0,0,0.4);
+}
+
+/* Ensure images or injected inline elements inside the wrapper scale nicely */
+.cf-turnstile-wrapper img,
+.cf-turnstile-wrapper svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Optional spacing tweak so submit button doesn't crowd the widget */
+.cf-turnstile-wrapper + button[type="submit"],
+.cf-turnstile-wrapper + input[type="submit"] {
+    margin-top: 10px;
+}
