@@ -198,6 +198,39 @@
 				wrapper.dataset.turnstileKey = mapKey;
 				// mark wrapper as rendered to prevent duplicate widgets
 				wrapper.dataset.turnstileRendered = "1";
+				// Attach DOM listeners on the (possibly injected) hidden input so changes also trigger validation
+				(function attachHiddenInputListeners() {
+					const triggerValidation = () => {
+						if (
+							validateFnName &&
+							typeof window[validateFnName] === "function"
+						) {
+							try {
+								window[validateFnName]();
+							} catch (e) {}
+						}
+					};
+					const hidden =
+						wrapper.querySelector('input[name="cf-turnstile-response"]') ||
+						form.querySelector('input[name="cf-turnstile-response"]');
+					if (hidden) {
+						hidden.addEventListener("input", triggerValidation);
+						hidden.addEventListener("change", triggerValidation);
+					} else {
+						// watch for future addition
+						const mo = new MutationObserver((mutations, ob) => {
+							const hid =
+								wrapper.querySelector('input[name="cf-turnstile-response"]') ||
+								form.querySelector('input[name="cf-turnstile-response"]');
+							if (hid) {
+								hid.addEventListener("input", triggerValidation);
+								hid.addEventListener("change", triggerValidation);
+								ob.disconnect();
+							}
+						});
+						mo.observe(wrapper, { childList: true, subtree: true });
+					}
+				})();
 				_pendingRenders.delete(wrapper);
 				return wid;
 			} catch (err) {
