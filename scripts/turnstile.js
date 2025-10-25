@@ -137,17 +137,6 @@
 				// mark wrapper as rendered to prevent duplicate widgets
 				wrapper.dataset.turnstileRendered = "1";
 				_pendingRenders.delete(wrapper);
-                wrapper.addEventListener("click", () => {
-                    // on any click, try to focus the widget iframe (improves UX on some browsers)
-                    try {
-                        const iframe = wrapper.querySelector("iframe");
-                        if (iframe) iframe.focus();
-                        // trigger form validation update if applicable
-                        try {
-                            form.dispatchEvent(new Event("input"));
-                        } catch (e) {}
-                    } catch (e) {}
-                });
 				return wid;
 			} catch (err) {
 				console.error("Turnstile render failed", err);

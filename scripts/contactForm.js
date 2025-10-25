@@ -9,29 +9,7 @@ function validateContactFormLoggedOut() {
 	if (!name.value.trim()) valid = false;
 	if (!/^[0-9]{10}$/.test(phone.value.trim())) valid = false;
 	if (!message.value.trim()) valid = false;
-
-	// ReCAPTCHA / Turnstile check: only enforce if widget was injected
-	const hasWidget =
-		!!form.querySelector(".cf-turnstile-wrapper") ||
-		!!form.querySelector('input[name="cf-turnstile-response"]');
-	if (hasWidget) {
-		let token = null;
-		try {
-			if (
-				window.TurnstileHelper &&
-				typeof window.TurnstileHelper.getTokenForForm === "function"
-			) {
-				token = window.TurnstileHelper.getTokenForForm(form);
-			} else {
-				const input = form.querySelector('input[name="cf-turnstile-response"]');
-				if (input && input.value) token = input.value;
-			}
-		} catch (e) {
-			console.warn("Turnstile token read error:", e);
-			token = null;
-		}
-		if (!token) valid = false;
-	}
+	if(message.value.trim().length < 10) valid = false;
 
 	return valid;
 }
@@ -52,31 +30,8 @@ function validateContactFormLoggedIn() {
 		phone.disabled = false;
 		if (!/^[0-9]{10}$/.test(phone.value.trim())) valid = false;
 	}
-	if (!message.value.trim()) valid = false;
-
-	// ReCAPTCHA / Turnstile check: only enforce if widget was injected
-	const hasWidget =
-		!!form.querySelector(".cf-turnstile-wrapper") ||
-		!!form.querySelector('input[name="cf-turnstile-response"]');
-	if (hasWidget) {
-		let token = null;
-		try {
-			if (
-				window.TurnstileHelper &&
-				typeof window.TurnstileHelper.getTokenForForm === "function"
-			) {
-				token = window.TurnstileHelper.getTokenForForm(form);
-			} else {
-				const input = form.querySelector('input[name="cf-turnstile-response"]');
-				if (input && input.value) token = input.value;
-			}
-		} catch (e) {
-			console.warn("Turnstile token read error:", e);
-			token = null;
-		}
-		if (!token) valid = false;
-	}
-
+	if (!message.value.trim()) valid = false;	
+	if(message.value.trim().length < 10) valid = false;
 	return valid;
 }
 
