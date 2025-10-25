@@ -42,19 +42,24 @@
     }
 }
 
-/* Slight scale-down on very small viewports to avoid overflow */
+
 @media (max-width: 480px) {
     .cf-turnstile-wrapper {
-        transform-origin: left center;
         max-width: 240px !important;
-    }
-    .cf-turnstile-wrapper.scale-down {
-        transform: scale(0.85);
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 0;
+        padding-right: 0;
+        transform-origin: center;
     }
 
     .cf-turnstile-wrapper .cf-turnstile,
     .cf-turnstile-wrapper iframe {
-        max-width: 200px !important;
+        max-width: 240px !important;
+        width: 100% !important;
+        transform: scale(0.95);
+        transform-origin: center;
     }
 }
 
