@@ -30,11 +30,11 @@
 
 @media (max-width: 768px) {
     .cf-turnstile-wrapper {
-        max-width: 320px !important; /* smaller max width on tablets */
+        max-width: 280px !important; /* smaller max width on tablets */
     }
     .cf-turnstile-wrapper .cf-turnstile,
     .cf-turnstile-wrapper iframe {
-        max-width: 280px !important;
+        max-width: 240px !important;
     }
 }
 
