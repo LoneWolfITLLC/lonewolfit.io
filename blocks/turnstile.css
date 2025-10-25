@@ -33,7 +33,7 @@
 	.cf-turnstile-wrapper {
 		width: 240px !important; /* target visual width */
 		max-width: 100%;
-		overflow: hidden !important; /* hide overflow of the iframe */
+		overflow: scroll !important; /* scrolls overflow of the iframe */
 		margin-left: auto;
 		margin-right: auto;
 		padding: 0;
@@ -68,7 +68,7 @@
 /* Subtle focus/glow when user interacts with widget (dark & light modes) */
 .cf-turnstile-wrapper:focus-within {
 	outline: none;
-	box-shadow: 0 6px 30px rgba(0, 0, 0, 0.12);
+	box-shadow: 0 6px 30px rgba(52, 43, 43, 0.12);
 }
 
 /* Disabled/blocked state (e.g. while submitting) */
