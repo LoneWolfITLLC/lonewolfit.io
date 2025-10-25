@@ -33,23 +33,35 @@
 	.cf-turnstile-wrapper {
 		width: 240px !important; /* target visual width */
 		max-width: 100%;
-		overflow: hidden; /* hide the extra portion of the original iframe */
+		overflow: hidden !important; /* hide overflow of the iframe */
 		margin-left: auto;
 		margin-right: auto;
 		padding: 0;
 		box-sizing: border-box;
 		transform-origin: top center;
+		height: auto; /* will be adjusted by JS when possible */
 	}
 
-	/* Turnstile widget / iframe: scale down from its native width (~320px) */
+	/* Target the widget container and the iframe specifically.
+       Keep the iframe at its native width and scale it down to the wrapper.
+       Use !important so inline styles from the widget don't override layout. */
 	.cf-turnstile-wrapper .cf-turnstile,
+	.cf-turnstile-wrapper .cf-turnstile > iframe,
 	.cf-turnstile-wrapper iframe {
-		width: 320px !important; /* treat iframe as its native width */
+		width: 320px !important; /* assume native widget width (adjusted by JS if different) */
 		height: auto !important;
-		transform: scale(0.75); /* 320 * 0.75 = 240 visible width */
-		transform-origin: 0 0; /* align scaled content with wrapper top-left */
+		transform: scale(
+			0.75
+		) !important; /* fallback scale (320 * 0.75 = 240 visible) */
+		transform-origin: 0 0 !important; /* align scaled content with wrapper top-left */
+		display: block !important;
+		box-sizing: border-box !important;
+	}
+
+	/* ensure wrapper centers scaled content */
+	.cf-turnstile-wrapper {
 		display: block;
-		box-sizing: border-box;
+		text-align: center;
 	}
 }
 
