@@ -124,6 +124,68 @@
 			}
 
 			try {
+				// build validation callback mapping
+				const validateFnName =
+					keyName === "loggedOut"
+						? "validateContactFormLoggedOut"
+						: keyName === "loggedIn"
+						? "validateContactFormLoggedIn"
+						: null;
+
+				const opts = {
+					sitekey: _siteKey,
+					callback: function (token) {
+						// mark that we have a token for quick checks
+						try {
+							wrapper.dataset.turnstileHasToken = "1";
+						} catch (e) {}
+						// dispatch event for other listeners
+						try {
+							form.dispatchEvent(
+								new CustomEvent("turnstile:verified", { detail: { token } })
+							);
+						} catch (e) {}
+						// run the project's validation function if present
+						if (
+							validateFnName &&
+							typeof window[validateFnName] === "function"
+						) {
+							try {
+								window[validateFnName]();
+							} catch (e) {}
+						}
+					},
+					"expired-callback": function () {
+						try {
+							delete wrapper.dataset.turnstileHasToken;
+						} catch (e) {}
+						try {
+							form.dispatchEvent(new Event("turnstile:expired"));
+						} catch (e) {}
+						if (
+							validateFnName &&
+							typeof window[validateFnName] === "function"
+						) {
+							try {
+								window[validateFnName]();
+							} catch (e) {}
+						}
+					},
+					"error-callback": function () {
+						try {
+							form.dispatchEvent(new Event("turnstile:error"));
+						} catch (e) {}
+						if (
+							validateFnName &&
+							typeof window[validateFnName] === "function"
+						) {
+							try {
+								window[validateFnName]();
+							} catch (e) {}
+						}
+					},
+				};
+
 				// perform actual render
 				const wid = window.turnstile.render(wrapper, { sitekey: _siteKey });
 				const mapKey =
@@ -235,38 +297,11 @@
 		const outForm = document.getElementById("contactFormLoggedOut");
 		const inForm = document.getElementById("contactFormLoggedIn");
 		if (!outForm && !inForm) return;
-		// Render widgets (best-effort) and then trigger the appropriate form validation.
-		if (outForm) {
-			renderIntoFormSafe(outForm, "loggedOut")
-				.then(() => {
-					if (typeof window.validateContactFormLoggedOut === "function") {
-						try {
-							window.validateContactFormLoggedOut();
-						} catch (e) {
-							/* ignore */
-						}
-					}
-				})
-				.catch(() => {
-					/* ignore */
-				});
-		}
-
-		if (inForm) {
-			renderIntoFormSafe(inForm, "loggedIn")
-				.then(() => {
-					if (typeof window.validateContactFormLoggedIn === "function") {
-						try {
-							window.validateContactFormLoggedIn();
-						} catch (e) {
-							/* ignore */
-						}
-					}
-				})
-				.catch(() => {
-					/* ignore */
-				});
-		}
+		// try to render; errors are silent
+		if (outForm && outForm.checkVisibility())
+			renderIntoFormSafe(outForm, "loggedOut");
+		if (inForm && inForm.checkVisibility())
+			renderIntoFormSafe(inForm, "loggedIn");
 	}
 
 	// document.addEventListener("DOMContentLoaded", _autoInit); NO NEED TO RUN INIT
