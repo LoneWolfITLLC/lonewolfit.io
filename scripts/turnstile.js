@@ -234,12 +234,17 @@
 	function _autoInit() {
 		const outForm = document.getElementById("contactFormLoggedOut");
 		const inForm = document.getElementById("contactFormLoggedIn");
-		if (!outForm && !inForm) return;
+        const residentialForm = document.getElementById("registerForm");
+        const businessForm = document.getElementById("registerFormBusiness");
+
+		if (!outForm && !inForm && !residentialForm && !businessForm) return;
 		// try to render; errors are silent
 		if (outForm && outForm.checkVisibility())
 			renderIntoFormSafe(outForm, "loggedOut");
 		if (inForm && inForm.checkVisibility())
 			renderIntoFormSafe(inForm, "loggedIn");
+        if (residentialForm) renderIntoFormSafe(residentialForm, "registerResidential");
+        if (businessForm) renderIntoFormSafe(businessForm, "registerBusiness");
 	}
 
 	// document.addEventListener("DOMContentLoaded", _autoInit); NO NEED TO RUN INIT

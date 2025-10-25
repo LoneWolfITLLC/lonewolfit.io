@@ -50,10 +50,6 @@
 	.cf-turnstile-wrapper iframe {
 		width: 320px !important; /* assume native widget width (adjusted by JS if different) */
 		height: auto !important;
-		transform: scale(
-			0.75
-		) !important; /* fallback scale (320 * 0.75 = 240 visible) */
-		transform-origin: 0 0 !important; /* align scaled content with wrapper top-left */
 		display: block !important;
 		box-sizing: border-box !important;
 	}
