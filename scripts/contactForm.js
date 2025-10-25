@@ -9,6 +9,7 @@ function validateContactFormLoggedOut() {
 	if (!name.value.trim()) valid = false;
 	if (!/^[0-9]{10}$/.test(phone.value.trim())) valid = false;
 	if (!message.value.trim()) valid = false;
+	if (message.value.trim().length < 10) valid = false;
 	return valid;
 }
 
@@ -29,6 +30,7 @@ function validateContactFormLoggedIn() {
 		if (!/^[0-9]{10}$/.test(phone.value.trim())) valid = false;
 	}
 	if (!message.value.trim()) valid = false;
+	if (message.value.trim().length < 10) valid = false;
 	return valid;
 }
 
