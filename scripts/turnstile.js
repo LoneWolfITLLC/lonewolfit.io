@@ -236,8 +236,9 @@
 		const inForm = document.getElementById("contactFormLoggedIn");
         const residentialForm = document.getElementById("registerForm");
         const businessForm = document.getElementById("registerFormBusiness");
+		const testimonialForm = document.getElementById("testimonialForm");
 
-		if (!outForm && !inForm && !residentialForm && !businessForm) return;
+		if (!outForm && !inForm && !residentialForm && !businessForm && !testimonialForm) return;
 		// try to render; errors are silent
 		if (outForm && outForm.checkVisibility())
 			renderIntoFormSafe(outForm, "loggedOut");
@@ -245,6 +246,7 @@
 			renderIntoFormSafe(inForm, "loggedIn");
         if (residentialForm) renderIntoFormSafe(residentialForm, "registerResidential");
         if (businessForm) renderIntoFormSafe(businessForm, "registerBusiness");
+		if (testimonialForm) renderIntoFormSafe(testimonialForm, "testimonialForm");
 	}
 
 	// document.addEventListener("DOMContentLoaded", _autoInit); NO NEED TO RUN INIT

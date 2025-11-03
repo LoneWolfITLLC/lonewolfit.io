@@ -25,9 +25,21 @@ window.addEventListener("authChecked", function () {
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
     if (submitBtn.disabled) return;
-    showLoading();
     let token =
       typeof getTokenFromSession === "function" ? getTokenFromSession() : null;
+    // get turnstile token (best-effort)
+    let turnstileToken = null;
+    try {
+      if (
+        window.TurnstileHelper &&
+        typeof window.TurnstileHelper.getTokenForForm === "function"
+      ) {
+        turnstileToken = window.TurnstileHelper.getTokenForForm(form);
+      }
+    } catch (e) {
+      console.warn("Error getting Turnstile token:", e);
+    }
+    showLoading();
     try {
       const response = await fetch(URL_BASE + "/api/submit-testimonial", {
         method: "POST",
@@ -35,7 +47,7 @@ window.addEventListener("authChecked", function () {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ testimonial: textarea.value.trim() }),
+        body: JSON.stringify({ testimonial: textarea.value.trim(), turnstileToken}),
       });
       const data = await response.json();
       if (response.ok) {
@@ -49,6 +61,10 @@ window.addEventListener("authChecked", function () {
         textarea.value = "";
         checkbox.checked = false;
         validate();
+        // reset widget so user can try again
+        try {
+          window.TurnstileHelper && window.TurnstileHelper.resetForForm(form);
+        } catch (e) {}
         // Reset character count display if present
         var charCountElem = document.getElementById("characterCount");
         if (charCountElem) {
@@ -62,6 +78,10 @@ window.addEventListener("authChecked", function () {
         }, 2000);
       } else {
         hideLoading();
+        // reset widget so user can try again
+        try {
+          window.TurnstileHelper && window.TurnstileHelper.resetForForm(form);
+        } catch (e) {}
         window.location.hash = "#userSubmissionSection";
         if (data.message && data.message.trim() === "Malformed token") {
           alertModal("Token expired. Please login again...", true);
@@ -81,6 +101,10 @@ window.addEventListener("authChecked", function () {
           error && error.toString ? error.toString() : String(error)
         }`
       );
+      // reset widget so user can try again
+			try {
+				window.TurnstileHelper && window.TurnstileHelper.resetForForm(form);
+			} catch (e) {}
     }
   });
 });
