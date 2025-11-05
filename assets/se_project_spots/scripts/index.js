@@ -201,8 +201,8 @@ function handleNewPostSubmit(event) {
   //console.log("New Post Image Link: " + newPostImageLinkInput.value);
   //console.log("New Post Caption: " + newPostCaptionInput.value);
   const cardData = {
-    name: newPostImageLinkInput.value,
-    link: newPostCaptionInput.value,
+    name: newPostCaptionInput.value,
+    link: newPostImageLinkInput.value,
   };
   const card = getCardElement(cardData);
   if (card) cardsList.prepend(card);
