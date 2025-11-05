@@ -118,7 +118,10 @@ window.addEventListener("authChecked", async function () {
 			alert(
 				"Please provide a message and either check the box to use your account phone number or enter a valid 10-digit phone number."
 			);
-		} else submitContactFormLoggedIn();
+		} else{
+			submitContactFormLoggedIn();
+			submitBtnLoggedIn.disabled = true;
+		} 
 	});
 
 	contactFormLoggedOut.addEventListener("submit", function (e) {
@@ -127,7 +130,10 @@ window.addEventListener("authChecked", async function () {
 			alert(
 				"Please fill out all required fields and enter a valid 10-digit phone number."
 			);
-		} else submitContactFormLoggedOut();
+		} else {
+			submitContactFormLoggedOut();
+			submitBtnLoggedOut.disabled = true;
+		}
 	});
 
 	if (loggedIn) {

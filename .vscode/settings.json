@@ -4,5 +4,5 @@
     "baseUri": "/api",
     "proxyUri": "http://localhost:3000/api"
   },
-  "liveServer.settings.port": 5501
+  "liveServer.settings.port": 5502
 }

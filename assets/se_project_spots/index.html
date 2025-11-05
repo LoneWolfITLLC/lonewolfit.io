@@ -52,103 +52,25 @@
         </section>
         <section class="cards page__section">
           <ul class="cards__list">
-            <li class="card">
-              <img
-                src="images/1-photo-by-moritz-feldmann-from-pexels.jpg"
-                alt="Val Thorens"
-                class="card__image"
-              />
-              <div class="card__content">
-                <h2 class="card__title">Val Thorens</h2>
-                <button
-                  type="button"
-                  aria-label="Like Button"
-                  class="card__like-btn"
-                ></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="images/2-photo-by-ceiline-from-pexels.jpg"
-                alt="Restaurant Terrace"
-                class="card__image"
-              />
-              <div class="card__content">
-                <h2 class="card__title">Restaurant Terrace</h2>
-                <button
-                  type="button"
-                  aria-label="Like Button"
-                  class="card__like-btn"
-                ></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="images/3-photo-by-tubanur-dogan-from-pexels.jpg"
-                alt="An outdoor cafe"
-                class="card__image"
-              />
-              <div class="card__content">
-                <h2 class="card__title">An outdoor cafe</h2>
-                <button
-                  type="button"
-                  aria-label="Like Button"
-                  class="card__like-btn"
-                ></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="images/4-photo-by-maurice-laschet-from-pexels.jpg"
-                alt="A very long bridge, over the forest..."
-                class="card__image"
-              />
-              <div class="card__content">
-                <h2 class="card__title">
-                  A very long bridge, over the forest...
-                </h2>
-                <button
-                  type="button"
-                  aria-label="Like Button"
-                  class="card__like-btn"
-                ></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="images/5-photo-by-van-anh-nguyen-from-pexels.jpg"
-                alt="Tunnel with morning light"
-                class="card__image"
-              />
-              <div class="card__content">
-                <h2 class="card__title">Tunnel with morning light</h2>
-                <button
-                  type="button"
-                  aria-label="Like Button"
-                  class="card__like-btn"
-                ></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="images/6-photo-by-moritz-feldmann-from-pexels.jpg"
-                alt="Mountain house"
-                class="card__image"
-              />
-              <div class="card__content">
-                <h2 class="card__title">Mountain house</h2>
-                <button
-                  type="button"
-                  aria-label="Like Button"
-                  class="card__like-btn"
-                ></button>
-              </div>
-            </li>
+            <template id="card-template">
+              <li class="card">
+                <button class="card__delete-btn" type="button"></button>
+                <img class="card__image" src="#" alt="" />
+                <div class="card__content">
+                  <h2 class="card__title"></h2>
+                  <button
+                    type="button"
+                    aria-label="Like Button"
+                    class="card__like-btn"
+                  ></button>
+                </div>
+              </li>
+            </template>
           </ul>
         </section>
       </main>
       <footer class="footer">
-        <p class="footer__copyright">2023 © Spots</p>
+        <p class="footer__copyright">2025 © Spots</p>
       </footer>
       <div class="modal" id="edit-profile-modal">
         <div class="modal__container">
@@ -203,6 +125,17 @@
             <button type="submit" class="modal__submit-btn">Save</button>
           </form>
         </div>
+      </div>
+    </div>
+    <div class="modal modal_type_preview" id="preview-modal">
+      <div class="modal__image-container">
+        <button
+          class="modal__close-btn"
+          type="button"
+          aria-label="Close modal"
+        ></button>
+        <img src="#" alt="" class="modal__image" />
+        <p class="modal__caption"></p>
       </div>
     </div>
     <script src="scripts/index.js"></script>
