@@ -178,6 +178,15 @@ previewModalCloseButton.addEventListener("click", function (event) {
   closeModal(previewModal);
 });
 
+// THIS IS HERE FOR SMALL SCREENS WHERE THE CLOSE BUTTON GETS CUT OFF, THIS WILL ALLOW USERS TO CLICK OFF THE MODAL
+previewModal.addEventListener("click", function (event) {
+  event.preventDefault();
+  if (event.target === previewModal) {
+    if (previewModal.classList.contains("modal_is-opened"))
+      closeModal(previewModal);
+  }
+});
+
 function handleEditProfileSubmit(event) {
   event.preventDefault();
   profileNameEl.textContent = editProfileNameInput.value;
