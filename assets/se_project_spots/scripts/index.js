@@ -119,7 +119,6 @@ function getCardElement(data) {
     .querySelector(".card")
     .cloneNode(true);
   const cardImageEl = cardElement.querySelector(".card__image");
-  //const cardContent = cardElement.querySelector(".card__content");
   const cardTitleEl = cardElement.querySelector(".card__title");
 
   cardImageEl.src = data.link;
@@ -197,7 +196,7 @@ function handleNewPostSubmit(event) {
     link: newPostCaptionInput.value,
   };
   const card = getCardElement(cardData);
-  cardsList.prepend(card);
+  if (card) cardsList.prepend(card);
   closeModal(newPostModal);
 }
 
