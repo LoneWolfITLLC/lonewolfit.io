@@ -198,8 +198,6 @@ editProfileForm.addEventListener("submit", handleEditProfileSubmit);
 
 function handleNewPostSubmit(event) {
   event.preventDefault();
-  //console.log("New Post Image Link: " + newPostImageLinkInput.value);
-  //console.log("New Post Caption: " + newPostCaptionInput.value);
   const cardData = {
     name: newPostCaptionInput.value,
     link: newPostImageLinkInput.value,
@@ -207,6 +205,9 @@ function handleNewPostSubmit(event) {
   const card = getCardElement(cardData);
   if (card) cardsList.prepend(card);
   closeModal(newPostModal);
+  newPostCaptionInput.value = "";
+  newPostImageLinkInput.value = "";
+  newPostForm.reset(); //reset the form
 }
 
 newPostForm.addEventListener("submit", handleNewPostSubmit);

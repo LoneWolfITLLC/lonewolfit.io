@@ -201,6 +201,7 @@
   font-weight: 500;
   font-size: 20px;
   line-height: 120%;
+  margin-bottom: 0;
 }
 
 .modal__image {
@@ -226,6 +227,10 @@
 @media screen and (max-width: 627px) {
   .modal__submit-btn {
     max-width: none;
+  }
+
+  .modal__caption {
+    font-size: 16px;
   }
 
   .modal__container {
