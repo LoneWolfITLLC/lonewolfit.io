@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const alertDiv = document.getElementById("alertEmail");
       showLoading();
       try {
-        const response = await fetch("/api/auth/send-verification-code", {
+        const response = await fetch(`${URL_BASE}/api/auth/send-verification-code`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       showLoading();
       try {
-        const response = await fetch("/api/auth/reset-password", {
+        const response = await fetch(`${URL_BASE}/api/auth/reset-password`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
