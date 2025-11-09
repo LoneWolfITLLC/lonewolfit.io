@@ -168,6 +168,14 @@
   flex-wrap: wrap;
 }
 
+.contactform__email-btn,
+.contactform__call-btn,
+.contactform__delete-btn {
+  max-width: 200px;
+  align-self: center;
+}
+
+
 @media (max-width: 800px) {
   .contactform__item {
     padding: 14px 6vw 12px 6vw;
