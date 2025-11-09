@@ -430,6 +430,26 @@ function gatherFormData(formName) {
 			document.getElementById("dbaNameBusiness").value
 		);
 		formData.append("businessAddress", getBusinessAddress());
+		// get turnstile token (best-effort)
+		let turnstileToken = null;
+		try {
+			if (
+				window.TurnstileHelper &&
+				typeof window.TurnstileHelper.getTokenForForm === "function"
+			) {
+				turnstileToken = window.TurnstileHelper.getTokenForForm(form);
+			}
+		} catch (e) {
+			console.warn("Error getting Turnstile token:", e);
+		}
+
+		// append token to the FormData so server can verify
+        if (turnstileToken) {
+            formData.append("turnstileToken", turnstileToken);
+        } else {
+            // still append empty value so server sees the field consistently
+            formData.append("turnstileToken", "");
+        }
 		return formData;
 	} else if (formName === "registerForm") {
 		const formData = new FormData(form);
@@ -463,6 +483,26 @@ function gatherFormData(formName) {
 		);
 		formData.append("dbaName", null);
 		formData.append("businessAddress", null);
+		// get turnstile token (best-effort)
+		let turnstileToken = null;
+		try {
+			if (
+				window.TurnstileHelper &&
+				typeof window.TurnstileHelper.getTokenForForm === "function"
+			) {
+				turnstileToken = window.TurnstileHelper.getTokenForForm(form);
+			}
+		} catch (e) {
+			console.warn("Error getting Turnstile token:", e);
+		}
+
+		// append token to the FormData so server can verify
+        if (turnstileToken) {
+            formData.append("turnstileToken", turnstileToken);
+        } else {
+            // still append empty value so server sees the field consistently
+            formData.append("turnstileToken", "");
+        }
 		return formData;
 	}
 }
