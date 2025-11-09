@@ -196,7 +196,7 @@ function showEditUserModal(id) {
     (value) => value === "on"
   );
   if (darkMode) {
-    const confirmBtn = document.querySelector(
+    const confirmBtn = modal.querySelector(
       "#editUserForm button[type='submit']"
     );
     buttonGlow.then((isGlowing) => {
