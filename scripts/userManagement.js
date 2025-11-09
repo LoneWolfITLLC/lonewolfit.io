@@ -10,171 +10,196 @@ function showEditUserModal(id) {
   // Remove any existing modal first
   hideEditUserModal(id);
 
-  // Modal HTML (all IDs are unique to editUser context)
+  // Create modal container
   const modal = document.createElement("div");
   modal.id = id;
   modal.className = "modal";
   modal.tabIndex = -1;
   modal.style.display = "flex";
   modal.style.animation = "modalBGFadeIn 0.35s ease forwards";
-  modal.innerHTML = `
-    <div class="modal-dialog" id="editUserModalBody">
-      <form
-        id="editUserForm"
-        class="modal-content modal-content--opening"
-        enctype="multipart/form-data"
-      >
-        <div class="modal-header">
-          <h5 class="modal-title">Edit User</h5>
-          <button
-            type="button"
-            class="modal-close-button"
-            id="closeEditUserModalBtn"
-          ></button>
-        </div>
-        <div
-          id="editUserModalAlert"
-          class="alertDiv main__alert"
-          style="display: none"
-        ></div>
-        <div class="modal-body">
-          <input type="hidden" name="editorId" id="editorId" />
 
-          <div class="mb-2">
-            <label for="firstName" class="form-label">First Name</label>
-            <input
-              type="text"
-              class="form-control"
-              id="firstName"
-              name="firstName"
-              required
-              autocomplete="given-name"
-            />
-          </div>
-          <div class="mb-2">
-            <label>Middle Name</label>
-            <input
-              type="text"
-              class="form-control"
-              id="middleName"
-              name="middleName"
-            />
-          </div>
-          <div class="mb-2">
-            <label>Last Name</label>
-            <input
-              type="text"
-              class="form-control"
-              id="lastName"
-              name="lastName"
-              required
-            />
-          </div>
-          <div class="mb-2">
-            <label>Username</label>
-            <input
-              type="text"
-              class="form-control"
-              id="username"
-              name="username"
-              required
-            />
-          </div>
-          <div class="mb-2">
-            <label>Email</label>
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              name="email"
-              required
-            />
-          </div>
-          <div class="mb-2">
-            <label>Phone</label>
-            <input
-              type="text"
-              class="form-control"
-              id="phone"
-              name="phone"
-              required
-            />
-          </div>
-          <div class="mb-2">
-            <label>
-              Address<br /><small>(add1,add2,city,state,zip,country)</small>
-            </label>
-            <input
-              type="text"
-              class="form-control"
-              id="address"
-              name="address"
-              required
-            />
-          </div>
-          <div class="mb-2">
-            <label>Stripe Cust. ID</label>
-            <input
-              type="text"
-              class="form-control"
-              id="stripeCustomerId"
-              name="stripeCustomerId"
-              required
-            />
-          </div>
-          <div class="mb-2">
-            <label>DBA Name</label>
-            <input
-              type="text"
-              class="form-control"
-              id="dbaName"
-              name="dbaName"
-            />
-          </div>
-          <div class="mb-2">
-            <label>Business Address</label>
-            <input
-              type="text"
-              class="form-control"
-              id="businessAddress"
-              name="businessAddress"
-            />
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="endUserCanEdit"
-              name="endUserCanEdit"
-            />
-            <label class="form-check-label">End-user can edit</label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="adminUser"
-              name="adminUser"
-            />
-            <label class="form-check-label">Admin user</label>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Save changes</button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            id="cancelEditUserModalBtn"
-          >
-            Cancel
-          </button>
-          <button type="button" class="btn btn-delete" id="deleteUserModalBtn">
-            Delete User
-          </button>
-        </div>
-      </form>
-    </div>
-  `;
+  // dialog
+  const dialog = document.createElement("div");
+  dialog.className = "modal-dialog";
+  dialog.id = "editUserModalBody";
+
+  // form
+  const form = document.createElement("form");
+  form.id = "editUserForm";
+  form.className = "modal-content modal-content--opening";
+  form.enctype = "multipart/form-data";
+
+  // header
+  const header = document.createElement("div");
+  header.className = "modal-header";
+  const title = document.createElement("h5");
+  title.className = "modal-title";
+  title.textContent = "Edit User";
+  const closeBtn = document.createElement("button");
+  closeBtn.type = "button";
+  closeBtn.className = "modal-close-button";
+  closeBtn.id = "closeEditUserModalBtn";
+  header.appendChild(title);
+  header.appendChild(closeBtn);
+
+  // alert div
+  const alertDiv = document.createElement("div");
+  alertDiv.id = "editUserModalAlert";
+  alertDiv.className = "alertDiv main__alert";
+  alertDiv.style.display = "none";
+
+  // body
+  const body = document.createElement("div");
+  body.className = "modal-body";
+
+  // helper to build labeled input block
+  function addInputBlock({ labelText, inputAttrs = {}, inputId }) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "mb-2";
+    if (labelText) {
+      const label = document.createElement("label");
+      if (inputAttrs.type === "text" && inputAttrs.id === "firstName") {
+        label.setAttribute("for", inputId);
+        label.className = "form-label";
+      }
+      label.innerHTML = labelText;
+      wrapper.appendChild(label);
+    }
+    const input = document.createElement("input");
+    Object.keys(inputAttrs).forEach((k) => (input[k] = inputAttrs[k]));
+    if (inputId) input.id = inputId;
+    if (inputAttrs.className) input.className = inputAttrs.className;
+    else input.className = "form-control";
+    wrapper.appendChild(input);
+    body.appendChild(wrapper);
+  }
+
+  // hidden editorId
+  const editorIdInput = document.createElement("input");
+  editorIdInput.type = "hidden";
+  editorIdInput.name = "editorId";
+  editorIdInput.id = "editorId";
+  body.appendChild(editorIdInput);
+
+  // fields
+  addInputBlock({
+    labelText: "<span>First Name</span>",
+    inputAttrs: {
+      type: "text",
+      name: "firstName",
+      required: true,
+      autocomplete: "given-name",
+    },
+    inputId: "firstName",
+  });
+
+  addInputBlock({
+    labelText: "Middle Name",
+    inputAttrs: { type: "text", name: "middleName" },
+    inputId: "middleName",
+  });
+
+  addInputBlock({
+    labelText: "Last Name",
+    inputAttrs: { type: "text", name: "lastName", required: true },
+    inputId: "lastName",
+  });
+
+  addInputBlock({
+    labelText: "Username",
+    inputAttrs: { type: "text", name: "username", required: true },
+    inputId: "username",
+  });
+
+  addInputBlock({
+    labelText: "Email",
+    inputAttrs: { type: "email", name: "email", required: true },
+    inputId: "email",
+  });
+
+  addInputBlock({
+    labelText: "Phone",
+    inputAttrs: { type: "text", name: "phone", required: true },
+    inputId: "phone",
+  });
+
+  addInputBlock({
+    labelText: "Address<br /><small>(add1,add2,city,state,zip,country)</small>",
+    inputAttrs: { type: "text", name: "address", required: true },
+    inputId: "address",
+  });
+
+  addInputBlock({
+    labelText: "Stripe Cust. ID",
+    inputAttrs: { type: "text", name: "stripeCustomerId", required: true },
+    inputId: "stripeCustomerId",
+  });
+
+  addInputBlock({
+    labelText: "DBA Name",
+    inputAttrs: { type: "text", name: "dbaName" },
+    inputId: "dbaName",
+  });
+
+  addInputBlock({
+    labelText: "Business Address",
+    inputAttrs: { type: "text", name: "businessAddress" },
+    inputId: "businessAddress",
+  });
+
+  // checkboxes
+  function addCheckbox(labelText, id, name) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "form-check";
+    const input = document.createElement("input");
+    input.className = "form-check-input";
+    input.type = "checkbox";
+    input.id = id;
+    input.name = name;
+    const label = document.createElement("label");
+    label.className = "form-check-label";
+    label.textContent = labelText;
+    wrapper.appendChild(input);
+    wrapper.appendChild(label);
+    body.appendChild(wrapper);
+  }
+
+  addCheckbox("End-user can edit", "endUserCanEdit", "endUserCanEdit");
+  addCheckbox("Admin user", "adminUser", "adminUser");
+
+  // footer with buttons
+  const footer = document.createElement("div");
+  footer.className = "modal-footer";
+
+  const saveBtn = document.createElement("button");
+  saveBtn.type = "submit";
+  saveBtn.className = "btn btn-primary";
+  saveBtn.textContent = "Save changes";
+
+  const cancelBtn = document.createElement("button");
+  cancelBtn.type = "button";
+  cancelBtn.className = "btn btn-primary";
+  cancelBtn.id = "cancelEditUserModalBtn";
+  cancelBtn.textContent = "Cancel";
+
+  const deleteBtn = document.createElement("button");
+  deleteBtn.type = "button";
+  deleteBtn.className = "btn btn-delete";
+  deleteBtn.id = "deleteUserModalBtn";
+  deleteBtn.textContent = "Delete User";
+
+  footer.appendChild(saveBtn);
+  footer.appendChild(cancelBtn);
+  footer.appendChild(deleteBtn);
+
+  // assemble
+  form.appendChild(header);
+  form.appendChild(alertDiv);
+  form.appendChild(body);
+  form.appendChild(footer);
+  dialog.appendChild(form);
+  modal.appendChild(dialog);
+
   const darkMode = document.body.classList.contains("dark-mode");
 
   const modalGlow = getPreference("modalGlow").then((value) => value === "on");
@@ -196,9 +221,7 @@ function showEditUserModal(id) {
     (value) => value === "on"
   );
   if (darkMode) {
-    const confirmBtn = modal.querySelector(
-      "#editUserForm button[type='submit']"
-    );
+    const confirmBtn = form.querySelector("button[type='submit']");
     buttonGlow.then((isGlowing) => {
       if (isGlowing) {
         confirmBtn.classList.remove("btn--no-glow");
@@ -228,51 +251,58 @@ function showEditUserModal(id) {
       modal.classList.add("modal--no-blur");
     }
   });
+
   document.body.appendChild(modal);
 
-  modal.addEventListener("animationend", () => {
-		modal.querySelectorAll(".modal-content").forEach((content) => {
-			content.classList.remove("modal-content--opening");
-		});
-	}, {once: true})
+  modal.addEventListener(
+    "animationend",
+    () => {
+      modal.querySelectorAll(".modal-content").forEach((content) => {
+        content.classList.remove("modal-content--opening");
+      });
+    },
+    { once: true }
+  );
 
-  const deleteBtn = document.getElementById("deleteUserModalBtn");
-  deleteBtn.addEventListener("click", function (e) {
-    confirmModal(
-      "Are you sure you want to delete this user? This cannot be undone.",
-      async function (confirmed) {
-        if (!confirmed) {
-          // Do nothing, leave modal open and allow table/modal events
-          return;
+  // delete handler
+  document
+    .getElementById("deleteUserModalBtn")
+    .addEventListener("click", function (e) {
+      confirmModal(
+        "Are you sure you want to delete this user? This cannot be undone.",
+        async function (confirmed) {
+          if (!confirmed) {
+            // Do nothing, leave modal open and allow table/modal events
+            return;
+          }
+          const token = getTokenFromSession();
+          const editorId = document.getElementById("editorId").value;
+          showLoading();
+          const res = await fetch(URL_BASE + "/api/admin/delete-account", {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ editorId }),
+          });
+          hideLoading();
+          if (res.ok) {
+            showMessage("User deleted successfully.", true);
+            await new Promise((resolve) => setTimeout(resolve, 2000));
+            hideEditUserModal("editUserModal");
+            loadUsers();
+          } else {
+            let errorMsg = "Failed to delete user";
+            try {
+              const errJson = await res.json().catch(() => null);
+              errorMsg = errJson?.error || errJson?.message || errorMsg;
+            } catch {}
+            showMessage(errorMsg, false);
+          }
         }
-        const token = getTokenFromSession();
-        const editorId = document.getElementById("editorId").value;
-        showLoading();
-        const res = await fetch(URL_BASE + "/api/admin/delete-account", {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ editorId }),
-        });
-        hideLoading();
-        if (res.ok) {
-          showMessage("User deleted successfully.", true);
-          await new Promise((resolve) => setTimeout(resolve, 2000));
-          hideEditUserModal("editUserModal");
-          loadUsers();
-        } else {
-          let errorMsg = "Failed to delete user";
-          try {
-            const errJson = await res.json().catch(() => null);
-            errorMsg = errJson?.error || errJson?.message || errorMsg;
-          } catch {}
-          showMessage(errorMsg, false);
-        }
-      }
-    );
-  });
+      );
+    });
 
   // Handle form submit
   document
