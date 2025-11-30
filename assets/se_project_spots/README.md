@@ -26,7 +26,10 @@
 Check out the live version here: **[Spots on GitHub Pages](https://lonewolfitllc.github.io/se_project_spots/index.html)**
 Alternatively, you can check it out on my website within my portfolio @ https://lonewolfit.io/portfolio.html
 
-## Video
+## Project Pitch Videos
 
-For reviewers at triple Ten, here is the Video of me explaining my project and various steps taken to create Spots here:
-https://drive.google.com/file/d/1Cpvaw4aOMyGt-3QqkRPuSJfyc1AZvnEz/view?usp=sharing
+Check out these videos, where I describe my project
+and some challenges I faced while building it:
+
+- [Ealier Stage](https://drive.google.com/file/d/1Cpvaw4aOMyGt-3QqkRPuSJfyc1AZvnEz/view?usp=sharing)
+- [Stage 6 - CURRENT](https://drive.google.com/file/d/1tt12rn8Bh199Pa2JC8horAAK0dbxp02g/edit?pli=1)

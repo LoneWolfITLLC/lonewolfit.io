@@ -298,10 +298,10 @@
     /* Use your close icon, center and cover */
     background-image: url('../images/ui/closebtn-black.png');
     background-repeat: no-repeat;
-    background-position: cover;
+    background-position: center;
     background-size: 24px 24px;
     opacity: 0.4;
-    transition: opacity 0.2s, box-shadow 0.2s;
+    transition: opacity 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     /* Remove default content property */
     content: '';
 }
@@ -310,14 +310,14 @@
     opacity: 0.7;
     background-image: url('../images/ui/closebtn-black.png');
     background-repeat: no-repeat;
-    background-position: cover;
+    background-position: center;
 }
 
 .modal-close-button:active {
     opacity: 0.9;
     background-image: url('../images/ui/closebtn-black.png');
     background-repeat: no-repeat;
-    background-position: cover;
+    background-position: center;
 }
 
 /* ─── EDIT USER MODAL STYLING ─── */
@@ -382,6 +382,67 @@
     justify-content: unset !important;
 }
 
+.modal__image {
+  max-width: 80vw;
+  max-height: 80vh;
+  width: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 8px;
+}
+
+.modal_type_preview {
+  padding: 0 16px;
+  visibility: hidden;
+}
+
+.modal__image-container {
+  position: relative;
+}
+
+.modal_is-opened {
+  visibility: visible;
+}
+
+.modal-preview-close-button {
+  top: 0px;
+  right: -52.5px;
+  background-image: url('../images/ui/close-icon-preview.svg') !important;
+  opacity: 1;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  outline: none;
+  border: none;
+  cursor: pointer !important;
+  background: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 24px 24px;
+  transition: opacity 0.2s ease-in-out;
+  content: '';
+}
+
+.modal-preview-close-button:hover {
+  opacity: 0.6;
+}
+
+.modal-preview-close-button:active {
+  opacity: 0.25;
+}
+
+@media (max-width: 627px) {
+  .modal-preview-close-button {
+    top: -32px !important;
+    right: 0px !important;
+  }
+
+  .modal__image {
+    max-width: unset;
+  }
+}
+
 @media (max-width: 768px) {
     .modal-content {
         margin: 50px auto;
@@ -397,6 +458,11 @@
 
     #alertModal .modal-content {
         padding: 0.75rem 1.25rem;
+    }
+
+    .modal-preview-close-button  {
+        top: -32px !important;
+        right: 0px !important;
     }
 
     .modal-close-button {
@@ -424,6 +490,11 @@
 
     #alertModal .modal-content {
         padding: 0.5rem 1rem;
+    }
+
+    .modal-preview-close-button {
+        width: 24px !important;
+        height: 24px !important;
     }
 
     .modal-close-button {

@@ -153,6 +153,24 @@
   outline: none;
 }
 
+.modal__input_type_error {
+  border-color: rgba(255, 0, 0, 0.6);
+}
+
+.modal__input_type_error:hover {
+  border-color: rgba(255, 0, 0, 0.9);
+}
+
+.modal__error {
+  display: block;
+  color: rgba(255, 0, 0, 0.6);
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 110%;
+  margin-top: 8px;
+}
+
 .modal__submit-btn {
   font-size: 16px;
   max-width: 156px;
@@ -164,7 +182,7 @@
   border: none;
   margin: 0;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out opacity 0.3s ease-in-out;
 }
 
 .modal__submit-btn:hover {
@@ -173,6 +191,13 @@
 
 .modal__submit-btn:active {
   background-color: #848484;
+}
+
+.modal__submit-btn:disabled {
+  opacity: 0.5;
+  background-color: #212121;
+  color: #fcf5e5;
+  cursor: default;
 }
 
 .modal__container--closing {
@@ -231,6 +256,10 @@
 
   .modal__caption {
     font-size: 16px;
+  }
+
+  .modal__error {
+    font-size: 12px;
   }
 
   .modal__container {
