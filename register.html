@@ -316,6 +316,9 @@
 							class="form-control"
 							id="passwordResidential"
 							placeholder="Create a secure password..."
+							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{10,16}$"
+							minlength="10"
+							maxlength="16"
 							required
 						/>
 						<span class="main__form-error" id="passwordResidential-error"></span>
@@ -343,6 +346,9 @@
 							class="form-control"
 							id="confirmPasswordResidential"
 							placeholder="Re-enter your password..."
+							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{10,16}$"
+							minlength="10"
+							maxlength="16"
 							required
 						/>
 						<span class="main__form-error" id="confirmPasswordResidential-error"></span>
@@ -738,6 +744,7 @@
 							required
 							minlength="10"
 							maxlength="16"
+							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{10,16}$"
 						/>
 						<span class="main__form-error" id="passwordBusiness-error"></span>
 						<small class="main__text-small main__item-centered"
@@ -767,6 +774,7 @@
 							required
 							minlength="10"
 							maxlength="16"
+							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{10,16}$"
 						/>
 						<span class="main__form-error" id="confirmPasswordBusiness-error"></span>
 						<label>

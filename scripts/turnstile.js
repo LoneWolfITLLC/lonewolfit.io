@@ -232,6 +232,7 @@
 
 	// Auto-init common contact forms when DOM ready or on custom event "authChecked"
 	function _autoInit() {
+		if(ENVIRONMENT === 'development') return; //skip auto-init during development
 		const outForm = document.getElementById("contactFormLoggedOut");
 		const inForm = document.getElementById("contactFormLoggedIn");
         const residentialForm = document.getElementById("registerForm");

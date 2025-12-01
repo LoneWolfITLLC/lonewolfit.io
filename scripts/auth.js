@@ -7,6 +7,7 @@ let requireUserToBeAdmin = false; // Set this to true if you want to require the
 const URL_BASE = "http://localhost:3000";
 const ADMIN_PATH = "admin.html";
 const MEMBER_PATH = "members.html";
+const ENVIRONMENT = "development"; // Change to 'production' in production environment
 const triggerDarkModeEvent = new CustomEvent("triggerDarkMode");
 
 function executeOnLoad() {
