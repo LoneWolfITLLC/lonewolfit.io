@@ -444,12 +444,12 @@ function gatherFormData(formName) {
 		}
 
 		// append token to the FormData so server can verify
-        if (turnstileToken) {
-            formData.append("turnstileToken", turnstileToken);
-        } else {
-            // still append empty value so server sees the field consistently
-            formData.append("turnstileToken", "");
-        }
+		if (turnstileToken) {
+			formData.append("turnstileToken", turnstileToken);
+		} else {
+			// still append empty value so server sees the field consistently
+			formData.append("turnstileToken", "");
+		}
 		return formData;
 	} else if (formName === "registerForm") {
 		const formData = new FormData(form);
@@ -497,12 +497,12 @@ function gatherFormData(formName) {
 		}
 
 		// append token to the FormData so server can verify
-        if (turnstileToken) {
-            formData.append("turnstileToken", turnstileToken);
-        } else {
-            // still append empty value so server sees the field consistently
-            formData.append("turnstileToken", "");
-        }
+		if (turnstileToken) {
+			formData.append("turnstileToken", turnstileToken);
+		} else {
+			// still append empty value so server sees the field consistently
+			formData.append("turnstileToken", "");
+		}
 		return formData;
 	}
 }
@@ -547,11 +547,6 @@ function handleEditUserSubmit(formName) {
 	const formData = gatherFormData(formName);
 	if (!formData) return; // gatherFormData already alerts on error
 	const form = document.getElementById(formName);
-	if (formName === "registerFormBusiness") {
-		updateStripeCustomerDetails("business");
-	} else {
-		updateStripeCustomerDetails("residential");
-	}
 	// Convert FormData to JSON object
 	const data = {};
 	for (const [key, value] of formData.entries()) {
@@ -583,6 +578,15 @@ function handleEditUserSubmit(formName) {
 		.then(async (response) => {
 			hideLoading();
 			if (response.ok) {
+				const successJson = await response.json();
+				if (successJson.turnstileTokenOk) {
+					formData.append("turnstileTokenOk", successJson.turnstileTokenOk);
+				}
+				if (formName === "registerFormBusiness") {
+					updateStripeCustomerDetails("business");
+				} else {
+					updateStripeCustomerDetails("residential");
+				}
 				alertModal("User updated successfully!");
 			} else {
 				const errorText = await response.text();
@@ -599,7 +603,9 @@ function handleEditUserSubmit(formName) {
 				}
 				alertModal(
 					"Error updating user: " +
-						(json.message || json.error || errorText ||
+						(json.message ||
+							json.error ||
+							errorText ||
 							response.statusText ||
 							"Unknown error")
 				);
@@ -671,7 +677,8 @@ function updateStripeCustomerDetails(formType) {
 				const json = JSON.parse(errorText);
 				alertModal(
 					"Error updating Stripe customer: " +
-						(json.error || json.message ||
+						(json.error ||
+							json.message ||
 							errorText ||
 							response.statusText ||
 							"Unknown error")
