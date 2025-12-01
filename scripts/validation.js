@@ -106,6 +106,15 @@ const resetValidation = (formElement, config) => {
 	}
 };
 
+// Keep submit button enabled after a form submission error
+// Call this function from your form submission handler when an error occurs
+const keepButtonEnabledOnError = (formElement, config) => {
+	const buttonElement = formElement.querySelector(config.submitButtonSelector);
+	if (buttonElement) {
+		enableSubmitButton(buttonElement);
+	}
+};
+
 const enableValidation = (config) => {
 	const formList = Array.from(document.querySelectorAll(config.formSelector));
 	formList.forEach((formElement) => {
