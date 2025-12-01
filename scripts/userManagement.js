@@ -78,7 +78,8 @@ function showEditUserModal(id) {
 		if (inputId) input.id = inputId;
 		if (inputAttrs.className) input.className = inputAttrs.className;
 		else input.className = "form-control";
-		wrapper.appendChild(input);
+		if (inputAttrs.pattern) input.pattern = inputAttrs.pattern;
+    wrapper.appendChild(input);
 		// Add error span for HTML Constraint API validation
 		const errorSpan = document.createElement("span");
 		errorSpan.className = "modal-content-form-error";
@@ -102,43 +103,75 @@ function showEditUserModal(id) {
 			name: "firstName",
 			required: true,
 			autocomplete: "given-name",
+			pattern: "^[A-Za-z'\\- ]+$",
 		},
 		inputId: "firstName",
 	});
 
 	addInputBlock({
 		labelText: "Middle Name",
-		inputAttrs: { type: "text", name: "middleName" },
+		inputAttrs: {
+			type: "text",
+			name: "middleName",
+			pattern: "^[A-Za-z'\\- ]*$",
+		},
 		inputId: "middleName",
 	});
 
 	addInputBlock({
 		labelText: "Last Name",
-		inputAttrs: { type: "text", name: "lastName", required: true },
+		inputAttrs: {
+			type: "text",
+			name: "lastName",
+			required: true,
+			pattern: "^[A-Za-z'\\- ]+$",
+		},
 		inputId: "lastName",
 	});
 
 	addInputBlock({
 		labelText: "Username",
-		inputAttrs: { type: "text", name: "username", required: true },
+		inputAttrs: {
+			type: "text",
+			name: "username",
+			required: true,
+			pattern: "^[A-Za-z0-9_]+$",
+		},
 		inputId: "username",
 	});
 
 	addInputBlock({
 		labelText: "Email",
-		inputAttrs: { type: "email", name: "email", required: true },
+		inputAttrs: {
+			type: "email",
+			name: "email",
+			required: true,
+			pattern: "^[a-z0-9._%+\\-]+@[a-z0-9.\\-]+\\.[a-z]{2,}$",
+		},
 		inputId: "email",
 	});
 
 	addInputBlock({
 		labelText: "Phone",
-		inputAttrs: { type: "text", name: "phone", required: true },
+		inputAttrs: {
+			type: "text",
+			name: "phone",
+			required: true,
+			pattern: "^[0-9]{10,15}$",
+		},
 		inputId: "phone",
 	});
 
+	// Address: add1, add2, city, state, zip, country
+	// No \s, no [ ]*, no slash in classes.
+	// Spaces handled as literal space followed by quantifier.
 	addInputBlock({
 		labelText: "Address<br /><small>(add1,add2,city,state,zip,country)</small>",
-		inputAttrs: { type: "text", name: "address", required: true },
+		inputAttrs: {
+			type: "text",
+			name: "address",
+			required: true,
+			pattern: "^[A-Za-z0-9 ]+, *[A-Za-z0-9 ]*, *[A-Za-z ]+, *(?:[A-Za-z]{2}|[A-Za-z]{2}-[A-Za-z]{2}), *\\d{5}(?:-\\d{4})?, *[A-Za-z ]+$",		},
 		inputId: "address",
 	});
 
@@ -150,13 +183,20 @@ function showEditUserModal(id) {
 
 	addInputBlock({
 		labelText: "DBA Name",
-		inputAttrs: { type: "text", name: "dbaName" },
+		inputAttrs: {
+			type: "text",
+			name: "dbaName",
+			pattern: "^[A-Za-z0-9 .,&'\\-]*$",
+		},
 		inputId: "dbaName",
 	});
 
+	// Business address: long OR short (street, city, state)
 	addInputBlock({
 		labelText: "Business Address",
-		inputAttrs: { type: "text", name: "businessAddress" },
+		inputAttrs: {
+			type: "text",
+			name: "businessAddress",},
 		inputId: "businessAddress",
 	});
 
@@ -368,6 +408,12 @@ function showEditUserModal(id) {
 						errorMsg = res.message;
 					}
 					showMessage(errorMsg, false);
+					if (
+						document.getElementById("editUserForm") &&
+						typeof notifyFormSubmissionError === "function"
+					) {
+						notifyFormSubmissionError(document.getElementById("editUserForm"));
+					}
 				} else {
 					showMessage("User updated!", true);
 					showLoading();
@@ -395,6 +441,13 @@ function showEditUserModal(id) {
 					errorMsg = err.message;
 				}
 				showMessage(errorMsg, false);
+				// Keep submit button enabled after server error
+				if (
+					document.getElementById("editUserForm") &&
+					typeof notifyFormSubmissionError === "function"
+				) {
+					notifyFormSubmissionError(document.getElementById("editUserForm"));
+				}
 			}
 		});
 
