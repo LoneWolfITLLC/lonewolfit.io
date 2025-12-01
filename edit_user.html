@@ -33,6 +33,7 @@
 		<script src="scripts/darkmode.js"></script>
 		<script src="scripts/editUser.js"></script>
 		<script src="scripts/turnstile.js"></script>
+		<script src="scripts/validation.js"></script>
 		<style>
 			.main {
 				min-height: 100vh;
@@ -112,7 +113,12 @@
 							class="form-control"
 							placeholder="Enter your username..."
 							required
+							minlength="3"
+							maxlength="30"
+							pattern="^[a-zA-Z0-9_]+$"
+							title="Username must be 3-30 characters, letters, numbers, and underscores only"
 						/>
+						<span class="main__form-error" id="usernameResidential-error"></span>
 						<label for="firstNameResidential" class="form-label"
 							>First Name</label
 						>
@@ -122,7 +128,12 @@
 							id="firstNameResidential"
 							placeholder="Enter your first name as it appears on your ID..."
 							required
+							minlength="1"
+							maxlength="50"
+							pattern="^[a-zA-Z\s\-']+$"
+							title="First name must be 1-50 characters, letters, spaces, hyphens, and apostrophes only"
 						/>
+						<span class="main__form-error" id="firstNameResidential-error"></span>
 						<label for="middleNameResidential" class="form-label"
 							>Middle Name</label
 						>
@@ -131,7 +142,11 @@
 							class="form-control"
 							id="middleNameResidential"
 							placeholder="Enter your middle name as it appears on your ID..."
+							maxlength="50"
+							pattern="^[a-zA-Z\s\-']*$"
+							title="Middle name must be 0-50 characters"
 						/>
+						<span class="main__form-error" id="middleNameResidential-error"></span>
 						<label for="lastNameResidential" class="form-label"
 							>Last Name</label
 						>
@@ -141,7 +156,12 @@
 							id="lastNameResidential"
 							placeholder="Enter your last name as it appears on your ID..."
 							required
+							minlength="1"
+							maxlength="50"
+							pattern="^[a-zA-Z\s\-']+$"
+							title="Last name must be 1-50 characters, letters, spaces, hyphens, and apostrophes only"
 						/>
+						<span class="main__form-error" id="lastNameResidential-error"></span>
 						<label for="phoneResidential" class="form-label"
 							>Phone Number</label
 						>
@@ -150,10 +170,14 @@
 							class="form-control"
 							id="phoneResidential"
 							required
-							pattern="[0-9]*"
+							minlength="10"
+							maxlength="15"
+							pattern="[0-9]{10,15}"
 							placeholder="1234567890"
+							title="Phone number must be 10-15 digits"
 							onkeypress="return event.charCode >= 48 && event.charCode <= 57"
 						/>
+						<span class="main__form-error" id="phoneResidential-error"></span>
 						<label for="country" class="form-label">Country</label>
 						<select class="form-control" id="country" required>
 							<option value="">Select a country</option>
@@ -220,6 +244,7 @@
 							<option value="UA">Ukraine</option>
 							<option value="IS">Iceland</option>
 						</select>
+						<span class="main__form-error" id="country-error"></span>
 						<label for="address1Residential" class="form-label"
 							>Address Line 1</label
 						>
@@ -229,11 +254,25 @@
 							id="address1Residential"
 							placeholder="123 Any St (Street - as it appears on your ID...)"
 							required
+							minlength="5"
+							maxlength="100"
+							pattern="^[a-zA-Z0-9\s\.\,\-\#\']+$"
+							title="Address must be 5-100 characters"
 						/>
+						<span class="main__form-error" id="address1Residential-error"></span>
 						<label for="address2Residential" class="form-label"
 							>Address Line 2 (APT#/Unit)</label
 						>
-						<input type="text" class="form-control" id="address2Residential" placeholder="APT# (as it appears on your ID...)" />
+						<input
+							type="text"
+							class="form-control"
+							id="address2Residential"
+							placeholder="APT# (as it appears on your ID...)"
+							maxlength="50"
+							pattern="^[a-zA-Z0-9\s\.\,\-\#\']*$"
+							title="Address line 2 must be 0-50 characters"
+						/>
+						<span class="main__form-error" id="address2Residential-error"></span>
 						<label for="cityResidential" class="form-label">City</label>
 						<input
 							type="text"
@@ -241,12 +280,18 @@
 							id="cityResidential"
 							placeholder="Cupertino (City - as it appears on your ID...)"
 							required
+							minlength="2"
+							maxlength="50"
+							pattern="^[a-zA-Z\s\-\']+$"
+							title="City must be 2-50 characters"
 						/>
+						<span class="main__form-error" id="cityResidential-error"></span>
 						<label for="state" class="form-label">State</label>
 						<select class="form-control" id="state" name="state" required>
 							<option value="">Select a state</option>
 							<!-- State options will be populated dynamically based on selected country -->
 						</select>
+						<span class="main__form-error" id="state-error"></span>
 						<label for="zipCodeResidential" class="form-label">Zip Code</label>
 						<input
 							type="text"
@@ -254,7 +299,12 @@
 							id="zipCodeResidential"
 							placeholder="94015 (Zip Code - as it appears on your ID...)"
 							required
+							minlength="3"
+							maxlength="10"
+							pattern="^[a-zA-Z0-9\s\-]+$"
+							title="Zip code must be 3-10 characters"
 						/>
+						<span class="main__form-error" id="zipCodeResidential-error"></span>
 						<label for="emailResidential" class="form-label"
 							>Email
 							<a href="#mainSection" class="main__text-hyperlink"
@@ -268,6 +318,7 @@
 							required
 							readonly
 						/>
+						<span class="main__form-error" id="emailResidential-error"></span>
 						<label for="stripeCustomerIdResidential">Stripe Customer ID</label>
 						<div class="input-group">
 							<input
@@ -323,7 +374,16 @@
 				<form id="registerFormBusiness" class="main__form">
 					<div class="form-group">
 						<label for="dbaNameBusiness" class="form-label">DBA Name</label>
-						<input type="text" class="form-control" id="dbaNameBusiness" placeholder="Enter your DBA name (as on LLC-5.5/147C...)" />
+						<input
+							type="text"
+							class="form-control"
+							id="dbaNameBusiness"
+							placeholder="Enter your DBA name (as on LLC-5.5/147C...)"
+							maxlength="100"
+							pattern="^[a-zA-Z0-9\s\.\,\-\&\']*$"
+							title="DBA name must be 0-100 characters"
+						/>
+						<span class="main__form-error" id="dbaNameBusiness-error"></span>
 						<label for="businessCountry" class="form-label"
 							>Business Country</label
 						>
@@ -392,6 +452,7 @@
 							<option value="UA">Ukraine</option>
 							<option value="IS">Iceland</option>
 						</select>
+						<span class="main__form-error" id="businessCountry-error"></span>
 						<label for="businessAddress1Business" class="form-label"
 							>Business Address Line 1</label
 						>
@@ -400,7 +461,11 @@
 							class="form-control"
 							placeholder="1 Cupertino Pkwy"
 							id="businessAddress1Business"
+							maxlength="100"
+							pattern="^[a-zA-Z0-9\s\.\,\-\#\']*$"
+							title="Address must be 0-100 characters"
 						/>
+						<span class="main__form-error" id="businessAddress1Business-error"></span>
 						<label for="businessAddress2Business" class="form-label"
 							>Business Address Line 2 (Unit#)</label
 						>
@@ -409,16 +474,30 @@
 							class="form-control"
 							placeholder="Unit 4 (Suite/Unit # optional)"
 							id="businessAddress2Business"
+							maxlength="50"
+							pattern="^[a-zA-Z0-9\s\.\,\-\#\']*$"
+							title="Address line 2 must be 0-50 characters"
 						/>
+						<span class="main__form-error" id="businessAddress2Business-error"></span>
 						<label for="businessCityBusiness" class="form-label"
 							>Business City</label
 						>
-						<input type="text" class="form-control" id="businessCityBusiness" placeholder="Cupertino" />
+						<input
+							type="text"
+							class="form-control"
+							id="businessCityBusiness"
+							placeholder="Cupertino"
+							maxlength="50"
+							pattern="^[a-zA-Z\s\-\']*$"
+							title="City must be 0-50 characters"
+						/>
+						<span class="main__form-error" id="businessCityBusiness-error"></span>
 						<label for="businessState" class="form-label">Business State</label>
 						<select class="form-control" id="businessState">
 							<option value="">Select a state</option>
 							<!-- State options dynamically populated based on Business Country -->
 						</select>
+						<span class="main__form-error" id="businessState-error"></span>
 						<label for="businessZipCodeBusiness" class="form-label"
 							>Business Zip Code</label
 						>
@@ -427,7 +506,11 @@
 							class="form-control"
 							placeholder="94015"
 							id="businessZipCodeBusiness"
+							maxlength="10"
+							pattern="^[a-zA-Z0-9\s\-]*$"
+							title="Zip code must be 0-10 characters"
 						/>
+						<span class="main__form-error" id="businessZipCodeBusiness-error"></span>
 						<label for="usernameBusiness" class="form-label">Username</label>
 						<input
 							type="text"
@@ -436,7 +519,12 @@
 							class="form-control"
 							placeholder="Enter your username..."
 							required
+							minlength="3"
+							maxlength="30"
+							pattern="^[a-zA-Z0-9_]+$"
+							title="Username must be 3-30 characters, letters, numbers, and underscores only"
 						/>
+						<span class="main__form-error" id="usernameBusiness-error"></span>
 						<label for="firstNameBusiness" class="form-label">First Name</label>
 						<input
 							type="text"
@@ -444,11 +532,25 @@
 							id="firstNameBusiness"
 							placeholder="Enter your first name (as it appears on your ID...)"
 							required
+							minlength="1"
+							maxlength="50"
+							pattern="^[a-zA-Z\s\-']+$"
+							title="First name must be 1-50 characters, letters, spaces, hyphens, and apostrophes only"
 						/>
+						<span class="main__form-error" id="firstNameBusiness-error"></span>
 						<label for="middleNameBusiness" class="form-label"
 							>Middle Name</label
 						>
-						<input type="text" class="form-control" id="middleNameBusiness" placeholder="Enter your middle name (as it appears on your ID...)" />
+						<input
+							type="text"
+							class="form-control"
+							id="middleNameBusiness"
+							placeholder="Enter your middle name (as it appears on your ID...)"
+							maxlength="50"
+							pattern="^[a-zA-Z\s\-']*$"
+							title="Middle name must be 0-50 characters"
+						/>
+						<span class="main__form-error" id="middleNameBusiness-error"></span>
 						<label for="lastNameBusiness" class="form-label">Last Name</label>
 						<input
 							type="text"
@@ -456,17 +558,26 @@
 							id="lastNameBusiness"
 							placeholder="Enter your last name (as it appears on your ID...)"
 							required
+							minlength="1"
+							maxlength="50"
+							pattern="^[a-zA-Z\s\-']+$"
+							title="Last name must be 1-50 characters, letters, spaces, hyphens, and apostrophes only"
 						/>
+						<span class="main__form-error" id="lastNameBusiness-error"></span>
 						<label for="phoneBusiness" class="form-label">Phone Number</label>
 						<input
 							type="tel"
 							class="form-control"
 							id="phoneBusiness"
 							required
-							pattern="[0-9]*"
+							minlength="10"
+							maxlength="15"
+							pattern="[0-9]{10,15}"
 							placeholder="1234567890"
+							title="Phone number must be 10-15 digits"
 							onkeypress="return event.charCode >= 48 && event.charCode <= 57"
 						/>
+						<span class="main__form-error" id="phoneBusiness-error"></span>
 						<label for="countryBusiness" class="form-label">Country</label>
 						<select class="form-control" id="countryBusiness" required>
 							<option value="">Select a country</option>
@@ -533,6 +644,7 @@
 							<option value="UA">Ukraine</option>
 							<option value="IS">Iceland</option>
 						</select>
+						<span class="main__form-error" id="countryBusiness-error"></span>
 						<label for="address1Business" class="form-label"
 							>Address Line 1</label
 						>
@@ -542,11 +654,25 @@
 							id="address1Business"
 							placeholder="123 Any St (Street - as it appears on your ID...)"
 							required
+							minlength="5"
+							maxlength="100"
+							pattern="^[a-zA-Z0-9\s\.\,\-\#\']+$"
+							title="Address must be 5-100 characters"
 						/>
+						<span class="main__form-error" id="address1Business-error"></span>
 						<label for="address2Business" class="form-label"
 							>Address Line 2 (APT#/Unit)</label
 						>
-						<input type="text" class="form-control" id="address2Business" placeholder="APT# (as it appears on your ID...)" />
+						<input
+							type="text"
+							class="form-control"
+							id="address2Business"
+							placeholder="APT# (as it appears on your ID...)"
+							maxlength="50"
+							pattern="^[a-zA-Z0-9\s\.\,\-\#\']*$"
+							title="Address line 2 must be 0-50 characters"
+						/>
+						<span class="main__form-error" id="address2Business-error"></span>
 						<label for="cityBusiness" class="form-label">City</label>
 						<input
 							type="text"
@@ -554,7 +680,12 @@
 							id="cityBusiness"
 							placeholder="Cupertino (City - as it appears on your ID...)"
 							required
+							minlength="2"
+							maxlength="50"
+							pattern="^[a-zA-Z\s\-\']+$"
+							title="City must be 2-50 characters"
 						/>
+						<span class="main__form-error" id="cityBusiness-error"></span>
 						<label for="stateBusiness" class="form-label">State</label>
 						<select
 							class="form-control"
@@ -565,6 +696,7 @@
 							<option value="">Select a state</option>
 							<!-- State options will be populated dynamically based on selected country -->
 						</select>
+						<span class="main__form-error" id="stateBusiness-error"></span>
 						<label for="zipCodeBusiness" class="form-label">Zip Code</label>
 						<input
 							type="text"
@@ -572,7 +704,12 @@
 							id="zipCodeBusiness"
 							placeholder="94015 (Zip Code - as it appears on your ID...)"
 							required
+							minlength="3"
+							maxlength="10"
+							pattern="^[a-zA-Z0-9\s\-]+$"
+							title="Zip code must be 3-10 characters"
 						/>
+						<span class="main__form-error" id="zipCodeBusiness-error"></span>
 						<label for="email" class="form-label"
 							>Email
 							<a href="#mainSection" class="main__text-hyperlink"
@@ -586,6 +723,7 @@
 							required
 							readonly
 						/>
+						<span class="main__form-error" id="emailBusiness-error"></span>
 						<label for="stripeCustomerIdBusiness">Stripe Customer ID</label>
 						<div class="input-group">
 							<input

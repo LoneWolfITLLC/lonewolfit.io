@@ -210,3 +210,24 @@ body.dark-mode .main__form .form-check-input:checked:hover:not(:disabled) {
 body.dark-mode #passwordStrengthContainer.progress {
 	background: #23272a; /* Dark background for password strength bar in dark mode. */
 }
+
+/* Dark mode form validation error styles */
+body.dark-mode .main__form-error {
+	color: rgba(255, 80, 80, 0.9); /* Bright red for error text in dark mode. */
+	text-shadow: 0 0 8px rgba(255, 0, 0, 0.4); /* Subtle red glow for error text. */
+}
+
+body.dark-mode .main__form .form-control_type_error {
+	border-color: rgba(255, 80, 80, 0.8) !important; /* Red border for invalid inputs in dark mode. */
+	box-shadow: 0 0 8px rgba(255, 0, 0, 0.3); /* Red glow for invalid inputs. */
+}
+
+body.dark-mode .main__form .form-control_type_error:hover {
+	border-color: rgba(255, 100, 100, 0.9) !important; /* Brighter red border on hover. */
+	box-shadow: 0 0 12px rgba(255, 0, 0, 0.4); /* Stronger red glow on hover. */
+}
+
+body.dark-mode .main__form .form-control_type_error:focus {
+	border-color: rgba(255, 100, 100, 1) !important; /* Brightest red border on focus. */
+	box-shadow: 0 0 16px rgba(255, 0, 0, 0.5); /* Strongest red glow on focus. */
+}

@@ -30,6 +30,7 @@
 		<script src="scripts/modals.js"></script>
 		<script src="scripts/newPasswordField.js"></script>
 		<script src="scripts/resetPassword.js"></script>
+		<script src="scripts/validation.js"></script>
 		<style>
 			.main {
 				min-height: 100vh;
@@ -65,16 +66,18 @@
 				<form id="resetForm" class="main__form main__item-centered">
 					<div class="form-group">
 						<input
-							type="text"
+							type="email"
 							id="email"
 							class="form-control"
 							placeholder="Enter your email address..."
 							required
-						/><br /><br />
+							maxlength="100"
+						/>
+						<span class="main__form-error" id="email-error"></span>
 						<button
 							type="submit"
 							class="btn btn-primary main__item-centered"
-							style="margin-top: -30px"
+							style="margin-top: 10px"
 							disabled
 						>
 							Send Verification Code
@@ -99,7 +102,13 @@
 							id="verificationCode"
 							class="form-control"
 							placeholder="Enter the verification code...123456"
+							required
+							minlength="6"
+							maxlength="6"
+							pattern="[0-9]{6}"
+							title="Verification code must be 6 digits"
 						/>
+						<span class="main__form-error" id="verificationCode-error"></span>
 						<label for="password" class="form-label">New Password</label>
 						<div class="input-group">
 							<input
@@ -109,6 +118,8 @@
 								placeholder="Create a secure password..."
 								style="height: inherit"
 								required
+								minlength="10"
+								maxlength="16"
 							/>
 							<button
 								type="button"
@@ -130,6 +141,7 @@
 								<i class="fa fa-eye" aria-hidden="true"></i>
 							</button>
 						</div>
+						<span class="main__form-error" id="password-error"></span>
 						<small class="main__text-small main__item-centered"
 							>Password must be at least 10-16 characters long, contain a
 							lowercase and uppercase letter, a number, and a special
@@ -155,7 +167,10 @@
 							class="form-control"
 							placeholder="Re-enter your password..."
 							required
+							minlength="10"
+							maxlength="16"
 						/>
+						<span class="main__form-error" id="passwordConfirm-error"></span>
 						<button
 							type="submit"
 							class="btn btn-primary main__item-centered"
