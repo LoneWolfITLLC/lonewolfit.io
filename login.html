@@ -124,7 +124,7 @@
 							required
 							minlength="10"
 							maxlength="50"
-							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{10,50}$"
+							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9_]).{10,50}$"
 						/>
 						<span class="main__form-error" id="password-error"></span>
 						<label
