@@ -125,7 +125,7 @@
 							required
 							minlength="1"
 							maxlength="50"
-							pattern="^[a-zA-Z\s\-']+$"
+							pattern="^[a-zA-Z \-']+$"
 							title="First name must be 1-50 characters, letters, spaces, hyphens, and apostrophes only"
 						/>
 						<span class="main__form-error" id="firstNameResidential-error"></span>
@@ -138,7 +138,7 @@
 							id="middleNameResidential"
 							placeholder="Your legal middle name as it appears on your ID..."
 							maxlength="50"
-							pattern="^[a-zA-Z\s\-']*$"
+							pattern="^[a-zA-Z \-']*$"
 							title="Middle name must be 0-50 characters, letters, spaces, hyphens, and apostrophes only"
 						/>
 						<span class="main__form-error" id="middleNameResidential-error"></span>
@@ -153,7 +153,7 @@
 							required
 							minlength="1"
 							maxlength="50"
-							pattern="^[a-zA-Z\s\-']+$"
+							pattern="^[a-zA-Z \-']+$"
 							title="Last name must be 1-50 characters, letters, spaces, hyphens, and apostrophes only"
 						/>
 						<span class="main__form-error" id="lastNameResidential-error"></span>
@@ -251,7 +251,7 @@
 							required
 							minlength="5"
 							maxlength="100"
-							pattern="^[a-zA-Z0-9\s\.\,\-\#\']+$"
+							pattern="^[a-zA-Z0-9 .,#'\-]+$"
 							title="Address must be 5-100 characters, letters, numbers, spaces, and common punctuation only"
 						/>
 						<span class="main__form-error" id="address1Residential-error"></span>
@@ -264,7 +264,7 @@
 							id="address2Residential"
 							placeholder="Apt 4B (APT # as it appears on your ID...)"
 							maxlength="50"
-							pattern="^[a-zA-Z0-9\s\.\,\-\#\']*$"
+							pattern="^[a-zA-Z0-9 .,#'\-]*$"
 							title="Address line 2 must be 0-50 characters, letters, numbers, spaces, and common punctuation only"
 						/>
 						<span class="main__form-error" id="address2Residential-error"></span>
@@ -277,7 +277,7 @@
 							required
 							minlength="2"
 							maxlength="50"
-							pattern="^[a-zA-Z\s\-\']+$"
+							pattern="^[a-zA-Z '\-]+$"
 							title="City must be 2-50 characters, letters, spaces, hyphens, and apostrophes only"
 						/>
 						<span class="main__form-error" id="cityResidential-error"></span>
@@ -296,7 +296,7 @@
 							required
 							minlength="3"
 							maxlength="10"
-							pattern="^[a-zA-Z0-9\s\-]+$"
+							pattern="^[a-zA-Z0-9 \-]+$"
 							title="Zip code must be 3-10 characters"
 						/>
 						<span class="main__form-error" id="zipCodeResidential-error"></span>
@@ -316,7 +316,7 @@
 							class="form-control"
 							id="passwordResidential"
 							placeholder="Create a secure password..."
-							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{10,50}$"
+							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9_]).{10,50}$"
 							minlength="10"
 							maxlength="50"
 							required
@@ -346,7 +346,7 @@
 							class="form-control"
 							id="confirmPasswordResidential"
 							placeholder="Re-enter your password..."
-							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{10,50}$"
+							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9_]).{10,50}$"
 							minlength="10"
 							maxlength="50"
 							required
@@ -395,7 +395,7 @@
 							id="dbaNameBusiness"
 							placeholder="Your DBA name as it appears on your LLC-5.5/147C..."
 							maxlength="100"
-							pattern="^[a-zA-Z0-9\s\.\,\-\&\']*$"
+							pattern="^[a-zA-Z0-9 .,&'\-]*$"
 							title="DBA name must be 0-100 characters"
 						/>
 						<span class="main__form-error" id="dbaNameBusiness-error"></span>
@@ -477,7 +477,7 @@
 							id="businessAddress1Business"
 							placeholder="123 Main St"
 							maxlength="100"
-							pattern="^[a-zA-Z0-9\s\.\,\-\#\']*$"
+							pattern="^[a-zA-Z0-9 .,#'\-]*$"
 							title="Address must be 0-100 characters"
 						/>
 						<span class="main__form-error" id="businessAddress1Business-error"></span>
@@ -490,7 +490,7 @@
 							id="businessAddress2Business"
 							placeholder="Suite 100 (Unit #)"
 							maxlength="50"
-							pattern="^[a-zA-Z0-9\s\.\,\-\#\']*$"
+							pattern="^[a-zA-Z0-9 .,#'\-]*$"
 							title="Address line 2 must be 0-50 characters"
 						/>
 						<span class="main__form-error" id="businessAddress2Business-error"></span>
@@ -503,7 +503,7 @@
 							id="businessCityBusiness"
 							placeholder="Anytown"
 							maxlength="50"
-							pattern="^[a-zA-Z\s\-\']*$"
+							pattern="^[a-zA-Z '\-]*$"
 							title="City must be 0-50 characters"
 						/>
 						<span class="main__form-error" id="businessCityBusiness-error"></span>
@@ -522,7 +522,7 @@
 							id="businessZipCodeBusiness"
 							placeholder="12345"
 							maxlength="10"
-							pattern="^[a-zA-Z0-9\s\-]*$"
+							pattern="^[a-zA-Z0-9 \-]*$"
 							title="Zip code must be 0-10 characters"
 						/>
 						<span class="main__form-error" id="businessZipCodeBusiness-error"></span>
@@ -549,7 +549,7 @@
 							required
 							minlength="1"
 							maxlength="50"
-							pattern="^[a-zA-Z\s\-']+$"
+							pattern="^[a-zA-Z \-']+$"
 							title="First name must be 1-50 characters, letters, spaces, hyphens, and apostrophes only"
 						/>
 						<span class="main__form-error" id="firstNameBusiness-error"></span>
@@ -562,7 +562,7 @@
 							id="middleNameBusiness"
 							placeholder="Your legal middle name as it appears on your ID..."
 							maxlength="50"
-							pattern="^[a-zA-Z\s\-']*$"
+							pattern="^[a-zA-Z \-']*$"
 							title="Middle name must be 0-50 characters"
 						/>
 						<span class="main__form-error" id="middleNameBusiness-error"></span>
@@ -575,7 +575,7 @@
 							required
 							minlength="1"
 							maxlength="50"
-							pattern="^[a-zA-Z\s\-']+$"
+							pattern="^[a-zA-Z \-']+$"
 							title="Last name must be 1-50 characters, letters, spaces, hyphens, and apostrophes only"
 						/>
 						<span class="main__form-error" id="lastNameBusiness-error"></span>
@@ -671,7 +671,7 @@
 							required
 							minlength="5"
 							maxlength="100"
-							pattern="^[a-zA-Z0-9\s\.\,\-\#\']+$"
+							pattern="^[a-zA-Z0-9 .,#'\-]+$"
 							title="Address must be 5-100 characters"
 						/>
 						<span class="main__form-error" id="address1Business-error"></span>
@@ -684,7 +684,7 @@
 							id="address2Business"
 							placeholder="APT 1B (Unit # - as it appears on your ID...)"
 							maxlength="50"
-							pattern="^[a-zA-Z0-9\s\.\,\-\#\']*$"
+							pattern="^[a-zA-Z0-9 .,#'\-]*$"
 							title="Address line 2 must be 0-50 characters"
 						/>
 						<span class="main__form-error" id="address2Business-error"></span>
@@ -697,7 +697,7 @@
 							required
 							minlength="2"
 							maxlength="50"
-							pattern="^[a-zA-Z\s\-\']+$"
+							pattern="^[a-zA-Z '\-]+$"
 							title="City must be 2-50 characters"
 						/>
 						<span class="main__form-error" id="cityBusiness-error"></span>
@@ -721,7 +721,7 @@
 							required
 							minlength="3"
 							maxlength="10"
-							pattern="^[a-zA-Z0-9\s\-]+$"
+							pattern="^[a-zA-Z0-9 \-]+$"
 							title="Zip code must be 3-10 characters"
 						/>
 						<span class="main__form-error" id="zipCodeBusiness-error"></span>
@@ -744,7 +744,7 @@
 							required
 							minlength="10"
 							maxlength="50"
-							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{10,50}$"
+							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9_]).{10,50}$"
 						/>
 						<span class="main__form-error" id="passwordBusiness-error"></span>
 						<small class="main__text-small main__item-centered"
@@ -774,7 +774,7 @@
 							required
 							minlength="10"
 							maxlength="50"
-							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{10,50}$"
+							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9_]).{10,50}$"
 						/>
 						<span class="main__form-error" id="confirmPasswordBusiness-error"></span>
 						<label>
