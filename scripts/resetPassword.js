@@ -34,11 +34,33 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll("#password").forEach((input) => {
     input.addEventListener("input", function () {
       meterPasswordStrength(this);
+      // HTML5 Constraint Validation API
+      if (!doesPasswordMeetCriteria(this.value)) {
+        this.setCustomValidity("Password must be 10-50 characters with uppercase, lowercase, digit, and special character.");
+      } else {
+        this.setCustomValidity("");
+      }
+      // Also revalidate confirm password field when password changes
+      const confirmInput = document.getElementById("passwordConfirm");
+      if (confirmInput) {
+        if (confirmInput.value && confirmInput.value !== this.value) {
+          confirmInput.setCustomValidity("Passwords do not match.");
+        } else {
+          confirmInput.setCustomValidity("");
+        }
+      }
     });
   });
   document.querySelectorAll("#passwordConfirm").forEach((input) => {
     input.addEventListener("input", function () {
       meterPasswordStrength(this);
+      // HTML5 Constraint Validation API
+      const passwordInput = document.getElementById("password");
+      if (passwordInput && this.value !== passwordInput.value) {
+        this.setCustomValidity("Passwords do not match.");
+      } else {
+        this.setCustomValidity("");
+      }
     });
   });
   const resetSection = document.getElementById("resetSection");

@@ -8,14 +8,69 @@ window.addEventListener("authChecked", function () {
 	document.querySelectorAll("#passwordResidential").forEach((input) => {
 		input.addEventListener("input", function () {
 			meterPasswordStrength(this);
+			// HTML5 Constraint Validation API
+			if (!doesPasswordMeetCriteria(this.value)) {
+				this.setCustomValidity("Password must be 10-50 characters with uppercase, lowercase, digit, and special character.");
+			} else {
+				this.setCustomValidity("");
+			}
+			// Also revalidate confirm password field when password changes
+			const confirmInput = document.getElementById("confirmPasswordResidential");
+			if (confirmInput) {
+				if (confirmInput.value && confirmInput.value !== this.value) {
+					confirmInput.setCustomValidity("Passwords do not match.");
+				} else {
+					confirmInput.setCustomValidity("");
+				}
+			}
 		});
 	});
 	// Query all elements with id="password" (not recommended, but works)
 	document.querySelectorAll("#passwordBusiness").forEach((input) => {
 		input.addEventListener("input", function () {
 			meterPasswordStrength(this);
+			// HTML5 Constraint Validation API
+			if (!doesPasswordMeetCriteria(this.value)) {
+				this.setCustomValidity("Password must be 10-50 characters with uppercase, lowercase, digit, and special character.");
+			} else {
+				this.setCustomValidity("");
+			}
+			// Also revalidate confirm password field when password changes
+			const confirmInput = document.getElementById("confirmPasswordBusiness");
+			if (confirmInput) {
+				if (confirmInput.value && confirmInput.value !== this.value) {
+					confirmInput.setCustomValidity("Passwords do not match.");
+				} else {
+					confirmInput.setCustomValidity("");
+				}
+			}
 		});
 	});
+
+	// Add validation for confirm password fields
+	const confirmPasswordResidential = document.getElementById("confirmPasswordResidential");
+	if (confirmPasswordResidential) {
+		confirmPasswordResidential.addEventListener("input", function () {
+			const passwordInput = document.getElementById("passwordResidential");
+			if (passwordInput && this.value !== passwordInput.value) {
+				this.setCustomValidity("Passwords do not match.");
+			} else {
+				this.setCustomValidity("");
+			}
+		});
+	}
+
+	const confirmPasswordBusiness = document.getElementById("confirmPasswordBusiness");
+	if (confirmPasswordBusiness) {
+		confirmPasswordBusiness.addEventListener("input", function () {
+			const passwordInput = document.getElementById("passwordBusiness");
+			if (passwordInput && this.value !== passwordInput.value) {
+				this.setCustomValidity("Passwords do not match.");
+			} else {
+				this.setCustomValidity("");
+			}
+		});
+	}
 
 	// Handle form submission for residential registration
 	document
