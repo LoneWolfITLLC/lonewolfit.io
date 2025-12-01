@@ -120,10 +120,20 @@ document.addEventListener("DOMContentLoaded", function () {
             );
           }
           else alertModal(text);
+          // Keep submit button enabled after server error
+          const form = document.getElementById("resetForm");
+          if (form && typeof notifyFormSubmissionError === "function") {
+            notifyFormSubmissionError(form);
+          }
         }
       } catch (error) {
         hideLoading();
         alertModal("Error: " + error.message);
+        // Keep submit button enabled after error
+        const form = document.getElementById("resetForm");
+        if (form && typeof notifyFormSubmissionError === "function") {
+          notifyFormSubmissionError(form);
+        }
       }
     });
   document
@@ -180,10 +190,20 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 3000);
             return;
           } else alertModal(text);
+          // Keep submit button enabled after server error
+          const form = document.getElementById("newPasswordForm");
+          if (form && typeof notifyFormSubmissionError === "function") {
+            notifyFormSubmissionError(form);
+          }
         }
       } catch (error) {
         hideLoading();
         alertModal("Error: " + error.message);
+        // Keep submit button enabled after error
+        const form = document.getElementById("newPasswordForm");
+        if (form && typeof notifyFormSubmissionError === "function") {
+          notifyFormSubmissionError(form);
+        }
       }
     });
 }); // <-- Add this closing brace to end the DOMContentLoaded event listener

@@ -212,10 +212,18 @@ window.addEventListener("authChecked", function () {
 						result ||
 						"Registration failed. Please try again."
 				);
+				// Keep submit button enabled after server error
+				if (form && typeof notifyFormSubmissionError === "function") {
+					notifyFormSubmissionError(form);
+				}
 			}
 		} catch (err) {
 			hideLoading();
 			alertModal("An error occurred. Please try again later.");
+			// Keep submit button enabled after error
+			if (form && typeof notifyFormSubmissionError === "function") {
+				notifyFormSubmissionError(form);
+			}
 		}
 	}
 
