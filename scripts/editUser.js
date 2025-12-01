@@ -579,13 +579,10 @@ function handleEditUserSubmit(formName) {
 			hideLoading();
 			if (response.ok) {
 				const successJson = await response.json();
-				if (successJson.turnstileTokenOk) {
-					formData.append("turnstileTokenOk", successJson.turnstileTokenOk);
-				}
 				if (formName === "registerFormBusiness") {
-					updateStripeCustomerDetails("business");
+					updateStripeCustomerDetails("business", ENVIRONMENT === "production" ? successJson.turnstileTokenOk : null);
 				} else {
-					updateStripeCustomerDetails("residential");
+					updateStripeCustomerDetails("residential", ENVIRONMENT === "production" ? successJson.turnstileTokenOk : null);
 				}
 				alertModal("User updated successfully!");
 			} else {
@@ -625,7 +622,7 @@ function handleEditUserSubmit(formName) {
 		});
 }
 
-function updateStripeCustomerDetails(formType) {
+function updateStripeCustomerDetails(formType, turnstileTokenOk) {
 	const form =
 		formType === "business"
 			? document.getElementById("registerFormBusiness")
@@ -656,6 +653,8 @@ function updateStripeCustomerDetails(formType) {
 	}
 
 	data.address = parseAddress(data.address);
+
+	data.turnstileTokenOk = turnstileTokenOk;
 
 	const token = sessionStorage.getItem("jwt");
 	showLoading();
