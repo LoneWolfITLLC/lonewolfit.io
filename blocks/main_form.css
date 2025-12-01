@@ -113,14 +113,18 @@
 
 /* Form validation error styles */
 .main__form-error {
-	display: block; /* Makes error span a block element. */
+	display: none; /* Hidden by default when empty. */
 	color: rgba(255, 0, 0, 0.7); /* Red color for error text. */
 	font-weight: 500; /* Medium weight for error text. */
 	font-size: 0.875rem; /* Slightly smaller font size for error messages. */
 	line-height: 1.2; /* Tight line height for error messages. */
 	margin-top: -0.8rem; /* Pulls error message closer to input. */
 	margin-bottom: 0.8rem; /* Space below error message. */
-	min-height: 1.1rem; /* Minimum height to prevent layout shift. */
+}
+
+/* Show error span only when it has content */
+.main__form-error:not(:empty) {
+	display: block; /* Shows error span when it has text content. */
 }
 
 .main__form .form-control_type_error {

@@ -34,6 +34,9 @@ const showInputError = (formElement, inputElement, errorText, config) => {
 	);
 	if (errorMsgElement) {
 		errorMsgElement.textContent = errorText;
+	} else if (inputElement.id) {
+		// Log a warning if error element is missing for debugging
+		console.warn(`Missing error span for input: ${inputElement.id}`);
 	}
 	inputElement.classList.add(config.inputErrorClass);
 };
@@ -72,10 +75,16 @@ const setEventListeners = (formElement, config) => {
 	}
 
 	inputList.forEach((inputElement) => {
+		// Validate on input for real-time feedback
 		inputElement.addEventListener("input", () => {
 			if (buttonElement) {
 				toggleButtonState(inputList, buttonElement);
 			}
+			checkInputValidity(formElement, inputElement, config);
+		});
+
+		// Also validate on blur for better UX when tabbing through fields
+		inputElement.addEventListener("blur", () => {
 			checkInputValidity(formElement, inputElement, config);
 		});
 	});
