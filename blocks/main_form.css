@@ -110,3 +110,32 @@
 	gap: 0.5rem; /* Space between labels. */
 	flex-wrap: nowrap; /* Prevents labels from wrapping. */
 }
+
+/* Form validation error styles */
+.main__form-error {
+	display: none; /* Hidden by default when empty. */
+	color: rgba(255, 0, 0, 0.7); /* Red color for error text. */
+	font-weight: 500; /* Medium weight for error text. */
+	font-size: 0.875rem; /* Slightly smaller font size for error messages. */
+	line-height: 1.2; /* Tight line height for error messages. */
+	margin-top: -0.8rem; /* Pulls error message closer to input. */
+	margin-bottom: 0.8rem; /* Space below error message. */
+}
+
+/* Show error span only when it has content */
+.main__form-error:not(:empty) {
+	display: block; /* Shows error span when it has text content. */
+}
+
+.main__form .form-control_type_error {
+	border-color: rgba(255, 0, 0, 0.6) !important; /* Red border for invalid inputs. */
+}
+
+.main__form .form-control_type_error:hover {
+	border-color: rgba(255, 0, 0, 0.8) !important; /* Darker red border on hover. */
+}
+
+.main__form .form-control_type_error:focus {
+	border-color: rgba(255, 0, 0, 0.8) !important; /* Darker red border on focus. */
+	box-shadow: 0 0 8px rgba(255, 0, 0, 0.3); /* Red glow on focus. */
+}

@@ -43,6 +43,7 @@
 		<script src="scripts/characterCount.js"></script>
 		<script src="scripts/turnstile.js"></script>
 		<script src="scripts/contactForm.js"></script>
+		<script src="scripts/validation.js"></script>
 		<style>
 			.main {
 				min-height: 100vh;
@@ -345,23 +346,34 @@
 							class="form-control"
 							placeholder="Enter your name..."
 							required
+							minlength="2"
+							maxlength="100"
+							pattern="^[a-zA-Z\s\-']+$"
+							title="Name must be 2-100 characters, letters, spaces, hyphens, and apostrophes only"
 						/>
+						<span class="main__form-error" id="name-error"></span>
 						<label for="email">Email</label>
 						<input
 							type="email"
 							id="email"
 							class="form-control"
 							placeholder="Enter your email address..."
+							maxlength="100"
 						/>
+						<span class="main__form-error" id="email-error"></span>
 						<label for="phoneLoggedOut">Phone <span style="color:red;">*</span></label>
 						<input
 							type="tel"
 							id="phoneLoggedOut"
 							class="form-control"
-							pattern="[0-9]*"
 							placeholder="1234567890"
 							required
+							minlength="10"
+							maxlength="15"
+							pattern="[0-9]{10,15}"
+							title="Phone number must be 10-15 digits"
 						/>
+						<span class="main__form-error" id="phoneLoggedOut-error"></span>
 						<label for="messageLoggedOut">Message <span style="color:red;">*</span></label>
 						<textarea
 							id="messageLoggedOut"
@@ -369,7 +381,11 @@
 							rows="3"
 							placeholder="Type your message here..."
 							required
+							minlength="10"
+							maxlength="500"
+							title="Message must be 10-500 characters"
 						></textarea>
+						<span class="main__form-error" id="messageLoggedOut-error"></span>
 						<p class="main__text-character-count" id="characterCountLoggedOut">
 							0/500 characters
 						</p>
@@ -390,9 +406,13 @@
 							type="tel"
 							id="phone"
 							class="form-control"
-							pattern="[0-9]*"
 							placeholder="1234567890"
+							minlength="10"
+							maxlength="15"
+							pattern="[0-9]{10,15}"
+							title="Phone number must be 10-15 digits"
 						/>
+						<span class="main__form-error" id="phone-error"></span>
 						<label for="useAccountPhoneNumberCheckbox" style="margin-top: 0px;">
 							<input
 								type="checkbox"
@@ -409,7 +429,11 @@
 							rows="3"
 							placeholder="Type your message here..."
 							required
+							minlength="10"
+							maxlength="500"
+							title="Message must be 10-500 characters"
 						></textarea>
+						<span class="main__form-error" id="message-error"></span>
 						<p class="main__text-character-count" id="characterCountLoggedIn">
 							0/500 characters
 						</p>

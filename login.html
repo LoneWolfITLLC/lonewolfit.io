@@ -25,6 +25,7 @@
 		<script src="scripts/auth.js"></script>
 		<script src="scripts/modals.js"></script>
 		<script src="scripts/login.js"></script>
+		<script src="scripts/validation.js"></script>
 		<style>
 			.main {
 				min-height: 100vh;
@@ -110,7 +111,9 @@
 							class="form-control"
 							placeholder="Enter your email"
 							required
+							maxlength="100"
 						/>
+						<span class="main__form-error" id="email-error"></span>
 						<label for="password">Password:</label>
 						<input
 							type="password"
@@ -119,7 +122,11 @@
 							class="form-control"
 							placeholder="Enter your password"
 							required
+							minlength="10"
+							maxlength="16"
+							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{10,16}$"
 						/>
+						<span class="main__form-error" id="password-error"></span>
 						<label
 							onclick="window.location.href='reset.html' + window.location.search;"
 							class="main__text-hyperlink main__item-centered"
@@ -194,6 +201,7 @@
 						placeholder="Enter the verification code...123456"
 						required
 					/>
+					<span class="main__form-error" id="verificationCode-error"></span>
 					<button
 						type="submit"
 						class="btn btn-primary main__item-centered"

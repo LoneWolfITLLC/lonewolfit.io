@@ -97,12 +97,22 @@ window.addEventListener("authChecked", function () {
 							errorData ||
 							"Login failed! Please try again."
 					);
+					// Keep submit button enabled after server error
+					const form = document.getElementById("emaillogin");
+					if (form && typeof notifyFormSubmissionError === "function") {
+						notifyFormSubmissionError(form);
+					}
 				}
 			} catch (error) {
 				tempEmail = null;
 				hideLoading();
 				console.error("Error logging in:", error);
 				alertModal("Login failed due to network error: " + error.message);
+				// Keep submit button enabled after network error
+				const form = document.getElementById("emaillogin");
+				if (form && typeof notifyFormSubmissionError === "function") {
+					notifyFormSubmissionError(form);
+				}
 			}
 		});
 

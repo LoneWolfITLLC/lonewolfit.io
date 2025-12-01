@@ -92,6 +92,10 @@ window.addEventListener("authChecked", function () {
           return;
         }
         alertModal(data.message || "An error occurred. Please try again.");
+        // Keep submit button enabled after server error
+        if (form && typeof notifyFormSubmissionError === "function") {
+          notifyFormSubmissionError(form);
+        }
       }
     } catch (error) {
       hideLoading();
@@ -105,6 +109,10 @@ window.addEventListener("authChecked", function () {
 			try {
 				window.TurnstileHelper && window.TurnstileHelper.resetForForm(form);
 			} catch (e) {}
+      // Keep submit button enabled after error
+      if (form && typeof notifyFormSubmissionError === "function") {
+        notifyFormSubmissionError(form);
+      }
     }
   });
 });
