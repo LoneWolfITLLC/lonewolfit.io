@@ -63,6 +63,27 @@
 
 	function injectWrapperBeforeSubmit(form) {
 		if (!form) return null;
+		// Use typeof checks to avoid ReferenceError if ENVIRONMENT is not defined.
+		const _isDevEnv =
+			(typeof ENVIRONMENT !== "undefined" && ENVIRONMENT === "development") ||
+			(typeof window !== "undefined" && window.ENVIRONMENT === "development") ||
+			// fallback: treat localhost as development to avoid loading external widgets during local testing
+			(typeof window !== "undefined" &&
+				(window.location.hostname === "localhost" ||
+					window.location.hostname === "127.0.0.1"));
+
+		if (_isDevEnv) {
+			// Skip automatic rendering in development/local environments.
+			if (
+				typeof console !== "undefined" &&
+				typeof console.debug === "function"
+			) {
+				console.debug(
+					"TurnstileHelper: auto-init skipped in development/localhost"
+				);
+			}
+			return null;
+		}
 		const existing = form.querySelector(".cf-turnstile-wrapper");
 		if (existing) return existing;
 		const submitBtn = form.querySelector(
@@ -232,21 +253,50 @@
 
 	// Auto-init common contact forms when DOM ready or on custom event "authChecked"
 	function _autoInit() {
-		if(ENVIRONMENT === 'development') return; //skip auto-init during development
+		// Respect the environment flag (guarded) and also skip on localhost as a safe fallback.
+		// Use typeof checks to avoid ReferenceError if ENVIRONMENT is not defined.
+		const _isDevEnv =
+			(typeof ENVIRONMENT !== "undefined" && ENVIRONMENT === "development") ||
+			(typeof window !== "undefined" && window.ENVIRONMENT === "development") ||
+			// fallback: treat localhost as development to avoid loading external widgets during local testing
+			(typeof window !== "undefined" &&
+				(window.location.hostname === "localhost" ||
+					window.location.hostname === "127.0.0.1"));
+
+		if (_isDevEnv) {
+			// Skip automatic rendering in development/local environments.
+			if (
+				typeof console !== "undefined" &&
+				typeof console.debug === "function"
+			) {
+				console.debug(
+					"TurnstileHelper: auto-init skipped in development/localhost"
+				);
+			}
+			return;
+		}
 		const outForm = document.getElementById("contactFormLoggedOut");
 		const inForm = document.getElementById("contactFormLoggedIn");
-        const residentialForm = document.getElementById("registerForm");
-        const businessForm = document.getElementById("registerFormBusiness");
+		const residentialForm = document.getElementById("registerForm");
+		const businessForm = document.getElementById("registerFormBusiness");
 		const testimonialForm = document.getElementById("testimonialForm");
 
-		if (!outForm && !inForm && !residentialForm && !businessForm && !testimonialForm) return;
+		if (
+			!outForm &&
+			!inForm &&
+			!residentialForm &&
+			!businessForm &&
+			!testimonialForm
+		)
+			return;
 		// try to render; errors are silent
 		if (outForm && outForm.checkVisibility())
 			renderIntoFormSafe(outForm, "loggedOut");
 		if (inForm && inForm.checkVisibility())
 			renderIntoFormSafe(inForm, "loggedIn");
-        if (residentialForm) renderIntoFormSafe(residentialForm, "registerResidential");
-        if (businessForm) renderIntoFormSafe(businessForm, "registerBusiness");
+		if (residentialForm)
+			renderIntoFormSafe(residentialForm, "registerResidential");
+		if (businessForm) renderIntoFormSafe(businessForm, "registerBusiness");
 		if (testimonialForm) renderIntoFormSafe(testimonialForm, "testimonialForm");
 	}
 
