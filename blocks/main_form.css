@@ -127,6 +127,22 @@
 	display: block; /* Shows error span when it has text content. */
 }
 
+/* Form validation error styles */
+.modal-content-form-error {
+	display: none; /* Hidden by default when empty. */
+	color: rgba(255, 0, 0, 0.7); /* Red color for error text. */
+	font-weight: 500; /* Medium weight for error text. */
+	font-size: 0.650rem; /* Slightly smaller font size for error messages. */
+	line-height: 1; /* Tight line height for error messages. */
+	margin-top: 8px; /* Pulls error message closer to input. */
+	margin-bottom: 2px; /* Space below error message. */
+}
+
+/* Show error span only when it has content */
+.modal-content-form-error:not(:empty) {
+	display: block; /* Shows error span when it has text content. */
+}
+
 .main__form .form-control_type_error {
 	border-color: rgba(255, 0, 0, 0.6) !important; /* Red border for invalid inputs. */
 }
@@ -136,6 +152,19 @@
 }
 
 .main__form .form-control_type_error:focus {
+	border-color: rgba(255, 0, 0, 0.8) !important; /* Darker red border on focus. */
+	box-shadow: 0 0 8px rgba(255, 0, 0, 0.3); /* Red glow on focus. */
+}
+
+.modal-content .form-control_type_error {
+	border-color: rgba(255, 0, 0, 0.6) !important; /* Red border for invalid inputs. */
+}
+
+.modal-content .form-control_type_error:hover {
+	border-color: rgba(255, 0, 0, 0.8) !important; /* Darker red border on hover. */
+}
+
+.modal-content .form-control_type_error:focus {
 	border-color: rgba(255, 0, 0, 0.8) !important; /* Darker red border on focus. */
 	box-shadow: 0 0 8px rgba(255, 0, 0, 0.3); /* Red glow on focus. */
 }
