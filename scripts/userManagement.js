@@ -58,10 +58,10 @@ function showEditUserModal(id) {
     wrapper.className = "mb-2";
     if (labelText) {
       const label = document.createElement("label");
-      if (inputAttrs.type === "text" && inputAttrs.id === "firstName") {
+      if (inputId) {
         label.setAttribute("for", inputId);
-        label.className = "form-label";
       }
+      label.className = "form-label";
       label.innerHTML = labelText;
       wrapper.appendChild(label);
     }
@@ -71,6 +71,13 @@ function showEditUserModal(id) {
     if (inputAttrs.className) input.className = inputAttrs.className;
     else input.className = "form-control";
     wrapper.appendChild(input);
+    // Add error span for HTML Constraint API validation
+    if (inputId) {
+      const errorSpan = document.createElement("span");
+      errorSpan.className = "main__form-error";
+      errorSpan.id = `${inputId}-error`;
+      wrapper.appendChild(errorSpan);
+    }
     body.appendChild(wrapper);
   }
 
@@ -158,9 +165,15 @@ function showEditUserModal(id) {
     input.name = name;
     const label = document.createElement("label");
     label.className = "form-check-label";
+    label.setAttribute("for", id);
     label.textContent = labelText;
     wrapper.appendChild(input);
     wrapper.appendChild(label);
+    // Add error span for HTML Constraint API validation
+    const errorSpan = document.createElement("span");
+    errorSpan.className = "main__form-error";
+    errorSpan.id = `${id}-error`;
+    wrapper.appendChild(errorSpan);
     body.appendChild(wrapper);
   }
 
