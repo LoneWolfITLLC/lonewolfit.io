@@ -546,6 +546,7 @@ function getBusinessAddress() {
 function handleEditUserSubmit(formName) {
 	const formData = gatherFormData(formName);
 	if (!formData) return; // gatherFormData already alerts on error
+	const form = document.getElementById(formName);
 	if (formName === "registerFormBusiness") {
 		updateStripeCustomerDetails("business");
 	} else {
@@ -602,11 +603,19 @@ function handleEditUserSubmit(formName) {
 							response.statusText ||
 							"Unknown error")
 				);
+				// Keep submit button enabled after server error
+				if (form && typeof notifyFormSubmissionError === "function") {
+					notifyFormSubmissionError(form);
+				}
 			}
 		})
 		.catch((err) => {
 			hideLoading();
 			alertModal("Network error: " + err.message);
+			// Keep submit button enabled after error
+			if (form && typeof notifyFormSubmissionError === "function") {
+				notifyFormSubmissionError(form);
+			}
 		});
 }
 

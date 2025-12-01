@@ -88,6 +88,14 @@ const setEventListeners = (formElement, config) => {
 			checkInputValidity(formElement, inputElement, config);
 		});
 	});
+
+	// Re-enable submit button after form submission error from server
+	// This listens for custom 'formSubmissionError' event dispatched by form handlers
+	formElement.addEventListener("formSubmissionError", () => {
+		if (buttonElement && !hasInvalidInput(inputList)) {
+			enableSubmitButton(buttonElement);
+		}
+	});
 };
 
 // Reset validation for a form (useful when forms are reset or closed)
@@ -113,6 +121,12 @@ const keepButtonEnabledOnError = (formElement, config) => {
 	if (buttonElement) {
 		enableSubmitButton(buttonElement);
 	}
+};
+
+// Helper function to dispatch form submission error event
+// Call this from your form handlers when a server error occurs
+const notifyFormSubmissionError = (formElement) => {
+	formElement.dispatchEvent(new CustomEvent("formSubmissionError"));
 };
 
 const enableValidation = (config) => {

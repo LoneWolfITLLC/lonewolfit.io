@@ -182,6 +182,10 @@ async function submitContactFormLoggedOut() {
 			try {
 				window.TurnstileHelper && window.TurnstileHelper.resetForForm(form);
 			} catch (e) {}
+			// Keep submit button enabled after server error
+			if (form && typeof notifyFormSubmissionError === "function") {
+				notifyFormSubmissionError(form);
+			}
 			return;
 		}
 		window.location.hash = "#contact";
@@ -204,6 +208,10 @@ async function submitContactFormLoggedOut() {
 		try {
 			window.TurnstileHelper && window.TurnstileHelper.resetForForm(form);
 		} catch (e) {}
+		// Keep submit button enabled after error
+		if (form && typeof notifyFormSubmissionError === "function") {
+			notifyFormSubmissionError(form);
+		}
 	}
 }
 
@@ -266,6 +274,10 @@ async function submitContactFormLoggedIn() {
 			try {
 				window.TurnstileHelper && window.TurnstileHelper.resetForForm(form);
 			} catch (e) {}
+			// Keep submit button enabled after server error
+			if (form && typeof notifyFormSubmissionError === "function") {
+				notifyFormSubmissionError(form);
+			}
 			return;
 		}
 		hideLoading();
@@ -287,5 +299,9 @@ async function submitContactFormLoggedIn() {
 		try {
 			window.TurnstileHelper && window.TurnstileHelper.resetForForm(form);
 		} catch (e) {}
+		// Keep submit button enabled after error
+		if (form && typeof notifyFormSubmissionError === "function") {
+			notifyFormSubmissionError(form);
+		}
 	}
 }
