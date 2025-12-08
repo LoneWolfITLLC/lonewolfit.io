@@ -4,10 +4,10 @@ let requireLogin = false; // Set this to true if you want to require the user to
 let loggedIn = false; // Track if the user is logged in
 let redirectToPortal = false; // Set this to true if you want to redirect to portal on auth success
 let requireUserToBeAdmin = false; // Set this to true if you want to require the user to be an admin to view the page.
-const URL_BASE = "https://lonewolfit.io:2096";
+const URL_BASE = "http://localhost:3000";
 const ADMIN_PATH = "admin.html";
 const MEMBER_PATH = "members.html";
-const ENVIRONMENT = "production"; // Change to 'production' in production environment
+const ENVIRONMENT = "development"; // Change to 'production' in production environment
 const triggerDarkModeEvent = new CustomEvent("triggerDarkMode");
 
 function executeOnLoad() {
