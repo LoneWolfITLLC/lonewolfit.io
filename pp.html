@@ -21,211 +21,245 @@
 		<script src="scripts/preferences.js"></script>
 		<script src="scripts/auth.js"></script>
 		<script src="scripts/darkmode.js"></script>
-	</head>
+			<script>COLLAPSABLE_WIDTH = 970;</script>
+		<script src="scripts/accountFunctions.js"></script>
+</head>
 	<body>
-		<header class="header">
-			<img
-				src="images/wolf-logo.png"
-				alt="Lone Wolf IT Logo"
-				class="header__logo"
-				onclick="window.location.href='index.html#home';"
-			/>
-			<h1 class="header__title">Lone Wolf IT</h1>
-			<nav class="header__nav" id="headerNav">
-				<ul class="header__nav-list">
-					<li class="header__nav-item">
-						<a href="index.html" class="header__nav-link">Home</a>
-					</li>
-					<li class="header__nav-item">
-						<a href="index.html#services" class="header__nav-link"
-							>Portfolio/Services</a
-						>
-					</li>
-					<li class="header__nav-item">
-						<a onclick="goToMemberPortal()" class="header__nav-link">Member Portal</a>
-					</li>
-					<li class="header__nav-item">
-						<a href="index.html#about" class="header__nav-link">About</a>
-					</li>
-					<li class="header__nav-item">
-						<a href="index.html#contact" class="header__nav-link">Contact</a>
-					</li>
-				</ul>
-			</nav>
-			<button
-				class="navbar-toggle"
-				id="navbarToggle"
-				aria-label="Open navigation menu"
-			>
-				&#9776;
-			</button>
-		</header>
+	<div class="page" id="main">
+
+<header class="header">
+	<img
+		src="images/wolf-logo.png"
+		alt="Lone Wolf IT Services logo"
+		class="header__logo"
+		onclick="location.href='index.html#home';"
+	/>
+	<span class="header__title">Lone Wolf IT Services</span>
+	<nav class="header__nav" aria-label="Primary" aria-hidden="true">
+		<ul class="header__nav-list">
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="index.html#home" onclick="closeHeaderNavGlobal()">Home</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="index.html#services" onclick="closeHeaderNavGlobal()">Portfolio/Services</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="shop.html" onclick="closeHeaderNavGlobal()">Shop</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="index.html#about" onclick="closeHeaderNavGlobal()">About</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="index.html#contact" onclick="closeHeaderNavGlobal()">Contact</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" id="membersLinkSidebar" onclick="goToMemberPortal(); closeHeaderNavGlobal();">Sign In</a>
+			</li>
+		</ul>
+	</nav>
+	<button
+		class="header__toggle"
+		id="toggleBtn"
+		aria-expanded="true"
+		aria-controls="sidebar"
+	>
+		☰
+	</button>
+</header>
+
 		<main class="main">
-			<section class="main__section">
-				<p class="main__text main__item-centered">
-					At Lone Wolf IT, I prioritize your privacy and the protection of your
-					personal information. This Privacy Policy outlines how I collect, use,
-					disclose, and safeguard your information when you interact with my
-					services.
-				</p>
-			</section>
-			<section class="main__section">
-				<h2 class="main__heading">Contact Information</h2>
-				<p class="main__text main__item-centered">
-					If you have any questions or concerns regarding this Privacy Policy,
-					please contact me at:
-				</p>
-				<strong class="main__text main__item-centered">Email:</strong>
-				<button
-					class="btn btn-primary main__item-centered"
-					onclick="window.location.href='mailto:arlo.lonewolfit@gmail.com'"
-				>
-					arlo.lonewolfit@gmail.com
-				</button>
-				<p class="main__text main__item-centered" style="margin-top: 10px">
-					You can also reach me through the contact form on my
-					<a href="index.html#contact" class="main__link">Contact Page</a>.
-				</p>
-			</section>
-			<section class="main__section">
-				<h2 class="main__heading">Information I Collect</h2>
-				<p class="main__text">
-					I collect the following information to provide and enhance my
-					services:
-				</p>
-				<ul>
-					<li>
-						<strong>Personal Information:</strong> This includes your name,
-						email address, phone number, mailing address, and other contact
-						details you provide during registration or inquiries.
-					</li>
-					<li>
-						<strong>Account Information:</strong> When you register using my
-						<a href="register.html">registration form</a>, I may collect
-						additional information such as your username, password, and profile
-						photo.
-					</li>
-					<li>
-						<strong>Payment Information:</strong> If you make a purchase, I may
-						collect billing information and transaction history through payment
-						processors like Stripe.
-					</li>
-					<li>
-						<strong>Usage Data:</strong> I may collect information about how you
-						use my services, including your IP address, device type, browser
-						type, and usage patterns to improve service delivery and user
-						experience.
-					</li>
-					<li>
-						<strong>Profile Information:</strong> You may also provide
-						additional information for your profile, such as a profile photo,
-						which I will store securely.
-					</li>
-				</ul>
-			</section>
-			<section class="main__section">
-				<h2 class="main__heading">How I Use Your Information</h2>
-				<p class="main__text">
-					Your information may be used for the following purposes:
-				</p>
-				<ul>
-					<li>To provide, operate, and maintain my services.</li>
-					<li>To improve, personalize, and expand my services.</li>
-					<li>To process your transactions and manage your orders.</li>
-					<li>
-						To communicate with you, including sending verification emails,
-						promotional content, and customer support.
-					</li>
-					<li>To comply with legal obligations and ensure security.</li>
-				</ul>
-			</section>
-			<section class="main__section">
-				<h2 class="main__heading">Data Security</h2>
-				<p class="main__text">
-					I implement various security measures to protect your data, using
-					techniques such as encryption and secure storage. I also employ
-					measures to prevent unauthorized access, data breaches, and misuse of
-					your information.
-				</p>
-			</section>
-			<section class="main__section">
-				<h2 class="main__heading">Data Sharing</h2>
-				<p class="main__text">
-					I do not sell your personal information to third parties. However, I
-					may share your information with trusted third-party service providers,
-					including payment processors like Stripe, to perform services on my
-					behalf, such as processing payments and managing customer accounts.
-				</p>
-			</section>
-			<section class="main__section">
-				<h2 class="main__heading">Your Rights</h2>
-				<p class="main__text">
-					You have the following rights regarding your personal information:
-				</p>
-				<ul>
-					<li>
-						The right to access, correct, or delete your personal information.
-					</li>
-					<li>
-						The right to object to or restrict the processing of your personal
-						information.
-					</li>
-					<li>
-						The right to withdraw consent at any time where I rely on your
-						consent to process your personal information.
-					</li>
-				</ul>
-			</section>
-			<section class="main__section">
-				<h2 class="main__heading">Changes to This Privacy Policy</h2>
-				<p class="main__text">
-					I may update this Privacy Policy from time to time. Any changes will
-					be posted on this page with an updated effective date. I encourage you
-					to review this Privacy Policy periodically for any updates.
-				</p>
-			</section>
-		</main>
-		<footer class="footer">
-			<div class="footer__content">
-				<p class="footer__prepared-by">
-					Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
-				</p>
-				<p class="footer__contact">
-					Contact:
-					<a
-						href="mailto:arlo.lonewolfit@gmail.com"
-						class="footer__contact-link"
-						>arlo.lonewolfit@gmail.com</a
-					>
-				</p>
-				<p class="footer__copyright">
-					© 2025 Lone Wolf IT Services LLC | All Rights Reserved.
-				</p>
-				<ul class="footer__links">
-					<li class="footer__link-item">
-						<a href="pp.html" class="footer__link">Privacy Policy</a>
-					</li>
-					<li class="footer__link-item">
-						<a href="tos.html" class="footer__link">Terms of Service</a>
-					</li>
-					<li class="footer__link-item">
-						<a href="index.html#contact" class="footer__link">Contact Me</a>
-					</li>
-					<li class="footer__link-item footer__link-item--icon">
-						<a
-							href="https://www.facebook.com/lonewolfitservicesllc"
-							target="_blank"
-							class="footer__link"
+					<section class="main__section">
+						<p class="main__text main__item-centered">
+							At Lone Wolf IT, I prioritize your privacy and the protection of your
+							personal information. This Privacy Policy outlines how I collect, use,
+							disclose, and safeguard your information when you interact with my
+							services.
+						</p>
+					</section>
+					<section class="main__section">
+						<h2 class="main__heading">Contact Information</h2>
+						<p class="main__text main__item-centered">
+							If you have any questions or concerns regarding this Privacy Policy,
+							please contact me at:
+						</p>
+						<strong class="main__text main__item-centered">Email:</strong>
+						<button
+							class="btn btn-primary main__item-centered"
+							onclick="window.location.href='mailto:arlo.lonewolfit@gmail.com'"
 						>
-							<img
-								src="images/ui/facebook-icon.png"
-								alt="Facebook"
-								class="footer__icon"
-							/>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</footer>
-	</body>
+							arlo.lonewolfit@gmail.com
+						</button>
+						<p class="main__text main__item-centered" style="margin-top: 10px">
+							You can also reach me through the contact form on my
+							<a href="index.html#contact" class="main__link">Contact Page</a>.
+						</p>
+					</section>
+					<section class="main__section">
+						<h2 class="main__heading">Information I Collect</h2>
+						<p class="main__text">
+							I collect the following information to provide and enhance my
+							services:
+						</p>
+						<ul>
+							<li>
+								<strong>Personal Information:</strong> This includes your name,
+								email address, phone number, mailing address, and other contact
+								details you provide during registration or inquiries.
+							</li>
+							<li>
+								<strong>Account Information:</strong> When you register using my
+								<a href="register.html">registration form</a>, I may collect
+								additional information such as your username, password, and profile
+								photo.
+							</li>
+							<li>
+								<strong>Payment Information:</strong> If you make a purchase, I may
+								collect billing information and transaction history through payment
+								processors like Stripe.
+							</li>
+							<li>
+								<strong>Usage Data:</strong> I may collect information about how you
+								use my services, including your IP address, device type, browser
+								type, and usage patterns to improve service delivery and user
+								experience.
+							</li>
+							<li>
+								<strong>Profile Information:</strong> You may also provide
+								additional information for your profile, such as a profile photo,
+								which I will store securely.
+							</li>
+						</ul>
+					</section>
+					<section class="main__section">
+						<h2 class="main__heading">How I Use Your Information</h2>
+						<p class="main__text">
+							Your information may be used for the following purposes:
+						</p>
+						<ul>
+							<li>To provide, operate, and maintain my services.</li>
+							<li>To improve, personalize, and expand my services.</li>
+							<li>To process your transactions and manage your orders.</li>
+							<li>
+								To communicate with you, including sending verification emails,
+								promotional content, and customer support.
+							</li>
+							<li>To comply with legal obligations and ensure security.</li>
+						</ul>
+					</section>
+					<section class="main__section">
+						<h2 class="main__heading">Data Security</h2>
+						<p class="main__text">
+							I implement various security measures to protect your data, using
+							techniques such as encryption and secure storage. I also employ
+							measures to prevent unauthorized access, data breaches, and misuse of
+							your information.
+						</p>
+					</section>
+					<section class="main__section">
+						<h2 class="main__heading">Data Sharing</h2>
+						<p class="main__text">
+							I do not sell your personal information to third parties. However, I
+							may share your information with trusted third-party service providers,
+							including payment processors like Stripe, to perform services on my
+							behalf, such as processing payments and managing customer accounts.
+						</p>
+					</section>
+					<section class="main__section">
+						<h2 class="main__heading">Your Rights</h2>
+						<p class="main__text">
+							You have the following rights regarding your personal information:
+						</p>
+						<ul>
+							<li>
+								The right to access, correct, or delete your personal information.
+							</li>
+							<li>
+								The right to object to or restrict the processing of your personal
+								information.
+							</li>
+							<li>
+								The right to withdraw consent at any time where I rely on your
+								consent to process your personal information.
+							</li>
+						</ul>
+					</section>
+					<section class="main__section">
+						<h2 class="main__heading">Changes to This Privacy Policy</h2>
+						<p class="main__text">
+							I may update this Privacy Policy from time to time. Any changes will
+							be posted on this page with an updated effective date. I encourage you
+							to review this Privacy Policy periodically for any updates.
+						</p>
+					</section>
+				</main>
+
+<aside class="main__sidebar" id="sidebar" aria-label="Main navigation">
+	<nav class="main__nav">
+		<ul class="main__nav-list">
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="index.html#home">Home</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="index.html#services">Portfolio/Services</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="shop.html">Shop</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="index.html#about">About</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="index.html#contact">Contact</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" id="membersLink" onclick="goToMemberPortal();">Sign In</a>
+			</li>
+		</ul>
+	</nav>
+</aside>
+
+<footer class="footer">
+	<div class="footer__content">
+		<p class="footer__prepared-by">
+			Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
+		</p>
+		<p class="footer__contact">
+			Contact:
+			<a
+				href="mailto:arlo.lonewolfit@gmail.com"
+				class="footer__contact-link"
+			>arlo.lonewolfit@gmail.com</a>
+		</p>
+		<p class="footer__copyright">
+			© 2025 Lone Wolf IT Services LLC | All Rights Reserved.
+		</p>
+		<ul class="footer__links">
+			<li class="footer__link-item">
+				<a href="pp.html" class="footer__link">Privacy Policy</a>
+			</li>
+			<li class="footer__link-item">
+				<a href="tos.html" class="footer__link">Terms of Service</a>
+			</li>
+			<li class="footer__link-item">
+				<a href="index.html#contact" class="footer__link">Contact Me</a>
+			</li>
+			<li class="footer__link-item footer__link-item--icon">
+				<a
+					href="https://www.facebook.com/lonewolfitservicesllc"
+					target="_blank"
+					class="footer__link"
+				>
+					<img
+						src="images/ui/facebook-icon.png"
+						alt="Facebook"
+						class="footer__icon"
+					/>
+				</a>
+			</li>
+		</ul>
+	</div>
+</footer>
+
+	</div>
+</body>
 </html>

@@ -7,7 +7,6 @@ let requireUserToBeAdmin = false; // Set this to true if you want to require the
 const URL_BASE = "http://localhost:3000";
 const ADMIN_PATH = "admin.html";
 const MEMBER_PATH = "members.html";
-const ENVIRONMENT = "development"; // Change to 'production' in production environment
 const triggerDarkModeEvent = new CustomEvent("triggerDarkMode");
 
 function executeOnLoad() {
@@ -60,7 +59,6 @@ function hideLoading() {
 }
 function getTokenFromSession() {
 	const token = sessionStorage.getItem("jwt");
-	console.log(`Retrieved token from session...`);
 	return token ? token : null;
 }
 async function checkAuthentication(token) {
@@ -68,7 +66,9 @@ async function checkAuthentication(token) {
 		if (requireLogin) {
 			window.location.href =
 				"login.html?redirect_uri=" +
-				window.location.pathname.replace(/^\//, "") +
+				encodeURIComponent(
+					window.location.pathname.replace(/^\//, "") + window.location.search
+				) +
 				"#emailloginSection";
 			return false;
 		}
@@ -110,7 +110,9 @@ async function checkAuthentication(token) {
 		if (requireLogin) {
 			window.location.href =
 				"login.html?redirect_uri=" +
-				window.location.pathname.replace(/^\//, "") +
+				encodeURIComponent(
+					window.location.pathname.replace(/^\//, "") + window.location.search
+				) +
 				"#emailloginSection";
 			return null;
 		}
@@ -124,9 +126,11 @@ async function onLoad() {
 	loggedIn = logged !== null;
 	const urlParams = new URLSearchParams(window.location.search);
 	const redirectUri = urlParams.get("redirect_uri");
-	const allowedHtmlRegex = /^\/?[a-zA-Z0-9_-]+\.html$/i;
+	const allowedHtmlRegex = /^[A-Za-z0-9_-]+\.html(?:\?id=\d+)?$/i;
+	const membersLink = document.getElementById("membersLink");
+	const membersLinkSidebar = document.getElementById("membersLinkSidebar");
 	if (redirectUri !== null && !allowedHtmlRegex.test(redirectUri)) {
-		console.warn("Invalid redirect_uri detected.");
+		console.warn(`Invalid redirect_uri detected: ${redirectUri}`);
 		urlParams.delete("redirect_uri");
 		const newUrl =
 			window.location.pathname +
@@ -221,6 +225,39 @@ async function onLoad() {
 				) {
 					window.location.href = MEMBER_PATH;
 				}
+			}
+		}
+		if (membersLink) {
+			if (
+				!window.location.pathname.endsWith(MEMBER_PATH) &&
+				!window.location.pathname.endsWith(ADMIN_PATH)
+			) {
+				membersLink.textContent = "Portal";
+				membersLink.href = MEMBER_PATH;
+				membersLink.onclick = `closeHeaderNavGlobal();`;
+			} else {
+				membersLink.textContent = "Sign Out";
+				membersLink.href = "#";
+				membersLink.onclick = () => {
+					signOut();
+					closeHeaderNavGlobal();
+				};
+			}
+		}
+		if (membersLinkSidebar) {
+			if (
+				!window.location.pathname.endsWith(MEMBER_PATH) &&
+				!window.location.pathname.endsWith(ADMIN_PATH)
+			) {
+				membersLinkSidebar.textContent = "Portal";
+				membersLinkSidebar.href = MEMBER_PATH;
+				membersLinkSidebar.onclick = `closeHeaderNavGlobal();`;
+			} else {
+				membersLinkSidebar.textContent = "Sign Out";
+				membersLinkSidebar.href = "#";
+				membersLinkSidebar.onclick = () => {
+					signOut();
+				};
 			}
 		}
 		// If already on /members.html, do not redirect

@@ -101,395 +101,430 @@
 				"sameAs": ["https://www.facebook.com/lonewolfitservicesllc"]
 			}
 		</script>
-	</head>
+			<script>COLLAPSABLE_WIDTH = 970;</script>
+</head>
 	<body>
-		<header class="header">
-			<img
-				src="images/wolf-logo.png"
-				alt="Lone Wolf IT Logo"
-				class="header__logo"
-				onclick="window.location.href='index.html#home';"
-			/>
-			<h1 class="header__title">Lone Wolf IT</h1>
-			<nav class="header__nav" id="headerNav">
-				<ul class="header__nav-list">
-					<li class="header__nav-item">
-						<a href="index.html" class="header__nav-link">Home</a>
-					</li>
-					<li class="header__nav-item">
-						<a href="#services" class="header__nav-link">Portfolio/Services</a>
-					</li>
-					<li class="header__nav-item">
-						<a onclick="goToMemberPortal()" class="header__nav-link">Member Portal</a>
-					</li>
-					<li class="header__nav-item">
-						<a href="#about" class="header__nav-link">About</a>
-					</li>
-					<li class="header__nav-item">
-						<a href="#contact" class="header__nav-link">Contact</a>
-					</li>
-				</ul>
-			</nav>
-			<button
-				class="navbar-toggle"
-				id="navbarToggle"
-				aria-label="Open navigation menu"
-			>
-				&#9776;
-			</button>
-		</header>
+	<div class="page" id="main">
+
+<header class="header">
+	<img
+		src="images/wolf-logo.png"
+		alt="Lone Wolf IT Services logo"
+		class="header__logo"
+		onclick="location.href='index.html#home';"
+	/>
+	<span class="header__title">Lone Wolf IT Services</span>
+	<nav class="header__nav" aria-label="Primary" aria-hidden="true">
+		<ul class="header__nav-list">
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="index.html#home" onclick="closeHeaderNavGlobal()">Home</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="index.html#services" onclick="closeHeaderNavGlobal()">Portfolio/Services</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="shop.html" onclick="closeHeaderNavGlobal()">Shop</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="index.html#about" onclick="closeHeaderNavGlobal()">About</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="index.html#contact" onclick="closeHeaderNavGlobal()">Contact</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" id="membersLinkSidebar" onclick="goToMemberPortal(); closeHeaderNavGlobal();">Sign In</a>
+			</li>
+		</ul>
+	</nav>
+	<button
+		class="header__toggle"
+		id="toggleBtn"
+		aria-expanded="true"
+		aria-controls="sidebar"
+	>
+		☰
+	</button>
+</header>
+
 		<main class="main">
-			<section id="home" class="main__section main__section--home">
-				<h2 class="main__heading">Welcome to Lone Wolf IT</h2>
-				<p class="main__text main__item-centered" style="font-weight: bold">
-					Empowering small businesses, startups, and individuals through
-					innovative, cost-effective, and AI-enhanced IT services.
-				</p>
-				<p class="main__text">
-					At Lone Wolf IT, I am dedicated to providing top-notch IT solutions
-					tailored to your unique needs. Whether you're a small business looking
-					for reliable tech support or an individual seeking expert guidance,
-					I've got you covered.
-				</p>
-				<p class="main__text">
-					My services include IT consulting, web development, and ongoing
-					support, all designed to help you leverage technology for success.
-					With a focus on personalized service and a commitment to understanding
-					each client's unique needs, I aim to deliver tailored solutions that
-					drive your success.
-				</p>
-				<img
-					src="images/index_bg.png"
-					alt="Technology"
-					class="main__image main__image--tech"
-				/>
-			</section>
-			<section id="services" class="main__section">
-				<h2 class="main__heading">Portfolio / Services</h2>
-				<div class="main__portfolio">
-					<!-- <div
-						class="main__portfolio-item"
-						onclick="window.open('https://www.comptia.org/certifications/a', '_blank');"
-					>
+					<section id="home" class="main__section main__section--home">
+						<h2 class="main__heading">Welcome to Lone Wolf IT</h2>
+						<p class="main__text main__item-centered" style="font-weight: bold">
+							Empowering small businesses, startups, and individuals through
+							innovative, cost-effective, and AI-enhanced IT services.
+						</p>
+						<p class="main__text">
+							At Lone Wolf IT, I am dedicated to providing top-notch IT solutions
+							tailored to your unique needs. Whether you're a small business looking
+							for reliable tech support or an individual seeking expert guidance,
+							I've got you covered.
+						</p>
+						<p class="main__text">
+							My services include IT consulting, web development, and ongoing
+							support, all designed to help you leverage technology for success.
+							With a focus on personalized service and a commitment to understanding
+							each client's unique needs, I aim to deliver tailored solutions that
+							drive your success.
+						</p>
 						<img
-							src="images/compcert.png"
-							alt="CompTIA A+ Certification"
-							class="main__image main__image--cert"
+							src="images/index_bg.png"
+							alt="Technology"
+							class="main__image main__image--tech"
 						/>
-						<p class="main__portfolio-text">
-							<strong>CompTIA A+ Certified</strong>
+					</section>
+					<section id="services" class="main__section">
+						<h2 class="main__heading">Portfolio / Services</h2>
+						<div class="main__portfolio">
+							<!-- <div
+								class="main__portfolio-item"
+								onclick="window.open('https://www.comptia.org/certifications/a', '_blank');"
+							>
+								<img
+									src="images/compcert.png"
+									alt="CompTIA A+ Certification"
+									class="main__image main__image--cert"
+								/>
+								<p class="main__portfolio-text">
+									<strong>CompTIA A+ Certified</strong>
+								</p>
+							</div> No longer COMP TIA certified as of October 22nd, 2025...--> 
+							<div
+								class="main__portfolio-item main__portfolio-item-tripleten"
+								onclick="window.open('https://tripleten.com/software-engineer/', '_blank');"
+							>
+								<p class="main__portfolio-text">
+									<strong>TripleTen Software Engineering Program</strong>
+								</p>
+							</div>
+						</div>
+						<p class="main__text">
+							<!-- Removed COMP TIA A+ Certification as of October 22nd, 2025 -->
+							 I am currently enrolled in the TripleTen Software Engineering Program, gaining hands-on experience in full-stack development and modern web technologies,
+							 including JavaScript, React, Node.js, and more. I am no longer COMP TIA A+ certified as of October 22nd, 2025. My experience and expertise will always remain relevant and up to date.
 						</p>
-					</div> No longer COMP TIA certified as of October 22nd, 2025...--> 
-					<div
-						class="main__portfolio-item main__portfolio-item-tripleten"
-						onclick="window.open('https://tripleten.com/software-engineer/', '_blank');"
-					>
-						<p class="main__portfolio-text">
-							<strong>TripleTen Software Engineering Program</strong>
-						</p>
-					</div>
-				</div>
-				<p class="main__text">
-					<!-- Removed COMP TIA A+ Certification as of October 22nd, 2025 -->
-					 I am currently enrolled in the TripleTen Software Engineering Program, gaining hands-on experience in full-stack development and modern web technologies,
-					 including JavaScript, React, Node.js, and more. I am no longer COMP TIA A+ certified as of October 22nd, 2025. My experience and expertise will always remain relevant and up to date.
-				</p>
-				<p class="main__text">
-					Explore my portfolio and discover the wide range of services I offer,
-					with a special focus on <strong>web development</strong> as my core
-					specialty. From building modern, responsive websites and custom web
-					applications to optimizing your online presence, I deliver tailored
-					solutions that help your business stand out. In addition to web
-					development, my expertise includes IT consulting, technical support,
-					cloud integration, and ongoing maintenance—ensuring your technology
-					works seamlessly for you. Let me help you leverage the latest tools
-					and best practices to achieve your goals efficiently and effectively.
-				</p>
-				<button
-					class="btn btn-primary main__portfolio-button"
-					onclick="window.location.href='portfolio.html';"
-				>
-					View My Portfolio
-				</button>
-				<!-- <button
-		  class="btn btn-primary main__portfolio-button"
-		  onclick="window.location.href='services.html';"
-		>
-		  View My Services
-		</button>-->
-				<button
-					class="btn btn-primary main__portfolio-button"
-					onclick="window.location.href='pricing.html';"
-				>
-					View My Pricing
-				</button>
-			</section>
-			<section
-				id="testimonials"
-				class="main__section main__section--testimonials"
-			>
-				<h2 class="main__heading">Testimonials</h2>
-				<p class="main__text main__item-centered">
-					Hear from our satisfied clients about their experiences with Lone Wolf
-					IT.
-				</p>
-				<div class="slideshow__wrapper vignette" style="min-width: auto">
-					<div class="slideshow__container"></div>
-					<div
-						id="prev"
-						class="slideshow__nav-btn slideshow__nav-btn--prev"
-						onclick="changeSlide(-1)"
-					>
-						&lt;
-					</div>
-					<div class="slideshow"></div>
-					<div
-						id="next"
-						class="slideshow__nav-btn slideshow__nav-btn--next"
-						onclick="changeSlide(1)"
-					>
-						&gt;
-					</div>
-					<div
-						class="slideshow__loading-bar"
-						id="loadingBar"
-						style="display: none"
-					></div>
-				</div>
-				<button
-					class="btn btn-primary main__item-centered"
-					onclick="window.location.href=loggedIn ? 'submit_testimonial.html' :  'login.html?redirect_uri=submit_testimonial.html';"
-				>
-					Submit a Testimonial
-				</button>
-			</section>
-			<section id="memberAreaSection" class="main__section">
-				<h2 class="main__heading">Member Area</h2>
-				<p class="main__text main__item-centered" style="display: none;" id="memberAreaText">
-					Welcome to the member area! Thank you for being a valued member of the
-					Wolf Pack! Here you can manage your account, view invoices, and access
-					exclusive resources.
-				</p>
-				<p class="main__text main__item-centered" id="memberAreaTextLoggedOut">
-					Welcome to the member area! Please log in to access your account,
-					view invoices, and access exclusive resources.
-				</p>
-				<button
-					class="btn btn-primary main__button main__item-centered"
-					onclick="goToMemberPortal()"
-				>
-					Go to the Member Portal
-				</button>
-				<div class="main__section-hidden main__item-centered" id="accountButtonsSection">
-					<button
-						class="btn btn-primary main__button main__item-centered"
-						onclick="signOut()"
-						style="margin-top: 10px"
-					>
-						Sign Out
-					</button>
-					<button
-						class="btn btn-secondary main__button main__item-centered"
-						onclick="signOut(true)"
-						style="margin-top: 10px"
-					>
-						Sign Out of All Devices
-					</button>
-				</div>
-			</section>
-			<section id="about" class="main__section main__section--about">
-				<h2 class="main__heading">About Me</h2>
-				<p class="main__text">
-					My name is <strong>Arlo W</strong>, and I was born and raised in a
-					middle-class family that instilled in me a strong work ethic and
-					resilience. Throughout my life, I have faced various adversities that
-					have shaped my character and fueled my passion for helping others find
-					their true calling.
-				</p>
-				<p class="main__text">
-					I believe that every challenge is an opportunity for growth. These
-					experiences have not only taught me valuable lessons but have also
-					inspired me to launch <strong>Lone Wolf IT</strong>. My mission is to
-					empower individuals and small businesses, guiding them towards success
-					through innovative IT solutions that enhance their productivity.
-				</p>
-				<p class="main__text">
-					With a heart dedicated to serving others and a commitment to
-					excellence, I strive to create a positive impact in everyone’s
-					journey. Together, let’s harness technology to elevate your dreams.
-				</p>
-				<p class="main__text">
-					Lone Wolf IT is not just a business; it's a vision to empower
-					individuals and small businesses with the technology they need to
-					thrive.
-				</p>
-				<p class="main__text">
-					With a focus on personalized service and a commitment to understanding
-					each client's unique needs, I aim to deliver tailored solutions that
-					drive success.
-				</p>
-				<img
-					src="images/self.png"
-					alt="Arlo Wandell"
-					class="main__image main__image--arlo"
-				/>
-			</section>
-			<section id="contact" class="main__section main__section-hidden">
-				<h2 class="main__heading">Contact</h2>
-				<!-- Create a contact form here. -->
-				<form id="contactFormLoggedOut" class="main__form">
-					<fieldset class="form-group">
-						<label for="name">Name <span style="color:red;">*</span></label>
-						<input
-							type="text"
-							id="name"
-							class="form-control"
-							placeholder="Enter your name..."
-							required
-							minlength="2"
-							maxlength="100"
-							pattern="^[a-zA-Z \-']+$"
-							title="Name must be 2-100 characters, letters, spaces, hyphens, and apostrophes only"
-						/>
-						<span class="main__form-error" id="name-error"></span>
-						<label for="email">Email</label>
-						<input
-							type="email"
-							id="email"
-							class="form-control"
-							placeholder="Enter your email address..."
-							maxlength="100"
-						/>
-						<span class="main__form-error" id="email-error"></span>
-						<label for="phoneLoggedOut">Phone <span style="color:red;">*</span></label>
-						<input
-							type="tel"
-							id="phoneLoggedOut"
-							class="form-control"
-							placeholder="1234567890"
-							required
-							minlength="10"
-							maxlength="15"
-							pattern="[0-9]{10,15}"
-							title="Phone number must be 10-15 digits"
-						/>
-						<span class="main__form-error" id="phoneLoggedOut-error"></span>
-						<label for="messageLoggedOut">Message <span style="color:red;">*</span></label>
-						<textarea
-							id="messageLoggedOut"
-							class="form-control"
-							rows="3"
-							placeholder="Type your message here..."
-							required
-							minlength="10"
-							maxlength="500"
-							title="Message must be 10-500 characters"
-						></textarea>
-						<span class="main__form-error" id="messageLoggedOut-error"></span>
-						<p class="main__text-character-count" id="characterCountLoggedOut">
-							0/500 characters
+						<p class="main__text">
+							Explore my portfolio and discover the wide range of services I offer,
+							with a special focus on <strong>web development</strong> as my core
+							specialty. From building modern, responsive websites and custom web
+							applications to optimizing your online presence, I deliver tailored
+							solutions that help your business stand out. In addition to web
+							development, my expertise includes IT consulting, technical support,
+							cloud integration, and ongoing maintenance—ensuring your technology
+							works seamlessly for you. Let me help you leverage the latest tools
+							and best practices to achieve your goals efficiently and effectively.
 						</p>
 						<button
-							type="submit"
-							class="btn btn-primary main__item-centered"
-							style="margin-top: 10px"
-							disabled
+							class="btn btn-primary main__portfolio-button"
+							onclick="window.location.href='portfolio.html';"
 						>
-							Send Message
+							View My Portfolio
 						</button>
-					</fieldset>
-				</form>
-				<form id="contactFormLoggedIn" class="main__form">
-					<fieldset class="form-group">
-						<label for="phone">Call back number <span style="color:red;">*</span></label>
-						<input
-							type="tel"
-							id="phone"
-							class="form-control"
-							placeholder="1234567890"
-							minlength="10"
-							maxlength="15"
-							pattern="[0-9]{10,15}"
-							title="Phone number must be 10-15 digits"
-						/>
-						<span class="main__form-error" id="phone-error"></span>
-						<label for="useAccountPhoneNumberCheckbox" style="margin-top: 0px;">
-							<input
-								type="checkbox"
-								id="useAccountPhoneNumberCheckbox"
-								name="useAccountPhoneNumberCheckbox"
-								class="form-check-input"
-							/>
-							Use my lonewolfit.io account phone number
-						</label>
-						<label for="message">Message <span style="color:red;">*</span></label>
-						<textarea
-							id="message"
-							class="form-control"
-							rows="3"
-							placeholder="Type your message here..."
-							required
-							minlength="10"
-							maxlength="500"
-							title="Message must be 10-500 characters"
-						></textarea>
-						<span class="main__form-error" id="message-error"></span>
-						<p class="main__text-character-count" id="characterCountLoggedIn">
-							0/500 characters
+						<!-- <button
+				  class="btn btn-primary main__portfolio-button"
+				  onclick="window.location.href='services.html';"
+				>
+				  View My Services
+				</button>-->
+						<button
+							class="btn btn-primary main__portfolio-button"
+							onclick="window.location.href='pricing.html';"
+						>
+							View My Pricing
+						</button>
+					</section>
+					<section
+						id="testimonials"
+						class="main__section main__section--testimonials"
+					>
+						<h2 class="main__heading">Testimonials</h2>
+						<p class="main__text main__item-centered">
+							Hear from our satisfied clients about their experiences with Lone Wolf
+							IT.
+						</p>
+						<div class="slideshow__wrapper vignette" style="min-width: auto">
+							<div class="slideshow__container"></div>
+							<div
+								id="prev"
+								class="slideshow__nav-btn slideshow__nav-btn--prev"
+								onclick="changeSlide(-1)"
+							>
+								&lt;
+							</div>
+							<div class="slideshow"></div>
+							<div
+								id="next"
+								class="slideshow__nav-btn slideshow__nav-btn--next"
+								onclick="changeSlide(1)"
+							>
+								&gt;
+							</div>
+							<div
+								class="slideshow__loading-bar"
+								id="loadingBar"
+								style="display: none"
+							></div>
+						</div>
+						<button
+							class="btn btn-primary main__item-centered"
+							onclick="window.location.href=loggedIn ? 'submit_testimonial.html' :  'login.html?redirect_uri=submit_testimonial.html';"
+						>
+							Submit a Testimonial
+						</button>
+					</section>
+					<section id="memberAreaSection" class="main__section">
+						<h2 class="main__heading">Member Area</h2>
+						<p class="main__text main__item-centered" style="display: none;" id="memberAreaText">
+							Welcome to the member area! Thank you for being a valued member of the
+							Wolf Pack! Here you can manage your account, view invoices, and access
+							exclusive resources.
+						</p>
+						<p class="main__text main__item-centered" id="memberAreaTextLoggedOut">
+							Welcome to the member area! Please log in to access your account,
+							view invoices, and access exclusive resources.
 						</p>
 						<button
-							type="submit"
-							class="btn btn-primary main__item-centered"
-							style="margin-top: 10px"
-							disabled
+							class="btn btn-primary main__button main__item-centered"
+							onclick="goToMemberPortal()"
 						>
-							Send Message
+							Go to the Member Portal
 						</button>
-					</fieldset>
-				</form>
-			</section>
-		</main>
-		<footer class="footer">
-			<div class="footer__content">
-				<p class="footer__prepared-by">
-					Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
-				</p>
-				<p class="footer__contact">
-					Contact:
-					<a
-						href="mailto:arlo.lonewolfit@gmail.com"
-						class="footer__contact-link"
-						>arlo.lonewolfit@gmail.com</a
-					>
-				</p>
-				<p class="footer__copyright">
-					© 2025 Lone Wolf IT Services LLC | All Rights Reserved.
-				</p>
-				<ul class="footer__links">
-					<li class="footer__link-item">
-						<a href="pp.html" class="footer__link">Privacy Policy</a>
-					</li>
-					<li class="footer__link-item">
-						<a href="tos.html" class="footer__link">Terms of Service</a>
-					</li>
-					<li class="footer__link-item">
-						<a href="index.html#contact" class="footer__link">Contact Me</a>
-					</li>
-					<li class="footer__link-item footer__link-item--icon">
-						<a
-							href="https://www.facebook.com/lonewolfitservicesllc"
-							target="_blank"
-							class="footer__link"
-						>
-							<img
-								src="images/ui/facebook-icon.png"
-								alt="Facebook"
-								class="footer__icon"
-							/>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</footer>
-	</body>
+						<div class="main__section-hidden main__item-centered" id="accountButtonsSection">
+							<button
+								class="btn btn-primary main__button main__item-centered"
+								onclick="signOut()"
+								style="margin-top: 10px"
+							>
+								Sign Out
+							</button>
+							<button
+								class="btn btn-secondary main__button main__item-centered"
+								onclick="signOut(true)"
+								style="margin-top: 10px"
+							>
+								Sign Out of All Devices
+							</button>
+						</div>
+					</section>
+					<section id="about" class="main__section main__section--about">
+						<h2 class="main__heading">About Me</h2>
+						<p class="main__text">
+							My name is <strong>Arlo W</strong>, and I was born and raised in a
+							middle-class family that instilled in me a strong work ethic and
+							resilience. Throughout my life, I have faced various adversities that
+							have shaped my character and fueled my passion for helping others find
+							their true calling.
+						</p>
+						<p class="main__text">
+							I believe that every challenge is an opportunity for growth. These
+							experiences have not only taught me valuable lessons but have also
+							inspired me to launch <strong>Lone Wolf IT</strong>. My mission is to
+							empower individuals and small businesses, guiding them towards success
+							through innovative IT solutions that enhance their productivity.
+						</p>
+						<p class="main__text">
+							With a heart dedicated to serving others and a commitment to
+							excellence, I strive to create a positive impact in everyone’s
+							journey. Together, let’s harness technology to elevate your dreams.
+						</p>
+						<p class="main__text">
+							Lone Wolf IT is not just a business; it's a vision to empower
+							individuals and small businesses with the technology they need to
+							thrive.
+						</p>
+						<p class="main__text">
+							With a focus on personalized service and a commitment to understanding
+							each client's unique needs, I aim to deliver tailored solutions that
+							drive success.
+						</p>
+						<img
+							src="images/self.png"
+							alt="Arlo Wandell"
+							class="main__image main__image--arlo"
+						/>
+					</section>
+					<section id="contact" class="main__section main__section-hidden">
+						<h2 class="main__heading">Contact</h2>
+						<!-- Create a contact form here. -->
+						<form id="contactFormLoggedOut" class="main__form">
+							<fieldset class="form-group">
+								<label for="name">Name <span style="color:red;">*</span></label>
+								<input
+									type="text"
+									id="name"
+									class="form-control"
+									placeholder="Enter your name..."
+									required
+									minlength="2"
+									maxlength="100"
+									pattern="^[a-zA-Z \-']+$"
+									title="Name must be 2-100 characters, letters, spaces, hyphens, and apostrophes only"
+								/>
+								<span class="main__form-error" id="name-error"></span>
+								<label for="email">Email</label>
+								<input
+									type="email"
+									id="email"
+									class="form-control"
+									placeholder="Enter your email address..."
+									maxlength="100"
+								/>
+								<span class="main__form-error" id="email-error"></span>
+								<label for="phoneLoggedOut">Phone <span style="color:red;">*</span></label>
+								<input
+									type="tel"
+									id="phoneLoggedOut"
+									class="form-control"
+									placeholder="1234567890"
+									required
+									minlength="10"
+									maxlength="15"
+									pattern="[0-9]{10,15}"
+									title="Phone number must be 10-15 digits"
+								/>
+								<span class="main__form-error" id="phoneLoggedOut-error"></span>
+								<label for="messageLoggedOut">Message <span style="color:red;">*</span></label>
+								<textarea
+									id="messageLoggedOut"
+									class="form-control"
+									rows="3"
+									placeholder="Type your message here..."
+									required
+									minlength="10"
+									maxlength="500"
+									title="Message must be 10-500 characters"
+								></textarea>
+								<span class="main__form-error" id="messageLoggedOut-error"></span>
+								<p class="main__text-character-count" id="characterCountLoggedOut">
+									0/500 characters
+								</p>
+								<button
+									type="submit"
+									class="btn btn-primary main__item-centered"
+									style="margin-top: 10px"
+									disabled
+								>
+									Send Message
+								</button>
+							</fieldset>
+						</form>
+						<form id="contactFormLoggedIn" class="main__form">
+							<fieldset class="form-group">
+								<label for="phone">Call back number <span style="color:red;">*</span></label>
+								<input
+									type="tel"
+									id="phone"
+									class="form-control"
+									placeholder="1234567890"
+									minlength="10"
+									maxlength="15"
+									pattern="[0-9]{10,15}"
+									title="Phone number must be 10-15 digits"
+								/>
+								<span class="main__form-error" id="phone-error"></span>
+								<label for="useAccountPhoneNumberCheckbox" style="margin-top: 0px;">
+									<input
+										type="checkbox"
+										id="useAccountPhoneNumberCheckbox"
+										name="useAccountPhoneNumberCheckbox"
+										class="form-check-input"
+									/>
+									Use my lonewolfit.io account phone number
+								</label>
+								<label for="message">Message <span style="color:red;">*</span></label>
+								<textarea
+									id="message"
+									class="form-control"
+									rows="3"
+									placeholder="Type your message here..."
+									required
+									minlength="10"
+									maxlength="500"
+									title="Message must be 10-500 characters"
+								></textarea>
+								<span class="main__form-error" id="message-error"></span>
+								<p class="main__text-character-count" id="characterCountLoggedIn">
+									0/500 characters
+								</p>
+								<button
+									type="submit"
+									class="btn btn-primary main__item-centered"
+									style="margin-top: 10px"
+									disabled
+								>
+									Send Message
+								</button>
+							</fieldset>
+						</form>
+					</section>
+				</main>
+
+<aside class="main__sidebar" id="sidebar" aria-label="Main navigation">
+	<nav class="main__nav">
+		<ul class="main__nav-list">
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="index.html#home">Home</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="index.html#services">Portfolio/Services</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="shop.html">Shop</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="index.html#about">About</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="index.html#contact">Contact</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" id="membersLink" onclick="goToMemberPortal();">Sign In</a>
+			</li>
+		</ul>
+	</nav>
+</aside>
+
+<footer class="footer">
+	<div class="footer__content">
+		<p class="footer__prepared-by">
+			Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
+		</p>
+		<p class="footer__contact">
+			Contact:
+			<a
+				href="mailto:arlo.lonewolfit@gmail.com"
+				class="footer__contact-link"
+			>arlo.lonewolfit@gmail.com</a>
+		</p>
+		<p class="footer__copyright">
+			© 2025 Lone Wolf IT Services LLC | All Rights Reserved.
+		</p>
+		<ul class="footer__links">
+			<li class="footer__link-item">
+				<a href="pp.html" class="footer__link">Privacy Policy</a>
+			</li>
+			<li class="footer__link-item">
+				<a href="tos.html" class="footer__link">Terms of Service</a>
+			</li>
+			<li class="footer__link-item">
+				<a href="index.html#contact" class="footer__link">Contact Me</a>
+			</li>
+			<li class="footer__link-item footer__link-item--icon">
+				<a
+					href="https://www.facebook.com/lonewolfitservicesllc"
+					target="_blank"
+					class="footer__link"
+				>
+					<img
+						src="images/ui/facebook-icon.png"
+						alt="Facebook"
+						class="footer__icon"
+					/>
+				</a>
+			</li>
+		</ul>
+	</div>
+</footer>
+
+	</div>
+</body>
 </html>

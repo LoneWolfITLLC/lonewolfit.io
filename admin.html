@@ -144,238 +144,266 @@
 				}
 			});
 		</script>
-	</head>
+			<script>COLLAPSABLE_WIDTH = 970;</script>
+</head>
 	<body>
-		<div
-			class="invoices__loading-bar"
-			id="functionsLoadingBar"
-			style="display: none"
-		></div>
-		<header class="header">
-			<img
-				src="images/wolf-logo.png"
-				alt="Lone Wolf IT Logo"
-				class="header__logo"
-				onclick="window.location.href='index.html#home';"
-			/>
-			<h1 class="header__title">Lone Wolf IT</h1>
-			<nav class="header__nav" id="headerNav">
-				<ul class="header__nav-list">
-					<li class="header__nav-item">
-						<a href="index.html" class="header__nav-link">Home</a>
-					</li>
-					<li class="header__nav-item">
-						<a href="index.html#services" class="header__nav-link"
-							>Portfolio/Services</a
-						>
-					</li>
-					<li class="header__nav-item">
-						<a onclick="goToMemberPortal()" class="header__nav-link">Member Portal</a>
-					</li>
-					<li class="header__nav-item">
-						<a href="index.html#about" class="header__nav-link">About</a>
-					</li>
-					<li class="header__nav-item">
-						<a href="index.html#contact" class="header__nav-link">Contact</a>
-					</li>
-				</ul>
-			</nav>
-			<button
-				class="navbar-toggle"
-				id="navbarToggle"
-				aria-label="Open navigation menu"
-			>
-				&#9776;
-			</button>
-		</header>
+	<div class="page" id="main">
+
+<header class="header">
+	<img
+		src="images/wolf-logo.png"
+		alt="Lone Wolf IT Services logo"
+		class="header__logo"
+		onclick="location.href='index.html#home';"
+	/>
+	<span class="header__title">Lone Wolf IT Services</span>
+	<nav class="header__nav" aria-label="Primary" aria-hidden="true">
+		<ul class="header__nav-list">
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="index.html#home" onclick="closeHeaderNavGlobal()">Home</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="index.html#services" onclick="closeHeaderNavGlobal()">Portfolio/Services</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="shop.html" onclick="closeHeaderNavGlobal()">Shop</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="index.html#about" onclick="closeHeaderNavGlobal()">About</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="index.html#contact" onclick="closeHeaderNavGlobal()">Contact</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" id="membersLinkSidebar" onclick="goToMemberPortal(); closeHeaderNavGlobal();">Sign In</a>
+			</li>
+		</ul>
+	</nav>
+	<button
+		class="header__toggle"
+		id="toggleBtn"
+		aria-expanded="true"
+		aria-controls="sidebar"
+	>
+		☰
+	</button>
+</header>
+
 		<main class="main">
-			<section class="main__section" id="mainSection">
-				<img
-					src="./images/wolf-logo.png"
-					alt="Lone Wolf IT Logo"
-					class="main__logo main__item-centered"
-				/>
-				<h1 class="main__heading main__item-centered">
-					Welcome to the Admin Portal
-				</h1>
-				<p class="main__text main__item-centered">
-					This is the admin portal for Lone Wolf IT Services LLC. Here you can
-					manage users, view analytics, and perform administrative tasks.
-				</p>
-				<p class="main__text main__item-centered">
-					If you have any questions or need assistance, please
-					<a href="index.html#contact" class="main__link">contact support</a>.
-				</p>
-				<p class="main__text main__item-centered">
-					<a href="members.html" class="main__link">Go to Member Portal</a>
-				</p>
-				<button
-					class="btn btn-primary main__item-centered"
-					onclick="window.location.href='members.html'"
-				>
-					Member Portal
-				</button>
-			</section>
-			<section class="main__section" id="customerFeedbackSection">
-				<h2 class="main__heading">Customer Feedback & Testimonials</h2>
-				<p class="main__text main__item-centered">
-					Manage and review customer testimonials for Lone Wolf IT.
-				</p>
-				<div
-					class="main__section-hidden main__item-centered"
-					style="margin-bottom: 5px"
-				>
-					<button
-						class="btn btn-primary"
-						style="margin-bottom: 5px"
-						onclick="window.location.href='testimonials.html'"
-					>
-						Manage Testimonials
-					</button>
-					<button
-						class="btn btn-primary"
-						onclick="window.location.href='delete_testimonials.html'"
-						style="margin-bottom: 5px"
-					>
-						Delete Approved Testimonials
-					</button>
-				</div>
-			</section>
-			<section class="main__section" id="contactFormSection">
-				<h2 class="main__heading">Contact Form Submissions</h2>
-				<p class="main__text main__item-centered">
-					Manage and review contact form submissions from customers.
-				</p>
-				<div
-					class="main__section-hidden main__item-centered"
-					style="margin-bottom: 5px"
-				>
-					<button
-						class="btn btn-primary"
-						onclick="window.location.href='contact_form_submissions.html'"
-						style="margin-bottom: 5px"
-					>
-						View Contact Form Submissions
-					</button>
-				</div>
-			</section>
-			<section class="main__section" id="databaseManagementSection">
-				<h2 class="main__heading">Database & User Management</h2>
-				<p class="main__text main__item-centered">
-					Manage users, synchronize databases, and perform cleanup operations.
-				</p>
-				<div class="main__item-centered" style="margin-bottom: 5px">
-					<button
-						class="btn btn-primary"
-						onclick="window.location.href='users.html'"
-						style="margin-bottom: 5px"
-					>
-						View/Manage Users
-					</button>
-					<button
-						class="btn btn-primary"
-						id="stripeSyncBtn"
-						style="margin-bottom: 5px"
-					>
-						Sync Stripe DB to SQLLite
-					</button>
-					<button
-						class="btn btn-primary"
-						onclick="window.open('https://dashboard.stripe.com', '_blank')"
-						style="margin-bottom: 5px"
-					>
-						Stripe Dashboard
-					</button>
-				</div>
-				<div class="main__item-centered" style="margin-bottom: 5px">
-					<button
-						class="btn btn-primary"
-						id="cleanupAllBtn"
-						style="margin-bottom: 5px"
-					>
-						Cleanup Deleted User Content
-					</button>
-				</div>
-			</section>
-			<section class="main__section" id="accountManagementSection">
-				<h2 class="main__heading">Personal Account Management</h2>
-				<p class="main__text main__item-centered">
-					Manage your account details, and update your preferences.
-				</p>
-				<div
-					class="main__section-hidden main__item-centered"
-				>
-					<button
-						class="btn btn-primary"
-						onclick="window.location.href='preferences.html'"
-						style="margin-bottom: 5px"
-					>
-						Manage Preferences
-					</button>
-					<button
-						class="btn btn-primary"
-						onclick="window.location.href='edit_user.html'"
-						style="margin-bottom: 5px"
-					>
-						Edit User Account Details
-					</button>
-				</div>
-				<div class="main__section-hidden main__item-centered">
-					<button class="btn btn-primary" onclick="signOut()">Sign Out</button>
-					<button class="btn btn-secondary" onclick="signOut(true)">
-						Sign Out of All Devices
-					</button>
-				</div>
-				<button
-					class="btn btn-delete main__item-centered"
-					style="margin-top: 5px"
-					onclick="deleteAccount()"
-				>
-					Delete Account
-				</button>
-			</section>
-		</main>
-		<footer class="footer">
-			<div class="footer__content">
-				<p class="footer__prepared-by">
-					Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
-				</p>
-				<p class="footer__contact">
-					Contact:
-					<a
-						href="mailto:arlo.lonewolfit@gmail.com"
-						class="footer__contact-link"
-						>arlo.lonewolfit@gmail.com</a
-					>
-				</p>
-				<p class="footer__copyright">
-					© 2025 Lone Wolf IT Services LLC | All Rights Reserved.
-				</p>
-				<ul class="footer__links">
-					<li class="footer__link-item">
-						<a href="pp.html" class="footer__link">Privacy Policy</a>
-					</li>
-					<li class="footer__link-item">
-						<a href="tos.html" class="footer__link">Terms of Service</a>
-					</li>
-					<li class="footer__link-item">
-						<a href="index.html#contact" class="footer__link">Contact Me</a>
-					</li>
-					<li class="footer__link-item footer__link-item--icon">
-						<a
-							href="https://www.facebook.com/lonewolfitservicesllc"
-							target="_blank"
-							class="footer__link"
+					<section class="main__section" id="mainSection">
+						<img
+							src="./images/wolf-logo.png"
+							alt="Lone Wolf IT Logo"
+							class="main__logo main__item-centered"
+						/>
+						<h1 class="main__heading main__item-centered">
+							Welcome to the Admin Portal
+						</h1>
+						<p class="main__text main__item-centered">
+							This is the admin portal for Lone Wolf IT Services LLC. Here you can
+							manage users, view analytics, and perform administrative tasks.
+						</p>
+						<p class="main__text main__item-centered">
+							If you have any questions or need assistance, please
+							<a href="index.html#contact" class="main__link">contact support</a>.
+						</p>
+						<p class="main__text main__item-centered">
+							<a href="members.html" class="main__link">Go to Member Portal</a>
+						</p>
+						<button
+							class="btn btn-primary main__item-centered"
+							onclick="window.location.href='members.html'"
 						>
-							<img
-								src="images/ui/facebook-icon.png"
-								alt="Facebook"
-								class="footer__icon"
-							/>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</footer>
-	</body>
+							Member Portal
+						</button>
+					</section>
+					<section class="main__section" id="customerFeedbackSection">
+						<h2 class="main__heading">Customer Feedback & Testimonials</h2>
+						<p class="main__text main__item-centered">
+							Manage and review customer testimonials for Lone Wolf IT.
+						</p>
+						<div
+							class="main__section-hidden main__item-centered"
+							style="margin-bottom: 5px"
+						>
+							<button
+								class="btn btn-primary"
+								style="margin-bottom: 5px"
+								onclick="window.location.href='testimonials.html'"
+							>
+								Manage Testimonials
+							</button>
+							<button
+								class="btn btn-primary"
+								onclick="window.location.href='delete_testimonials.html'"
+								style="margin-bottom: 5px"
+							>
+								Delete Approved Testimonials
+							</button>
+						</div>
+					</section>
+					<section class="main__section" id="contactFormSection">
+						<h2 class="main__heading">Contact Form Submissions</h2>
+						<p class="main__text main__item-centered">
+							Manage and review contact form submissions from customers.
+						</p>
+						<div
+							class="main__section-hidden main__item-centered"
+							style="margin-bottom: 5px"
+						>
+							<button
+								class="btn btn-primary"
+								onclick="window.location.href='contact_form_submissions.html'"
+								style="margin-bottom: 5px"
+							>
+								View Contact Form Submissions
+							</button>
+						</div>
+					</section>
+					<section class="main__section" id="databaseManagementSection">
+						<h2 class="main__heading">Database & User Management</h2>
+						<p class="main__text main__item-centered">
+							Manage users, synchronize databases, and perform cleanup operations.
+						</p>
+						<div class="main__item-centered" style="margin-bottom: 5px">
+							<button
+								class="btn btn-primary"
+								onclick="window.location.href='users.html'"
+								style="margin-bottom: 5px"
+							>
+								View/Manage Users
+							</button>
+							<button
+								class="btn btn-primary"
+								id="stripeSyncBtn"
+								style="margin-bottom: 5px"
+							>
+								Sync Stripe DB to SQLLite
+							</button>
+							<button
+								class="btn btn-primary"
+								onclick="window.open('https://dashboard.stripe.com', '_blank')"
+								style="margin-bottom: 5px"
+							>
+								Stripe Dashboard
+							</button>
+						</div>
+						<div class="main__item-centered" style="margin-bottom: 5px">
+							<button
+								class="btn btn-primary"
+								id="cleanupAllBtn"
+								style="margin-bottom: 5px"
+							>
+								Cleanup Deleted User Content
+							</button>
+						</div>
+					</section>
+					<section class="main__section" id="accountManagementSection">
+						<h2 class="main__heading">Personal Account Management</h2>
+						<p class="main__text main__item-centered">
+							Manage your account details, and update your preferences.
+						</p>
+						<div
+							class="main__section-hidden main__item-centered"
+						>
+							<button
+								class="btn btn-primary"
+								onclick="window.location.href='preferences.html'"
+								style="margin-bottom: 5px"
+							>
+								Manage Preferences
+							</button>
+							<button
+								class="btn btn-primary"
+								onclick="window.location.href='edit_user.html'"
+								style="margin-bottom: 5px"
+							>
+								Edit User Account Details
+							</button>
+						</div>
+						<div class="main__section-hidden main__item-centered">
+							<button class="btn btn-primary" onclick="signOut()">Sign Out</button>
+							<button class="btn btn-secondary" onclick="signOut(true)">
+								Sign Out of All Devices
+							</button>
+						</div>
+						<button
+							class="btn btn-delete main__item-centered"
+							style="margin-top: 5px"
+							onclick="deleteAccount()"
+						>
+							Delete Account
+						</button>
+					</section>
+				</main>
+
+<aside class="main__sidebar" id="sidebar" aria-label="Main navigation">
+	<nav class="main__nav">
+		<ul class="main__nav-list">
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="index.html#home">Home</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="index.html#services">Portfolio/Services</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="shop.html">Shop</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="index.html#about">About</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="index.html#contact">Contact</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" id="membersLink" onclick="goToMemberPortal();">Sign In</a>
+			</li>
+		</ul>
+	</nav>
+</aside>
+
+<footer class="footer">
+	<div class="footer__content">
+		<p class="footer__prepared-by">
+			Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
+		</p>
+		<p class="footer__contact">
+			Contact:
+			<a
+				href="mailto:arlo.lonewolfit@gmail.com"
+				class="footer__contact-link"
+			>arlo.lonewolfit@gmail.com</a>
+		</p>
+		<p class="footer__copyright">
+			© 2025 Lone Wolf IT Services LLC | All Rights Reserved.
+		</p>
+		<ul class="footer__links">
+			<li class="footer__link-item">
+				<a href="pp.html" class="footer__link">Privacy Policy</a>
+			</li>
+			<li class="footer__link-item">
+				<a href="tos.html" class="footer__link">Terms of Service</a>
+			</li>
+			<li class="footer__link-item">
+				<a href="index.html#contact" class="footer__link">Contact Me</a>
+			</li>
+			<li class="footer__link-item footer__link-item--icon">
+				<a
+					href="https://www.facebook.com/lonewolfitservicesllc"
+					target="_blank"
+					class="footer__link"
+				>
+					<img
+						src="images/ui/facebook-icon.png"
+						alt="Facebook"
+						class="footer__icon"
+					/>
+				</a>
+			</li>
+		</ul>
+	</div>
+</footer>
+
+	</div>
+</body>
 </html>

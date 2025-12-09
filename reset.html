@@ -43,189 +43,261 @@
 		<script>
 			redirectToPortal = true;
 		</script>
-	</head>
+			<script>COLLAPSABLE_WIDTH = 970;</script>
+		<script src="scripts/accountFunctions.js"></script>
+		<script src="scripts/header.js"></script>
+</head>
 	<body>
+	<div class="page" id="main">
+
+<header class="header">
+	<img
+		src="images/wolf-logo.png"
+		alt="Lone Wolf IT Services logo"
+		class="header__logo"
+		onclick="location.href='index.html#home';"
+	/>
+	<span class="header__title">Lone Wolf IT Services</span>
+	<nav class="header__nav" aria-label="Primary" aria-hidden="true">
+		<ul class="header__nav-list">
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="index.html#home" onclick="closeHeaderNavGlobal()">Home</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="index.html#services" onclick="closeHeaderNavGlobal()">Portfolio/Services</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="shop.html" onclick="closeHeaderNavGlobal()">Shop</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="index.html#about" onclick="closeHeaderNavGlobal()">About</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="index.html#contact" onclick="closeHeaderNavGlobal()">Contact</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" id="membersLinkSidebar" onclick="goToMemberPortal(); closeHeaderNavGlobal();">Sign In</a>
+			</li>
+		</ul>
+	</nav>
+	<button
+		class="header__toggle"
+		id="toggleBtn"
+		aria-expanded="true"
+		aria-controls="sidebar"
+	>
+		☰
+	</button>
+</header>
+
 		<main class="main">
-			<section class="main__section" id="mainSection">
-				<img
-					src="images/wolf-logo.png"
-					alt="Lone Wolf Logo"
-					class="main__logo main__item-centered"
-					onclick="window.location.href='index.html#home';"
-				/>
-				<h1 class="main__heading">Reset Your Password</h1>
-				<div
-					id="alertEmail"
-					class="alertDiv main__alert"
-					style="display: none"
-				></div>
-				<p class="main__intro main__item-centered" style="margin-top: 20px">
-					Please enter your email address below and we will send you
-					instructions on how to reset your password.
-				</p>
-				<form id="resetForm" class="main__form main__item-centered">
-					<div class="form-group">
-						<input
-							type="email"
-							id="email"
-							class="form-control"
-							placeholder="Enter your email address..."
-							required
-							maxlength="100"
+					<section class="main__section" id="mainSection">
+						<img
+							src="images/wolf-logo.png"
+							alt="Lone Wolf Logo"
+							class="main__logo main__item-centered"
+							onclick="window.location.href='index.html#home';"
 						/>
-						<span class="main__form-error" id="email-error"></span>
-						<button
-							type="submit"
-							class="btn btn-primary main__item-centered"
-							style="margin-top: 10px"
-							disabled
-						>
-							Send Verification Code
-						</button>
-					</div>
-				</form>
-			</section>
-			<section class="main__section main__section-hidden" id="resetSection">
-				<h2 class="main__heading">Enter New Password</h2>
-				<div
-					id="alertNewPassword"
-					class="alertDiv main__alert"
-					style="display: none"
-				></div>
-				<form id="newPasswordForm" class="main__form main__item-centered">
-					<div class="form-group">
-						<label for="verificationCode" class="form-label"
-							>Verification Code</label
-						>
-						<input
-							type="text"
-							id="verificationCode"
-							class="form-control"
-							placeholder="Enter the verification code...123456"
-							required
-							minlength="6"
-							maxlength="6"
-							pattern="[0-9]{6}"
-							title="Verification code must be 6 digits"
-						/>
-						<span class="main__form-error" id="verificationCode-error"></span>
-						<label for="password" class="form-label">New Password</label>
-						<div class="input-group">
-							<input
-								type="password"
-								id="password"
-								class="form-control"
-								placeholder="Create a secure password..."
-								style="height: inherit"
-								required
-								minlength="10"
-								maxlength="50"
-								pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9_]).{10,50}$"
-							/>
-							<button
-								type="button"
-								id="togglePassword"
-								class="btn btn-outline-secondary"
-								style="
-									display: flex;
-									align-items: center;
-									justify-content: center;
-									height: 50px;
-									border-top-left-radius: 0;
-									border-bottom-left-radius: 0;
-									padding-top: 0;
-									padding-bottom: 0;
-								"
-								tabindex="-1"
-								aria-label="Show/Hide Password"
-							>
-								<i class="fa fa-eye" aria-hidden="true"></i>
-							</button>
-						</div>
-						<span class="main__form-error" id="password-error"></span>
-						<small class="main__text-small main__item-centered"
-							>Password must be at least 10-16 characters long, contain a
-							lowercase and uppercase letter, a number, and a special
-							character.</small
-						>
+						<h1 class="main__heading">Reset Your Password</h1>
 						<div
-							class="progress"
-							id="passwordStrengthContainer"
+							id="alertEmail"
+							class="alertDiv main__alert"
 							style="display: none"
-						>
-							<div
-								id="passwordStrength"
-								class="progress-bar"
-								role="progressbar"
-							></div>
-						</div>
-						<label for="passwordConfirm" class="form-label"
-							>Confirm New Password</label
-						>
-						<input
-							type="password"
-							id="passwordConfirm"
-							class="form-control"
-							placeholder="Re-enter your password..."
-							required
-							minlength="10"
-							maxlength="50"
-							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9_]).{10,50}$"
-						/>
-						<span class="main__form-error" id="passwordConfirm-error"></span>
-						<button
-							type="submit"
-							class="btn btn-primary main__item-centered"
-							style="margin-top: 10px"
-							disabled
-						>
-							Reset Password
-						</button>
-					</div>
-				</form>
-			</section>
-		</main>
-		<footer class="footer">
-			<div class="footer__content">
-				<p class="footer__prepared-by">
-					Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
-				</p>
-				<p class="footer__contact">
-					Contact:
-					<a
-						href="mailto:arlo.lonewolfit@gmail.com"
-						class="footer__contact-link"
-						>arlo.lonewolfit@gmail.com</a
-					>
-				</p>
-				<p class="footer__copyright">
-					© 2025 Lone Wolf IT Services LLC | All Rights Reserved.
-				</p>
-				<ul class="footer__links">
-					<li class="footer__link-item">
-						<a href="pp.html" class="footer__link">Privacy Policy</a>
-					</li>
-					<li class="footer__link-item">
-						<a href="tos.html" class="footer__link">Terms of Service</a>
-					</li>
-					<li class="footer__link-item">
-						<a href="index.html#contact" class="footer__link">Contact Me</a>
-					</li>
-					<li class="footer__link-item footer__link-item--icon">
-						<a
-							href="https://www.facebook.com/lonewolfitservicesllc"
-							target="_blank"
-							class="footer__link"
-						>
-							<img
-								src="images/ui/facebook-icon.png"
-								alt="Facebook"
-								class="footer__icon"
-							/>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</footer>
-	</body>
+						></div>
+						<p class="main__intro main__item-centered" style="margin-top: 20px">
+							Please enter your email address below and we will send you
+							instructions on how to reset your password.
+						</p>
+						<form id="resetForm" class="main__form main__item-centered">
+							<div class="form-group">
+								<input
+									type="email"
+									id="email"
+									class="form-control"
+									placeholder="Enter your email address..."
+									required
+									maxlength="100"
+								/>
+								<span class="main__form-error" id="email-error"></span>
+								<button
+									type="submit"
+									class="btn btn-primary main__item-centered"
+									style="margin-top: 10px"
+									disabled
+								>
+									Send Verification Code
+								</button>
+							</div>
+						</form>
+					</section>
+					<section class="main__section main__section-hidden" id="resetSection">
+						<h2 class="main__heading">Enter New Password</h2>
+						<div
+							id="alertNewPassword"
+							class="alertDiv main__alert"
+							style="display: none"
+						></div>
+						<form id="newPasswordForm" class="main__form main__item-centered">
+							<div class="form-group">
+								<label for="verificationCode" class="form-label"
+									>Verification Code</label
+								>
+								<input
+									type="text"
+									id="verificationCode"
+									class="form-control"
+									placeholder="Enter the verification code...123456"
+									required
+									minlength="6"
+									maxlength="6"
+									pattern="[0-9]{6}"
+									title="Verification code must be 6 digits"
+								/>
+								<span class="main__form-error" id="verificationCode-error"></span>
+								<label for="password" class="form-label">New Password</label>
+								<div class="input-group">
+									<input
+										type="password"
+										id="password"
+										class="form-control"
+										placeholder="Create a secure password..."
+										style="height: inherit"
+										required
+										minlength="10"
+										maxlength="50"
+										pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9_]).{10,50}$"
+									/>
+									<button
+										type="button"
+										id="togglePassword"
+										class="btn btn-outline-secondary"
+										style="
+											display: flex;
+											align-items: center;
+											justify-content: center;
+											height: 50px;
+											border-top-left-radius: 0;
+											border-bottom-left-radius: 0;
+											padding-top: 0;
+											padding-bottom: 0;
+										"
+										tabindex="-1"
+										aria-label="Show/Hide Password"
+									>
+										<i class="fa fa-eye" aria-hidden="true"></i>
+									</button>
+								</div>
+								<span class="main__form-error" id="password-error"></span>
+								<small class="main__text-small main__item-centered"
+									>Password must be at least 10-16 characters long, contain a
+									lowercase and uppercase letter, a number, and a special
+									character.</small
+								>
+								<div
+									class="progress"
+									id="passwordStrengthContainer"
+									style="display: none"
+								>
+									<div
+										id="passwordStrength"
+										class="progress-bar"
+										role="progressbar"
+									></div>
+								</div>
+								<label for="passwordConfirm" class="form-label"
+									>Confirm New Password</label
+								>
+								<input
+									type="password"
+									id="passwordConfirm"
+									class="form-control"
+									placeholder="Re-enter your password..."
+									required
+									minlength="10"
+									maxlength="50"
+									pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9_]).{10,50}$"
+								/>
+								<span class="main__form-error" id="passwordConfirm-error"></span>
+								<button
+									type="submit"
+									class="btn btn-primary main__item-centered"
+									style="margin-top: 10px"
+									disabled
+								>
+									Reset Password
+								</button>
+							</div>
+						</form>
+					</section>
+				</main>
+
+<aside class="main__sidebar" id="sidebar" aria-label="Main navigation">
+	<nav class="main__nav">
+		<ul class="main__nav-list">
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="index.html#home">Home</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="index.html#services">Portfolio/Services</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="shop.html">Shop</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="index.html#about">About</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="index.html#contact">Contact</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" id="membersLink" onclick="goToMemberPortal();">Sign In</a>
+			</li>
+		</ul>
+	</nav>
+</aside>
+
+<footer class="footer">
+	<div class="footer__content">
+		<p class="footer__prepared-by">
+			Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
+		</p>
+		<p class="footer__contact">
+			Contact:
+			<a
+				href="mailto:arlo.lonewolfit@gmail.com"
+				class="footer__contact-link"
+			>arlo.lonewolfit@gmail.com</a>
+		</p>
+		<p class="footer__copyright">
+			© 2025 Lone Wolf IT Services LLC | All Rights Reserved.
+		</p>
+		<ul class="footer__links">
+			<li class="footer__link-item">
+				<a href="pp.html" class="footer__link">Privacy Policy</a>
+			</li>
+			<li class="footer__link-item">
+				<a href="tos.html" class="footer__link">Terms of Service</a>
+			</li>
+			<li class="footer__link-item">
+				<a href="index.html#contact" class="footer__link">Contact Me</a>
+			</li>
+			<li class="footer__link-item footer__link-item--icon">
+				<a
+					href="https://www.facebook.com/lonewolfitservicesllc"
+					target="_blank"
+					class="footer__link"
+				>
+					<img
+						src="images/ui/facebook-icon.png"
+						alt="Facebook"
+						class="footer__icon"
+					/>
+				</a>
+			</li>
+		</ul>
+	</div>
+</footer>
+
+	</div>
+</body>
 </html>

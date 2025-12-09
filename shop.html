@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shop - Lone Wolf IT Services</title>
+<link rel="icon" href="./images/wolf-logo.png" type="image/png" />
+<link rel="stylesheet" href="vendor/bootstrap.min.css" />
+<link rel="stylesheet" href="styles/styles_white.css" />
+<link rel="stylesheet" href="styles/styles_black.css" />
+<link rel="stylesheet" href="styles/styles_modals_white.css" />
+<link rel="stylesheet" href="styles/styles_modals_black.css" />
+<script src="scripts/auth.js"></script>
+<script src="scripts/preferences.js"></script>
+<script src="scripts/darkmode.js"></script>
+<script>COLLAPSABLE_WIDTH = 970;</script>
+<script src="scripts/accountFunctions.js"></script>
+<script src="scripts/header.js"></script>
+</head>
+<body>
+<div class="page" id="main">
+<header class="header">
+<img
+src="images/wolf-logo.png"
+alt="Lone Wolf IT Services logo"
+class="header__logo"
+onclick="location.href='index.html#home';"
+/>
+<span class="header__title">Lone Wolf IT Services</span>
+<nav class="header__nav" aria-label="Primary" aria-hidden="true">
+<ul class="header__nav-list">
+<li class="header__nav-item">
+<a class="header__nav-link" href="index.html#home" onclick="closeHeaderNavGlobal()">Home</a>
+</li>
+<li class="header__nav-item">
+<a class="header__nav-link" href="index.html#services" onclick="closeHeaderNavGlobal()">Portfolio/Services</a>
+</li>
+<li class="header__nav-item">
+<a class="header__nav-link" href="shop.html" onclick="closeHeaderNavGlobal()">Shop</a>
+</li>
+<li class="header__nav-item">
+<a class="header__nav-link" href="index.html#about" onclick="closeHeaderNavGlobal()">About</a>
+</li>
+<li class="header__nav-item">
+<a class="header__nav-link" href="index.html#contact" onclick="closeHeaderNavGlobal()">Contact</a>
+</li>
+<li class="header__nav-item">
+<a class="header__nav-link" id="membersLinkSidebar" onclick="goToMemberPortal(); closeHeaderNavGlobal();">Sign In</a>
+</li>
+</ul>
+</nav>
+<button
+class="header__toggle"
+id="toggleBtn"
+aria-expanded="true"
+aria-controls="sidebar"
+>
+☰
+</button>
+</header>
+
+<main class="main">
+</main>
+
+<aside class="main__sidebar" id="sidebar" aria-label="Main navigation">
+<nav class="main__nav">
+<ul class="main__nav-list">
+<li class="main__nav-item">
+<a class="main__nav-link" href="index.html#home">Home</a>
+</li>
+<li class="main__nav-item">
+<a class="main__nav-link" href="index.html#services">Portfolio/Services</a>
+</li>
+<li class="main__nav-item">
+<a class="main__nav-link" href="shop.html">Shop</a>
+</li>
+<li class="main__nav-item">
+<a class="main__nav-link" href="index.html#about">About</a>
+</li>
+<li class="main__nav-item">
+<a class="main__nav-link" href="index.html#contact">Contact</a>
+</li>
+<li class="main__nav-item">
+<a class="main__nav-link" id="membersLink" onclick="goToMemberPortal();">Sign In</a>
+</li>
+</ul>
+</nav>
+</aside>
+
+<footer class="footer">
+<div class="footer__content">
+<p class="footer__prepared-by">
+Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
+</p>
+<p class="footer__contact">
+Contact:
+<a
+href="mailto:arlo.lonewolfit@gmail.com"
+class="footer__contact-link"
+>arlo.lonewolfit@gmail.com</a>
+</p>
+<p class="footer__copyright">
+© 2025 Lone Wolf IT Services LLC | All Rights Reserved.
+</p>
+<ul class="footer__links">
+<li class="footer__link-item">
+<a href="pp.html" class="footer__link">Privacy Policy</a>
+</li>
+<li class="footer__link-item">
+<a href="tos.html" class="footer__link">Terms of Service</a>
+</li>
+<li class="footer__link-item">
+<a href="index.html#contact" class="footer__link">Contact Me</a>
+</li>
+<li class="footer__link-item footer__link-item--icon">
+<a
+href="https://www.facebook.com/lonewolfitservicesllc"
+target="_blank"
+class="footer__link"
+>
+<img
+src="images/ui/facebook-icon.png"
+alt="Facebook"
+class="footer__icon"
+/>
+</a>
+</li>
+</ul>
+</div>
+</footer>
+
+</div>
+</body>
+</html>

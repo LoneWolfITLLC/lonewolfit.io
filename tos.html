@@ -40,203 +40,235 @@
 		<script src="scripts/auth.js"></script>
 		<script src="scripts/darkmode.js"></script>
 		<script src="scripts/header.js"></script>
-	</head>
+			<script>COLLAPSABLE_WIDTH = 970;</script>
+		<script src="scripts/accountFunctions.js"></script>
+</head>
 	<body>
-		<header class="header">
-			<img
-				src="images/wolf-logo.png"
-				alt="Lone Wolf IT Logo"
-				class="header__logo"
-				onclick="window.location.href='index.html#home';"
-			/>
-			<h1 class="header__title">Lone Wolf IT</h1>
-			<nav class="header__nav" id="headerNav">
-				<ul class="header__nav-list">
-					<li class="header__nav-item">
-						<a href="index.html" class="header__nav-link">Home</a>
-					</li>
-					<li class="header__nav-item">
-						<a href="index.html#services" class="header__nav-link"
-							>Portfolio/Services</a
-						>
-					</li>
-					<li class="header__nav-item">
-						<a onclick="goToMemberPortal()" class="header__nav-link"
-							>Member Portal</a
-						>
-					</li>
-					<li class="header__nav-item">
-						<a href="index.html#about" class="header__nav-link">About</a>
-					</li>
-					<li class="header__nav-item">
-						<a href="index.html#contact" class="header__nav-link">Contact</a>
-					</li>
-				</ul>
-			</nav>
-			<button
-				class="navbar-toggle"
-				id="navbarToggle"
-				aria-label="Open navigation menu"
-			>
-				&#9776;
-			</button>
-		</header>
+	<div class="page" id="main">
+
+<header class="header">
+	<img
+		src="images/wolf-logo.png"
+		alt="Lone Wolf IT Services logo"
+		class="header__logo"
+		onclick="location.href='index.html#home';"
+	/>
+	<span class="header__title">Lone Wolf IT Services</span>
+	<nav class="header__nav" aria-label="Primary" aria-hidden="true">
+		<ul class="header__nav-list">
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="index.html#home" onclick="closeHeaderNavGlobal()">Home</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="index.html#services" onclick="closeHeaderNavGlobal()">Portfolio/Services</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="shop.html" onclick="closeHeaderNavGlobal()">Shop</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="index.html#about" onclick="closeHeaderNavGlobal()">About</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="index.html#contact" onclick="closeHeaderNavGlobal()">Contact</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" id="membersLinkSidebar" onclick="goToMemberPortal(); closeHeaderNavGlobal();">Sign In</a>
+			</li>
+		</ul>
+	</nav>
+	<button
+		class="header__toggle"
+		id="toggleBtn"
+		aria-expanded="true"
+		aria-controls="sidebar"
+	>
+		☰
+	</button>
+</header>
+
 		<main class="main">
-			<section class="main__section">
-				<p class="main__text">
-					Welcome to Lone Wolf IT. By accessing or using our services, you agree
-					to be bound by the terms and conditions outlined below. If you do not
-					agree, please refrain from using our services.
-				</p>
-			</section>
-			<section class="main__section">
-				<h2 class="main__heading">1. Acceptance of Terms</h2>
-				<p class="main__text">
-					By accessing Lone Wolf IT services, you affirm that you are at least
-					18 years old or have obtained parental consent to use our services.
-					You agree to comply with these terms and any applicable laws.
-				</p>
-			</section>
-			<section class="main__section">
-				<h2 class="main__heading">2. Services Provided</h2>
-				<p class="main__text">
-					Lone Wolf IT provides IT solutions, software, and services
-					("Services"). We reserve the right to modify or discontinue the
-					Services at any time without prior notice.
-				</p>
-			</section>
-			<section class="main__section">
-				<h2 class="main__heading">3. User Responsibilities</h2>
-				<ul>
-					<li>
-						You agree not to misuse the Services, including engaging in any
-						illegal or harmful activities.
-					</li>
-					<li>
-						Keep your account credentials confidential and notify us immediately
-						of unauthorized access.
-					</li>
-					<li>Ensure your use complies with all applicable laws.</li>
-				</ul>
-			</section>
-			<section class="main__section">
-				<h2 class="main__heading">4. Intellectual Property</h2>
-				<p class="main__text">
-					All content, including text, graphics, logos, and software, is the
-					property of Lone Wolf IT or its licensors. You may not copy,
-					reproduce, or distribute any content without prior written permission.
-				</p>
-			</section>
-			<section class="main__section">
-				<h2 class="main__heading">5. Limitation of Liability</h2>
-				<p class="main__text">
-					Lone Wolf IT is not liable for any indirect, incidental, or
-					consequential damages arising from your use of the Services. Our
-					liability is limited to the extent permitted by law.
-				</p>
-			</section>
-			<section class="main__section">
-				<h2 class="main__heading">6. Privacy Policy</h2>
-				<p class="main__text">
-					Your use of the Services is also governed by our
-					<a href="pp.html">Privacy Policy</a>, which outlines how we collect,
-					use, and protect your information.
-				</p>
-			</section>
-			<section class="main__section">
-				<h2 class="main__heading">7. Termination</h2>
-				<p class="main__text">
-					We reserve the right to suspend or terminate your access to the
-					Services at any time for violations of these terms or other reasons at
-					our sole discretion.
-				</p>
-			</section>
-			<section class="main__section">
-				<h2 class="main__heading">8. Governing Law</h2>
-				<p class="main__text">
-					These terms are governed by the laws of the State of Illinois, United
-					States. Any disputes arising from these terms will be resolved under
-					the jurisdiction of the courts located in Illinois.
-				</p>
-			</section>
-			<section class="main__section">
-				<h2 class="main__heading">9. Payment Processing</h2>
-				<p class="main__text">
-					Our services include payment processing through
-					<strong>Stripe</strong>, a third-party payment processor. By using our
-					services and making payments, you consent to the collection and use of
-					your payment information by Stripe in accordance with their privacy
-					policy.
-				</p>
-				<p class="main__text">
-					We do not store your payment information on our servers. All payment
-					transactions are processed through Stripe's secure servers. Please
-					review Stripe's privacy policy at
-					<a href="https://stripe.com/privacy" target="_blank"
-						>https://stripe.com/privacy</a
-					>
-					for more information on how your information is handled.
-				</p>
-			</section>
-			<section class="main__section">
-				<h2 class="main__heading">Contact Information</h2>
-				<p class="main__text main__item-centered">
-					If you have any questions about these terms, you can reach us at:
-				</p>
-				<strong class="main__text main__item-centered">Email:</strong>
-				<button
-					class="btn btn-primary main__item-centered"
-					onclick="window.location.href='mailto:arlo.lonewolfit@gmail.com'"
-				>
-					arlo.lonewolfit@gmail.com
-				</button>
-				<p class="main__text main__item-centered" style="margin-top: 10px">
-					You can also reach me through the contact form on my
-					<a href="index.html#contact" class="main__link">Contact Page</a>.
-				</p>
-			</section>
-		</main>
-		<footer class="footer">
-			<div class="footer__content">
-				<p class="footer__prepared-by">
-					Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
-				</p>
-				<p class="footer__contact">
-					Contact:
-					<a
-						href="mailto:arlo.lonewolfit@gmail.com"
-						class="footer__contact-link"
-						>arlo.lonewolfit@gmail.com</a
-					>
-				</p>
-				<p class="footer__copyright">
-					© 2025 Lone Wolf IT Services LLC | All Rights Reserved.
-				</p>
-				<ul class="footer__links">
-					<li class="footer__link-item">
-						<a href="pp.html" class="footer__link">Privacy Policy</a>
-					</li>
-					<li class="footer__link-item">
-						<a href="tos.html" class="footer__link">Terms of Service</a>
-					</li>
-					<li class="footer__link-item">
-						<a href="index.html#contact" class="footer__link">Contact Me</a>
-					</li>
-					<li class="footer__link-item footer__link-item--icon">
-						<a
-							href="https://www.facebook.com/lonewolfitservicesllc"
-							target="_blank"
-							class="footer__link"
+					<section class="main__section">
+						<p class="main__text">
+							Welcome to Lone Wolf IT. By accessing or using our services, you agree
+							to be bound by the terms and conditions outlined below. If you do not
+							agree, please refrain from using our services.
+						</p>
+					</section>
+					<section class="main__section">
+						<h2 class="main__heading">1. Acceptance of Terms</h2>
+						<p class="main__text">
+							By accessing Lone Wolf IT services, you affirm that you are at least
+							18 years old or have obtained parental consent to use our services.
+							You agree to comply with these terms and any applicable laws.
+						</p>
+					</section>
+					<section class="main__section">
+						<h2 class="main__heading">2. Services Provided</h2>
+						<p class="main__text">
+							Lone Wolf IT provides IT solutions, software, and services
+							("Services"). We reserve the right to modify or discontinue the
+							Services at any time without prior notice.
+						</p>
+					</section>
+					<section class="main__section">
+						<h2 class="main__heading">3. User Responsibilities</h2>
+						<ul>
+							<li>
+								You agree not to misuse the Services, including engaging in any
+								illegal or harmful activities.
+							</li>
+							<li>
+								Keep your account credentials confidential and notify us immediately
+								of unauthorized access.
+							</li>
+							<li>Ensure your use complies with all applicable laws.</li>
+						</ul>
+					</section>
+					<section class="main__section">
+						<h2 class="main__heading">4. Intellectual Property</h2>
+						<p class="main__text">
+							All content, including text, graphics, logos, and software, is the
+							property of Lone Wolf IT or its licensors. You may not copy,
+							reproduce, or distribute any content without prior written permission.
+						</p>
+					</section>
+					<section class="main__section">
+						<h2 class="main__heading">5. Limitation of Liability</h2>
+						<p class="main__text">
+							Lone Wolf IT is not liable for any indirect, incidental, or
+							consequential damages arising from your use of the Services. Our
+							liability is limited to the extent permitted by law.
+						</p>
+					</section>
+					<section class="main__section">
+						<h2 class="main__heading">6. Privacy Policy</h2>
+						<p class="main__text">
+							Your use of the Services is also governed by our
+							<a href="pp.html">Privacy Policy</a>, which outlines how we collect,
+							use, and protect your information.
+						</p>
+					</section>
+					<section class="main__section">
+						<h2 class="main__heading">7. Termination</h2>
+						<p class="main__text">
+							We reserve the right to suspend or terminate your access to the
+							Services at any time for violations of these terms or other reasons at
+							our sole discretion.
+						</p>
+					</section>
+					<section class="main__section">
+						<h2 class="main__heading">8. Governing Law</h2>
+						<p class="main__text">
+							These terms are governed by the laws of the State of Illinois, United
+							States. Any disputes arising from these terms will be resolved under
+							the jurisdiction of the courts located in Illinois.
+						</p>
+					</section>
+					<section class="main__section">
+						<h2 class="main__heading">9. Payment Processing</h2>
+						<p class="main__text">
+							Our services include payment processing through
+							<strong>Stripe</strong>, a third-party payment processor. By using our
+							services and making payments, you consent to the collection and use of
+							your payment information by Stripe in accordance with their privacy
+							policy.
+						</p>
+						<p class="main__text">
+							We do not store your payment information on our servers. All payment
+							transactions are processed through Stripe's secure servers. Please
+							review Stripe's privacy policy at
+							<a href="https://stripe.com/privacy" target="_blank"
+								>https://stripe.com/privacy</a
+							>
+							for more information on how your information is handled.
+						</p>
+					</section>
+					<section class="main__section">
+						<h2 class="main__heading">Contact Information</h2>
+						<p class="main__text main__item-centered">
+							If you have any questions about these terms, you can reach us at:
+						</p>
+						<strong class="main__text main__item-centered">Email:</strong>
+						<button
+							class="btn btn-primary main__item-centered"
+							onclick="window.location.href='mailto:arlo.lonewolfit@gmail.com'"
 						>
-							<img
-								src="images/ui/facebook-icon.png"
-								alt="Facebook"
-								class="footer__icon"
-							/>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</footer>
-	</body>
+							arlo.lonewolfit@gmail.com
+						</button>
+						<p class="main__text main__item-centered" style="margin-top: 10px">
+							You can also reach me through the contact form on my
+							<a href="index.html#contact" class="main__link">Contact Page</a>.
+						</p>
+					</section>
+				</main>
+
+<aside class="main__sidebar" id="sidebar" aria-label="Main navigation">
+	<nav class="main__nav">
+		<ul class="main__nav-list">
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="index.html#home">Home</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="index.html#services">Portfolio/Services</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="shop.html">Shop</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="index.html#about">About</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="index.html#contact">Contact</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" id="membersLink" onclick="goToMemberPortal();">Sign In</a>
+			</li>
+		</ul>
+	</nav>
+</aside>
+
+<footer class="footer">
+	<div class="footer__content">
+		<p class="footer__prepared-by">
+			Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
+		</p>
+		<p class="footer__contact">
+			Contact:
+			<a
+				href="mailto:arlo.lonewolfit@gmail.com"
+				class="footer__contact-link"
+			>arlo.lonewolfit@gmail.com</a>
+		</p>
+		<p class="footer__copyright">
+			© 2025 Lone Wolf IT Services LLC | All Rights Reserved.
+		</p>
+		<ul class="footer__links">
+			<li class="footer__link-item">
+				<a href="pp.html" class="footer__link">Privacy Policy</a>
+			</li>
+			<li class="footer__link-item">
+				<a href="tos.html" class="footer__link">Terms of Service</a>
+			</li>
+			<li class="footer__link-item">
+				<a href="index.html#contact" class="footer__link">Contact Me</a>
+			</li>
+			<li class="footer__link-item footer__link-item--icon">
+				<a
+					href="https://www.facebook.com/lonewolfitservicesllc"
+					target="_blank"
+					class="footer__link"
+				>
+					<img
+						src="images/ui/facebook-icon.png"
+						alt="Facebook"
+						class="footer__icon"
+					/>
+				</a>
+			</li>
+		</ul>
+	</div>
+</footer>
+
+	</div>
+</body>
 </html>

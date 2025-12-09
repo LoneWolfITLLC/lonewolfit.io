@@ -1,255 +1,164 @@
 .main {
-	width: 100%; /* Main content fills container. */
-	max-width: 1200px; /* Restricts main content width for readability. */
-	margin: 0 auto; /* Centers main content horizontally. */
-	padding: 2rem 1rem; /* Adds space around main content. */
+    grid-area: main;
+    background: transparent;
+    margin: 0; /* Centers main content horizontally. */
+    overflow-anchor: none;
 }
-
 .main__section {
-	margin-top: 80px; /* Adds space below header. */
-	margin-bottom: 3rem; /* Adds space below each section. */
-	background: #fff; /* White background for content clarity. */
-	border-radius: 12px; /* Softly rounds section corners. */
-	box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06); /* Subtle shadow for depth. */
-	padding: 2rem; /* Generous padding for content. */
-	scroll-margin-top: 100px; /* Ensures anchor links scroll below header. */
+    margin: 20px 20px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for better readability */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    padding: 20px;
+    z-index: 1;
+    animation: fadeIn 0.8s ease-in;
+    scroll-margin-top: 120px; /* Ensures anchor links scroll below header. */
 }
-
 .main__section-hidden {
-	background: none; /* No background for hidden sections. */
-	border: none; /* No border for hidden sections. */
-	box-shadow: none; /* No shadow for hidden sections. */
+    background: transparent;
+    box-shadow: none;
 }
-
-.main__section--portfolio {
-	background: #f9f9f9; /* Light gray background for portfolio sections. */
-	border: 1px solid #e0e0e0; /* Subtle border for separation. */
-	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05); /* Soft shadow for depth. */
-	padding: 1.5rem; /* Padding for content spacing. */
-	display: flex; /* Flexbox for layout. */
-	flex-direction: column; /* Stacks items vertically. */
-	align-items: center;
-	gap: 1.5rem; /* Space between items. */
-	margin-bottom: 2rem; /* Space below portfolio section. */
-	overflow: hidden; /* Prevents overflow of content. */
-	max-width: 100%; /* Ensures section does not exceed container width. */
-	max-height: 100%; /* Prevents section from exceeding container height. */
+.main__section-fit-content {
+    display: block;
+    width: fit-content;
+    max-width: calc(100% - 40px); /* reserve 20px on each side */
+    margin: 10px auto;               /* center when there's extra space */
+    box-sizing: border-box;
 }
-
+.main__section-title {
+    text-align: center;
+}
+/* Sidebar: use width transition instead of collapsing grid column to 0.
+   Keeps layout stable and prevents nav items from overlapping. */
+.main__sidebar {
+    grid-area: sidebar;
+    background: transparent;
+    transition: width 0.25s ease-in-out forwards, transform 0.25s ease-in-out forwards;
+    animation: slideInFromRight 0.25s ease-out forwards;
+    /* Remove from document flow and pin to the right side under the fixed header */
+    position: fixed;
+    top: 100px; /* adjust to match header height; change if header size changes */
+    right: 0px;
+    width: 280px;         /* default sidebar width matches grid */
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    min-width: 0;         /* allow container to shrink in grid/flex contexts */
+    z-index: 1;
+    overflow-anchor: none;
+}
+.main--scrolled {
+    margin-top: 50px !important; /* Adjust margin to account for fixed header height */
+    transition: margin-top 0.25s ease-in-out;
+}
 .main__heading {
-	font-size: 2rem; /* Large heading for section titles. */
-	font-weight: 700; /* Bold heading for emphasis. */
-	color: #031e3c; /* Deep blue for strong contrast. */
-	margin-bottom: 1rem; /* Space below heading. */
-	margin-top: 0; /* No extra space above heading. */
-	margin-left: 0; /* No extra space to the left. */
-	margin-right: 0; /* No extra space to the right. */
-	white-space: nowrap; /* Prevents heading from wrapping. */
-	text-align: center; /* Centers heading text. */
-	text-shadow: 0 0 8px #00ffff, 0 0 16px #00ffff, 0 0 24px #031e3c; /* Glowing effect for headings. */
-}
-
-.main__heading--no-glow {
-	text-shadow: none; /* Removes glow for accessibility. */
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 15px;
 }
 
 .main__intro,
 .main__text {
-	font-size: 1.1rem; /* Slightly larger text for readability. */
-	color: #333; /* Dark gray for body text. */
-	margin-bottom: 1.5rem; /* Space below paragraphs. */
+    font-size: 1em;
+    line-height: 1.6;
+    color: #333;
+    text-align: left;
 }
 
-.main__text-small {
-	font-size: 0.9rem; /* Smaller text for less important info. */
-	color: #555; /* Lighter gray for secondary text. */
-	margin-bottom: 1.5rem; /* Space below small text. */
+/* Nav layout: prevent shrinking and allow ellipsis on links */
+.main__nav {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    overflow: hidden; /* ensure contents are clipped when sidebar narrows */
+}
+.main__nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+.main__nav-item {
+    margin-top: 0; /* gap handled by list gap */
+    font-size: 2em;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle text shadow for better readability */
+    cursor: pointer;
+    flex: 0 0 auto;     /* prevent the item from shrinking */
+    min-width: 0;       /* allow proper ellipsis behavior for children */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 30px;
+}
+.main__nav-link {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s ease-in-out, transform 0.2s ease-in-out, text-shadow 0.3s ease-in-out, opacity 0.2s ease-in-out;
+    display: block;             /* make ellipsis work on the whole label area */
+    width: calc(100% - 20px);
+    padding: 4px 10px;
+    overflow: hidden;           /* clip long labels */
+    text-overflow: ellipsis;    /* truncate when sidebar narrows */
+    white-space: nowrap;
+}
+.main__nav-link:hover {
+    color: #FFF; /* Change link color on hover for better interactivity */
+    text-shadow: 3px 2px 6px rgba(255, 255, 255, 0.4); /* Enhance text shadow on hover */
+}
+.main__nav-link:active {
+    transform: scale(0.9);
+    opacity: 0.8;
 }
 
-.main__text--center {
-	text-align: center; /* Centers text horizontally. */
+/* Collapsed state: keep a small fixed width instead of 0 to avoid overlap */
+.page.main--collapsed {
+    /* override the page grid so the sidebar column remains a stable small width */
+    grid-template-columns: 1fr 0px;
 }
-.main__text--bold {
-	font-weight: bold; /* Makes text bold. */
-}
-
-.main__image {
-	display: block; /* Makes image a block element. */
-	max-width: 100%; /* Prevents image from overflowing container. */
-	height: auto; /* Maintains image aspect ratio. */
-	margin: 1.5rem auto; /* Centers image with space above and below. */
+.main--collapsed .main__sidebar {
+    animation: slideToTheRight 0.25s ease-out forwards;
+    top: 100px;
+    right: 0px;
+    overflow: hidden;
 }
 
-.main__logo {
-	width: 80px; /* Logo width for consistency. */
-	margin-bottom: 20px; /* Space below logo. */
-	max-width: 80px; /* Prevents logo from exceeding set width. */
-	margin: 0 auto 10px auto; /* Centers logo horizontally and adds space below. */
+/* Keep the hidden modifier only if you explicitly want to entirely remove the sidebar.
+   For this setup we no longer auto-hide the sidebar to prevent layout overlap issues. */
+.main--collapsed-hidden .main__sidebar {
+    display: none; /* Hides the sidebar when in collapsed-hidden state (optional) */
 }
 
-.main__logo--no-glow {
-	animation: none; /* Disables logo animation. */
-	box-shadow: none; /* Removes logo shadow. */
-}
-
-.main__logo--no-glow:hover {
-	animation: none; /* Disables animation on hover. */
-	box-shadow: none; /* Removes shadow on hover. */
-}
-
-@media (max-width: 768px) {
-	.main__image {
-		max-width: calc(100% - 20px); /* Shrinks image for mobile. */
-		width: 100%; /* Ensures image fills container. */
-		margin: 10px auto; /* Less space for mobile. */
-	}
-}
-
-.main__image--tech {
-	border-radius: 15px; /* Rounds corners for tech image. */
-	box-shadow: 0 4px 24px rgba(0, 255, 255, 0.25),
-		0 1.5px 8px rgba(3, 30, 60, 0.12); /* Multi-layered shadow for depth. */
-	max-width: 350px; /* Restricts tech image size. */
-}
-
-.main__portfolio {
-	display: flex; /* Flexbox for portfolio layout. */
-	flex-wrap: wrap; /* Allows items to wrap to new lines. */
-	gap: 2rem; /* Large gap between portfolio items. */
-	margin-bottom: 1.5rem; /* Space below portfolio section. */
-	justify-content: center; /* Centers portfolio items. */
-}
-
-.main__portfolio-item {
-	flex: 1 1 150px; /* Flexible sizing for portfolio items. */
-	background: #fefefe; /* Light background for item. */
-	border: none; /* No border for item. */
-	border-radius: 12px; /* Rounded corners for item. */
-	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.125); /* Subtle shadow for item. */
-	padding: 1rem; /* Padding inside item. */
-	display: flex; /* Flexbox for item content. */
-	align-items: center; /* Vertically centers item content. */
-	transition: box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-		transform 0.18s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth hover/active transitions. */
-	max-width: max-content; /* Prevents item from exceeding parent width. */
-	min-width: min-content;
-	width: 100%;
-	min-height: 120px; /* Ensures minimum height for item. */
-	position: relative; /* Allows for absolute positioning inside item. */
-	text-decoration: none; /* Removes underline from links. */
-	overflow: hidden; /* Prevents content from overflowing item. */
-	font-size: x-large; /* Larger font size for item text. */
-	color: #031e3c; /* Dark blue text for item. */
-	text-align: center; /* Centers text inside item. */
-	gap: 2.2rem; /* Space between item elements. */
-	margin: 0; /* Centers item horizontally. */
-}
-
-.main__portfolio-item-triplepeaks {
-	min-width: min-content; /* Prevents item from shrinking too small. */
-}
-
-.main__portfolio-item-tripleten {
-	min-width: min-content; /* Prevents item from shrinking too small. */
-}
-
-.main__portfolio-item:hover {
-	box-shadow: 0 4px 18px rgba(0, 0, 0, 0.175); /* Deeper shadow on hover for pop effect. */
-	transform: translateY(-1px); /* Slightly lifts item on hover. */
-}
-
-.main__portfolio-item:active {
-	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25); /* Stronger shadow when active. */
-	transform: translateY(3px); /* Pushes item down when clicked. */
-}
-
-@media (max-width: 768px) {
-	.main__portfolio-item {
-		max-height: max-content; /* Allows item to grow for mobile. */
-	}
-}
-
-.main__image--cert,
-.main__image--tripleten {
-	border-radius: 15px; /* Rounds corners for cert/tripleten images. */
-	box-shadow: 0 4px 18px rgba(0, 191, 255, 0.18),
-		0 1.5px 8px rgba(3, 30, 60, 0.1); /* Multi-layered shadow for depth. */
-	max-width: 100px; /* Restricts image size. */
-	background: #fefefe; /* Light background for image. */
-}
-
-.main__image--arlo {
-	border-radius: 50%; /* Makes image circular for profile. */
-	box-shadow: 10px 10px 24px rgba(3, 30, 60, 0.25); /* Deep shadow for profile image. */
-	max-width: 150px; /* Restricts profile image size. */
-	height: 150px; /* Sets fixed height for profile image. */
-	object-fit: cover; /* Ensures image covers area without distortion. */
-}
-
-.main__image--tripleten {
-	border-radius: 0%; /* Removes rounding for tripleten image. */
-	box-shadow: none; /* No shadow for tripleten image. */
-}
-
-.main__portfolio-item-tripleten::before {
-    content: "";
-    display: inline-block;
-    width: 96px;        /* adjust to desired size */
-    height: 48px;       /* adjust to desired size */
-    background-image: url('/images/tripleten-logo.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: transparent;
-}
-.main__image--triplepeaks::before {
-	content: url("../assets/se_project_library/images/logo.svg"); /* Uses dark mode specific image for triple peaks. */
-	background: transparent; /* Transparent background for triple peaks image. */
-}
-
-.main__image--tripleespresso::before {
-	content: url("../assets/se_project_coffeeshop/images/logo_coffeeshop_dark.svg"); /* Uses SVG for tripleespresso image. */
-	background: transparent; /* Transparent background for triple espresso image. */
-}
-
-.main__image--spots::before {
-	content: url("../assets/se_project_spots/images/logo.svg");
-	background: transparent; /* Transparent background for spots image. */
-}
-
-.main__portfolio-text {
-	font-size: 1rem; /* Standard font size for portfolio text. */
-	color: #222; /* Dark text for readability. */
-	margin: 0; /* No extra margin. */
-}
-
-@media (max-width: 900px) {
-	.main__portfolio {
-		gap: 1rem; /* Smaller gap for mobile. */
-	}
-	.main__portfolio-text {
-		font-size: 0.75rem; /* Smaller text for mobile. */
-	}
-	.main__text {
-		font-size: 0.9rem; /* Smaller text for mobile. */
-	}
-	.main__heading {
-		font-size: 1.4rem; /* Smaller heading for mobile. */
-		margin-bottom: 0.75rem; /* Less space below heading. */
-		white-space: normal; /* Allows heading to wrap. */
-		text-align: center; /* Keeps heading centered. */
-	}
-}
-
-.main__portfolio-button {
-	display: block; /* Button is block-level for easy centering. */
-	margin: 2rem auto 0 auto; /* Centers button and adds space above. */
-	text-align: center; /* Centers button text. */
+@media (max-height: 500px) {
+    .main__nav-item {
+        font-size: 1.5em; /* Reduce font size on very short viewports to fit more items */
+    }
+    .main--scrolled {
+        margin-top: 30px !important; /* Adjust margin to account for fixed header height */
+    }
 }
 
 .main__item-centered {
 	display: block; /* Block-level for centering. */
 	text-align: center; /* Centers content. */
-	margin-left: auto; /* Horizontally centers element. */
-	margin-right: auto; /* Horizontally centers element. */
+	margin-left: auto !important; /* Horizontally centers element. */
+	margin-right: auto !important; /* Horizontally centers element. */
+}
+
+/* Ensure the client-type toggle centers reliably */
+#clientTypeToggle,
+.menu__item-slider.main__item-centered {
+    display: block;               /* make margin:auto work */
+    margin: 20px auto !important; /* center horizontally, keep top spacing */
+    width: auto;                  /* don't stretch full width */
+    align-self: center;           /* helps if parent is a flex container */
+    text-align: center;
 }

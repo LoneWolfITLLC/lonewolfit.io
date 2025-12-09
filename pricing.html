@@ -41,234 +41,268 @@
 				min-height: 100vh;
 			}
 		</style>
-	</head>
+			<script>COLLAPSABLE_WIDTH = 970;</script>
+		<script src="scripts/accountFunctions.js"></script>
+</head>
 	<body>
-		<header class="header">
-			<button
-				class="navbar-toggle"
-				id="navbarToggle"
-				aria-label="Open navigation menu"
-			>
-				&#9776;
-			</button>
-			<img
-				src="images/wolf-logo.png"
-				alt="Lone Wolf IT Logo"
-				class="header__logo"
-				onclick="window.location.href='index.html#home';"
-			/>
-			<h1 class="header__title">Lone Wolf IT</h1>
-			<nav class="header__nav" id="headerNav">
-				<ul class="header__nav-list">
-					<li class="header__nav-item">
-						<a href="index.html" class="header__nav-link">Home</a>
-					</li>
-					<li class="header__nav-item">
-						<a href="index.html#services" class="header__nav-link"
-							>Portfolio/Services</a
-						>
-					</li>
-					<li class="header__nav-item">
-						<a onclick="goToMemberPortal()" class="header__nav-link">Member Portal</a>
-					</li>
-					<li class="header__nav-item">
-						<a href="index.html#about" class="header__nav-link">About</a>
-					</li>
-					<li class="header__nav-item">
-						<a href="index.html#contact" class="header__nav-link">Contact</a>
-					</li>
-				</ul>
-			</nav>
-		</header>
+	<div class="page" id="main">
+
+<header class="header">
+	<img
+		src="images/wolf-logo.png"
+		alt="Lone Wolf IT Services logo"
+		class="header__logo"
+		onclick="location.href='index.html#home';"
+	/>
+	<span class="header__title">Lone Wolf IT Services</span>
+	<nav class="header__nav" aria-label="Primary" aria-hidden="true">
+		<ul class="header__nav-list">
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="index.html#home" onclick="closeHeaderNavGlobal()">Home</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="index.html#services" onclick="closeHeaderNavGlobal()">Portfolio/Services</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="shop.html" onclick="closeHeaderNavGlobal()">Shop</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="index.html#about" onclick="closeHeaderNavGlobal()">About</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" href="index.html#contact" onclick="closeHeaderNavGlobal()">Contact</a>
+			</li>
+			<li class="header__nav-item">
+				<a class="header__nav-link" id="membersLinkSidebar" onclick="goToMemberPortal(); closeHeaderNavGlobal();">Sign In</a>
+			</li>
+		</ul>
+	</nav>
+	<button
+		class="header__toggle"
+		id="toggleBtn"
+		aria-expanded="true"
+		aria-controls="sidebar"
+	>
+		☰
+	</button>
+</header>
+
 		<main class="main">
-			<section class="main__section main__section--pricing">
-				<h2 class="main__heading">Transparent Pricing</h2>
-				<p class="main__text main__text--center main__text--bold">
-					Choose the plan that fits your needs. No hidden fees, just honest IT
-					solutions.
-				</p>
-				<p class="main__text">
-					Whether you need one-time support, ongoing consulting, or a custom web
-					development package, Lone Wolf IT offers flexible and competitive
-					pricing. Contact us for a custom quote or see our standard rates
-					below.
-				</p>
-				<table class="pricing-table pricing-table--fade-in">
-					<thead>
-						<tr>
-							<th class="pricing-table__th">Service</th>
-							<th class="pricing-table__th">Description</th>
-							<th class="pricing-table__th">My Pricing</th>
-							<th class="pricing-table__th">Competitor Pricing</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class="pricing-table__row">
-							<td class="pricing-table__cell">Web Development</td>
-							<td class="pricing-table__cell">
-								Professional websites and e-commerce stores to boost your online
-								presence and revenue.
-							</td>
-							<td class="pricing-table__cell">
-								Starting at $850.00 per project
-							</td>
-							<td class="pricing-table__cell">
-								<s>$1,000 - $2,500 per project</s>
-							</td>
-						</tr>
-						<tr class="pricing-table__row">
-							<td class="pricing-table__cell">Business Consulting</td>
-							<td class="pricing-table__cell">
-								Tailored advice to optimize IT infrastructure and align
-								technology with your business goals.
-							</td>
-							<td class="pricing-table__cell">$127.50 per hour</td>
-							<td class="pricing-table__cell"><s>$150 - $250 per hour</s></td>
-						</tr>
-						<tr class="pricing-table__row">
-							<td class="pricing-table__cell">Custom IT Solutions</td>
-							<td class="pricing-table__cell">
-								Unique IT setups to solve operational challenges and enhance
-								productivity.
-							</td>
-							<td class="pricing-table__cell">
-								Starting at $1,700.00 per setup
-							</td>
-							<td class="pricing-table__cell">
-								<s>$2,000 - $5,000 per setup</s>
-							</td>
-						</tr>
-						<tr class="pricing-table__row">
-							<td class="pricing-table__cell">
-								Custom Software &amp; Services
-							</td>
-							<td class="pricing-table__cell">
-								Innovative software and IT services tailored for your business
-								needs.
-							</td>
-							<td class="pricing-table__cell">
-								Starting at $3,400.00 per project
-							</td>
-							<td class="pricing-table__cell">
-								<s>$4,000 - $10,000 per project</s>
-							</td>
-						</tr>
-						<tr class="pricing-table__row">
-							<td class="pricing-table__cell">SEO &amp; Digital Marketing</td>
-							<td class="pricing-table__cell">
-								Rank higher online and attract targeted customers with expert
-								SEO and marketing advice.
-							</td>
-							<td class="pricing-table__cell">$255.00 per campaign</td>
-							<td class="pricing-table__cell">
-								<s>$300 - $800 per campaign</s>
-							</td>
-						</tr>
-						<tr class="pricing-table__row">
-							<td class="pricing-table__cell">Web Hosting Setup</td>
-							<td class="pricing-table__cell">
-								Assistance with self-hosting your website, avoiding expensive
-								platforms.
-							</td>
-							<td class="pricing-table__cell">Starting at $595.00 per setup</td>
-							<td class="pricing-table__cell">
-								<s>$700 - $1,500 per setup</s>
-							</td>
-						</tr>
-						<tr class="pricing-table__row">
-							<td class="pricing-table__cell">One-on-One Consulting</td>
-							<td class="pricing-table__cell">
-								Coaching on business growth, coding, or tech strategy.
-							</td>
-							<td class="pricing-table__cell">$102.00 per session</td>
-							<td class="pricing-table__cell">
-								<s>$120 - $250 per session</s>
-							</td>
-						</tr>
-						<tr class="pricing-table__row">
-							<td class="pricing-table__cell">IT Support &amp; Maintenance</td>
-							<td class="pricing-table__cell">
-								Reliable support to keep your IT systems running smoothly.
-							</td>
-							<td class="pricing-table__cell">$85.00 per hour</td>
-							<td class="pricing-table__cell"><s>$100 - $200 per hour</s></td>
-						</tr>
-						<tr class="pricing-table__row">
-							<td class="pricing-table__cell">Website Markup Services (FRONT END)</td>
-							<td class="pricing-table__cell">
-								HTML, CSS and JavaScript fixes and enhancements to improve your website's look
-								and functionality.
-							</td>
-							<td class="pricing-table__cell">$42.50 per hour</td>
-							<td class="pricing-table__cell"><s>$50 - $100 per hour</s></td>
-						</tr>
-						<tr class="pricing-table__row">
-							<td class="pricing-table__cell">Website Backend Services (BACK END)</td>
-							<td class="pricing-table__cell">
-								Server-side development and database management to ensure your website runs
-								smoothly and efficiently.
-							</td>
-							<td class="pricing-table__cell">$51.00 per hour</td>
-							<td class="pricing-table__cell"><s>$60 - $120 per hour</s></td>
-						</tr>
-						<tr class="pricing-table__row">
-							<td class="pricing-table__cell">Subscription-Free Solutions</td>
-							<td class="pricing-table__cell">
-								Custom tools that eliminate recurring SaaS fees for your
-								business.
-							</td>
-							<td class="pricing-table__cell">
-								Starting at $2,550.00 per solution
-							</td>
-							<td class="pricing-table__cell">
-								<s>$3,000 - $8,000 per solution</s>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</section>
-		</main>
-		<footer class="footer">
-			<div class="footer__container">
-				<p class="footer__prepared">
-					Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
-				</p>
-				<p class="footer__contact">
-					Contact:
-					<a href="mailto:arlo.lonewolfit@gmail.com" class="footer__link"
-						>arlo.lonewolfit@gmail.com</a
-					>
-				</p>
-				<p class="footer__copyright">
-					© 2025 Lone Wolf IT Services LLC | All Rights Reserved.
-				</p>
-				<ul class="footer__links">
-					<li class="footer__links-item">
-						<a href="privacy_policy.html" class="footer__link"
-							>Privacy Policy</a
-						>
-					</li>
-					<li class="footer__links-item">
-						<a href="tos.html" class="footer__link">Terms of Service</a>
-					</li>
-					<li class="footer__links-item">
-						<a href="index.html#contact" class="footer__link">Contact Me</a>
-					</li>
-					<li class="footer__links-item">
-						<a
-							href="https://www.facebook.com/lonewolfitservicesllc"
-							target="_blank"
-							class="footer__link"
-						>
-							<img
-								src="./images/ui/facebook-icon.png"
-								alt="Facebook"
-								class="footer__icon"
-							/>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</footer>
-	</body>
+					<section class="main__section main__section--pricing">
+						<h2 class="main__heading">Transparent Pricing</h2>
+						<p class="main__text main__text--center main__text--bold">
+							Choose the plan that fits your needs. No hidden fees, just honest IT
+							solutions.
+						</p>
+						<p class="main__text">
+							Whether you need one-time support, ongoing consulting, or a custom web
+							development package, Lone Wolf IT offers flexible and competitive
+							pricing. Contact us for a custom quote or see our standard rates
+							below.
+						</p>
+						<table class="pricing-table pricing-table--fade-in">
+							<thead>
+								<tr>
+									<th class="pricing-table__th">Service</th>
+									<th class="pricing-table__th">Description</th>
+									<th class="pricing-table__th">My Pricing</th>
+									<th class="pricing-table__th">Competitor Pricing</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="pricing-table__row">
+									<td class="pricing-table__cell">Web Development</td>
+									<td class="pricing-table__cell">
+										Professional websites and e-commerce stores to boost your online
+										presence and revenue.
+									</td>
+									<td class="pricing-table__cell">
+										Starting at $850.00 per project
+									</td>
+									<td class="pricing-table__cell">
+										<s>$1,000 - $2,500 per project</s>
+									</td>
+								</tr>
+								<tr class="pricing-table__row">
+									<td class="pricing-table__cell">Business Consulting</td>
+									<td class="pricing-table__cell">
+										Tailored advice to optimize IT infrastructure and align
+										technology with your business goals.
+									</td>
+									<td class="pricing-table__cell">$127.50 per hour</td>
+									<td class="pricing-table__cell"><s>$150 - $250 per hour</s></td>
+								</tr>
+								<tr class="pricing-table__row">
+									<td class="pricing-table__cell">Custom IT Solutions</td>
+									<td class="pricing-table__cell">
+										Unique IT setups to solve operational challenges and enhance
+										productivity.
+									</td>
+									<td class="pricing-table__cell">
+										Starting at $1,700.00 per setup
+									</td>
+									<td class="pricing-table__cell">
+										<s>$2,000 - $5,000 per setup</s>
+									</td>
+								</tr>
+								<tr class="pricing-table__row">
+									<td class="pricing-table__cell">
+										Custom Software &amp; Services
+									</td>
+									<td class="pricing-table__cell">
+										Innovative software and IT services tailored for your business
+										needs.
+									</td>
+									<td class="pricing-table__cell">
+										Starting at $3,400.00 per project
+									</td>
+									<td class="pricing-table__cell">
+										<s>$4,000 - $10,000 per project</s>
+									</td>
+								</tr>
+								<tr class="pricing-table__row">
+									<td class="pricing-table__cell">SEO &amp; Digital Marketing</td>
+									<td class="pricing-table__cell">
+										Rank higher online and attract targeted customers with expert
+										SEO and marketing advice.
+									</td>
+									<td class="pricing-table__cell">$255.00 per campaign</td>
+									<td class="pricing-table__cell">
+										<s>$300 - $800 per campaign</s>
+									</td>
+								</tr>
+								<tr class="pricing-table__row">
+									<td class="pricing-table__cell">Web Hosting Setup</td>
+									<td class="pricing-table__cell">
+										Assistance with self-hosting your website, avoiding expensive
+										platforms.
+									</td>
+									<td class="pricing-table__cell">Starting at $595.00 per setup</td>
+									<td class="pricing-table__cell">
+										<s>$700 - $1,500 per setup</s>
+									</td>
+								</tr>
+								<tr class="pricing-table__row">
+									<td class="pricing-table__cell">One-on-One Consulting</td>
+									<td class="pricing-table__cell">
+										Coaching on business growth, coding, or tech strategy.
+									</td>
+									<td class="pricing-table__cell">$102.00 per session</td>
+									<td class="pricing-table__cell">
+										<s>$120 - $250 per session</s>
+									</td>
+								</tr>
+								<tr class="pricing-table__row">
+									<td class="pricing-table__cell">IT Support &amp; Maintenance</td>
+									<td class="pricing-table__cell">
+										Reliable support to keep your IT systems running smoothly.
+									</td>
+									<td class="pricing-table__cell">$85.00 per hour</td>
+									<td class="pricing-table__cell"><s>$100 - $200 per hour</s></td>
+								</tr>
+								<tr class="pricing-table__row">
+									<td class="pricing-table__cell">Website Markup Services (FRONT END)</td>
+									<td class="pricing-table__cell">
+										HTML, CSS and JavaScript fixes and enhancements to improve your website's look
+										and functionality.
+									</td>
+									<td class="pricing-table__cell">$42.50 per hour</td>
+									<td class="pricing-table__cell"><s>$50 - $100 per hour</s></td>
+								</tr>
+								<tr class="pricing-table__row">
+									<td class="pricing-table__cell">Website Backend Services (BACK END)</td>
+									<td class="pricing-table__cell">
+										Server-side development and database management to ensure your website runs
+										smoothly and efficiently.
+									</td>
+									<td class="pricing-table__cell">$51.00 per hour</td>
+									<td class="pricing-table__cell"><s>$60 - $120 per hour</s></td>
+								</tr>
+								<tr class="pricing-table__row">
+									<td class="pricing-table__cell">Subscription-Free Solutions</td>
+									<td class="pricing-table__cell">
+										Custom tools that eliminate recurring SaaS fees for your
+										business.
+									</td>
+									<td class="pricing-table__cell">
+										Starting at $2,550.00 per solution
+									</td>
+									<td class="pricing-table__cell">
+										<s>$3,000 - $8,000 per solution</s>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+				</main>
+
+<aside class="main__sidebar" id="sidebar" aria-label="Main navigation">
+	<nav class="main__nav">
+		<ul class="main__nav-list">
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="index.html#home">Home</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="index.html#services">Portfolio/Services</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="shop.html">Shop</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="index.html#about">About</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" href="index.html#contact">Contact</a>
+			</li>
+			<li class="main__nav-item">
+				<a class="main__nav-link" id="membersLink" onclick="goToMemberPortal();">Sign In</a>
+			</li>
+		</ul>
+	</nav>
+</aside>
+
+<footer class="footer">
+	<div class="footer__content">
+		<p class="footer__prepared-by">
+			Prepared by <strong>Arlo at Lone Wolf IT Services LLC</strong>
+		</p>
+		<p class="footer__contact">
+			Contact:
+			<a
+				href="mailto:arlo.lonewolfit@gmail.com"
+				class="footer__contact-link"
+			>arlo.lonewolfit@gmail.com</a>
+		</p>
+		<p class="footer__copyright">
+			© 2025 Lone Wolf IT Services LLC | All Rights Reserved.
+		</p>
+		<ul class="footer__links">
+			<li class="footer__link-item">
+				<a href="pp.html" class="footer__link">Privacy Policy</a>
+			</li>
+			<li class="footer__link-item">
+				<a href="tos.html" class="footer__link">Terms of Service</a>
+			</li>
+			<li class="footer__link-item">
+				<a href="index.html#contact" class="footer__link">Contact Me</a>
+			</li>
+			<li class="footer__link-item footer__link-item--icon">
+				<a
+					href="https://www.facebook.com/lonewolfitservicesllc"
+					target="_blank"
+					class="footer__link"
+				>
+					<img
+						src="images/ui/facebook-icon.png"
+						alt="Facebook"
+						class="footer__icon"
+					/>
+				</a>
+			</li>
+		</ul>
+	</div>
+</footer>
+
+	</div>
+</body>
 </html>

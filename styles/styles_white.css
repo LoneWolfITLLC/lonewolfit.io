@@ -1,4 +1,5 @@
 /* Importing Block Styles (Light) */
+@import url('../blocks/page.css');
 @import url('../blocks/body.css');
 @import url('../blocks/buttons.css');
 @import url('../blocks/header.css');

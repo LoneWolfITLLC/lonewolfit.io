@@ -1,3 +1,4 @@
+@import url('../blocks/page.css');
 @import url('../blocks/dark/body.css');
 @import url('../blocks/dark/buttons.css');
 @import url('../blocks/dark/header.css');
@@ -18,4 +19,3 @@
 		opacity: 1; /* Fully visible at end for fade-in effect. */
 	}
 }
-
