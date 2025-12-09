@@ -17,11 +17,17 @@ const closeModal = (modal) => {
   modal.classList.remove("popup_visible");
 };
 
-const generateDefaultTodo = (data) => {
+const generateTodo = (data) => {
   const todo = new Todo(data, "#todo-template");
   const todoElement = todo.getView();
   return todoElement;
 };
+
+//My Apologies, Sir/Ma'am, for not including this function earlier.
+const renderTodo = (values) => {
+  const todoElem = new Todo(values, "#todo-template").getView();
+  todosList.append(todoElem);
+} 
 
 addTodoButton.addEventListener("click", () => {
   openModal(addTodoPopup);
@@ -42,14 +48,14 @@ addTodoForm.addEventListener("submit", (evt) => {
 
   const id = uuidv4();
   const values = { name, date, id };
-  const todo = new Todo(values, "#todo-template").getView();
-  todosList.append(todo);
+  //Now it just calls the renderTodo function to add the new todo item to the list.
+  renderTodo(values);
   closeModal(addTodoPopup);
   newTodoValidator.resetValidation();
 });
 
 initialTodos.forEach((item) => {
-  const todo = generateDefaultTodo(item);
+  const todo = generateTodo(item);
   todosList.append(todo);
 });
 

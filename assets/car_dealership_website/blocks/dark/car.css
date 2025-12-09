@@ -1,0 +1,115 @@
+body.dark-mode .car__back-btn {
+    color: #fff;
+}
+
+body.dark-mode .car__back-btn:hover{
+    color: #ffcc22;
+    text-shadow: 3px 2px 6px rgba(255, 200, 0, 0.8);
+}
+
+body.dark-mode .car__back-btn-image::before{
+    background-image: url('/images/ui/back-white.png');
+}
+
+body.dark-mode .car-slideshow {
+    background: #15151580;
+}
+
+body.dark-mode .car-slideshow__slide--placeholder {
+    color: #ddd;
+}
+
+body.dark-mode .car__heading{
+    color: #efefef;
+}
+
+body.dark-mode .car__description {
+    color: #ccc;
+}
+
+body.dark-mode .car__price {
+    color: #8fe6a6 !important;
+}
+
+body.dark-mode .car__details p {
+    color: #ddd;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .car__listing-modified,
+body.dark-mode .car__listing-created{
+    color: #eee;
+}
+
+/* Dark mode styles for admin editor */
+body.dark-mode .admin-editor-root {
+    background: transparent;
+}
+
+body.dark-mode .admin-editor {
+    background: transparent;
+    color: #f0f0f0;
+}
+
+body.dark-mode .admin-editor__title {
+    color: #f0f0f0;
+}
+
+body.dark-mode .admin-editor__meta {
+    color: #b0b0b0;
+}
+
+body.dark-mode .admin-form-label {
+    color: #e0e0e0;
+}
+
+body.dark-mode .admin-form-input,
+body.dark-mode .admin-form-textarea {
+    background: rgba(50, 50, 50, 0.8);
+    color: #e0e0e0;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+body.dark-mode .admin-form-input:focus,
+body.dark-mode .admin-form-textarea:focus {
+    border-color: rgba(100, 150, 200, 0.3);
+    box-shadow: 0 6px 24px rgba(100, 150, 200, 0.3);
+}
+
+body.dark-mode .admin-form-toggle__label {
+    color: #e0e0e0;
+}
+
+body.dark-mode .admin-editor__right {
+    border-left: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .admin-slideshow-wrap {
+    background: #1a1a1a;
+}
+
+body.dark-mode .admin-slide__img {
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .admin-thumb {
+    background: rgba(50, 50, 50, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .admin-thumb.is-active {
+    box-shadow: 0 8px 18px rgba(100, 150, 200, 0.7);
+}
+
+body.dark-mode .admin-thumb.drag-over {
+    outline: 3px dashed rgba(100, 150, 200, 0.5);
+}
+
+body.dark-mode .admin-upload__info,
+body.dark-mode .admin-help .main__text {
+    color: #b0b0b0;
+}
+
+body.dark-mode .admin__slideshow-heading {
+    color: #eee;
+}

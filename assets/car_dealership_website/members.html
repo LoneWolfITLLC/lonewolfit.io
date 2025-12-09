@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Member Portal | Buy Smart Auto Sales 365, LLC | Used Cars</title>
+    <meta
+      name="description"
+      content="Buy Smart Auto Sales 365 South Elgin offers a wide selection of quality used cars at competitive prices. Visit us today to find your next vehicle!"
+    />
+    <meta
+      name="keywords"
+      content="Buy Smart Auto Sales, Used Cars, South Elgin, Quality Vehicles, Affordable Cars"
+    />
+    <meta
+      name="author"
+      content="Buy Smart Auto Sales 365, LLC and Arlo at Lone Wolf IT Services, LLC"
+    />
+    <meta
+      property="og:title"
+      content="Member Portal | Buy Smart Auto Sales 365, LLC | Used Cars"
+    />
+    <meta
+      property="og:description"
+      content="Buy Smart Auto Sales 365 South Elgin offers a wide selection of quality used cars at competitive prices. Visit us today to find your next vehicle!"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.buysmartautosales365.com" />
+    <meta property="og:image" content="./images/logo.png" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="styles/styles_white.css" />
+    <link rel="stylesheet" href="styles/styles_black.css" />
+    <link rel="stylesheet" href="styles/styles_modals_white.css" />
+    <link rel="stylesheet" href="styles/styles_modals_black.css" />
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/accountFunctions.js"></script>
+    <script src="scripts/header.js"></script>
+    <script src="scripts/footer.js"></script>
+    <script src="scripts/preferences.js"></script>
+    <script src="scripts/darkmode.js"></script>
+    <script src="scripts/modals.js"></script>
+    <script src="scripts/favoriteCars.js"></script>
+    <script>
+      requireLogin = true; // Set to true to require login for this page
+      window.addEventListener("authChecked", function (event) {
+        if (!event.detail.user || !event.detail.user.adminUser) {
+          document.getElementById("adminButton").style.display = "none";
+        } else {
+          document.getElementById("adminButton").style.display = "block";
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <div class="page" id="main">
+      <header class="header">
+        <img
+          src="images/logo_transparent.png"
+          alt="Buy Smart Auto Sales 365 South Elgin logo"
+          class="header__logo"
+          onclick="location.href='index.html#homeSection';"
+        />
+        <span class="header__title">Buy Smart Auto Sales 365</span>
+        <!-- Header nav: desktop inline / mobile sliding panel -->
+        <nav class="header__nav" aria-label="Primary" aria-hidden="true">
+          <ul class="header__nav-list">
+            <li class="header__nav-item">
+              <a
+                class="header__nav-link"
+                href="index.html#homeSection"
+                onclick="closeHeaderNavGlobal()"
+                >Home</a
+              >
+            </li>
+            <li class="header__nav-item">
+              <a
+                class="header__nav-link"
+                href="index.html#about"
+                onclick="closeHeaderNavGlobal()"
+                >About Us</a
+              >
+            </li>
+            <li class="header__nav-item">
+              <a
+                class="header__nav-link"
+                href="inventory.html"
+                onclick="closeHeaderNavGlobal()"
+                >Inventory</a
+              >
+            </li>
+            <li class="header__nav-item">
+              <a
+                class="header__nav-link"
+                href="contact.html"
+                onclick="closeHeaderNavGlobal()"
+                >Contact</a
+              >
+            </li>
+            <li class="header__nav-item">
+              <a
+                class="header__nav-link"
+                id="membersLinkSidebar"
+                onclick="goToMemberPortal(); closeHeaderNavGlobal();"
+                >Sign In</a
+              >
+            </li>
+          </ul>
+        </nav>
+        <button
+          class="header__toggle"
+          id="toggleBtn"
+          aria-expanded="true"
+          aria-controls="sidebar"
+        >
+          ☰
+        </button>
+      </header>
+      <main class="main">
+        <section class="main__section main__section-fit-content" id="mainSection">
+          <h1 class="main__heading main__item-centered">
+            Welcome to the Membership Portal
+          </h1>
+          <p class="main__text main__item-centered">
+            This is the member portal for Buy Smart Auto 365. Here you can
+            access your account, manage services, manage saved listings, and
+            find exclusive resources.
+          </p>
+          <p class="main__text main__item-centered">
+            If you have any questions or need assistance, please
+            <a href="contact.html" class="main__link">contact us</a>.
+          </p>
+          <button
+            class="btn btn-primary main__button main__item-centered"
+            onclick="window.location.href='admin.html'"
+            id="adminButton"
+            style="display: none"
+          >
+            Admin Portal
+          </button>
+        </section>
+        <section class="main__section main__section-fit-content" id="favoriteCarSection" style="margin-top: 50px;">
+          <h2 class="main__heading main__item-centered">Your Favorite Cars</h2>
+          <p class="main__text main__item-centered">
+            Browse and manage your saved vehicle listings.
+          </p>
+          <div class="inventory__container inventory__container-favorite-cars" id="favoriteCarContainer">
+            <!-- Favorite cars will be dynamically inserted here -->
+          </div>
+        </section>
+        <!-- <section class="main__section" id="selfTestimonialSection">
+				<h1 class="main__heading main__item-centered">
+					Your Submitted Testimonials
+				</h1>
+				<div
+					id="alertSelfTestimonialList"
+					class="alertDiv main__alert"
+					style="display: none"
+				></div>
+				<p class="main__text main__item-centered">
+					Here are the testimonials you have submitted. You can delete
+					them as needed. You can also submit new testimonials by clicking the button below.
+				</p>
+        <button
+          class="btn btn-primary main__item-centered"
+          onclick="window.location.href='submit_testimonial.html'"
+          style="margin-bottom: 10px;"
+        >
+          Submit New Testimonial
+        </button>
+				<div class="slideshow__wrapper vignette" style="min-width: auto" id="selfTestimonialSlideshow">
+					<div class="slideshow__container"></div>
+					<div
+						id="prev"
+						class="slideshow__nav-btn slideshow__nav-btn--prev"
+						onclick="changeSlide(-1)"
+					>
+						&lt;
+					</div>
+					<div class="slideshow"></div>
+					<div
+						id="next"
+						class="slideshow__nav-btn slideshow__nav-btn--next"
+						onclick="changeSlide(1)"
+					>
+						&gt;
+					</div>
+					<div
+						class="slideshow__loading-bar"
+						id="loadingBar"
+						style="display: none"
+					></div>
+				</div>
+				<div class="action-buttons">
+					<button class="action-btn" id="deleteButton">
+						<img src="images/ui/denybtn.png" alt="Delete" />
+					</button>
+				</div>
+			</section> -->
+        <section class="main__section main__section-fit-content" id="accountManagementSection" style="margin-top: 50px;">
+          <h2 class="main__heading">Account Management</h2>
+          <p class="main__text main__item-centered">
+            Manage your account details, and update your preferences.
+          </p>
+          <div class="main__section-hidden main__item-centered">
+            <button
+              class="btn btn-primary"
+              onclick="window.location.href='preferences.html'"
+              style="margin-bottom: 5px"
+            >
+              Manage Preferences
+            </button>
+            <button
+              class="btn btn-primary"
+              onclick="window.location.href='edit_user.html'"
+              style="margin-bottom: 5px"
+            >
+              Edit User Account Details
+            </button>
+          </div>
+          <div class="main__section-hidden main__item-centered">
+            <button class="btn btn-primary" onclick="signOut(true)">
+              Sign Out of All Devices
+            </button>
+          </div>
+          <button
+            class="btn btn-delete main__item-centered"
+            style="margin-top: 5px"
+            onclick="deleteAccount()"
+          >
+            Delete Account
+          </button>
+        </section>
+      </main>
+      <aside class="main__sidebar" id="sidebar" aria-label="Main navigation">
+        <nav class="main__nav">
+          <ul class="main__nav-list">
+            <li class="main__nav-item">
+              <a class="main__nav-link" href="index.html#homeSection">Home</a>
+            </li>
+            <li class="main__nav-item">
+              <a class="main__nav-link" href="index.html#about">About Us</a>
+            </li>
+            <li class="main__nav-item">
+              <a class="main__nav-link" href="inventory.html">Inventory</a>
+            </li>
+            <li class="main__nav-item">
+              <a class="main__nav-link" href="contact.html">Contact</a>
+            </li>
+            <li class="main__nav-item">
+              <a
+                class="main__nav-link"
+                id="membersLink"
+                onclick="goToMemberPortal();"
+                >Sign In</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </aside>
+      <footer class="footer">
+        <p class="footer__copyright">
+          © 2025 Buy Smart Auto Sales 365 LLC | Lone Wolf IT Services LLC | All
+          Rights Reserved.
+        </p>
+        <p class="footer__disclaimer">
+          Disclaimer: All vehicle prices, specifications, and availability are
+          subject to change without notice. Please contact us for the most
+          current information.
+        </p>
+        <div class="footer__links">
+          <a class="footer__link" href="pp.html">Privacy Policy</a>
+          <a class="footer__link" href="tos.html">Terms of Service</a>
+          <a href="contact.html" class="footer__link">Contact Us</a>
+        </div>
+        <p class="footer__social-media-text">@BuySmart365</p>
+        <div class="footer__social-media-links">
+          <button
+            class="footer__social-media-button footer__social-media-button-facebook"
+            id="facebookBtn"
+            aria-label="Facebook"
+          >
+            Facebook
+          </button>
+          <button
+            class="footer__social-media-button footer__social-media-button-instagram"
+            id="instagramBtn"
+            aria-label="Instagram"
+          >
+            Instagram
+          </button>
+          <button
+            class="footer__social-media-button footer__social-media-button-tiktok"
+            id="tiktokBtn"
+            aria-label="TikTok"
+          >
+            TikTok
+          </button>
+          <button
+            class="footer__social-media-button footer__social-media-button-youtube"
+            id="youtubeBtn"
+            aria-label="YouTube"
+          >
+            YouTube
+          </button>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

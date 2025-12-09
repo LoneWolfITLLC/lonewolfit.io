@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Edit Your Profile | Buy Smart Auto Sales 365, LLC</title>
+    <meta
+      name="description"
+      content="Buy Smart Auto Sales 365 South Elgin offers a wide selection of quality used cars at competitive prices. Visit us today to find your next vehicle!"
+    />
+    <meta
+      name="keywords"
+      content="Buy Smart Auto Sales, Privacy Policy, Used Cars, South Elgin, Quality Vehicles, Affordable Cars"
+    />
+    <meta
+      name="author"
+      content="Buy Smart Auto Sales 365, LLC and Arlo at Lone Wolf IT Services, LLC"
+    />
+    <meta
+      property="og:title"
+      content="Edit Your Profile | Buy Smart Auto Sales 365, LLC"
+    />
+    <meta
+      property="og:description"
+      content="Edit your profile for Buy Smart Auto Sales 365 South Elgin. Visit us today to find your next vehicle!"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.buysmartautosales365.com" />
+    <meta property="og:image" content="./images/logo.png" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="styles/styles_white.css" />
+    <link rel="stylesheet" href="styles/styles_black.css" />
+    <link rel="stylesheet" href="styles/styles_modals_white.css" />
+    <link rel="stylesheet" href="styles/styles_modals_black.css" />
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/accountFunctions.js"></script>
+    <script src="scripts/stateFields.js"></script>
+		<script src="scripts/clientTypeToggle.js"></script>
+    <script src="scripts/header.js"></script>
+    <script src="scripts/footer.js"></script>
+    <script src="scripts/preferences.js"></script>
+    <script src="scripts/darkmode.js"></script>
+    <script src="scripts/modals.js"></script>
+    <script src="scripts/editUser.js"></script>
+    <!-- <script src="scripts/turnstile.js"></script> TODO UNCOMMENT THIS AND ADD TURNSTILES-->
+    <style>
+      .page {
+        grid-template-areas:
+          "header header"
+          "main main"
+          "footer footer";
+      }
+    </style>
+    <script>
+      requireLogin = true; // Set to true to require login for this page
+    </script>
+  </head>
+  <body>
+    <div class="page" id="main">
+      <header class="header">
+        <img
+          src="images/logo_transparent.png"
+          alt="Buy Smart Auto Sales 365 South Elgin logo"
+          class="header__logo"
+          onclick="location.href='index.html#homeSection';"
+        />
+        <span class="header__title">Buy Smart Auto Sales 365</span>
+        <!-- Header nav: desktop inline / mobile sliding panel -->
+        <nav class="header__nav" aria-label="Primary" aria-hidden="true">
+          <ul class="header__nav-list">
+            <li class="header__nav-item">
+              <a
+                class="header__nav-link"
+                href="index.html#homeSection"
+                onclick="closeHeaderNavGlobal()"
+                >Home</a
+              >
+            </li>
+            <li class="header__nav-item">
+              <a
+                class="header__nav-link"
+                href="index.html#about"
+                onclick="closeHeaderNavGlobal()"
+                >About Us</a
+              >
+            </li>
+            <li class="header__nav-item">
+              <a
+                class="header__nav-link"
+                href="inventory.html"
+                onclick="closeHeaderNavGlobal()"
+                >Inventory</a
+              >
+            </li>
+            <li class="header__nav-item">
+              <a
+                class="header__nav-link"
+                href="contact.html"
+                onclick="closeHeaderNavGlobal()"
+                >Contact</a
+              >
+            </li>
+            <li class="header__nav-item">
+              <a
+                class="header__nav-link"
+                id="membersLink"
+                onclick="goToMemberPortal(); closeHeaderNavGlobal();"
+                >Sign In</a
+              >
+            </li>
+          </ul>
+        </nav>
+        <button class="header__toggle" id="toggleBtn" aria-expanded="true">
+          ☰
+        </button>
+      </header>
+      
+      <main class="main">
+			<section class="main__section main__section-fit-content" id="mainSection">
+				<h1 class="main__heading main__item-centered">Edit User Profile</h1>
+				<p class="main__text main__item-centered">
+					Welcome to your profile management page. Here you can update your
+					account details.
+				</p>
+				<p class="main__text main__item-centered">
+					Please ensure your information is accurate to maintain the security of
+					your account.
+				</p>
+				<p class="main__text main__item-centered">
+					If you wish to change your password, please click
+					<a class="main__link" onclick="resetPassword()">here</a>.
+				</p>
+				<button
+					id="resetPasswordButton"
+					class="btn btn-primary main__item-centered"
+					style="margin-bottom: 20px"
+					onclick="resetPassword()"
+				>
+					Reset Password
+				</button>
+				<p class="main__text main__item-centered">
+					If you wish to change your email, please delete your account by
+					clicking
+					<a class="main__link" onclick="deleteAccount('register.html')">here</a
+					>.
+				</p>
+				<p class="main__intro main__item-centered" style="margin-top: 20px">
+					Toggle between client and member views to access different features:
+				</p>
+				<button
+					id="clientTypeToggle"
+					class="menu__item-slider main__item-centered"
+					style="margin-top: 20px"
+				></button>
+			</section>
+			<!-- RESIDENTIAL SECTION -->
+			<section
+				class="main__section main__section-hidden"
+				id="registerSectionResidential"
+			>
+				<h1 class="main__heading">Residential Client Details</h1>
+				<div
+					id="alertResidential"
+					class="alertDiv main__alert"
+					style="display: none"
+				></div>
+				<form id="registerForm" class="main__form">
+					<div class="form-group">
+						<label for="usernameResidential" class="form-label">Username</label>
+						<input
+							type="text"
+							id="usernameResidential"
+							name="usernameResidential"
+							class="form-control"
+							placeholder="Enter your username..."
+							required
+						/>
+						<label for="firstNameResidential" class="form-label"
+							>First Name</label
+						>
+						<input
+							type="text"
+							class="form-control"
+							id="firstNameResidential"
+							placeholder="Enter your first name as it appears on your ID..."
+							required
+						/>
+						<label for="middleNameResidential" class="form-label"
+							>Middle Name</label
+						>
+						<input
+							type="text"
+							class="form-control"
+							id="middleNameResidential"
+							placeholder="Enter your middle name as it appears on your ID..."
+						/>
+						<label for="lastNameResidential" class="form-label"
+							>Last Name</label
+						>
+						<input
+							type="text"
+							class="form-control"
+							id="lastNameResidential"
+							placeholder="Enter your last name as it appears on your ID..."
+							required
+						/>
+						<label for="phoneResidential" class="form-label"
+							>Phone Number</label
+						>
+						<input
+							type="tel"
+							class="form-control"
+							id="phoneResidential"
+							required
+							pattern="[0-9]*"
+							placeholder="1234567890"
+							onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+						/>
+						<label for="country" class="form-label">Country</label>
+						<select class="form-control" id="country" required>
+							<option value="">Select a country</option>
+							<option value="US">United States</option>
+							<option value="CA">Canada</option>
+							<option value="MX">Mexico</option>
+							<option value="AG">Antigua and Barbuda</option>
+							<option value="AR">Argentina</option>
+							<option value="BO">Bolivia</option>
+							<option value="BR">Brazil</option>
+							<option value="CL">Chile</option>
+							<option value="CO">Colombia</option>
+							<option value="CR">Costa Rica</option>
+							<option value="CU">Cuba</option>
+							<option value="DM">Dominica</option>
+							<option value="DO">Dominican Republic</option>
+							<option value="EC">Ecuador</option>
+							<option value="SV">El Salvador</option>
+							<option value="GQ">Equatorial Guinea</option>
+							<option value="GT">Guatemala</option>
+							<option value="GY">Guyana</option>
+							<option value="HN">Honduras</option>
+							<option value="JM">Jamaica</option>
+							<option value="MX">Mexico</option>
+							<option value="NI">Nicaragua</option>
+							<option value="PA">Panama</option>
+							<option value="PY">Paraguay</option>
+							<option value="PE">Peru</option>
+							<option value="SR">Suriname</option>
+							<option value="TT">Trinidad and Tobago</option>
+							<option value="UY">Uruguay</option>
+							<option value="VE">Venezuela</option>
+							<option value="AL">Albania</option>
+							<option value="AT">Austria</option>
+							<option value="BY">Belarus</option>
+							<option value="BE">Belgium</option>
+							<option value="BG">Bulgaria</option>
+							<option value="CH">Switzerland</option>
+							<option value="CY">Cyprus</option>
+							<option value="CZ">Czech Republic</option>
+							<option value="DE">Germany</option>
+							<option value="DK">Denmark</option>
+							<option value="EE">Estonia</option>
+							<option value="ES">Spain</option>
+							<option value="FI">Finland</option>
+							<option value="FR">France</option>
+							<option value="GB">United Kingdom</option>
+							<option value="GR">Greece</option>
+							<option value="HR">Croatia</option>
+							<option value="HU">Hungary</option>
+							<option value="IE">Ireland</option>
+							<option value="IT">Italy</option>
+							<option value="LT">Lithuania</option>
+							<option value="LU">Luxembourg</option>
+							<option value="MT">Malta</option>
+							<option value="NL">Netherlands</option>
+							<option value="NO">Norway</option>
+							<option value="PL">Poland</option>
+							<option value="PT">Portugal</option>
+							<option value="RO">Romania</option>
+							<option value="SE">Sweden</option>
+							<option value="SI">Slovenia</option>
+							<option value="SK">Slovakia</option>
+							<option value="UA">Ukraine</option>
+							<option value="IS">Iceland</option>
+						</select>
+						<label for="address1Residential" class="form-label"
+							>Address Line 1</label
+						>
+						<input
+							type="text"
+							class="form-control"
+							id="address1Residential"
+							placeholder="123 Any St (Street - as it appears on your ID...)"
+							required
+						/>
+						<label for="address2Residential" class="form-label"
+							>Address Line 2 (APT#/Unit)</label
+						>
+						<input type="text" class="form-control" id="address2Residential" placeholder="APT# (as it appears on your ID...)" />
+						<label for="cityResidential" class="form-label">City</label>
+						<input
+							type="text"
+							class="form-control"
+							id="cityResidential"
+							placeholder="Cupertino (City - as it appears on your ID...)"
+							required
+						/>
+						<label for="state" class="form-label">State</label>
+						<select class="form-control" id="state" name="state" required>
+							<option value="">Select a state</option>
+							<!-- State options will be populated dynamically based on selected country -->
+						</select>
+						<label for="zipCodeResidential" class="form-label">Zip Code</label>
+						<input
+							type="text"
+							class="form-control"
+							id="zipCodeResidential"
+							placeholder="94015 (Zip Code - as it appears on your ID...)"
+							required
+						/>
+						<label for="emailResidential" class="form-label"
+							>Email
+							<a href="#mainSection" class="main__text-hyperlink"
+								>(Edit)</a
+							></label
+						>
+						<input
+							type="email"
+							class="form-control"
+							id="emailResidential"
+							required
+							readonly
+						/>
+						<button
+							type="submit"
+							style="margin-top: 10px"
+							class="btn btn-primary main__item-centered"
+							disabled
+						>
+							Save Changes
+						</button>
+					</div>
+				</form>
+			</section>
+
+			<!-- BUSINESS SECTION -->
+			<section
+				class="main__section main__section-hidden"
+				id="registerSectionBusiness"
+			>
+				<h1 class="main__heading">Business Client Details</h1>
+				<div
+					id="alertBusiness"
+					class="alertDiv main__alert"
+					style="display: none"
+				></div>
+				<form id="registerFormBusiness" class="main__form">
+					<div class="form-group">
+						<label for="dbaNameBusiness" class="form-label">DBA Name</label>
+						<input type="text" class="form-control" id="dbaNameBusiness" placeholder="Enter your DBA name (as on LLC-5.5/147C...)" />
+						<label for="businessCountry" class="form-label"
+							>Business Country</label
+						>
+						<select class="form-control" id="businessCountry">
+							<option value="">Select a country</option>
+							<option value="US">United States</option>
+							<option value="CA">Canada</option>
+							<option value="MX">Mexico</option>
+							<option value="AG">Antigua and Barbuda</option>
+							<option value="AR">Argentina</option>
+							<option value="BO">Bolivia</option>
+							<option value="BR">Brazil</option>
+							<option value="CL">Chile</option>
+							<option value="CO">Colombia</option>
+							<option value="CR">Costa Rica</option>
+							<option value="CU">Cuba</option>
+							<option value="DM">Dominica</option>
+							<option value="DO">Dominican Republic</option>
+							<option value="EC">Ecuador</option>
+							<option value="SV">El Salvador</option>
+							<option value="GQ">Equatorial Guinea</option>
+							<option value="GT">Guatemala</option>
+							<option value="GY">Guyana</option>
+							<option value="HN">Honduras</option>
+							<option value="JM">Jamaica</option>
+							<option value="MX">Mexico</option>
+							<option value="NI">Nicaragua</option>
+							<option value="PA">Panama</option>
+							<option value="PY">Paraguay</option>
+							<option value="PE">Peru</option>
+							<option value="SR">Suriname</option>
+							<option value="TT">Trinidad and Tobago</option>
+							<option value="UY">Uruguay</option>
+							<option value="VE">Venezuela</option>
+							<option value="AL">Albania</option>
+							<option value="AT">Austria</option>
+							<option value="BY">Belarus</option>
+							<option value="BE">Belgium</option>
+							<option value="BG">Bulgaria</option>
+							<option value="CH">Switzerland</option>
+							<option value="CY">Cyprus</option>
+							<option value="CZ">Czech Republic</option>
+							<option value="DE">Germany</option>
+							<option value="DK">Denmark</option>
+							<option value="EE">Estonia</option>
+							<option value="ES">Spain</option>
+							<option value="FI">Finland</option>
+							<option value="FR">France</option>
+							<option value="GB">United Kingdom</option>
+							<option value="GR">Greece</option>
+							<option value="HR">Croatia</option>
+							<option value="HU">Hungary</option>
+							<option value="IE">Ireland</option>
+							<option value="IT">Italy</option>
+							<option value="LT">Lithuania</option>
+							<option value="LU">Luxembourg</option>
+							<option value="MT">Malta</option>
+							<option value="NL">Netherlands</option>
+							<option value="NO">Norway</option>
+							<option value="PL">Poland</option>
+							<option value="PT">Portugal</option>
+							<option value="RO">Romania</option>
+							<option value="SE">Sweden</option>
+							<option value="SI">Slovenia</option>
+							<option value="SK">Slovakia</option>
+							<option value="UA">Ukraine</option>
+							<option value="IS">Iceland</option>
+						</select>
+						<label for="businessAddress1Business" class="form-label"
+							>Business Address Line 1</label
+						>
+						<input
+							type="text"
+							class="form-control"
+							placeholder="1 Cupertino Pkwy"
+							id="businessAddress1Business"
+						/>
+						<label for="businessAddress2Business" class="form-label"
+							>Business Address Line 2 (Unit#)</label
+						>
+						<input
+							type="text"
+							class="form-control"
+							placeholder="Unit 4 (Suite/Unit # optional)"
+							id="businessAddress2Business"
+						/>
+						<label for="businessCityBusiness" class="form-label"
+							>Business City</label
+						>
+						<input type="text" class="form-control" id="businessCityBusiness" placeholder="Cupertino" />
+						<label for="businessState" class="form-label">Business State</label>
+						<select class="form-control" id="businessState">
+							<option value="">Select a state</option>
+							<!-- State options dynamically populated based on Business Country -->
+						</select>
+						<label for="businessZipCodeBusiness" class="form-label"
+							>Business Zip Code</label
+						>
+						<input
+							type="text"
+							class="form-control"
+							placeholder="94015"
+							id="businessZipCodeBusiness"
+						/>
+						<label for="usernameBusiness" class="form-label">Username</label>
+						<input
+							type="text"
+							id="usernameBusiness"
+							name="usernameBusiness"
+							class="form-control"
+							placeholder="Enter your username..."
+							required
+						/>
+						<label for="firstNameBusiness" class="form-label">First Name</label>
+						<input
+							type="text"
+							class="form-control"
+							id="firstNameBusiness"
+							placeholder="Enter your first name (as it appears on your ID...)"
+							required
+						/>
+						<label for="middleNameBusiness" class="form-label"
+							>Middle Name</label
+						>
+						<input type="text" class="form-control" id="middleNameBusiness" placeholder="Enter your middle name (as it appears on your ID...)" />
+						<label for="lastNameBusiness" class="form-label">Last Name</label>
+						<input
+							type="text"
+							class="form-control"
+							id="lastNameBusiness"
+							placeholder="Enter your last name (as it appears on your ID...)"
+							required
+						/>
+						<label for="phoneBusiness" class="form-label">Phone Number</label>
+						<input
+							type="tel"
+							class="form-control"
+							id="phoneBusiness"
+							required
+							pattern="[0-9]*"
+							placeholder="1234567890"
+							onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+						/>
+						<label for="countryBusiness" class="form-label">Country</label>
+						<select class="form-control" id="countryBusiness" required>
+							<option value="">Select a country</option>
+							<option value="US">United States</option>
+							<option value="CA">Canada</option>
+							<option value="MX">Mexico</option>
+							<option value="AG">Antigua and Barbuda</option>
+							<option value="AR">Argentina</option>
+							<option value="BO">Bolivia</option>
+							<option value="BR">Brazil</option>
+							<option value="CL">Chile</option>
+							<option value="CO">Colombia</option>
+							<option value="CR">Costa Rica</option>
+							<option value="CU">Cuba</option>
+							<option value="DM">Dominica</option>
+							<option value="DO">Dominican Republic</option>
+							<option value="EC">Ecuador</option>
+							<option value="SV">El Salvador</option>
+							<option value="GQ">Equatorial Guinea</option>
+							<option value="GT">Guatemala</option>
+							<option value="GY">Guyana</option>
+							<option value="HN">Honduras</option>
+							<option value="JM">Jamaica</option>
+							<option value="MX">Mexico</option>
+							<option value="NI">Nicaragua</option>
+							<option value="PA">Panama</option>
+							<option value="PY">Paraguay</option>
+							<option value="PE">Peru</option>
+							<option value="SR">Suriname</option>
+							<option value="TT">Trinidad and Tobago</option>
+							<option value="UY">Uruguay</option>
+							<option value="VE">Venezuela</option>
+							<option value="AL">Albania</option>
+							<option value="AT">Austria</option>
+							<option value="BY">Belarus</option>
+							<option value="BE">Belgium</option>
+							<option value="BG">Bulgaria</option>
+							<option value="CH">Switzerland</option>
+							<option value="CY">Cyprus</option>
+							<option value="CZ">Czech Republic</option>
+							<option value="DE">Germany</option>
+							<option value="DK">Denmark</option>
+							<option value="EE">Estonia</option>
+							<option value="ES">Spain</option>
+							<option value="FI">Finland</option>
+							<option value="FR">France</option>
+							<option value="GB">United Kingdom</option>
+							<option value="GR">Greece</option>
+							<option value="HR">Croatia</option>
+							<option value="HU">Hungary</option>
+							<option value="IE">Ireland</option>
+							<option value="IT">Italy</option>
+							<option value="LT">Lithuania</option>
+							<option value="LU">Luxembourg</option>
+							<option value="MT">Malta</option>
+							<option value="NL">Netherlands</option>
+							<option value="NO">Norway</option>
+							<option value="PL">Poland</option>
+							<option value="PT">Portugal</option>
+							<option value="RO">Romania</option>
+							<option value="SE">Sweden</option>
+							<option value="SI">Slovenia</option>
+							<option value="SK">Slovakia</option>
+							<option value="UA">Ukraine</option>
+							<option value="IS">Iceland</option>
+						</select>
+						<label for="address1Business" class="form-label"
+							>Address Line 1</label
+						>
+						<input
+							type="text"
+							class="form-control"
+							id="address1Business"
+							placeholder="123 Any St (Street - as it appears on your ID...)"
+							required
+						/>
+						<label for="address2Business" class="form-label"
+							>Address Line 2 (APT#/Unit)</label
+						>
+						<input type="text" class="form-control" id="address2Business" placeholder="APT# (as it appears on your ID...)" />
+						<label for="cityBusiness" class="form-label">City</label>
+						<input
+							type="text"
+							class="form-control"
+							id="cityBusiness"
+							placeholder="Cupertino (City - as it appears on your ID...)"
+							required
+						/>
+						<label for="stateBusiness" class="form-label">State</label>
+						<select
+							class="form-control"
+							id="stateBusiness"
+							name="stateBusiness"
+							required
+						>
+							<option value="">Select a state</option>
+							<!-- State options will be populated dynamically based on selected country -->
+						</select>
+						<label for="zipCodeBusiness" class="form-label">Zip Code</label>
+						<input
+							type="text"
+							class="form-control"
+							id="zipCodeBusiness"
+							placeholder="94015 (Zip Code - as it appears on your ID...)"
+							required
+						/>
+						<label for="email" class="form-label"
+							>Email
+							<a href="#mainSection" class="main__text-hyperlink"
+								>(Edit)</a
+							></label
+						>
+						<input
+							type="email"
+							class="form-control"
+							id="emailBusiness"
+							required
+							readonly
+						/>
+						<button
+							type="submit"
+							style="margin-top: 10px"
+							class="btn btn-primary main__item-centered"
+							disabled
+						>
+							Save Changes
+						</button>
+					</div>
+				</form>
+			</section>
+		</main>
+      <footer class="footer">
+        <p class="footer__copyright">
+          © 2025 Buy Smart Auto Sales 365 LLC | Lone Wolf IT Services LLC | All
+          Rights Reserved.
+        </p>
+        <p class="footer__disclaimer">
+          Disclaimer: All vehicle prices, specifications, and availability are
+          subject to change without notice. Please contact us for the most
+          current information.
+        </p>
+        <div class="footer__links">
+          <a class="footer__link" href="pp.html">Privacy Policy</a>
+          <a class="footer__link" href="tos.html">Terms of Service</a>
+          <a href="contact.html" class="footer__link">Contact Us</a>
+        </div>
+        <p class="footer__social-media-text">@BuySmart365</p>
+        <div class="footer__social-media-links">
+          <button
+            class="footer__social-media-button footer__social-media-button-facebook"
+            id="facebookBtn"
+            aria-label="Facebook"
+          >
+            Facebook
+          </button>
+          <button
+            class="footer__social-media-button footer__social-media-button-instagram"
+            id="instagramBtn"
+            aria-label="Instagram"
+          >
+            Instagram
+          </button>
+          <button
+            class="footer__social-media-button footer__social-media-button-tiktok"
+            id="tiktokBtn"
+            aria-label="TikTok"
+          >
+            TikTok
+          </button>
+          <button
+            class="footer__social-media-button footer__social-media-button-youtube"
+            id="youtubeBtn"
+            aria-label="YouTube"
+          >
+            YouTube
+          </button>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

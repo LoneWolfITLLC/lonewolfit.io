@@ -1,0 +1,229 @@
+.header {
+	grid-area: header;
+	background: transparent;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-bottom: 10px;
+	font-size: 1.2em;
+	position: fixed;
+	/* Make header fixed at the top */
+	width: 100%;
+	height: 100px;
+	/* Full width */
+	margin: 0;
+	z-index: 1000;
+	overflow-anchor: none;
+	/* Ensure header is above other content */
+	transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Applied when content scrolls under the header */
+.header.header--scrolled {
+	background: rgba(255, 255, 255, 0.9);
+	/* Semi-transparent white background */
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+	backdrop-filter: saturate(120%) blur(3px);
+}
+
+.header__logo {
+	height: 100px;
+	display: flex;
+	margin-right: auto;
+	cursor: pointer;
+}
+
+.header__title {
+	font-weight: bold;
+	color: #333333;
+	font-size: 1.8em;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+	text-align: center;
+}
+
+.header__toggle {
+	margin-left: auto;
+	margin-right: 30px;
+	width: 50px;
+	height: 50px;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	font-size: 1.8em;
+	color: #333333;
+	transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.header__toggle:focus {
+	outline: none;
+}
+
+.header__toggle:hover {
+	color: #ccc;
+}
+
+.header__toggle:active {
+	transform: scale(0.85);
+}
+
+.header__nav-link {
+	text-decoration: none;
+	color: #333;
+	transition: color 0.3s ease-in-out, transform 0.2s ease-in-out,
+		text-shadow 0.3s ease-in-out;
+	display: block;
+	/* make ellipsis work on the whole label area */
+	width: calc(100% - 20px);
+	padding: 4px 10px;
+	overflow: hidden;
+	/* clip long labels */
+	text-overflow: ellipsis;
+	/* truncate when sidebar narrows */
+	white-space: nowrap;
+}
+
+.header__nav-link:hover {
+	color: #333;
+	/* Change link color on hover for better interactivity */
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+	/* Enhance text shadow on hover */
+}
+
+.header__nav-link:active {
+	transform: scale(0.95);
+	/* Slightly reduce scale when link is active/clicked */
+}
+
+/* Transform header nav into a sliding right panel */
+.header__nav {
+	position: absolute;
+	top: 100px;
+	/* sits below header; adjust if header height changes */
+	right: 0;
+	width: 240px;
+	background: rgba(255, 255, 215, 0.95);
+	/* match header tone for a cohesive look */
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+	backdrop-filter: saturate(120%) blur(3px);
+	flex-direction: column;
+	align-items: center;
+	padding: 1rem 0;
+	z-index: 110;
+	/* above content, below header if needed */
+	transform: translateX(200%);
+	/* offscreen by default */
+	opacity: 0;
+	pointer-events: none;
+	transition: transform 280ms cubic-bezier(0.4, 0, 0.2, 1), opacity 240ms ease;
+}
+
+/* Open state */
+.header__nav--open {
+	transform: translateX(0);
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.header__nav-list {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	width: 100%;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	align-items: center;
+}
+
+.header__nav-item {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	padding: 0.25rem 0;
+	white-space: nowrap;
+	font-size: 1.2em;
+	cursor: pointer;
+}
+
+@media (max-width: 768px) {
+	.header {
+		padding-top: 20px;
+		padding-left: 10px;
+		padding-bottom: 10px;
+		height: 80px;
+	}
+
+	.header__logo {
+		height: 60px;
+	}
+
+	.header__title {
+		font-size: 1.1em;
+	}
+
+	.header__toggle {
+		width: 40px;
+		height: 40px;
+		font-size: 1.5em;
+		margin-right: 20px;
+	}
+
+    .header__nav {
+        top: 80px;
+    }
+
+	.main__section {
+		scroll-margin-top: 80px !important;
+	}
+}
+
+@media (max-width: 480px) {
+	.header__title {
+		font-size: 0.9em;
+	}
+
+	.header__logo {
+		height: 60px;
+	}
+
+	.header__toggle {
+		width: 40px;
+		height: 40px;
+		font-size: 1.5em;
+		margin-right: 10px;
+	}
+}
+@media (max-height: 400px) {
+	/* make header nav horizontal */
+	.header__nav {
+		width: 100%;
+		height: auto; /* max-content is fine, but auto is safer */
+	}
+
+	.header__nav-list {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap; /* allow wrapping to new lines */
+		gap: 0; /* remove gap for tight layout */
+		padding: 0;
+		margin: 0;
+		list-style: none;
+	}
+
+	.header__nav-item {
+		flex: 0 0 auto; /* size to content */
+		width: auto; /* don’t stretch */
+		padding: 0.25rem 0.5rem; /* give clickable space */
+		font-size: 1em;
+		white-space: nowrap; /* keep each label on one line */
+		overflow: visible; /* ensure no clipping */
+		text-overflow: unset; /* disable ellipses */
+	}
+
+	.header__nav-link {
+		display: inline-block; /* ensures link sizes to text */
+		width: auto;
+	}
+}

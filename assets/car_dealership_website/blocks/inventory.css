@@ -1,0 +1,391 @@
+.inventory__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    background: transparent;
+    width: 100%;
+    min-height: min-content;
+    height: 100%;
+    position: relative; /* required for .inventory__loading-bar absolute positioning */
+    overflow: visible;
+}
+.inventory__container-favorite-cars {
+    max-height: 700px;
+    overflow-y: auto;
+}
+.inventory__loading-bar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 5px;
+	background: linear-gradient(90deg, #00bfff 0%, #00ffff 50%, #00bfff 100%);
+	box-shadow: 0 0 16px #00bfff, 0 0 32px #00ffff;
+	border-radius: 0 0 3px 3px;
+	overflow: hidden;
+	z-index: 10;
+	pointer-events: none;
+	display: none;
+	opacity: 1;
+	transition: opacity 0.3s cubic-bezier(0.4, 0.2, 0.2, 1);
+	animation: inventory-loading-bar-glow 1.5s infinite alternate;
+}
+
+.inventory__loading-bar::before {
+	content: "";
+	position: absolute;
+	left: -40%;
+	top: 0;
+	height: 100%;
+	width: 40%;
+	background: linear-gradient(90deg, transparent, #00ffff88, transparent);
+	filter: blur(4px);
+	animation: inventory-loading-sweep 1.2s cubic-bezier(0.4, 0.2, 0.2, 1) infinite;
+}
+
+@keyframes inventory-loading-sweep {
+	0% {
+		left: -40%;
+		opacity: 0.7;
+	}
+	50% {
+		left: 60%;
+		opacity: 1;
+	}
+	100% {
+		left: 100%;
+		opacity: 0.7;
+	}
+}
+
+@keyframes inventory-loading-bar-glow {
+	from {
+		box-shadow: 0 0 16px #00bfff, 0 0 32px #00ffff;
+	}
+	to {
+		box-shadow: 0 0 32px #00bfff, 0 0 64px #00ffff;
+	}
+}
+
+/* Additional inventory__* classes for cards and layout */
+
+/* Individual inventory card */
+.inventory__card {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+    cursor: pointer;
+    min-height: 220px;
+    height: auto;
+    outline: none;
+    justify-content: space-between;
+}
+
+.inventory__card-title {
+    margin: 0;
+    font-size: 1.05rem;
+    color: #111;
+    line-height: 1.2;
+    font-weight: 600;
+}
+
+.inventory__card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 14px;
+}
+
+.inventory__card-image-wrapper {
+    width: 100%;
+    height: 170px;
+    display: block;
+    background: #f4f4f4;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Hover / focus states */
+.inventory__card:hover,
+.inventory__card:focus {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.14);
+}
+
+/* image area inside card (JS may set inline styles; this ensures consistent look) */
+.inventory__image {
+    width: 100%;
+    height: 170px;
+    display: block;
+    background: #f4f4f4;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+}
+.inventory__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* card content section */
+.inventory__body {
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1 1 auto;
+}
+
+/* title, meta & details */
+.inventory__title {
+    margin: 0;
+    font-size: 1.05rem;
+    color: #111;
+    line-height: 1.2;
+    font-weight: 600;
+}
+
+.inventory__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.inventory__price {
+    font-weight: 700;
+    color: #0b6b2f; /* money/positive color */
+}
+
+.inventory__mileage {
+    font-size: 0.95rem;
+    color: #666;
+}
+
+/* details / brief description */
+.inventory__details {
+    margin: 0;
+    color: #444;
+    font-size: 0.95rem;
+    line-height: 1.3;
+}
+
+.inventory__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+/* footer row */
+.inventory__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    border-top: 1px solid rgba(0,0,0,0.04);
+    background: #fafafa;
+}
+
+/* call-to-action text */
+.inventory__more {
+    font-size: 0.95rem;
+    color: #0077cc;
+    transition: color 160ms ease, text-decoration 160ms ease, filter 160ms ease;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+.inventory__more:hover,
+.inventory__more:focus {
+    color: #ffcc22; /* highlight on hover */
+    text-decoration: none;
+    filter: drop-shadow(0 0 6px #ffcc22aa);
+    cursor: pointer;
+}
+
+/* empty / placeholder message */
+.inventory__empty {
+    grid-column: 1 / -1;
+    padding: 18px;
+    text-align: center;
+    color: #444;
+}
+
+/* Sort bar + dropdown styles for inventory */
+
+.inventory__sortbar {
+    grid-column: 1 / -1;                 /* span full grid width */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+    z-index: 5;
+}
+
+.inventory__sortbar .main__text {
+    margin: 0;
+    font-weight: 600;
+    color: inherit;
+}
+
+.inventory__sort-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Visible control button */
+.inventory__sort-btn {
+    appearance: none;
+    -webkit-appearance: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.08);
+    background: #fff;
+    color: #222;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.inventory__sort-btn:hover,
+.inventory__sort-btn:focus {
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    outline: none;
+}
+
+/* Dropdown menu */
+.inventory__sort-menu {
+    display: none; /* toggled by JS */
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    min-width: 220px;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    padding: 6px;
+    border-radius: 8px;
+    z-index: 60;
+}
+
+/* Individual menu items */
+.inventory__sort-item {
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+    margin: 2px 0;
+    border-radius: 6px;
+    background: transparent;
+    border: none;
+    text-align: left;
+    font-weight: 500;
+    color: #222;
+    cursor: pointer;
+}
+.inventory__sort-item:hover,
+.inventory__sort-item:focus {
+    background: rgba(0,0,0,0.04);
+    outline: none;
+}
+
+/* Right side controls */
+.inventory__count {
+    font-weight: 600;
+    color: #333;
+    white-space: nowrap;
+}
+.inventory__sortbar .btn {
+    margin: 0;
+    padding: 6px 10px;
+}
+
+.inventory__like-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: url("../images/ui/heart.svg") no-repeat center center;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 160ms ease, opacity 160ms ease;
+}
+
+.inventory__like-btn-liked {
+    background: url("../images/ui/heart-full.svg") no-repeat center center;
+}
+
+.inventory__like-btn:hover {
+    opacity: 0.8;
+}
+
+.inventory__delete-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: url("../images/ui/delete.svg") no-repeat center center;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 160ms ease;
+}
+
+.inventory__delete-btn:hover {
+    background: url("../images/ui/delete-hover.svg") no-repeat center center;
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .inventory__container {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    .inventory__image { height: 150px; }
+    .inventory__card { min-height: 180px; }
+    .inventory__sortbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    .inventory__sortbar > div:last-child {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+    }
+    .inventory__sort-menu {
+        left: 0;
+        right: auto;
+        min-width: 100%;
+    }
+}
+
+/* make sure cards are accessible on very small screens */
+@media (max-width: 420px) {
+    .inventory__image { height: 140px; }
+    .inventory__card { min-height: 200px; }
+}
+
+/* end */
