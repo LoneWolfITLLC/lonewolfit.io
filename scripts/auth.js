@@ -234,7 +234,9 @@ async function onLoad() {
 			) {
 				membersLink.textContent = "Portal";
 				membersLink.href = MEMBER_PATH;
-				membersLink.onclick = `closeHeaderNavGlobal();`;
+				membersLink.onclick = () => {
+					closeHeaderNavGlobal();
+				};
 			} else {
 				membersLink.textContent = "Sign Out";
 				membersLink.href = "#";
@@ -251,7 +253,9 @@ async function onLoad() {
 			) {
 				membersLinkSidebar.textContent = "Portal";
 				membersLinkSidebar.href = MEMBER_PATH;
-				membersLinkSidebar.onclick = `closeHeaderNavGlobal();`;
+				membersLinkSidebar.onclick = () => {
+					closeHeaderNavGlobal();
+				};
 			} else {
 				membersLinkSidebar.textContent = "Sign Out";
 				membersLinkSidebar.href = "#";

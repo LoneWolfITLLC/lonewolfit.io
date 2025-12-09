@@ -70,7 +70,7 @@ body {
 		#ffffff 0%,
 		#2798e9 50%,
 		#d4a520 100%
-	); /* Replaced the pale blues with white, a logo gold, and the logo blue */
+	); /* White-to-blue (#2798e9) into gold (#d4a520) gradient to mirror brand colors */
 	font-family: "Poppins", Arial, Helvetica, sans-serif;
 	min-height: 100vh; /* Ensures the body always fills at least the full viewport height, preventing whitespace at the bottom. */
 	height: auto;
