@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Reset Your Password | Buy Smart Auto Sales 365, LLC</title>
+    <meta
+      name="description"
+      content="Buy Smart Auto Sales 365 South Elgin offers a wide selection of quality used cars at competitive prices. Visit us today to find your next vehicle!"
+    />
+    <meta
+      name="keywords"
+      content="Buy Smart Auto Sales, Privacy Policy, Used Cars, South Elgin, Quality Vehicles, Affordable Cars"
+    />
+    <meta
+      name="author"
+      content="Buy Smart Auto Sales 365, LLC and Arlo at Lone Wolf IT Services, LLC"
+    />
+    <meta
+      property="og:title"
+      content="Reset Your Password | Buy Smart Auto Sales 365, LLC"
+    />
+    <meta
+      property="og:description"
+      content="Reset your password for Buy Smart Auto Sales 365 South Elgin. Visit us today to find your next vehicle!"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.buysmartautosales365.com" />
+    <meta property="og:image" content="./images/logo.png" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="styles/styles_white.css" />
+    <link rel="stylesheet" href="styles/styles_black.css" />
+    <link rel="stylesheet" href="styles/styles_modals_white.css" />
+    <link rel="stylesheet" href="styles/styles_modals_black.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/alert.js"></script>
+    <script src="scripts/accountFunctions.js"></script>
+    <script src="scripts/stateFields.js"></script>
+    <script src="scripts/newPasswordField.js"></script>
+    <script src="scripts/resetPassword.js"></script>
+    <script src="scripts/header.js"></script>
+    <script src="scripts/footer.js"></script>
+    <script src="scripts/preferences.js"></script>
+    <script src="scripts/darkmode.js"></script>
+    <script src="scripts/modals.js"></script>
+    <style>
+      .page {
+        grid-template-areas:
+          "header header"
+          "main main"
+          "footer footer";
+      }
+    </style>
+    <script>
+      redirectToPortal = true; // Set to false to prevent redirect after registration
+    </script>
+  </head>
+  <body>
+    <div class="page" id="main">
+      <header class="header">
+        <img
+          src="images/logo_transparent.png"
+          alt="Buy Smart Auto Sales 365 South Elgin logo"
+          class="header__logo"
+          onclick="location.href='index.html#homeSection';"
+        />
+        <span class="header__title">Buy Smart Auto Sales 365</span>
+        <!-- Header nav: desktop inline / mobile sliding panel -->
+        <nav class="header__nav" aria-label="Primary" aria-hidden="true">
+          <ul class="header__nav-list">
+            <li class="header__nav-item">
+              <a
+                class="header__nav-link"
+                href="index.html#homeSection"
+                onclick="closeHeaderNavGlobal()"
+                >Home</a
+              >
+            </li>
+            <li class="header__nav-item">
+              <a
+                class="header__nav-link"
+                href="index.html#about"
+                onclick="closeHeaderNavGlobal()"
+                >About Us</a
+              >
+            </li>
+            <li class="header__nav-item">
+              <a
+                class="header__nav-link"
+                href="inventory.html"
+                onclick="closeHeaderNavGlobal()"
+                >Inventory</a
+              >
+            </li>
+            <li class="header__nav-item">
+              <a
+                class="header__nav-link"
+                href="contact.html"
+                onclick="closeHeaderNavGlobal()"
+                >Contact</a
+              >
+            </li>
+            <li class="header__nav-item">
+              <a
+                class="header__nav-link"
+                id="membersLink"
+                onclick="goToMemberPortal(); closeHeaderNavGlobal();"
+                >Sign In</a
+              >
+            </li>
+          </ul>
+        </nav>
+        <button class="header__toggle" id="toggleBtn" aria-expanded="true">
+          ☰
+        </button>
+      </header>
+      <main class="main">
+        <section
+          class="main__section main__section-hidden main__section-fit-content"
+          id="mainSection"
+        >
+          <h1 class="main__heading">Reset Your Password</h1>
+          <div
+            id="alertEmail"
+            class="alertDiv main__alert"
+            style="display: none"
+          ></div>
+          <form id="resetForm" class="main__form main__item-centered">
+            <div class="form-group">
+              <p
+                class="main__intro main__item-centered"
+                style="margin-top: 20px"
+              >
+                Please enter your email address below and we will send you
+                instructions on how to reset your password.
+              </p>
+              <input
+                type="text"
+                id="email"
+                class="form-control"
+                placeholder="Enter your email address..."
+                required
+              /><br /><br />
+              <button
+                type="submit"
+                class="btn btn-primary main__item-centered"
+                style="margin-top: -30px"
+                disabled
+              >
+                Send Verification Code
+              </button>
+            </div>
+          </form>
+        </section>
+        <section class="main__section main__section-hidden" id="resetSection">
+          <h2 class="main__heading">Enter New Password</h2>
+          <div
+            id="alertNewPassword"
+            class="alertDiv main__alert"
+            style="display: none"
+          ></div>
+          <form id="newPasswordForm" class="main__form main__item-centered">
+            <div class="form-group">
+              <label for="verificationCode" class="form-label"
+                >Verification Code</label
+              >
+              <input
+                type="text"
+                id="verificationCode"
+                class="form-control"
+                placeholder="Enter the verification code...123456"
+              />
+              <label for="password" class="form-label">New Password</label>
+              <div class="input-group">
+                <input
+                  type="password"
+                  id="password"
+                  class="form-control"
+                  placeholder="Create a secure password..."
+                  style="height: inherit"
+                  required
+                />
+                <button
+                  type="button"
+                  id="togglePassword"
+                  class="btn btn-outline-secondary"
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 50px;
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                    padding-top: 0;
+                    padding-bottom: 0;
+                  "
+                  tabindex="-1"
+                  aria-label="Show/Hide Password"
+                >
+                  <i class="fa fa-eye" aria-hidden="true"></i>
+                </button>
+              </div>
+              <small class="main__text-small main__item-centered"
+                >Password must be at least 10-16 characters long, contain a
+                lowercase and uppercase letter, a number, and a special
+                character.</small
+              >
+              <div
+                class="progress"
+                id="passwordStrengthContainer"
+                style="display: none"
+              >
+                <div
+                  id="passwordStrength"
+                  class="progress-bar"
+                  role="progressbar"
+                ></div>
+              </div>
+              <label for="passwordConfirm" class="form-label"
+                >Confirm New Password</label
+              >
+              <input
+                type="password"
+                id="passwordConfirm"
+                class="form-control"
+                placeholder="Re-enter your password..."
+                required
+              />
+              <button
+                type="submit"
+                class="btn btn-primary main__item-centered"
+                style="margin-top: 10px"
+                disabled
+              >
+                Reset Password
+              </button>
+            </div>
+          </form>
+        </section>
+      </main>
+      <footer class="footer">
+        <p class="footer__copyright">
+          © 2025 Buy Smart Auto Sales 365 LLC | Lone Wolf IT Services LLC | All
+          Rights Reserved.
+        </p>
+        <p class="footer__disclaimer">
+          Disclaimer: All vehicle prices, specifications, and availability are
+          subject to change without notice. Please contact us for the most
+          current information.
+        </p>
+        <div class="footer__links">
+          <a class="footer__link" href="pp.html">Privacy Policy</a>
+          <a class="footer__link" href="tos.html">Terms of Service</a>
+          <a href="contact.html" class="footer__link">Contact Us</a>
+        </div>
+        <p class="footer__social-media-text">@BuySmart365</p>
+        <div class="footer__social-media-links">
+          <button
+            class="footer__social-media-button footer__social-media-button-facebook"
+            id="facebookBtn"
+            aria-label="Facebook"
+          >
+            Facebook
+          </button>
+          <button
+            class="footer__social-media-button footer__social-media-button-instagram"
+            id="instagramBtn"
+            aria-label="Instagram"
+          >
+            Instagram
+          </button>
+          <button
+            class="footer__social-media-button footer__social-media-button-tiktok"
+            id="tiktokBtn"
+            aria-label="TikTok"
+          >
+            TikTok
+          </button>
+          <button
+            class="footer__social-media-button footer__social-media-button-youtube"
+            id="youtubeBtn"
+            aria-label="YouTube"
+          >
+            YouTube
+          </button>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

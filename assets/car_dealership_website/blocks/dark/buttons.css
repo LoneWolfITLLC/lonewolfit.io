@@ -1,0 +1,308 @@
+body.dark-mode .btn-primary {
+	background-color: #031e3c;
+	border: none;
+	color: #00ffff;
+	box-shadow: 0 0 12px #00ffff55, 0 0 4px #00ffff22;
+	text-shadow: 0 0 8px #00ffff99;
+	transition: background 0.2s, color 0.2s, box-shadow 0.3s, background-color 0.25s;
+	opacity: 1;
+}
+
+body.dark-mode .btn-primary:disabled {
+	background-color: #01101e;
+	border-color: #01101e;
+	color: #00bfbf;
+	box-shadow: none;
+	opacity: 0.5;
+}
+
+body.dark-mode .btn-primary:hover {
+	background-color: #00e8f8;
+	color: #ffffff;
+	box-shadow: 0 0 32px #00ffffcc, 0 0 12px #00ffff99;
+	animation: steampunkGlowCyan 0.8s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
+	opacity: 1;
+}
+
+/* Focused, animated glow for dark mode buttons */
+body.dark-mode .btn-primary:focus {
+    background-color: #00cbe0; /* Between #00e8f8 (hover) and #00bfff (active) */
+    color: #fff;
+    outline: none;
+    box-shadow: 0 0 0 4px #00ffffcc, 0 0 24px #00ffffcc;
+    text-shadow: 0 0 16px #00ffffcc;
+    animation: steampunkGlowCyanFocused 0.8s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
+}
+
+body.dark-mode .btn-primary:active {
+	background-color: #00bfff;
+	color: #ffffff;
+	box-shadow: 0 0 24px #00ffff99, 0 0 8px #00ffff44;
+	animation: steampunkGlowCyanActive 0.7s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
+	opacity: 1;
+}
+
+body.dark-mode .btn-delete {
+	background-color: #2a2320;
+	border: none;
+	color: #ff4444;
+	box-shadow: 0 0 12px #ff444455, 0 0 4px #ff444422;
+	text-shadow: 0 0 8px #ff444499;
+	transition: background 0.2s, color 0.2s, box-shadow 0.3s, background-color 0.25s;
+	opacity: 1;
+}
+
+body.dark-mode .btn-delete:hover {
+	background-color: #ff4444;
+	color: #ffffff;
+	box-shadow: 0 0 32px #ff4444cc, 0 0 12px #ff444499;
+	animation: steampunkGlowRed 0.8s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
+	opacity: 1;
+}
+/* Focused, animated glow for dark mode buttons */
+body.dark-mode .btn-delete:focus {
+    background-color: #ff6666; /* Between #ff4444 (hover) and #ff8888 (active) */
+    color: #fff;
+    outline: none;
+    box-shadow: 0 0 0 4px #ff4444cc, 0 0 24px #ff4444cc;
+    text-shadow: 0 0 16px #ff4444cc;
+    animation: steampunkGlowRedFocused 0.8s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
+}
+
+body.dark-mode .btn-delete:active {
+	background-color: #ff8888;
+	color: #ffffff;
+	box-shadow: 0 0 24px #ff444499, 0 0 8px #ff444444;
+	animation: steampunkGlowRedActive 0.7s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
+	opacity: 1;
+}
+
+body.dark-mode .btn-secondary {
+	background-color: #4c2e03;
+	border: none;
+	color: #ff9500;
+	box-shadow: 0 0 12px #ff950055, 0 0 4px #ff950022;
+	text-shadow: 0 0 8px #ff950099;
+	transition: background 0.2s, color 0.2s, box-shadow 0.3s, background-color 0.25s;
+	opacity: 1;
+}
+
+body.dark-mode .btn-secondary:disabled {
+	background-color: #2a1400;
+	border-color: #2a1400;
+	color: #ffb366;
+	box-shadow: none;
+	opacity: 0.5;
+}
+
+body.dark-mode .btn-secondary:hover {
+	background-color: #e66000;
+	color: #ffffff;
+	box-shadow: 0 0 32px #ff9500cc, 0 0 12px #ff950099;
+	animation: steampunkGlowOrange 0.8s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
+	opacity: 1;
+}
+
+/* Focused, animated glow for dark mode buttons */
+body.dark-mode .btn-secondary:focus {
+    background-color: #ff7a1a; /* Between #e66000 (hover) and #a63d00 (active) */
+    color: #fff;
+    outline: none;
+    box-shadow: 0 0 0 4px #ff9500cc, 0 0 24px #ff9500cc;
+    text-shadow: 0 0 16px #ff9500cc;
+    animation: steampunkGlowOrangeFocused 0.8s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
+}
+
+body.dark-mode .btn-secondary:active {
+	background-color: #a63d00;
+	color: #ffffff;
+	box-shadow: 0 0 24px #ff950099, 0 0 8px #ff950044;
+	animation: steampunkGlowOrangeActive 0.7s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
+	opacity: 1;
+}
+
+body.dark-mode .btn-success {
+	background-color: #1a3c28;
+	border: none;
+	color: #aaffaa;
+	font-weight: 600;
+	box-shadow: 0 0 12px #aaffaa55, 0 0 4px #aaffaa22, 0 0 8px #00ffff44;
+	text-shadow: 0 0 15px #aaffaa, 0 0 8px #00ffff99;
+	transition: background 0.2s, color 0.2s, box-shadow 0.3s, background-color 0.25s;
+	opacity: 1;
+}
+
+body.dark-mode .btn-success:disabled {
+	background-color: #155724;
+	border-color: #155724;
+	color: #66ff66;
+	box-shadow: none;
+	opacity: 0.5;
+}
+
+body.dark-mode .btn-success:hover {
+	background-color: #66ff66;
+	color: #ffffff;
+	box-shadow: 0 0 32px #aaffaacc, 0 0 12px #00ffff99;
+	animation: steampunkGlowGreenBlue 0.8s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
+	opacity: 1;
+}
+
+/* Focused, animated glow for dark mode buttons */
+body.dark-mode .btn-success:focus {
+    background-color: #88ff88; /* Between #66ff66 (hover) and #aaffaa (active) */
+    color: #fff;
+    outline: none;
+    box-shadow: 0 0 0 4px #aaffaacc, 0 0 24px #aaffaacc;
+    text-shadow: 0 0 16px #aaffaacc;
+    animation: steampunkGlowGreenBlueFocused 0.8s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
+}
+
+body.dark-mode .btn-success:active {
+	background-color: #aaffaa;
+	color: #ffffff;
+	box-shadow: 0 0 24px #aaffaa99, 0 0 8px #00ffff44;
+	animation: steampunkGlowGreenBlueActive 0.7s cubic-bezier(0.4,0.2,0.2,1) infinite alternate;
+	opacity: 1;
+}
+
+body.dark-mode .btn--no-glow {
+	box-shadow: none !important;
+	text-shadow: none !important;
+	animation: none !important;
+}
+
+body.dark-mode .btn--no-glow:hover,
+body.dark-mode .btn--no-glow:active,
+body.dark-mode .btn--no-glow:focus {
+	box-shadow: none !important;
+	text-shadow: none !important;
+	animation: none !important;
+}
+
+@keyframes steampunkGlowCyan {
+	0% {
+		box-shadow: 0 0 12px #00ffff55, 0 0 4px #00ffff22;
+		text-shadow: 0 0 8px #00ffff99;
+	}
+	100% {
+		box-shadow: 0 0 32px #00ffffcc, 0 0 12px #00ffff99;
+		text-shadow: 0 0 16px #00ffffcc;
+	}
+}
+@keyframes steampunkGlowCyanActive {
+	0% {
+		box-shadow: 0 0 24px #00ffff99, 0 0 8px #00ffff44;
+		text-shadow: 0 0 8px #00ffff99;
+	}
+	100% {
+		box-shadow: 0 0 32px #00ffffcc, 0 0 16px #00ffff99;
+		text-shadow: 0 0 16px #00ffffcc;
+	}
+}
+@keyframes steampunkGlowRed {
+	0% {
+		box-shadow: 0 0 12px #ff444455, 0 0 4px #ff444422;
+		text-shadow: 0 0 8px #ff444499;
+	}
+	100% {
+		box-shadow: 0 0 32px #ff4444cc, 0 0 12px #ff444499;
+		text-shadow: 0 0 16px #ff4444cc;
+	}
+}
+@keyframes steampunkGlowRedActive {
+	0% {
+		box-shadow: 0 0 24px #ff444499, 0 0 8px #ff444444;
+		text-shadow: 0 0 8px #ff444499;
+	}
+	100% {
+		box-shadow: 0 0 32px #ff4444cc, 0 0 16px #ff444499;
+		text-shadow: 0 0 16px #ff4444cc;
+	}
+}
+@keyframes steampunkGlowOrange {
+	0% {
+		box-shadow: 0 0 12px #ff950055, 0 0 4px #ff950022;
+		text-shadow: 0 0 8px #ff950099;
+	}
+	100% {
+		box-shadow: 0 0 32px #ff9500cc, 0 0 12px #ff950099;
+		text-shadow: 0 0 16px #ff9500cc;
+	}
+}
+@keyframes steampunkGlowOrangeActive {
+	0% {
+		box-shadow: 0 0 24px #ff950099, 0 0 8px #ff950044;
+		text-shadow: 0 0 8px #ff950099;
+	}
+	100% {
+		box-shadow: 0 0 32px #ff9500cc, 0 0 16px #ff950099;
+		text-shadow: 0 0 16px #ff9500cc;
+	}
+}
+@keyframes steampunkGlowGreenBlue {
+	0% {
+		box-shadow: 0 0 12px #aaffaa55, 0 0 4px #aaffaa22, 0 0 8px #00ffff44;
+		text-shadow: 0 0 15px #aaffaa, 0 0 8px #00ffff99;
+	}
+	100% {
+		box-shadow: 0 0 32px #aaffaacc, 0 0 12px #00ffff99;
+		text-shadow: 0 0 24px #aaffaa, 0 0 16px #00ffffcc;
+	}
+}
+@keyframes steampunkGlowGreenBlueActive {
+	0% {
+		box-shadow: 0 0 24px #aaffaa99, 0 0 8px #00ffff44;
+		text-shadow: 0 0 15px #aaffaa, 0 0 8px #00ffff99;
+	}
+	100% {
+		box-shadow: 0 0 32px #aaffaacc, 0 0 16px #00ffff99;
+		text-shadow: 0 0 24px #aaffaa, 0 0 16px #00ffffcc;
+	}
+}
+
+/* Even brighter/bigger focused glow animations for dark mode buttons */
+@keyframes steampunkGlowCyanFocused {
+    0% {
+        box-shadow: 0 0 32px #00ffffcc, 0 0 16px #00ffff99, 0 0 48px #00ffff88;
+        text-shadow: 0 0 24px #00ffffcc, 0 0 8px #00ffff99;
+    }
+    100% {
+        box-shadow: 0 0 64px #00ffffee, 0 0 32px #00ffffcc, 0 0 96px #00ffff88;
+        text-shadow: 0 0 48px #00ffffee, 0 0 16px #00ffffcc;
+    }
+}
+
+@keyframes steampunkGlowRedFocused {
+    0% {
+        box-shadow: 0 0 32px #ff4444cc, 0 0 16px #ff444499, 0 0 48px #ff444488;
+        text-shadow: 0 0 24px #ff4444cc, 0 0 8px #ff444499;
+    }
+    100% {
+        box-shadow: 0 0 64px #ff4444ee, 0 0 32px #ff4444cc, 0 0 96px #ff444488;
+        text-shadow: 0 0 48px #ff4444ee, 0 0 16px #ff4444cc;
+    }
+}
+
+@keyframes steampunkGlowOrangeFocused {
+    0% {
+        box-shadow: 0 0 32px #ff9500cc, 0 0 16px #ff950099, 0 0 48px #ff950088;
+        text-shadow: 0 0 24px #ff9500cc, 0 0 8px #ff950099;
+    }
+    100% {
+        box-shadow: 0 0 64px #ff9500ee, 0 0 32px #ff9500cc, 0 0 96px #ff950088;
+        text-shadow: 0 0 48px #ff9500ee, 0 0 16px #ff9500cc;
+    }
+}
+
+@keyframes steampunkGlowGreenBlueFocused {
+    0% {
+        box-shadow: 0 0 32px #aaffaacc, 0 0 16px #00ffff99, 0 0 48px #aaffaa88;
+        text-shadow: 0 0 24px #aaffaacc, 0 0 8px #00ffff99;
+    }
+    100% {
+        box-shadow: 0 0 64px #aaffaaee, 0 0 32px #00ffffcc, 0 0 96px #aaffaa88;
+        text-shadow: 0 0 48px #aaffaaee, 0 0 16px #00ffffcc;
+    }
+}
+

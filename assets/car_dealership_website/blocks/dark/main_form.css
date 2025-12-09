@@ -1,0 +1,209 @@
+@keyframes formGlow {
+	0% {
+		box-shadow:
+			0 0 24px #ffcc2255,
+			0 0 48px #ffcc2233,
+			0 2px 24px rgba(255, 204, 34, 0.18);
+	}
+
+	100% {
+		box-shadow:
+			0 0 32px #ffcc22cc,
+			0 0 64px #ffcc2255,
+			0 2px 32px rgba(255, 204, 34, 0.25);
+	}
+}
+
+body.dark-mode .main__form {
+	background: rgba(34, 34, 34, 0.8);
+	border: 1.5px solid #ffcc22;
+	box-shadow:
+		0 0 24px #ffcc2255,
+		0 0 48px #ffcc2233,
+		0 2px 24px rgba(255, 204, 34, 0.18);
+}
+
+body.dark-mode .main__form:focus-within,
+body.dark-mode .main__form:hover {
+	animation: formGlow 1.2s infinite alternate;
+	border-color: #ffcc22;
+}
+
+body.dark-mode .main__form--no-glow {
+	animation: none !important;
+	border-color: #ffcc22;
+	box-shadow: none !important;
+}
+
+body.dark-mode .main__form label {
+	color: #ffcc22;
+	text-shadow: 2px 0px 10px #ffcc22cc;
+}
+
+body.dark-mode .main__form .form-control,
+body.dark-mode .main__form .form-control:focus {
+	color: #fff;
+}
+
+body.dark-mode .main__form .form-control {
+	background: #181a1b;
+	border: 1.5px solid #ffcc22;
+	color: #e0e0e0;
+}
+
+body.dark-mode .main__form .form-control:focus {
+	border-color: #ffcc22;
+	box-shadow: 0 0 12px #ffcc2288;
+	background: #23272a;
+	color: #fff;
+}
+
+body.dark-mode .main__form .form-control--no-glow {
+	border-color: #ffcc22 !important;
+	box-shadow: none !important;
+}
+
+body.dark-mode .main__form .form-control--no-glow:focus {
+	border-color: #ffcc22 !important;
+	box-shadow: none !important;
+}
+
+body.dark-mode .main__form .form-control--no-glow:disabled {
+	border-color: rgba(34, 34, 34, 0.6) !important;
+	border: 1.5px solid #7d5f00 !important;
+	/* muted gold for disabled */
+	box-shadow: none !important;
+}
+
+body.dark-mode .main__form input.form-control:disabled,
+body.dark-mode .main__form textarea.form-control:disabled,
+body.dark-mode .main__form select.form-control:disabled {
+	background: #181a1b;
+	border: 1.5px solid #7d5f00;
+	/* muted gold */
+	color: #8f8f8f;
+}
+
+body.dark-mode .main__form input::placeholder {
+	color: #8f8f8f !important;
+	opacity: 1;
+}
+
+body.dark-mode .main__form .form-control::placeholder {
+	color: #8f8f8f;
+	opacity: 1;
+}
+
+/* Glowing neon checkboxes for dark mode - full Bootstrap override */
+body.dark-mode .form-check-input {
+	--bs-form-check-bg: #232c3a;
+	--bs-form-check-border-color: #ffcc22;
+	--bs-form-check-bg-image: none;
+	--bs-form-check-checked-bg-color: #ffcc22;
+	--bs-form-check-checked-border-color: #ffcc22;
+	--bs-form-check-checked-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%231a222d' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+	background-color: var(--bs-form-check-bg) !important;
+	border: 2px solid var(--bs-form-check-border-color) !important;
+	box-shadow: 0 0 8px #ffcc2255;
+	accent-color: #ffcc22;
+	transition: box-shadow 0.2s, border-color 0.2s, background-color 0.2s;
+}
+
+body.dark-mode .form-check-input:focus {
+	border-color: #ffcc22 !important;
+	box-shadow: 0 0 16px #ffcc22cc;
+	outline: none;
+}
+
+body.dark-mode .form-check-input:checked {
+	background-color: #ffcc22 !important;
+	border-color: #ffcc22 !important;
+	box-shadow: 0 0 16px #ffcc22cc, 0 0 4px #ffcc2299;
+	background-image: var(--bs-form-check-checked-bg-image) !important;
+}
+
+body.dark-mode .form-check-input[type="checkbox"]:indeterminate {
+	background-color: #ffcc22 !important;
+	border-color: #ffcc22 !important;
+	box-shadow: 0 0 16px #ffcc22cc, 0 0 4px #ffcc2299;
+	--bs-form-check-bg-image: none;
+}
+
+body.dark-mode .form-check-input:disabled {
+	opacity: 0.5;
+	box-shadow: none;
+	filter: grayscale(0.5);
+}
+
+body.dark-mode .form-check-input:hover:not(:disabled) {
+	border-color: #ffcc22 !important;
+	box-shadow: 0 0 24px #ffcc22cc, 0 0 8px #ffcc2299;
+	background-color: #232c3a;
+	filter: brightness(1.2);
+}
+
+body.dark-mode .form-check-input:checked:hover:not(:disabled) {
+	background-color: #ffcc22 !important;
+	border-color: #ffcc22 !important;
+	box-shadow: 0 0 32px #ffcc22cc, 0 0 12px #ffcc2299;
+	filter: brightness(1.3);
+}
+
+/* Glowing neon checkboxes for dark mode - full Bootstrap override (scoped to .main__form) */
+body.dark-mode .main__form .form-check-input {
+	--bs-form-check-bg: #232c3a;
+	--bs-form-check-border-color: #ffcc22;
+	--bs-form-check-bg-image: none;
+	--bs-form-check-checked-bg-color: #ffcc22;
+	--bs-form-check-checked-border-color: #ffcc22;
+	--bs-form-check-checked-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%231a222d' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+	background-color: var(--bs-form-check-bg) !important;
+	border: 2px solid var(--bs-form-check-border-color) !important;
+	box-shadow: 0 0 8px #ffcc2255;
+	accent-color: #ffcc22;
+	transition: box-shadow 0.2s, border-color 0.2s, background-color 0.2s;
+}
+
+body.dark-mode .main__form .form-check-input:focus {
+	border-color: #ffcc22 !important;
+	box-shadow: 0 0 16px #ffcc22cc;
+	outline: none;
+}
+
+body.dark-mode .main__form .form-check-input:checked {
+	background-color: #ffcc22 !important;
+	border-color: #ffcc22 !important;
+	box-shadow: 0 0 16px #ffcc22cc, 0 0 4px #ffcc2299;
+	background-image: var(--bs-form-check-checked-bg-image) !important;
+}
+
+body.dark-mode .main__form .form-check-input[type="checkbox"]:indeterminate {
+	background-color: #ffcc22 !important;
+	border-color: #ffcc22 !important;
+	box-shadow: 0 0 16px #ffcc22cc, 0 0 4px #ffcc2299;
+	--bs-form-check-bg-image: none;
+}
+
+body.dark-mode .main__form .form-check-input:disabled {
+	opacity: 0.5;
+	box-shadow: none;
+	filter: grayscale(0.5);
+}
+
+body.dark-mode .main__form .form-check-input:hover:not(:disabled) {
+	border-color: #ffcc22 !important;
+	box-shadow: 0 0 24px #ffcc22cc, 0 0 8px #ffcc2299;
+	background-color: #232c3a;
+	filter: brightness(1.2);
+}
+
+body.dark-mode .main__form .form-check-input:checked:hover:not(:disabled) {
+	background-color: #ffcc22 !important;
+	border-color: #ffcc22 !important;
+	box-shadow: 0 0 32px #ffcc22cc, 0 0 12px #ffcc2299;
+	filter: brightness(1.3);
+}
+
+body.dark-mode #passwordStrengthContainer.progress {
+	background: #23272a;
+}

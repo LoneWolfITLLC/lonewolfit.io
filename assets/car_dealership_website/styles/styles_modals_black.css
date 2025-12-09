@@ -1,0 +1,191 @@
+body.dark-mode .modal-content {
+  background: #1a222d !important;
+  color: #fff9e0;
+  border-radius: 12px;
+  box-shadow: 
+    0 0 32px 8px #ffcc22,
+    0 0 64px 16px #ffcc55,
+    0 2px 24px rgba(255, 204, 34, 0.18); /* swapped to orange */
+  transition: box-shadow 0.3s,
+              animation 1s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  animation: breathing-shadow-idle 3s ease-in-out infinite;
+}
+/* Breathing hover effect */
+body.dark-mode .modal-content:hover {
+	animation: breathing-shadow-hover 3s ease-in-out infinite;
+}
+
+body.dark-mode .modal-content:focus-within {
+	animation: breathing-shadow 2s ease-in-out infinite;
+}
+
+body.dark-mode #loadingModal .modal-content {
+	box-shadow: none;
+	background: transparent !important;
+	color: transparent !important;
+	border: none;
+	pointer-events: none;
+}
+
+body.dark-mode #loadingModal .modal-content:hover,
+body.dark-mode #loadingModal .modal-content:focus-within {
+	box-shadow: none !important;
+	background: transparent !important;
+	animation: none !important;
+}
+
+body.dark-mode #loadingModal .modal-content > * {
+	color: inherit !important;
+	background: none !important;
+	border: none !important;
+	pointer-events: auto;
+	opacity: 1 !important;
+}
+
+body.dark-mode .modal--no-glow,
+body.dark-mode .modal--no-glow:hover,
+body.dark-mode .modal--no-glow:focus-within {
+	animation: none !important;
+	box-shadow: none !important;
+}
+
+.modal--no-glow .modal-content--closing {
+	animation: modalFadeOut 0.35s ease forwards !important;
+}
+
+@keyframes breathing-shadow {
+	0% {
+		box-shadow: 0 0 32px 8px #ffcc22cc, 0 0 64px 16px #ffcc2255,
+			0 2px 24px rgba(255, 204, 34, 0.18);
+	}
+	50% {
+		box-shadow: 0 0 48px 16px #ffcc22ee, 0 0 80px 24px #ffcc2277,
+			0 4px 32px rgba(255, 204, 34, 0.28);
+	}
+	100% {
+		box-shadow: 0 0 32px 8px #ffcc22cc, 0 0 64px 16px #ffcc2255,
+			0 2px 24px rgba(255, 204, 34, 0.18);
+	}
+}
+
+@keyframes breathing-shadow-hover {
+	0% {
+		box-shadow: 0 0 20px 4px #ffcc2288, 0 0 40px 8px #ffcc2233,
+			0 2px 12px rgba(255, 204, 34, 0.1);
+	}
+	50% {
+		box-shadow: 0 0 28px 8px #ffcc22aa, 0 0 56px 12px #ffcc2244,
+			0 4px 18px rgba(255, 204, 34, 0.16);
+	}
+	100% {
+		box-shadow: 0 0 20px 4px #ffcc2288, 0 0 40px 8px #ffcc2233,
+			0 2px 12px rgba(255, 204, 34, 0.1);
+	}
+}
+
+@keyframes breathing-shadow-idle {
+	0% {
+		box-shadow: 0 0 16px 4px #ffcc2277, 0 0 32px 8px #ffcc2233,
+			0 1px 8px rgba(255, 204, 34, 0.08);
+	}
+	50% {
+		box-shadow: 0 0 24px 8px #ffcc2299, 0 0 48px 12px #ffcc2244,
+			0 2px 12px rgba(255, 204, 34, 0.14);
+	}
+	100% {
+		box-shadow: 0 0 16px 4px #ffcc2277, 0 0 32px 8px #ffcc2233,
+			0 1px 8px rgba(255, 204, 34, 0.08);
+	}
+}
+
+body.dark-mode .modal-header,
+body.dark-mode .modal-footer {
+  background: #1a222d !important;
+  color: #ffcc22;
+}
+
+body.dark-mode .modal-body {
+  background: none;
+  color: #ffeccc; /* softened light text to pair with orange */
+}
+
+body.dark-mode .refresh-button {
+  background: none;
+  color: #ffcc22;
+}
+
+body.dark-mode .refresh-button:hover {
+  background: none;
+  color: #fff;
+}
+
+body.dark-mode .invoice-item,
+body.dark-mode .consultation-item {
+  background: #232c3a;
+  color: #ffeccc;
+  border: 1px solid #ffcc2255;
+  box-shadow: 0 0 12px #ffcc2233;
+}
+
+body.dark-mode .invoice-item:hover,
+body.dark-mode .consultation-item:hover {
+  background: #1a222d;
+  box-shadow: 0 0 24px #ffcc2288;
+}
+
+body.dark-mode .loading-bar {
+  background-color: #ffcc22;
+}
+
+body.dark-mode .modal-content input,
+body.dark-mode .modal-content textarea,
+body.dark-mode .modal-content select {
+  background: #232c3a;
+  color: #ffeccc;
+  border: 1.5px solid #ffcc22;
+}
+
+body.dark-mode .modal-content input:focus,
+body.dark-mode .modal-content textarea:focus,
+body.dark-mode .modal-content select:focus {
+  border-color: #ffcc22;
+  box-shadow: 0 0 8px #ffcc2288;
+  background: #1a222d;
+  color: #fff;
+}
+
+body.dark-mode .modal-title,
+body.dark-mode .invoice-title {
+  color: #ffcc22;
+  text-shadow: 0 0 8px #ffcc2288;
+}
+
+/* Modal close button styled like .btn-close but with custom texture for dark mode */
+body.dark-mode .modal-close-button {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 32px;
+	height: 32px;
+	padding: 0;
+	cursor: pointer;
+	background: transparent;
+	border: none;
+	outline: none;
+	/* Use white close icon by default in dark mode */
+	background-image: url("../images/ui/closebtn-white.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 24px 24px;
+	transition: opacity 0.2s, box-shadow 0.2s;
+	content: "";
+	opacity: 0.4;
+}
+
+body.dark-mode .modal-close-button:hover {
+	opacity: 0.7;
+}
+
+body.dark-mode .modal-close-button:active {
+	opacity: 0.9;
+}

@@ -1,0 +1,192 @@
+.footer {
+	grid-area: footer;
+	margin: 20px;
+	background: transparent;
+	text-align: center; /* Centered text */
+	padding-top: 1em;
+	padding-bottom: 1em;
+	font-size: 0.9em; /* Slightly smaller font size */
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: max-content; /* allow footer to be taller than 65px */
+	box-sizing: border-box;
+}
+.footer__copyright {
+	color: #333; /* Muted text color for footer */
+	font-size: 0.9em;
+	margin: 5px;
+	padding: 0;
+	text-align: center;
+}
+.footer__disclaimer {
+	color: #333; /* Slightly lighter text color for disclaimer */
+	font-size: 0.8em;
+	margin-left: 10px;
+	margin-right: 10px;
+	padding: 0;
+	text-align: center;
+}
+.footer__social-media-text {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-size: 0.9em;
+	color: #111;
+	font-weight: bold;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+.footer__social-media-links {
+	margin-top: 0px;
+	margin-left: 20px;
+	margin-right: 20px;
+	display: flex;
+	gap: 15px;
+	max-height: fit-content;
+}
+.footer__social-media-button {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	font-size: 0.9em;
+	color: #111;
+	transition: color 0.25s ease-in-out, text-shadow 0.25s ease-in-out,
+		transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+	/* keep icon and label aligned horizontally */
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 6px 8px;
+}
+.footer__social-media-button:hover {
+	color: #fff; /* Change to white on hover */
+	text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.9);
+}
+.footer__social-media-button:focus {
+	outline: none;
+}
+.footer__social-media-button:active {
+	transform: scale(0.95); /* Slightly shrink button on click for feedback */
+	opacity: 0.8;
+}
+.footer__social-media-button-facebook {
+	/* remove inline sizing here — icon handled by pseudo */
+	display: inline-flex;
+	align-items: center;
+}
+/* Use a pseudo-element for the icon, positioned left of the text */
+.footer__social-media-button-facebook::before {
+	content: "";
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+	background-image: url("../images/ui/facebook-icon-black.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	margin-right: 6px; /* space between icon and text */
+	flex: 0 0 24px;
+	vertical-align: middle;
+	background-color: transparent;
+}
+.footer__social-media-button-instagram {
+	/* remove inline sizing here — icon handled by pseudo */
+	display: inline-flex;
+	align-items: center;
+}
+/* Use a pseudo-element for the icon, positioned left of the text */
+.footer__social-media-button-instagram::before {
+	content: "";
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+	background-image: url("../images/ui/instagram-icon-black.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	margin-right: 6px; /* space between icon and text */
+	flex: 0 0 24px;
+	vertical-align: middle;
+	background-color: transparent;
+}
+.footer__social-media-button-tiktok {
+	/* remove inline sizing here — icon handled by pseudo */
+	display: inline-flex;
+	align-items: center;
+}
+/* Use a pseudo-element for the icon, positioned left of the text */
+.footer__social-media-button-tiktok::before {
+	content: "";
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+	background-image: url("../images/ui/tiktok-icon-black.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	margin-right: 6px; /* space between icon and text */
+	flex: 0 0 24px;
+	vertical-align: middle;
+	background-color: transparent;
+}
+.footer__social-media-button-youtube {
+	/* remove inline sizing here — icon handled by pseudo */
+	display: inline-flex;
+	align-items: center;
+}
+/* Use a pseudo-element for the icon, positioned left of the text */
+.footer__social-media-button-youtube::before {
+	content: "";
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+	background-image: url("../images/ui/youtube-icon-black.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	margin-right: 6px; /* space between icon and text */
+	flex: 0 0 24px;
+	vertical-align: middle;
+	background-color: transparent;
+}
+.footer__links {
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 20px;
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+	justify-content: center;
+	text-align: center;
+	height: max-content;
+}
+.footer__link {
+	color: #333;
+	text-decoration: none;
+	font-size: 0.9em;
+	font-weight: bold;
+	transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out,
+		transform 0.2s ease-in-out, opacity 0.2s ease-in-out,
+		opacity 0.2s ease-in-out;
+}
+.footer__link:hover {
+	color: #fff; /* Change to white on hover */
+	text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.9);
+}
+.footer__link:active {
+	transform: scale(0.9);
+	opacity: 0.8;
+}
+@media (max-width: 768px) {
+	.footer__social-media-button {
+		justify-content: center; /* center icon + label */
+		font-size: 1em;
+	}
+}
+@media (max-width: 560px) {
+	.footer__social-media-links {
+		flex-direction: column;
+		gap: 10px;
+	}
+}
