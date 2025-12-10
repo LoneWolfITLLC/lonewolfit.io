@@ -4,5 +4,8 @@
     "baseUri": "/api",
     "proxyUri": "http://localhost:3000/api"
   },
-  "liveServer.settings.port": 5502
+  "liveServer.settings.port": 5500,
+  "editor.formatOnSave": true,
+  "files.autoSave": "onFocusChange",
+  "editor.hover.delay": 600
 }
