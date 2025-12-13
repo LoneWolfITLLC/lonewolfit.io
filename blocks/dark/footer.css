@@ -1,0 +1,54 @@
+body.dark-mode .footer {
+	background-color: rgba(
+		0,
+		0,
+		0,
+		0.5
+	); /* Dark background for footer in dark mode */
+	color: #ccc; /* Light text color for readability */
+	border-top: 1px solid #444; /* Subtle top border for separation */
+	border-radius: 8px;
+}
+
+body.dark-mode .footer__copyright {
+	color: #aaa; /* Slightly lighter text color for disclaimer in dark mode */
+}
+
+body.dark-mode .footer__disclaimer {
+	color: #aaa; /* Slightly lighter text color for disclaimer in dark mode */
+}
+
+body.dark-mode .footer__social-media-text {
+	color: #eee; /* Lighter text color for social media text in dark mode */
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Subtle shadow for better readability */
+}
+body.dark-mode .footer__social-media-button {
+	color: #eee; /* Lighter button color in dark mode */
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Subtle shadow for better readability */
+}
+body.dark-mode .footer__social-media-button:hover {
+	color: #ffd700;
+	/* Change link color on hover for better interactivity */
+	text-shadow: 1px 1px 2px rgba(255, 215, 0, 0.6);
+}
+body.dark-mode .footer__social-media-button-facebook::before {
+	background-image: url("/images/ui/facebook-icon-white.png"); /* Use white icon for dark mode */
+}
+body.dark-mode .footer__social-media-button-instagram::before {
+	background-image: url("/images/ui/instagram-icon-white.png"); /* Use white icon for dark mode */
+}
+body.dark-mode .footer__social-media-button-tiktok::before {
+	background-image: url("/images/ui/tiktok-icon-white.png"); /* Use white icon for dark mode */
+}
+body.dark-mode .footer__social-media-button-youtube::before {
+	background-image: url("/images/ui/youtube-icon-white.png"); /* Use white icon for dark mode */
+}
+body.dark-mode .footer__link {
+	color: #fff; /* Lighter link color in dark mode */
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Subtle shadow for better readability */
+}
+body.dark-mode .footer__link:hover {
+	color: #ffd700;
+	/* Change link color on hover for better interactivity */
+	text-shadow: 1px 1px 2px rgba(255, 215, 0, 0.6);
+}
